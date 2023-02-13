@@ -18,9 +18,9 @@
             </v-col>
             
             <!-- MY PAGES -->
-            <home-page v-if="route().current('head.dashboard')"></home-page>
+            <!-- <home-page v-if="route().current('head.dashboard')"></home-page>
             <page-one v-if="route().current('head.pageOne')"></page-one>
-            <page-two v-if="route().current('head.pageTwo')"></page-two>
+            <page-two v-if="route().current('head.pageTwo')"></page-two> -->
                 
             
         </v-row>
