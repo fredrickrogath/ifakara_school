@@ -79,18 +79,18 @@ class User extends Authenticatable
 
     public const is_head = 1;
 
-    public const is_bishop = 2;
+    // public const is_bishop = 2;
 
     public const is_academic = 3;
 
-    public const is_secretary = 4;
+    // public const is_secretary = 4;
     
     public const is_accountant = 5;
 
     public const is_procurement = 6;
 
-    public const is_accountant_main = 7;
+    // public const is_accountant_main = 7;
 
-    public const is_internal_auditor = 8;
+    // public const is_internal_auditor = 8;
 
 }
