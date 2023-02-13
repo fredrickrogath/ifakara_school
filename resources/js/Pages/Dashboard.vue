@@ -53,6 +53,8 @@ InertiaProgress.init({
 })
 //end of inertiajs progress
 
+import { SidebarMenu } from 'vue-sidebar-menu';
+
 // import gsap from "gsap";
 import AppLayout from "@/Layouts/AppLayout";
 import Welcome from "@/Jetstream/Welcome";
@@ -72,6 +74,7 @@ export default {
         AppLayout,
         Welcome,
         SideBar,
+        SidebarMenu,
         
         // MY PAGES
         HomePage,
