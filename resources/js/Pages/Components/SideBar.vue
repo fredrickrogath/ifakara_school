@@ -1,152 +1,90 @@
 <template>
-    <v-card
-        :dark="isDark"
-        class="pa-12"
-        flat
-        max-width="200px"
-        style="position: fixed"
-        v-if="$vuetify.breakpoint.smAndUp"
-    >
-        <v-card width="256">
-            <v-navigation-drawer floating permanent>
-                <v-list
-                    v-for="(myRoute, i) in routes"
-                    :key="myRoute.menu_title"
-                    dense
-                    rounded
-                    class="text-center"
-                >
-                    <v-subheader>{{ myRoute.menu_title }}</v-subheader>
+   <!-- This is an example component -->
+<div class="max-w-2xl mx-auto">
 
-                    <div
-                        v-for="(levelOne, i) in myRoute.levelOne"
-                        :key="levelOne.title"
-                    >
-                        <v-list-group
-                            v-if="levelOne.levelTwo"
-                            no-action
-                            sub-group
-                        >
-                            <!-- <div> -->
-                            <!-- <template v-slot:activator> -->
-                            <template>
-                                <v-list-item
-                                    class="border-r-4 border-indigo-500 my-1"
-                                    :class="
-                                        route().current(levelOne.route)
-                                            ? 'bg-indigo-100 dark:bg-gray-900'
-                                            : 'bg-gray-50 dark:bg-slate-900'
-                                    "
-                                >
-                                    <v-list-item-title>{{
-                                        levelOne.title
-                                    }}</v-list-item-title>
-                                </v-list-item>
-                            </template>
-                            <!-- </div> -->
-
-                            <v-list-item
-                                v-for="(levelTwo, i) in levelOne.levelTwo"
-                                :key="levelTwo.title"
-                                link
-                                class="border-l-4 border-indigo-400 my-1"
-                                :class="
-                                    route().current(levelTwo.route)
-                                        ? 'bg-indigo-100 dark:bg-gray-900'
-                                        : 'bg-gray-50 dark:bg-slate-900'
-                                "
-                                :style="[
-                                    isDark && route().current(levelTwo.route)
-                                        ? { 'background-color': '#6366F1' }
-                                        : isDark
-                                        ? { background: '#1e1e1e' }
-                                        : {},
-                                ]"
-                            >
-                                <v-list-item-title
-                                    v-text="levelTwo.title"
-                                ></v-list-item-title>
-
-                                <v-list-item-icon>
-                                    <v-icon v-text="levelTwo.icon"></v-icon>
-                                </v-list-item-icon>
-                            </v-list-item>
-                        </v-list-group>
-
-                        <v-list-item
-                            v-else
-                            link
-                            class="border-r-4 border-indigo-500 my-1"
-                            :class="
-                                route().current(levelOne.route)
-                                    ? 'bg-indigo-100 dark:bg-gray-900'
-                                    : 'bg-gray-50 dark:bg-slate-900'
-                            "
-                            :style="[
-                                isDark && route().current(levelOne.route)
-                                    ? { 'background-color': '#6366F1' }
-                                    : isDark
-                                    ? { background: '#1e1e1e' }
-                                    : {},
-                            ]"
-                        >
-                            <my-custom-link
-                                :href="route(levelOne.route)"
-                                :active="route().current(levelOne.route)"
-                            >
-                                <v-list-item-icon>
-                                    <v-icon>{{ levelOne.icon }}</v-icon>
-                                </v-list-item-icon>
-
-                                <v-list-item-content>
-                                    <v-list-item-title class="py-1 font-bold">{{
-                                        levelOne.title
-                                    }}</v-list-item-title>
-                                </v-list-item-content>
-                            </my-custom-link>
-                        </v-list-item>
-                    </div>
-                </v-list>
-            </v-navigation-drawer>
-        </v-card>
-
-        <div class="h-2"></div>
-
-        <v-card elevation="12">
-            <pie-chart3-d></pie-chart3-d>
-        </v-card>
-    </v-card>
-
-    <!-- <v-expansion-panels style="position: fixed" v-else :dark="isDark">
-        <v-expansion-panel>
-            <v-expansion-panel-header> SideBar </v-expansion-panel-header>
-            <v-expansion-panel-content>
-                <v-card :dark="isDark" class="pa-12" flat>
-                    <v-card elevation="12" width="256">
-                        <v-navigation-drawer floating permanent>
-                            <v-list dense rounded class="text-center">
-                                <v-list-item
-                                    v-for="item in items"
-                                    :key="item.title"
-                                    link
-                                >
-                                    <v-list-item-icon>
-                                        <v-icon>{{ item.icon }}</v-icon>
-                                    </v-list-item-icon>
-
-                                    <v-list-item-content>
-                                        <v-list-item-title class="font-bold">{{
-                                            item.title
-                                        }}</v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-list>
-                        </v-navigation-drawer>
-                    </v-card>
-                </v-card>
-            </v-expansion-panel-content>
-        </v-expansion-panel>
-    </v-expansion-panels> -->
+<aside class="w-64" aria-label="Sidebar">
+    <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800">
+        <ul class="space-y-2">
+            <li>
+                <a href="#"
+                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                    </svg>
+                    <span class="ml-3">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+              <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+              <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Users</span>
+              <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+                <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="#"
+                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Students</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Hall Fees</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Pre-Form One Fee</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Other Fee</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                        </path>
+                    </svg>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Uploads</span>
+                    <!-- <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> -->
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">
+                        </path>
+                        <path
+                            d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">
+                        </path>
+                    </svg>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Email</span>
+                    <!-- <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span> -->
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Announcements</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+</div>
 </template>
 
 <script setup>
