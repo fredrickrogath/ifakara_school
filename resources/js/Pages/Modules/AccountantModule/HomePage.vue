@@ -9,7 +9,7 @@
 export default {
 
     mounted() {
-        // Receiving broadicasting
+        //Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
