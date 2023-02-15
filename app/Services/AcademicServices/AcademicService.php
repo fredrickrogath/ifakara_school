@@ -7,6 +7,7 @@ class AcademicService
     public function dashboardData(){
         return [
             $prefix = 'academic',
+            'role' => 'academic',
             'posts' => \App\Models\Post::all(),
             'routes'=> [
                 0 => [

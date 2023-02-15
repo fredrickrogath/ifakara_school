@@ -7,6 +7,7 @@ class HeadService
     public function dashboardData(){
         return [
             $prefix = 'head',
+            'role' => 'head',
             'posts' => \App\Models\Post::all(),
 
             'routes' => [
@@ -87,7 +88,7 @@ class HeadService
                 ],
               ],
             ]
-            
+
             // 'routes'=> [
             //     0 => [
             //       'title' => 'Home HEAD',

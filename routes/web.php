@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Post;
 /*
@@ -56,6 +57,11 @@ Route::middleware([
     */
 
     Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'DetermineUserRole'])->name('dashboard');
+
+    Route::get('/logout_link', function() {
+        Auth::logout();
+        return redirect()->route('login');
+    })->name('logout_link');
 
     /*
     |--------------------------------------------------------------------------
@@ -139,14 +145,14 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'accountant', 'middleware' => 'is_accountant', 'as' => 'accountant.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageFive'])->name('pageFive');
         Route::get('/dashboard', [\App\Http\Controllers\Accountant\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageSeven'])->name('pageSeven');
+        Route::get('/invoice_incoming', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_incoming'])->name('invoice.incoming');
+        Route::get('/invoice_pending', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_pending'])->name('invoice.pending');
+        Route::get('/invoice_successful', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_successful'])->name('invoice.successful');
+        Route::get('/invoice_create', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_create'])->name('invoice.create');
+        Route::get('/payment_details', [\App\Http\Controllers\Accountant\DashboardController::class, 'payment_details'])->name('payment_details');
+        Route::get('/uploads', [\App\Http\Controllers\Accountant\DashboardController::class, 'uploads'])->name('uploads');
+        Route::get('/reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'reports'])->name('reports');
     });
 
 

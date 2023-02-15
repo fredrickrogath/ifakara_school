@@ -1,107 +1,165 @@
 <template>
-   <!-- This is an example component -->
-<div class="max-w-2xl mx-auto">
+    <div>
+        <!-- Head Office -->
+        <div v-if="$page.props.role == 'head'" class="max-w-2xl mx-auto"></div>
 
-<aside class="w-64" aria-label="Sidebar">
-    <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800">
-        <ul class="space-y-2">
-            <li>
-                <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                    </svg>
-                    <span class="ml-3">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-              <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
-              <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Users</span>
-              <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        </button>
-                <ul id="dropdown-example" class="hidden py-2 space-y-2">
+        <!-- Academic -->
+        <div
+            v-if="$page.props.role == 'academic'"
+            class="max-w-2xl mx-auto"
+        ></div>
+
+        <!-- Procurement -->
+        <div
+            v-if="$page.props.role == 'procurement'"
+            class="max-w-2xl mx-auto"
+        ></div>
+
+        <!-- Accountant -->
+        <div v-if="$page.props.role == 'accountant'" class="max-w-2xl mx-auto">
+            <div id="sidebar-menu">
+                <ul id="side-menu">
+                    <li class="menu-title">Navigation</li>
+
                     <li>
-                        <a href="#"
-                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Students</a>
+                        <my-custom-link
+                                :href="route('accountant.dashboard')"
+                                :active="route().current('accountant.dashboard')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Dashboard </span>
+                            </my-custom-link>
+                       
                     </li>
+
+                    <li class="menu-title mt-2">Apps</li>
+
+                    <!-- <li>
+        <a href="apps-calendar.html">
+            <i data-feather="calendar"></i>
+            <span> Calendar </span>
+        </a>
+    </li>
+
+    <li>
+        <a href="apps-chat.html">
+            <i data-feather="message-square"></i>
+            <span> Chat </span>
+        </a>
+    </li> -->
+
                     <li>
-                        <a href="#"
-                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Hall Fees</a>
+                        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                            <i data-feather="shopping-cart"></i>
+                            <span> Invoice </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarEcommerce">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <my-custom-link
+                                :href="route('accountant.invoice.incoming')"
+                                :active="route().current('accountant.invoice.incoming')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Incoming </span>
+                            </my-custom-link>
+                                   
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                :href="route('accountant.invoice.pending')"
+                                :active="route().current('accountant.invoice.pending')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Pending </span>
+                            </my-custom-link>
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                :href="route('accountant.invoice.successful')"
+                                :active="route().current('accountant.invoice.successful')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Successful </span>
+                            </my-custom-link>
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                :href="route('accountant.invoice.create')"
+                                :active="route().current('accountant.invoice.create')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Create </span>
+                            </my-custom-link>
+                                
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+
                     <li>
-                        <a href="#"
-                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Pre-Form One Fee</a>
+                        <a href="#sidebarCrm" data-bs-toggle="collapse">
+                            <i data-feather="users"></i>
+                            <span> Student </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarCrm">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <my-custom-link
+                                :href="route('accountant.payment_details')"
+                                :active="route().current('accountant.payment_details')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Payment Detail </span>
+                            </my-custom-link>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+
+                    <!-- <li>
+        <a href="apps-social-feed.html">
+            <span class="badge bg-pink float-end">Hot</span>
+            <i data-feather="rss"></i>
+            <span> Social Feed </span>
+        </a>
+    </li> -->
+
                     <li>
-                        <a href="#"
-                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Other Fee</a>
+                            <my-custom-link
+                                :href="route('accountant.uploads')"
+                                :active="route().current('accountant.uploads')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Uploads </span>
+                            </my-custom-link>
+                    </li>
+
+                    <li>
+                            <my-custom-link
+                                :href="route('accountant.reports')"
+                                :active="route().current('accountant.reports')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Reports </span>
+                            </my-custom-link>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
-                        </path>
-                    </svg>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Uploads</span>
-                    <!-- <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> -->
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">
-                        </path>
-                        <path
-                            d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">
-                        </path>
-                    </svg>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Email</span>
-                    <!-- <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span> -->
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Announcements</span>
-                </a>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
-</aside>
-</div>
 </template>
-
-<script setup>
-import { useDark, useToggle } from "@vueuse/core";
-
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
-</script>
 
 <script>
 import MyCustomLink from "@/Jetstream/MyCustomLink";
-import PieChart3D from "../Components/Charts/GoogleCharts/PieChart3D.vue";
+// import PieChart3D from "../Components/Charts/GoogleCharts/PieChart3D.vue";
 
 export default {
     components: {
         MyCustomLink,
-        PieChart3D,
+        // PieChart3D,
     },
 
     mounted() {
@@ -111,6 +169,8 @@ export default {
     data() {
         return {
             routes: [],
+
+            isDropdownOpen: false,
         };
     },
 

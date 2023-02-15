@@ -32,7 +32,7 @@
                             </div>
 
                             <!-- Navigation Links -->
-                            <div
+                            <!-- <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
                                 <jet-nav-link
@@ -44,7 +44,7 @@
                                 >
                                     Dashboard
                                 </jet-nav-link>
-                            </div>
+                            </div> -->
 
                             <!-- <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
@@ -68,51 +68,6 @@
                                 </jet-nav-link>
                             </div> -->
 
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
-                            >
-                                <!-- Dark mode btn -->
-                                <button
-                                    @click="toggleDark()"
-                                    class="px-2 py-1 rounded-full text-gray-700 dark:text-gray-400 bg-white dark:bg-transparent"
-                                    :style="[
-                                        isDark
-                                            ? { 'background-color': '#1e1e1e' }
-                                            : { background: '#FFF' },
-                                    ]"
-                                >
-                                    <svg
-                                        v-if="isDark"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="20px"
-                                        height="20px"
-                                        preserveAspectRatio="xMidYMid meet"
-                                        viewBox="0 0 64 64"
-                                    >
-                                        <g transform="rotate(90 32 32)">
-                                            <path
-                                                fill="currentColor"
-                                                d="M29 50.54h6V62h-6zM29 2h6v11.46h-6zm21.539 27H62v6H50.539zM2 29h11.461v6H2zm10.909 26.335l-4.242-4.243l8.104-8.102l4.242 4.243zM51.091 8.666l4.242 4.243l-8.104 8.102l-4.242-4.243zm-.004 46.669l-8.104-8.104l4.243-4.243l8.104 8.104zM16.769 21.013l-8.104-8.104l4.242-4.243l8.104 8.104zM32 17c-8.284 0-15 6.716-15 15s6.716 15 15 15s15-6.716 15-15s-6.716-15-15-15m0 25c-5.522 0-10-4.478-10-10s4.478-10 10-10s10 4.478 10 10s-4.478 10-10 10"
-                                            />
-                                        </g>
-                                    </svg>
-                                    <svg
-                                        v-else
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="20px"
-                                        height="20px"
-                                        preserveAspectRatio="xMidYMid meet"
-                                        viewBox="0 0 26 26"
-                                    >
-                                        <g transform="rotate(90 13 13)">
-                                            <path
-                                                fill="currentColor"
-                                                d="m9.5.063l-.625 2.28l-2.25-.593L8.25 3.469L6.625 5.156l2.25-.593l.625 2.312l.625-2.313l2.25.594L10.75 3.47l1.625-1.719l-2.25.594L9.5.063zM2.469 6.5l-.5 1.813l-1.813-.47L1.47 9.189L.156 10.53l1.813-.469l.5 1.813L3 10.062l1.813.47L3.5 9.186l1.313-1.343L3 8.312L2.469 6.5zm15.625.688a8.273 8.273 0 0 1 4.937 7.593c0 4.581-3.685 8.281-8.25 8.281a8.29 8.29 0 0 1-7.594-4.968a9.39 9.39 0 0 0 9.25 7.718a9.361 9.361 0 0 0 9.375-9.375a9.396 9.396 0 0 0-7.718-9.25z"
-                                            />
-                                        </g>
-                                    </svg>
-                                </button>
-                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -342,47 +297,6 @@
                         <div
                             class="-mr-2 flex items-center justify-end sm:hidden"
                         >
-                            <!-- Dark mode btn -->
-                            <button
-                                @click="toggleDark()"
-                                class="px-2 py-1 rounded-full text-gray-700 dark:text-gray-400 bg-white dark:bg-gray-900"
-                                :style="[
-                                    isDark
-                                        ? { 'background-color': '#1e1e1e' }
-                                        : { background: '#FFF' },
-                                ]"
-                            >
-                                <svg
-                                    v-if="isDark"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20px"
-                                    height="20px"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    viewBox="0 0 64 64"
-                                >
-                                    <g transform="rotate(90 32 32)">
-                                        <path
-                                            fill="currentColor"
-                                            d="M29 50.54h6V62h-6zM29 2h6v11.46h-6zm21.539 27H62v6H50.539zM2 29h11.461v6H2zm10.909 26.335l-4.242-4.243l8.104-8.102l4.242 4.243zM51.091 8.666l4.242 4.243l-8.104 8.102l-4.242-4.243zm-.004 46.669l-8.104-8.104l4.243-4.243l8.104 8.104zM16.769 21.013l-8.104-8.104l4.242-4.243l8.104 8.104zM32 17c-8.284 0-15 6.716-15 15s6.716 15 15 15s15-6.716 15-15s-6.716-15-15-15m0 25c-5.522 0-10-4.478-10-10s4.478-10 10-10s10 4.478 10 10s-4.478 10-10 10"
-                                        />
-                                    </g>
-                                </svg>
-                                <svg
-                                    v-else
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20px"
-                                    height="20px"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    viewBox="0 0 26 26"
-                                >
-                                    <g transform="rotate(90 13 13)">
-                                        <path
-                                            fill="currentColor"
-                                            d="m9.5.063l-.625 2.28l-2.25-.593L8.25 3.469L6.625 5.156l2.25-.593l.625 2.312l.625-2.313l2.25.594L10.75 3.47l1.625-1.719l-2.25.594L9.5.063zM2.469 6.5l-.5 1.813l-1.813-.47L1.47 9.189L.156 10.53l1.813-.469l.5 1.813L3 10.062l1.813.47L3.5 9.186l1.313-1.343L3 8.312L2.469 6.5zm15.625.688a8.273 8.273 0 0 1 4.937 7.593c0 4.581-3.685 8.281-8.25 8.281a8.29 8.29 0 0 1-7.594-4.968a9.39 9.39 0 0 0 9.25 7.718a9.361 9.361 0 0 0 9.375-9.375a9.396 9.396 0 0 0-7.718-9.25z"
-                                        />
-                                    </g>
-                                </svg>
-                            </button>
                             <button
                                 @click="
                                     show = !show;
@@ -443,14 +357,14 @@
                             }"
                             class="sm:hidden"
                         >
-                            <div class="pt-2 pb-3 space-y-1">
+                            <!-- <div class="pt-2 pb-3 space-y-1">
                                 <jet-responsive-nav-link
                                     :href="route('head.dashboard')"
                                     :active="route().current('home.dashboard')"
                                 >
                                     Dashboard
                                 </jet-responsive-nav-link>
-                            </div>
+                            </div> -->
 
                             <!-- <div class="pt-2 pb-3 space-y-1">
                                 <jet-responsive-nav-link

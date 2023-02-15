@@ -7,6 +7,7 @@ class AccountantService
     public function dashboardData(){
         return [
             $prefix = 'accountant',
+            'role' => 'accountant',
             'posts' => \App\Models\Post::all(),
             'routes'=> [
                 0 => [
