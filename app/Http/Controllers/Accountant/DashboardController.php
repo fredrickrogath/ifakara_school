@@ -34,38 +34,38 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageOne(){
+    public function invoice_incoming(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function invoice_pending(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageThree(){
+    public function invoice_successful(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageFour(){
+    public function invoice_create(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageFive(){
+    public function payment_details(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageSix(){
+    public function uploads(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageSeven(){
+    public function reports(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 }
