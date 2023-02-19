@@ -34,38 +34,33 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $academicService->dashboardData());
     }
 
-    public function pageOne(){
+    public function students_registration(AcademicService $academicService){
         $this->authorize('authorizeAcademic', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $academicService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function upload_results(AcademicService $academicService){
         $this->authorize('authorizeAcademic', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $academicService->dashboardData());
     }
 
-    public function pageThree(){
+    public function view(AcademicService $academicService){
         $this->authorize('authorizeAcademic', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $academicService->dashboardData());
     }
 
-    public function pageFour(){
+    public function staffs(AcademicService $academicService){
         $this->authorize('authorizeAcademic', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $academicService->dashboardData());
     }
 
-    public function pageFive(){
+    public function departiment(AcademicService $academicService){
         $this->authorize('authorizeAcademic', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $academicService->dashboardData());
     }
 
-    public function pageSix(){
+    public function reports(AcademicService $academicService){
         $this->authorize('authorizeAcademic', \App\Models\User::class);
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSeven(){
-        $this->authorize('authorizeAcademic', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $academicService->dashboardData());
     }
 }

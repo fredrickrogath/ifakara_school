@@ -11,7 +11,7 @@
             ]"
         >
             <nav
-                class="border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50"
+                class="border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50 fixed-top"
                 :style="[
                     isDark
                         ? { 'background-color': '#1e1e1e' }

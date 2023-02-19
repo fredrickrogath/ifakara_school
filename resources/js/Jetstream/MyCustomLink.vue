@@ -5,15 +5,13 @@
 </template>
 
 <script>
-    export default {
-        props: ['href', 'active'],
+export default {
+    props: ["href", "active"],
 
-        computed: {
-            classes() {
-                return this.active
-                            ? 'flex'
-                            : 'flex'
-            }
-        }
-    }
+    computed: {
+        classes() {
+            return this.active ? "text-info" : "";
+        },
+    },
+};
 </script>

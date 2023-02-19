@@ -32,16 +32,43 @@
                     <div class="content">
                         <!-- Start Content-->
                         <div class="container-fluid">
-                            <home-page
+                            <accountant-home-page
                                 v-if="route().current('accountant.dashboard')"
-                            ></home-page>
-                            <create v-if="route().current('accountant.invoice.create')"></create>
-                            <incoming v-if="route().current('accountant.invoice.incoming')"></incoming>
-                            <payment-deatails v-if="route().current('accountant.payment_details')"></payment-deatails>
-                            <pending v-if="route().current('accountant.invoice.pending')"></pending>
-                            <reports v-if="route().current('accountant.reports')"></reports>
-                            <uploads v-if="route().current('accountant.uploads')"></uploads>
-                            <successful v-if="route().current('accountant.invoice.successful')"></successful>
+                            ></accountant-home-page>
+                            <accountant-create v-if="route().current('accountant.invoice.create')"></accountant-create>
+                            <accountant-incoming v-if="route().current('accountant.invoice.incoming')"></accountant-incoming>
+                            <accountant-payment-deatails v-if="route().current('accountant.payment_details')"></accountant-payment-deatails>
+                            <accountant-pending v-if="route().current('accountant.invoice.pending')"></accountant-pending>
+                            <accountant-reports v-if="route().current('accountant.reports')"></accountant-reports>
+                            <accountant-uploads v-if="route().current('accountant.uploads')"></accountant-uploads>
+                            <accountant-successful v-if="route().current('accountant.invoice.successful')"></accountant-successful>
+
+
+
+
+                            <academic-dashboard v-if="route().current('academic.dashboard')"></academic-dashboard>
+                            <academic-student-registration v-if="route().current('academic.students_registration')"></academic-student-registration>
+                            <academic-upload-results v-if="route().current('academic.upload_results')"></academic-upload-results>
+                            <academic-view v-if="route().current('academic.view')"></academic-view>
+                            <academic-staffs v-if="route().current('academic.staffs')"></academic-staffs>
+                            <academic-departiment v-if="route().current('academic.departiment')"></academic-departiment>
+                            <academic-create v-if="route().current('academic.reports')"></academic-create>
+
+
+
+                            <head-dashboard v-if="route().current('head.dashboard')"></head-dashboard>
+                            <head-accountant-uploads v-if="route().current('head.accountant_uploads')"></head-accountant-uploads>
+                            <head-accountant-invoices v-if="route().current('head.accountant_invoices')"></head-accountant-invoices>
+                            <head-accountant-reports v-if="route().current('head.accountant_reports')"></head-accountant-reports>
+                            <head-academic-uploads v-if="route().current('head.academic_uploads')"></head-academic-uploads>
+                            <head-academic-students v-if="route().current('head.academic_students')"></head-academic-students>
+                            <head-academic-invoices v-if="route().current('head.academic_invoices')"></head-academic-invoices>
+                            <head-academic-reports v-if="route().current('head.academic_reports')"></head-academic-reports>
+                            <head-procurement-item-registration v-if="route().current('head.procurement_item_registration')"></head-procurement-item-registration>
+                            <head-procurement-uploads v-if="route().current('head.procurement_uploads')"></head-procurement-uploads>
+                            <head-procurement-reports v-if="route().current('head.procurement_reports')"></head-procurement-reports>
+
+                            
                         </div>
                         <!-- container -->
                     </div>
@@ -125,14 +152,37 @@ import TopBar from "./Components/TopBar.vue";
 
 //PAGES
 
-import HomePage from "./Modules/AccountantModule/HomePage.vue";
-import Create from "./Modules/AccountantModule/Create.vue";
-import Incoming from "./Modules/AccountantModule/Incoming.vue";
-import PaymentDeatails from "./Modules/AccountantModule/PaymentDetails.vue";
-import Pending from "./Modules/AccountantModule/Pending.vue";
-import Reports from "./Modules/AccountantModule/Reports.vue";
-import Uploads from "./Modules/AccountantModule/Uploads.vue";
-import Successful from "./Modules/AccountantModule/Successful.vue";
+import AccountantHomePage from "./Modules/AccountantModule/HomePage.vue";
+import AccountantCreate from "./Modules/AccountantModule/Create.vue";
+import AccountantIncoming from "./Modules/AccountantModule/Incoming.vue";
+import AccountantPaymentDeatails from "./Modules/AccountantModule/PaymentDetails.vue";
+import AccountantPending from "./Modules/AccountantModule/Pending.vue";
+import AccountantReports from "./Modules/AccountantModule/Reports.vue";
+import AccountantUploads from "./Modules/AccountantModule/Uploads.vue";
+import AccountantSuccessful from "./Modules/AccountantModule/Successful.vue";
+
+
+import AcademicDashboard from "./Modules/AcademicModule/HomePage.vue";
+import AcademicStudentRegistration from "./Modules/AcademicModule/StudentsRegistration.vue";
+import AcademicUploadResults from "./Modules/AcademicModule/UploadResults.vue";
+import AcademicView from "./Modules/AcademicModule/View.vue";
+import AcademicStaffs from "./Modules/AcademicModule/Staffs.vue";
+import AcademicDepartiment from "./Modules/AcademicModule/Departiment.vue";
+import AcademicReports from "./Modules/AcademicModule/Reports.vue";
+
+
+import HeadDashboard from "./Modules/HeadModule/HomePage.vue";
+import HeadAccountantUploads from "./Modules/HeadModule/AccountantUploads.vue";
+import HeadAccountantInvoices from "./Modules/HeadModule/AccountantInvoices.vue";
+import HeadAccountantReports from "./Modules/HeadModule/AccountantReports.vue";
+import HeadAcademicUploads from "./Modules/HeadModule/AcademicUploads.vue";
+import HeadAcademicStudents from "./Modules/HeadModule/AcademicStudentDetails.vue";
+import HeadAcademicInvoices from "./Modules/HeadModule/AcademicInvoices.vue";
+import HeadAcademicReports from "./Modules/HeadModule/AcademicReports.vue";
+import HeadProcurementItemRegistration from "./Modules/HeadModule/ProcurementItemRegistration.vue";
+import HeadProcurementUploads from "./Modules/HeadModule/ProcurementUploads.vue";
+import HeadProcurementReports from "./Modules/HeadModule/ProcurementReports.vue";
+
 
 export default {
     components: {
@@ -143,14 +193,37 @@ export default {
         TopBar,
 
         // MY PAGES
-        HomePage,
-        Create,
-        Incoming,
-        PaymentDeatails,
-        Pending,
-        Reports,
-        Uploads,
-        Successful,
+        AccountantHomePage,
+        AccountantCreate,
+        AccountantIncoming,
+        AccountantPaymentDeatails,
+        AccountantPending,
+        AccountantReports,
+        AccountantUploads,
+        AccountantSuccessful,
+
+
+        AcademicDashboard,
+        AcademicStudentRegistration,
+        AcademicUploadResults,
+        AcademicView,
+        AcademicStaffs,
+        AcademicDepartiment,
+        AcademicReports,
+
+
+
+        HeadDashboard,
+        HeadAccountantUploads,
+        HeadAccountantInvoices,
+        HeadAccountantReports,
+        HeadAcademicUploads,
+        HeadAcademicStudents,
+        HeadAcademicInvoices,
+        HeadAcademicReports,
+        HeadProcurementItemRegistration,
+        HeadProcurementUploads,
+        HeadProcurementReports,
 
     },
 
