@@ -37,12 +37,18 @@ Route::get('/', function () {
     | END OF FAKE DATE GENERATING ROUTE
     |--------------------------------------------------------------------------
     */
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+
+    if (Auth::check()) {
+        return redirect('/dashboard');
+    } else {
+        return redirect('/login');
+    }
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
 });
 
 Route::middleware([
