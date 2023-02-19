@@ -68,6 +68,17 @@
                             <head-procurement-uploads v-if="route().current('head.procurement_uploads')"></head-procurement-uploads>
                             <head-procurement-reports v-if="route().current('head.procurement_reports')"></head-procurement-reports>
 
+
+
+
+                            <procurement-dashboard v-if="route().current('procurement.dashboard')"></procurement-dashboard>
+                            <procurement-invoice-create v-if="route().current('procurement.invoice_create')"></procurement-invoice-create>
+                            <procurement-invoice-view v-if="route().current('procurement.invoice_view')"></procurement-invoice-view>
+                            <procurement-reports v-if="route().current('procurement.reports')"></procurement-reports>
+                            <procurement-tools-registration v-if="route().current('procurement.tools_registration')"></procurement-tools-registration>
+                            <procurement-tools-view v-if="route().current('procurement.tools_view')"></procurement-tools-view>
+                            <procurement-uplaods v-if="route().current('procurement.uploads')"></procurement-uplaods>
+
                             
                         </div>
                         <!-- container -->
@@ -171,6 +182,7 @@ import AcademicDepartiment from "./Modules/AcademicModule/Departiment.vue";
 import AcademicReports from "./Modules/AcademicModule/Reports.vue";
 
 
+
 import HeadDashboard from "./Modules/HeadModule/HomePage.vue";
 import HeadAccountantUploads from "./Modules/HeadModule/AccountantUploads.vue";
 import HeadAccountantInvoices from "./Modules/HeadModule/AccountantInvoices.vue";
@@ -182,6 +194,16 @@ import HeadAcademicReports from "./Modules/HeadModule/AcademicReports.vue";
 import HeadProcurementItemRegistration from "./Modules/HeadModule/ProcurementItemRegistration.vue";
 import HeadProcurementUploads from "./Modules/HeadModule/ProcurementUploads.vue";
 import HeadProcurementReports from "./Modules/HeadModule/ProcurementReports.vue";
+
+
+
+import ProcurementDashboard from "./Modules/ProcurementModule/HomePage.vue";
+import ProcurementInvoiceCreate from "./Modules/ProcurementModule/InvoiceCreate.vue";
+import ProcurementInvoiceView from "./Modules/ProcurementModule/InvoiceView.vue";
+import ProcurementReports from "./Modules/ProcurementModule/Reports.vue";
+import ProcurementToolsRegistration from "./Modules/ProcurementModule/ToolsRegistration.vue";
+import ProcurementToolsView from "./Modules/ProcurementModule/ToolsView.vue";
+import ProcurementUplaods from "./Modules/ProcurementModule/Uploads.vue";
 
 
 export default {
@@ -224,6 +246,17 @@ export default {
         HeadProcurementItemRegistration,
         HeadProcurementUploads,
         HeadProcurementReports,
+
+
+
+
+        ProcurementDashboard,
+        ProcurementInvoiceCreate,
+        ProcurementInvoiceView,
+        ProcurementReports,
+        ProcurementToolsRegistration,
+        ProcurementToolsView,
+        ProcurementUplaods,
 
     },
 

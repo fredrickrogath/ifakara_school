@@ -172,14 +172,13 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'procurement', 'middleware' => 'is_procurement', 'as' => 'procurement.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageFive'])->name('pageFive');
         Route::get('/dashboard', [\App\Http\Controllers\Procurement\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageSeven'])->name('pageSeven');
+        Route::get('/tools_registration', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools_registration'])->name('tools_registration');
+        Route::get('/tools_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools_view'])->name('tools_view');
+        Route::get('/invoice_create', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice_create'])->name('invoice_create');
+        Route::get('/invoice_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice_view'])->name('invoice_view');
+        Route::get('/uploads', [\App\Http\Controllers\Procurement\DashboardController::class, 'uploads'])->name('uploads');
+        Route::get('/reports', [\App\Http\Controllers\Procurement\DashboardController::class, 'reports'])->name('reports');
     });
 
 

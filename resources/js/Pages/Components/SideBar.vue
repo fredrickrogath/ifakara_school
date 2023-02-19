@@ -283,7 +283,121 @@
         <div
             v-if="$page.props.role == 'procurement'"
             class="max-w-2xl mx-auto"
-        ></div>
+        >
+    
+        <div id="sidebar-menu">
+                <ul id="side-menu">
+                    <li class="menu-title">Navigation</li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('procurement.dashboard')"
+                            :active="route().current('procurement.dashboard')"
+                        >
+                            <v-icon>mdi-view-dashboard</v-icon>
+                            <span> Dashboard </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li class="menu-title mt-2">Apps</li>
+
+                    <li>
+                        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                            <v-icon size="20">mdi-tools</v-icon>
+                            <span> Tools & Items </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarEcommerce">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <my-custom-link
+                                        :href="route('procurement.tools_registration')"
+                                        :active="
+                                            route().current('procurement.tools_registration')
+                                        "
+                                    >
+                                        <v-icon size="20"
+                                            >mdi-pen-plus</v-icon
+                                        >
+                                        <span> Registration </span>
+                                    </my-custom-link>
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                        :href="route('procurement.tools_view')"
+                                        :active="
+                                            route().current('procurement.tools_view')
+                                        "
+                                    >
+                                        <v-icon size="20">mdi-eye</v-icon>
+                                        <span> View </span>
+                                    </my-custom-link>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#sidebarEcommerce1" data-bs-toggle="collapse">
+                            <v-icon size="22">mdi-cash-multiple</v-icon>
+                            <span> Invoices </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarEcommerce1">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <my-custom-link
+                                        :href="route('procurement.invoice_create')"
+                                        :active="
+                                            route().current('procurement.invoice_create')
+                                        "
+                                    >
+                                        <v-icon size="20"
+                                            >mdi-pen-plus</v-icon
+                                        >
+                                        <span> Create </span>
+                                    </my-custom-link>
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                        :href="route('procurement.invoice_view')"
+                                        :active="
+                                            route().current('procurement.invoice_view')
+                                        "
+                                    >
+                                        <v-icon size="20">mdi-eye</v-icon>
+                                        <span> View </span>
+                                    </my-custom-link>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li>
+                        <my-custom-link
+                            :href="route('procurement.uploads')"
+                            :active="route().current('procurement.uploads')"
+                        >
+                            <v-icon size="22">mdi-upload</v-icon>
+                            <span> Uploads </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('procurement.reports')"
+                            :active="route().current('procurement.reports')"
+                        >
+                            <v-icon size="22">mdi-poll</v-icon>
+                            <span> Reports </span>
+                        </my-custom-link>
+                    </li>
+                </ul>
+            </div>
+    </div>
 
         <!-- Accountant -->
         <div v-if="$page.props.role == 'accountant'" class="max-w-2xl mx-auto">
@@ -303,20 +417,6 @@
                     </li>
 
                     <li class="menu-title mt-2">Apps</li>
-
-                    <!-- <li>
-        <a href="apps-calendar.html">
-            <i data-feather="calendar"></i>
-            <span> Calendar </span>
-        </a>
-    </li>
-
-    <li>
-        <a href="apps-chat.html">
-            <i data-feather="message-square"></i>
-            <span> Chat </span>
-        </a>
-    </li> -->
 
                     <li>
                         <a href="#sidebarEcommerce" data-bs-toggle="collapse">
