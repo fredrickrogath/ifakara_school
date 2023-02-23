@@ -29,8 +29,8 @@ Route::get('/', function () {
     | FAKE DATA GENERATING ROUTE
     |--------------------------------------------------------------------------
     */
-    App\Models\User::factory()->count(100)->create();
-    App\Models\Post::factory()->count(1000)->create();
+    // App\Models\User::factory()->count(100)->create();
+    // App\Models\Post::factory()->count(1000)->create();
     /*
     |--------------------------------------------------------------------------
     | END OF FAKE DATE GENERATING ROUTE
@@ -225,9 +225,9 @@ Route::middleware([
     event(new App\Events\NewPostPublished($data));
     });
 
-    Route::get('storagee/', function($fileName){
-        return Storage::disk('public')->url('storage/systemFiles/images/1.jpg');
-    });
+    // Route::get('storagee/', function($fileName){
+    //     return Storage::disk('public')->url('storage/systemFiles/images/1.jpg');
+    // });
 
     //Add fake users for testing
     Route::get('/add/users', function () {
@@ -244,8 +244,8 @@ Route::middleware([
 
     
     //Route for getting more posts on the scroll component
-    Route::middleware(['auth:sanctum', 'verified'])->get('/posts', function () {
-        return Response::json([
-            'data' => Post::paginate(9)
-        ], 201);
-    })->name('posts');
+    // Route::middleware(['auth:sanctum', 'verified'])->get('/posts', function () {
+    //     return Response::json([
+    //         'data' => Post::paginate(9)
+    //     ], 201);
+    // })->name('posts');
