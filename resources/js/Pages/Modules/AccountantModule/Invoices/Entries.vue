@@ -273,13 +273,13 @@
                                 ><a
                                     href="javascript: void(0);"
                                     class="text-reset"
-                                    >App Design & Development</a
+                                    >{{ legerEntry.chart_of_account.account_type }}</a
                                 ></span
                             >
                         </td>
                         <td>
-                            <p class="mb-0">Jan 03, 2020</p>
-                            <span class="font-12">by Andrew</span>
+                            <p class="mb-0">{{ legerEntry.user.name }}</p>
+                            <!-- <span class="font-12">by Andrew</span> -->
                         </td>
                         <td>128 MB</td>
                         <td>Danielle Thompson</td>

@@ -9,6 +9,6 @@ class ChatOfAccountService
     }
 
     public function getLegerEntries(){
-        return \App\Models\TuitionFee::get();
+        return \App\Models\TuitionFee::with('chartOfAccount')->get();
     }
 }
