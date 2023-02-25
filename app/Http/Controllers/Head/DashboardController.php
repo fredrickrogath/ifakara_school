@@ -35,38 +35,53 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $headService->dashboardData());
     }
 
-    public function pageOne(){
+    public function accountant_uploads(HeadService $headService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $headService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function accountant_invoices(HeadService $headService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $headService->dashboardData());
     }
 
-    public function pageThree(){
+    public function accountant_reports(HeadService $headService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $headService->dashboardData());
     }
 
-    public function pageFour(){
+    public function academic_uploads(HeadService $headService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $headService->dashboardData());
     }
 
-    public function pageFive(){
+    public function academic_students(HeadService $headService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $headService->dashboardData());
     }
 
-    public function pageSix(){
+    public function academic_invoices(HeadService $headService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $headService->dashboardData());
     }
 
-    public function pageSeven(){
+    public function academic_reports(HeadService $headService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $headService->dashboardData());
+    }
+
+    public function procurement_item_registration(HeadService $headService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $headService->dashboardData());
+    }
+
+    public function procurement_uploads(HeadService $headService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $headService->dashboardData());
+    }
+
+    public function procurement_reports(HeadService $headService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $headService->dashboardData());
     }
 }

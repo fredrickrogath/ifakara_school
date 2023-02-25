@@ -37,12 +37,18 @@ Route::get('/', function () {
     | END OF FAKE DATE GENERATING ROUTE
     |--------------------------------------------------------------------------
     */
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+
+    if (Auth::check()) {
+        return redirect('/dashboard');
+    } else {
+        return redirect('/login');
+    }
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
 });
 
 Route::middleware([
@@ -70,14 +76,17 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'head', 'middleware' => 'is_head', 'as' => 'head.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Head\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Head\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Head\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Head\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Head\DashboardController::class, 'pageFive'])->name('pageFive');
         Route::get('/dashboard', [\App\Http\Controllers\Head\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Head\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Head\DashboardController::class, 'pageSeven'])->name('pageSeven');
+        Route::get('/accountant_uploads', [\App\Http\Controllers\Head\DashboardController::class, 'accountant_uploads'])->name('accountant_uploads');
+        Route::get('/accountant_invoices', [\App\Http\Controllers\Head\DashboardController::class, 'accountant_invoices'])->name('accountant_invoices');
+        Route::get('/accountant_reports', [\App\Http\Controllers\Head\DashboardController::class, 'accountant_reports'])->name('accountant_reports');
+        Route::get('/academic_uploads', [\App\Http\Controllers\Head\DashboardController::class, 'academic_uploads'])->name('academic_uploads');
+        Route::get('/academic_students', [\App\Http\Controllers\Head\DashboardController::class, 'academic_students'])->name('academic_students');
+        Route::get('/academic_invoices', [\App\Http\Controllers\Head\DashboardController::class, 'academic_invoices'])->name('academic_invoices');
+        Route::get('/academic_reports', [\App\Http\Controllers\Head\DashboardController::class, 'academic_reports'])->name('academic_reports');
+        Route::get('/procurement_item_registration', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_item_registration'])->name('procurement_item_registration');
+        Route::get('/procurement_uploads', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_uploads'])->name('procurement_uploads');
+        Route::get('/procurement_reports', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_reports'])->name('procurement_reports');
     });
 
 
@@ -107,14 +116,13 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'academic', 'middleware' => 'is_academic', 'as' => 'academic.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Academic\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Academic\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Academic\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Academic\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Academic\DashboardController::class, 'pageFive'])->name('pageFive');
         Route::get('/dashboard', [\App\Http\Controllers\Academic\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Academic\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Academic\DashboardController::class, 'pageSeven'])->name('pageSeven');
+        Route::get('/students_registration', [\App\Http\Controllers\Academic\DashboardController::class, 'students_registration'])->name('students_registration');
+        Route::get('/upload_results', [\App\Http\Controllers\Academic\DashboardController::class, 'upload_results'])->name('upload_results');
+        Route::get('/view', [\App\Http\Controllers\Academic\DashboardController::class, 'view'])->name('view');
+        Route::get('/staffs', [\App\Http\Controllers\Academic\DashboardController::class, 'staffs'])->name('staffs');
+        Route::get('/departiment', [\App\Http\Controllers\Academic\DashboardController::class, 'departiment'])->name('departiment');
+        Route::get('/reports', [\App\Http\Controllers\Academic\DashboardController::class, 'reports'])->name('reports');
     });
 
 
@@ -164,14 +172,13 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'procurement', 'middleware' => 'is_procurement', 'as' => 'procurement.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageFive'])->name('pageFive');
         Route::get('/dashboard', [\App\Http\Controllers\Procurement\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageSeven'])->name('pageSeven');
+        Route::get('/tools_registration', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools_registration'])->name('tools_registration');
+        Route::get('/tools_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools_view'])->name('tools_view');
+        Route::get('/invoice_create', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice_create'])->name('invoice_create');
+        Route::get('/invoice_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice_view'])->name('invoice_view');
+        Route::get('/uploads', [\App\Http\Controllers\Procurement\DashboardController::class, 'uploads'])->name('uploads');
+        Route::get('/reports', [\App\Http\Controllers\Procurement\DashboardController::class, 'reports'])->name('reports');
     });
 
 

@@ -34,38 +34,33 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageOne(){
+    public function tools_registration(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function tools_view(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageThree(){
+    public function invoice_create(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageFour(){
+    public function invoice_view(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageFive(){
+    public function uploads(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageSix(){
+    public function reports(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSeven(){
-        $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 }
