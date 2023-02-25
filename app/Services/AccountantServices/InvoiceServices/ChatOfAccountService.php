@@ -5,6 +5,6 @@ namespace App\Services\AccountantServices\InvoiceServices;
 class ChatOfAccountService
 {
     public function getLegerEntries(){
-        return \App\Models\ChartsOfAccount::all();
+        return \App\Models\ChartsOfAccount::where('account_type' ,'=', 'Income')->get();
     }
 }

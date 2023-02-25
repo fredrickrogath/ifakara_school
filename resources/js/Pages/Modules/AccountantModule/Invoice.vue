@@ -28,8 +28,8 @@
                                     >
                                         {{ student.user.name }}
                                     </option> -->
-                                    <!-- @endforeach -->
-                                <!-- </select>
+                            <!-- @endforeach -->
+                            <!-- </select>
                             </div> -->
 
                             <!-- <div class="mb-1 text-gray-600">
@@ -124,7 +124,7 @@
                                 class="d-flex justify-content-between my-1 mt-2"
                             >
                                 <button
-                                @click="dialog = false"
+                                    @click="dialog = false"
                                     type="submit"
                                     class="btn btn-success waves-effect waves-light"
                                 >
@@ -464,7 +464,7 @@ export default {
         return {
             echo: null,
             dialogm1: "",
-            dialog: true,
+            dialog: false,
             dialogForm: "",
             legerEntries: null,
             selectedLegerEntry: "Nothing Selected",
@@ -531,8 +531,8 @@ export default {
                 })
                 .then((response) => {
                     // this.students = response.data.data;
-                    this.amount = '';
-                    this.narration = '';
+                    this.amount = "";
+                    this.narration = "";
                     console.log(response.data);
                 });
             // handle response here
