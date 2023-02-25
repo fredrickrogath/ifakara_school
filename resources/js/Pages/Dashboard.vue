@@ -9,7 +9,7 @@
                 <!-- end Topbar -->
 
                 <!-- ========== Left Sidebar Start ========== -->
-                <div class="left-side-menu">
+                <div class="left-side-menu pt-0">
                     <div class="h-100" data-simplebar>
 
                         <!--- Sidemenu -->
@@ -28,7 +28,7 @@
                 <!-- Start Page Content here -->
                 <!-- ============================================================== -->
 
-                <div class="content-page">
+                <div class="content-page pt-0 px-0">
                     <div class="content">
                         <!-- Start Content-->
                         <div class="container-fluid">
@@ -42,6 +42,8 @@
                             <accountant-reports v-if="route().current('accountant.reports')"></accountant-reports>
                             <accountant-uploads v-if="route().current('accountant.uploads')"></accountant-uploads>
                             <accountant-successful v-if="route().current('accountant.invoice.successful')"></accountant-successful>
+                            <accountant-invoice v-if="route().current('accountant.invoice')"></accountant-invoice>
+
 
 
 
@@ -164,6 +166,7 @@ import TopBar from "./Components/TopBar.vue";
 //PAGES
 
 import AccountantHomePage from "./Modules/AccountantModule/HomePage.vue";
+import AccountantInvoice from "./Modules/AccountantModule/Invoice.vue";
 import AccountantCreate from "./Modules/AccountantModule/Create.vue";
 import AccountantIncoming from "./Modules/AccountantModule/Incoming.vue";
 import AccountantPaymentDeatails from "./Modules/AccountantModule/PaymentDetails.vue";
@@ -223,6 +226,7 @@ export default {
         AccountantReports,
         AccountantUploads,
         AccountantSuccessful,
+        AccountantInvoice,
 
 
         AcademicDashboard,

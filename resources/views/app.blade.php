@@ -5,15 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>ICD | SCHOOL</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-        {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" /> --}}
 
         {{-- Template --}}
 
@@ -37,6 +35,38 @@
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <style>
+            .btn:hover {
+            color: #fff !important;
+            text-decoration: none;
+        }
+
+        .btn:focus {
+            color: #fff !important;
+            text-decoration: none;
+        }
+
+        /* .form-control-light {
+            background-color: #fff !important;
+            border-color: #f7b84b !important;
+        } */
+
+        /* body {
+            zoom: 90%;
+            transform: scale(0.9);
+            transform-origin: 0 0;
+        } */
+
+        html,
+        body {
+            width: 106%;
+            height: 106%;
+            /* zoom: 100%; */
+            transform: scale(0.95);
+            transform-origin: 0 0;
+        }
+        </style>
     </head>
     <body class="font-sans antialiased loading">
         @inertia
