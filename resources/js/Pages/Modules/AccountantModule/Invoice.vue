@@ -497,6 +497,7 @@ export default {
             dialog: false,
             dialogForm: "",
             legerEntries: null,
+            legerEntries1: null,
             selectedLegerEntry: "Nothing Selected",
             student: null,
             students: null,

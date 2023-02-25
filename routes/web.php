@@ -164,7 +164,7 @@ Route::middleware([
         Route::get('/invoice', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice'])->name('invoice');
 
 
-
+        Route::get('/getLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getLegerEntries'])->name('getLegerEntries');
         Route::get('/getSpecificLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSpecificLegerEntries'])->name('getSpecificLegerEntries');
         Route::get('/searchStudent', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'searchStudent'])->name('searchStudent');
         Route::post('/submitTuitionFee', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'submitTuitionFee'])->name('submitTuitionFee');

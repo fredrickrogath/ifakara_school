@@ -11,6 +11,10 @@ class ChatOfAccountController extends Controller
 {
     //
     public function getSpecificLegerEntries(ChatOfAccountService $chatOfAccountService){
+        return response()->json(['data' => $chatOfAccountService->getSpecificLegerEntries()]);
+    }
+
+    public function getLegerEntries(ChatOfAccountService $chatOfAccountService){
         return response()->json(['data' => $chatOfAccountService->getLegerEntries()]);
     }
 

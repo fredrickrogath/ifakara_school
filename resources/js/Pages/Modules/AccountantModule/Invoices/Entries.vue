@@ -257,16 +257,16 @@
             <table class="table table-centered table-nowrap mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th class="border-0">Name</th>
-                        <th class="border-0">Last Modified</th>
-                        <th class="border-0">Size</th>
-                        <th class="border-0">Owner</th>
-                        <th class="border-0">Members</th>
+                        <th class="border-0">Transaction Type</th>
+                        <th class="border-0">Made For</th>
+                        <th class="border-0">Amount</th>
+                        <th class="border-0">Narration</th>
+                        <th class="border-0">Date</th>
                         <th class="border-0" style="width: 80px">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="i in 8" :key="i">
+                    <tr v-for="legerEntry in legerEntries" :key="legerEntry.id">
                         <td>
                             <i data-feather="folder" class="icon-dual"></i>
                             <span class="ms-2 fw-semibold"
@@ -401,10 +401,27 @@
 
 <script>
 export default {
+    mounted() {
+        this.getLegerEntries()
+    },
+
     data() {
         return {
             dialog: false,
+            legerEntries: null,
         };
     },
+
+    methods: {
+        getLegerEntries() {
+            // console.log("Loading next page");
+            axios
+                .get("/accountant/getLegerEntries")
+                .then((response) => {
+                    this.legerEntries = response.data.data;
+                    // console.log(this.legerEntries)
+                });
+        },
+    }
 };
 </script>

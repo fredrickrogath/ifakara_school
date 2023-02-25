@@ -8,7 +8,7 @@ export default {
 
     state() {
         return {
-            tab: 'home',
+            tab: 'entries',
         };
     },
     mutations: mutations,
