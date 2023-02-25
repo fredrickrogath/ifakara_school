@@ -259,6 +259,29 @@
 
                             <div class="mail-list">
                                 <span class="text-center pl-3 mx-auto"
+                                    >From Leger Entry</span
+                                >
+
+                                <a
+                                    @click="setTab('entries')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1"
+                                    :class="[
+                                        getCurrentTab == 'entries'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >All Entries
+                                </a>
+                            </div>
+
+                            <hr class="bg-gray-100 mb-1 mt-0" />
+
+                            <div class="mail-list">
+                                <span class="text-center pl-3 mx-auto"
                                     >From Procurement</span
                                 >
 
@@ -402,6 +425,9 @@
                             <div class="mt-3">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <transition name="fade">
+                                    <entries
+                                        v-if="getCurrentTab == 'entries'"
+                                    ></entries>
                                     <requisitions
                                         v-if="getCurrentTab == 'home'"
                                     ></requisitions>
@@ -441,6 +467,8 @@ import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 
+import Entries from "./Invoices/Entries.vue";
+
 export default {
     components: {
         Requisitions,
@@ -448,6 +476,8 @@ export default {
         DeletedRequisitions,
         StarredRequisitions,
         RejectedRequisitions,
+
+        Entries,
     },
 
     mounted() {
