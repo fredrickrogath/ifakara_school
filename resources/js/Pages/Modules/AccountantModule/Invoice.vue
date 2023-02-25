@@ -554,7 +554,6 @@ export default {
         },
 
         async submitForm() {
-            const formData = this.form;
             axios
                 .post("/accountant/submitTuitionFee", {
                     amount: this.amount,
@@ -562,9 +561,25 @@ export default {
                 })
                 .then((response) => {
                     // this.students = response.data.data;
+                    this.submitFormToMain();
                     this.amount = "";
                     this.narration = "";
                     console.log(response.data);
+                });
+            // handle response here
+        },
+
+        async submitFormToMain() {
+            axios
+                .post("http://127.0.0.1:8001/api/accountant/getLegerEntries", {
+                    amount: this.amount,
+                    narration: this.narration,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    console.log(response.data.data);
                 });
             // handle response here
         },
