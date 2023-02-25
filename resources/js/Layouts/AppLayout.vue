@@ -3,20 +3,10 @@
         <jet-banner />
 
         <div
-            class="min-h-screen shadow-xl"
-            :style="[
-                isDark
-                    ? { 'background-color': '#1e1e1e' }
-                    : { background: '#FFF' },
-            ]"
+            class="min-h-screen shadow-xl bg-white"
         >
             <nav
-                class="border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50 fixed-top"
-                :style="[
-                    isDark
-                        ? { 'background-color': '#1e1e1e' }
-                        : { background: '#FFF' },
-                ]"
+                class="border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50 fixed-top bg-white"
             >
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

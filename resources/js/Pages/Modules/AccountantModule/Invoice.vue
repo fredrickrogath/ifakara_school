@@ -150,7 +150,7 @@
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body pt-1">
+                    <div class="card-body pt-0">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
                             <div class="btn-group dropend d-block mb-2 mx-2">
@@ -382,8 +382,8 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar">
-                            <div
+                        <div class="inbox-rightbar pt-1">
+                            <!-- <div
                                 class="d-md-flex justify-content-between align-items-center"
                             >
                                 <form class="search-bar">
@@ -420,9 +420,9 @@
                                         ></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="mt-3">
+                            <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <transition name="fade">
                                     <entries

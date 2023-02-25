@@ -32,6 +32,7 @@
         "apexcharts": "^3.36.3",
         "gsap": "^3.11.4",
         "laravel-echo": "^1.11.2",
+        "moment": "^2.29.4",
         "pusher-js": "^7.0.3",
         "v-money": "^0.8.1",
         "vue-apexcharts": "^1.6.2",
