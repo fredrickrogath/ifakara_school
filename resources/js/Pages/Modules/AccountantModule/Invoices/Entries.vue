@@ -262,7 +262,7 @@
                         <th class="border-0">Amount</th>
                         <th class="border-0">Narration</th>
                         <th class="border-0">Date</th>
-                        <th class="border-0" style="width: 80px">Action</th>
+                        <!-- <th class="border-0" style="width: 80px">Action</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -281,116 +281,9 @@
                             <p class="mb-0">{{ legerEntry.user.name }}</p>
                             <!-- <span class="font-12">by Andrew</span> -->
                         </td>
-                        <td>128 MB</td>
-                        <td>Danielle Thompson</td>
-                        <td id="tooltips-container">
-                            <div class="avatar-group">
-                                <a
-                                    href="javascript: void(0);"
-                                    class="avatar-group-item mb-0"
-                                    data-bs-container="#tooltips-container"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Mat Helme"
-                                >
-                                    <img
-                                        src="assets/images/users/user-1.jpg"
-                                        class="rounded-circle avatar-xs"
-                                        alt="friend"
-                                    />
-                                </a>
-
-                                <a
-                                    href="javascript: void(0);"
-                                    class="avatar-group-item mb-0"
-                                    data-bs-container="#tooltips-container"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Michael Zenaty"
-                                >
-                                    <img
-                                        src="assets/images/users/user-2.jpg"
-                                        class="rounded-circle avatar-xs"
-                                        alt="friend"
-                                    />
-                                </a>
-
-                                <a
-                                    href="javascript: void(0);"
-                                    class="avatar-group-item mb-0"
-                                    data-bs-container="#tooltips-container"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="James Anderson"
-                                >
-                                    <img
-                                        src="assets/images/users/user-3.jpg"
-                                        class="rounded-circle avatar-xs"
-                                        alt="friend"
-                                    />
-                                </a>
-
-                                <a
-                                    href="javascript: void(0);"
-                                    class="avatar-group-item mb-0"
-                                    data-bs-container="#tooltips-container"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Username"
-                                >
-                                    <img
-                                        src="assets/images/users/user-5.jpg"
-                                        class="rounded-circle avatar-xs"
-                                        alt="friend"
-                                    />
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="btn-group dropdown">
-                                <a
-                                    href="javascript: void(0);"
-                                    class="table-action-btn dropdown-toggle arrow-none btn btn-light btn-xs"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    ><i class="mdi mdi-dots-horizontal"></i
-                                ></a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        @click="dialog = true"
-                                        ><i
-                                            class="mdi mdi-eye me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Open</a
-                                    >
-                                    <!-- <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-link me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Get Sharable Link</a
-                                    >
-                                    <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-pencil me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Rename</a
-                                    >
-                                    <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-download me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Download</a
-                                    >
-                                    <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-delete me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Remove</a
-                                    > -->
-                                </div>
-                            </div>
+                        <td>{{ legerEntry.amount }}</td>
+                        <td>{{ legerEntry.narration }}</td>
+                        <td>{{ legerEntry.created_at }}
                         </td>
                     </tr>
                 </tbody>
