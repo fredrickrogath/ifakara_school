@@ -38,6 +38,9 @@ class ChatOfAccountController extends Controller
             'narration' => $request->narration,
 
         ]);
+
+        event(new \App\Events\NewPostPublished('created'));
+
         return response()->json('success');
     }
 }

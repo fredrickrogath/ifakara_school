@@ -281,7 +281,7 @@
                             <p class="mb-0">{{ legerEntry.user.name }}</p>
                             <!-- <span class="font-12">by Andrew</span> -->
                         </td>
-                        <td>{{ legerEntry.amount }}</td>
+                        <td>{{ legerEntry.amount | currency("Tsh ", 0) }}</td>
                         <td>{{ legerEntry.narration }}</td>
                         <td>{{ legerEntry.created_at }}
                         </td>
@@ -296,6 +296,15 @@
 export default {
     mounted() {
         this.getLegerEntries()
+
+        // Receiving broadicasting
+        window.Echo.channel("EventTriggered").listen(
+            "NewPostPublished",
+            (e) => {
+                // console.log('abc');
+                this.getLegerEntries()
+            }
+        );
     },
 
     data() {
