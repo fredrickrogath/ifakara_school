@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-dialog v-model="dialog" width="auto">
-            <div class="mt-1">
+            <div class="">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -253,7 +253,7 @@
             <!-- container -->
         </v-dialog>
 
-        <div class="table-responsive">
+        <!-- <div class="table-responsive">
             <table class="table table-centered table-nowrap mb-0">
                 <thead class="table-light">
                     <tr>
@@ -262,10 +262,10 @@
                         <th class="border-0">Amount</th>
                         <th class="border-0">Narration</th>
                         <th class="border-0">Date</th>
-                        <!-- <th class="border-0" style="width: 80px">Action</th> -->
-                    </tr>
-                </thead>
-                <tbody>
+                         <th class="border-0" style="width: 80px">Action</th> -->
+                    <!-- </tr>
+                </thead> -->
+                <!-- <tbody> 
                     <tr v-for="legerEntry in legerEntries" :key="legerEntry.id">
                         <td>
                             <i data-feather="folder" class="icon-dual"></i>
@@ -277,22 +277,25 @@
                                 ></span
                             >
                         </td>
-                        <td>
-                            <p class="mb-0">{{ legerEntry.user.name }}</p>
-                            <!-- <span class="font-12">by Andrew</span> -->
-                        </td>
-                        <td>{{ legerEntry.amount | currency("Tsh ", 0) }}</td>
+                        <td> -->
+                            <!-- <p class="mb-0">{{ legerEntry.user.name }}</p>
+                             <span class="font-12">by Andrew</span> -->
+                        <!-- </td> -->
+                        <!-- <td>{{ legerEntry.amount | currency("Tsh ", 0) }}</td>
                         <td>{{ legerEntry.narration }}</td>
-                        <td>{{ legerEntry.created_at }}
-                        </td>
-                    </tr>
+                        <td>{{ legerEntry.created_at }} -->
+                        <!-- </td> -->
+                    <!-- </tr>
                 </tbody>
-            </table>
-        </div>
+            </table> -->
+        <!-- </div> -->
+
+        <data-table></data-table>
     </div>
 </template>
 
 <script>
+import DataTable from './../../../Components/Tables.vue';
 export default {
     mounted() {
         this.getLegerEntries()
@@ -305,6 +308,10 @@ export default {
                 this.getLegerEntries()
             }
         );
+    },
+
+    components: {
+        DataTable,
     },
 
     data() {
