@@ -30,18 +30,24 @@
                                     <my-custom-link
                                         :href="route('head.accountant_uploads')"
                                         :active="
-                                            route().current('head.accountant_uploads')
+                                            route().current(
+                                                'head.accountant_uploads'
+                                            )
                                         "
                                     >
-                                    <v-icon size="20">mdi-upload</v-icon>
+                                        <v-icon size="20">mdi-upload</v-icon>
                                         <span> Uploads </span>
                                     </my-custom-link>
                                 </li>
                                 <li>
                                     <my-custom-link
-                                        :href="route('head.accountant_invoices')"
+                                        :href="
+                                            route('head.accountant_invoices')
+                                        "
                                         :active="
-                                            route().current('head.accountant_invoices')
+                                            route().current(
+                                                'head.accountant_invoices'
+                                            )
                                         "
                                     >
                                         <v-icon size="20">mdi-cash</v-icon>
@@ -52,7 +58,9 @@
                                     <my-custom-link
                                         :href="route('head.accountant_reports')"
                                         :active="
-                                            route().current('head.accountant_reports')
+                                            route().current(
+                                                'head.accountant_reports'
+                                            )
                                         "
                                     >
                                         <v-icon size="18">mdi-poll</v-icon>
@@ -76,12 +84,12 @@
                                     <my-custom-link
                                         :href="route('head.academic_uploads')"
                                         :active="
-                                            route().current('head.academic_uploads')
+                                            route().current(
+                                                'head.academic_uploads'
+                                            )
                                         "
                                     >
-                                        <v-icon size="20"
-                                            >mdi-upload</v-icon
-                                        >
+                                        <v-icon size="20">mdi-upload</v-icon>
                                         <span> Uploads </span>
                                     </my-custom-link>
                                 </li>
@@ -89,7 +97,9 @@
                                     <my-custom-link
                                         :href="route('head.academic_students')"
                                         :active="
-                                            route().current('head.academic_students')
+                                            route().current(
+                                                'head.academic_students'
+                                            )
                                         "
                                     >
                                         <v-icon size="20">mdi-school</v-icon>
@@ -101,10 +111,12 @@
                                     <my-custom-link
                                         :href="route('head.academic_invoices')"
                                         :active="
-                                            route().current('head.academic_invoices')
+                                            route().current(
+                                                'head.academic_invoices'
+                                            )
                                         "
                                     >
-                                    <v-icon size="20">mdi-cash</v-icon>
+                                        <v-icon size="20">mdi-cash</v-icon>
                                         <span> Invoices </span>
                                     </my-custom-link>
                                 </li>
@@ -113,7 +125,9 @@
                                     <my-custom-link
                                         :href="route('head.academic_reports')"
                                         :active="
-                                            route().current('head.academic_reports')
+                                            route().current(
+                                                'head.academic_reports'
+                                            )
                                         "
                                     >
                                         <v-icon size="18">mdi-poll</v-icon>
@@ -123,7 +137,7 @@
                             </ul>
                         </div>
                     </li>
-                    
+
                     <li>
                         <a href="#sidebarEcommerce2" data-bs-toggle="collapse">
                             <v-icon size="24">mdi-account-tie</v-icon>
@@ -134,33 +148,45 @@
                             <ul class="nav-second-level">
                                 <li>
                                     <my-custom-link
-                                        :href="route('head.procurement_item_registration')"
+                                        :href="
+                                            route(
+                                                'head.procurement_item_registration'
+                                            )
+                                        "
                                         :active="
-                                            route().current('head.procurement_item_registration')
+                                            route().current(
+                                                'head.procurement_item_registration'
+                                            )
                                         "
                                     >
-                                        <v-icon size="20"
-                                            >mdi-pen-plus</v-icon
-                                        >
+                                        <v-icon size="20">mdi-pen-plus</v-icon>
                                         <span> Item Registration </span>
                                     </my-custom-link>
                                 </li>
                                 <li>
                                     <my-custom-link
-                                        :href="route('head.procurement_uploads')"
+                                        :href="
+                                            route('head.procurement_uploads')
+                                        "
                                         :active="
-                                            route().current('head.procurement_uploads')
+                                            route().current(
+                                                'head.procurement_uploads'
+                                            )
                                         "
                                     >
-                                    <v-icon size="20">mdi-upload</v-icon>
-                            <span> Uploads </span>
+                                        <v-icon size="20">mdi-upload</v-icon>
+                                        <span> Uploads </span>
                                     </my-custom-link>
                                 </li>
                                 <li>
                                     <my-custom-link
-                                        :href="route('head.procurement_reports')"
+                                        :href="
+                                            route('head.procurement_reports')
+                                        "
                                         :active="
-                                            route().current('head.procurement_reports')
+                                            route().current(
+                                                'head.procurement_reports'
+                                            )
                                         "
                                     >
                                         <v-icon size="18">mdi-poll</v-icon>
@@ -171,18 +197,13 @@
                             </ul>
                         </div>
                     </li>
-                    
-
                 </ul>
             </div>
         </div>
 
         <!-- Academic -->
-        <div
-            v-if="$page.props.role == 'academic'"
-            class="max-w-2xl mx-auto"
-        >
-        <div id="sidebar-menu">
+        <div v-if="$page.props.role == 'academic'" class="max-w-2xl mx-auto">
+            <div id="sidebar-menu">
                 <ul id="side-menu">
                     <li class="menu-title">Navigation</li>
 
@@ -208,14 +229,18 @@
                             <ul class="nav-second-level">
                                 <li>
                                     <my-custom-link
-                                        :href="route('academic.students_registration')"
+                                        :href="
+                                            route(
+                                                'academic.students_registration'
+                                            )
+                                        "
                                         :active="
-                                            route().current('academic.students_registration')
+                                            route().current(
+                                                'academic.students_registration'
+                                            )
                                         "
                                     >
-                                        <v-icon size="20"
-                                            >mdi-pen-plus</v-icon
-                                        >
+                                        <v-icon size="20">mdi-pen-plus</v-icon>
                                         <span> Registration </span>
                                     </my-custom-link>
                                 </li>
@@ -223,7 +248,9 @@
                                     <my-custom-link
                                         :href="route('academic.upload_results')"
                                         :active="
-                                            route().current('academic.upload_results')
+                                            route().current(
+                                                'academic.upload_results'
+                                            )
                                         "
                                     >
                                         <v-icon size="20">mdi-upload</v-icon>
@@ -277,15 +304,11 @@
                     </li>
                 </ul>
             </div>
-    </div>
+        </div>
 
         <!-- Procurement -->
-        <div
-            v-if="$page.props.role == 'procurement'"
-            class="max-w-2xl mx-auto"
-        >
-    
-        <div id="sidebar-menu">
+        <div v-if="$page.props.role == 'procurement'" class="max-w-2xl mx-auto">
+            <div id="sidebar-menu">
                 <ul id="side-menu">
                     <li class="menu-title">Navigation</li>
 
@@ -311,14 +334,18 @@
                             <ul class="nav-second-level">
                                 <li>
                                     <my-custom-link
-                                        :href="route('procurement.tools_registration')"
+                                        :href="
+                                            route(
+                                                'procurement.tools_registration'
+                                            )
+                                        "
                                         :active="
-                                            route().current('procurement.tools_registration')
+                                            route().current(
+                                                'procurement.tools_registration'
+                                            )
                                         "
                                     >
-                                        <v-icon size="20"
-                                            >mdi-pen-plus</v-icon
-                                        >
+                                        <v-icon size="20">mdi-pen-plus</v-icon>
                                         <span> Registration </span>
                                     </my-custom-link>
                                 </li>
@@ -326,7 +353,9 @@
                                     <my-custom-link
                                         :href="route('procurement.tools_view')"
                                         :active="
-                                            route().current('procurement.tools_view')
+                                            route().current(
+                                                'procurement.tools_view'
+                                            )
                                         "
                                     >
                                         <v-icon size="20">mdi-eye</v-icon>
@@ -348,22 +377,28 @@
                             <ul class="nav-second-level">
                                 <li>
                                     <my-custom-link
-                                        :href="route('procurement.invoice_create')"
+                                        :href="
+                                            route('procurement.invoice_create')
+                                        "
                                         :active="
-                                            route().current('procurement.invoice_create')
+                                            route().current(
+                                                'procurement.invoice_create'
+                                            )
                                         "
                                     >
-                                        <v-icon size="20"
-                                            >mdi-pen-plus</v-icon
-                                        >
+                                        <v-icon size="20">mdi-pen-plus</v-icon>
                                         <span> Create </span>
                                     </my-custom-link>
                                 </li>
                                 <li>
                                     <my-custom-link
-                                        :href="route('procurement.invoice_view')"
+                                        :href="
+                                            route('procurement.invoice_view')
+                                        "
                                         :active="
-                                            route().current('procurement.invoice_view')
+                                            route().current(
+                                                'procurement.invoice_view'
+                                            )
                                         "
                                     >
                                         <v-icon size="20">mdi-eye</v-icon>
@@ -374,7 +409,6 @@
                             </ul>
                         </div>
                     </li>
-
 
                     <li>
                         <my-custom-link
@@ -397,7 +431,7 @@
                     </li>
                 </ul>
             </div>
-    </div>
+        </div>
 
         <!-- Accountant -->
         <div v-if="$page.props.role == 'accountant'" class="max-w-2xl mx-auto">
@@ -407,18 +441,17 @@
 
                     <li>
                         <my-custom-link
-                                :href="route('accountant.dashboard')"
-                                :active="route().current('accountant.dashboard')"
-                            >
+                            :href="route('accountant.dashboard')"
+                            :active="route().current('accountant.dashboard')"
+                        >
                             <v-icon>mdi-view-dashboard</v-icon>
                             <span> Dashboard </span>
-                            </my-custom-link>
-                       
+                        </my-custom-link>
                     </li>
 
                     <li class="menu-title mt-2">Apps</li>
 
-                    <li>
+                    <!-- <li>
                         <a href="#sidebarEcommerce" data-bs-toggle="collapse">
                             <v-icon size="20">mdi-cash</v-icon>
                             <span> Invoice </span>
@@ -428,53 +461,89 @@
                             <ul class="nav-second-level">
                                 <li>
                                     <my-custom-link
-                                :href="route('accountant.invoice.incoming')"
-                                :active="route().current('accountant.invoice.incoming')"
-                            >
-                            <v-icon size="20">mdi-inbox-arrow-down</v-icon>
-                            <span> Incoming </span>
-                            </my-custom-link>
-                                   
-                                </li>
-                                <li>
-                                    <my-custom-link
-                                :href="route('accountant.invoice.pending')"
-                                :active="route().current('accountant.invoice.pending')"
-                            >
-                            <v-icon size="20">mdi-account-clock</v-icon>
-                            <span> Pending </span>
-                            </my-custom-link>
-                                </li>
-                                <li>
-                                    <my-custom-link
-                                :href="route('accountant.invoice.successful')"
-                                :active="route().current('accountant.invoice.successful')"
-                            >
-                            <v-icon size="20">mdi-check-bold</v-icon>
-                            <span> Successful </span>
-                            </my-custom-link>
-                                </li>
-                                <li>
-                                    <my-custom-link
-                                :href="route('accountant.invoice.create')"
-                                :active="route().current('accountant.invoice.create')"
-                            >
-                            <v-icon size="20"
-                                            >mdi-pen-plus</v-icon
+                                        :href="
+                                            route('accountant.invoice.incoming')
+                                        "
+                                        :active="
+                                            route().current(
+                                                'accountant.invoice.incoming'
+                                            )
+                                        "
+                                    >
+                                        <v-icon size="20"
+                                            >mdi-inbox-arrow-down</v-icon
                                         >
-                            <span> Create </span>
-                            </my-custom-link>
-                                
+                                        <span> Incoming </span>
+                                    </my-custom-link>
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                        :href="
+                                            route('accountant.invoice.pending')
+                                        "
+                                        :active="
+                                            route().current(
+                                                'accountant.invoice.pending'
+                                            )
+                                        "
+                                    >
+                                        <v-icon size="20"
+                                            >mdi-account-clock</v-icon
+                                        >
+                                        <span> Pending </span>
+                                    </my-custom-link>
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                        :href="
+                                            route(
+                                                'accountant.invoice.successful'
+                                            )
+                                        "
+                                        :active="
+                                            route().current(
+                                                'accountant.invoice.successful'
+                                            )
+                                        "
+                                    >
+                                        <v-icon size="20"
+                                            >mdi-check-bold</v-icon
+                                        >
+                                        <span> Successful </span>
+                                    </my-custom-link>
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                        :href="
+                                            route('accountant.invoice.create')
+                                        "
+                                        :active="
+                                            route().current(
+                                                'accountant.invoice.create'
+                                            )
+                                        "
+                                    >
+                                        <v-icon size="20">mdi-pen-plus</v-icon>
+                                        <span> Create </span>
+                                    </my-custom-link>
                                 </li>
                             </ul>
                         </div>
+                    </li> -->
+
+                    <li>
+                        <my-custom-link
+                            :href="route('accountant.invoice')"
+                            :active="route().current('accountant.invoice')"
+                        >
+                            <v-icon size="20">mdi-cash-multiple</v-icon>
+                            <span> Invoice </span>
+                        </my-custom-link>
                     </li>
 
                     <li>
                         <a href="#sidebarCrm" data-bs-toggle="collapse">
-                            <v-icon size="20"
-                                            >mdi-school</v-icon
-                                        >
+                            <v-icon size="20">mdi-school</v-icon>
                             <span> Student </span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -482,37 +551,53 @@
                             <ul class="nav-second-level">
                                 <li>
                                     <my-custom-link
-                                :href="route('accountant.payment_details')"
-                                :active="route().current('accountant.payment_details')"
-                            >
-                            <v-icon size="20"
+                                        :href="
+                                            route('accountant.payment_details')
+                                        "
+                                        :active="
+                                            route().current(
+                                                'accountant.payment_details'
+                                            )
+                                        "
+                                    >
+                                        <v-icon size="20"
                                             >mdi-cash-multiple</v-icon
                                         >
-                            <span> Payment Detail </span>
-                            </my-custom-link>
+                                        <span> Payment Detail </span>
+                                    </my-custom-link>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
                     <li>
-                            <my-custom-link
-                                :href="route('accountant.uploads')"
-                                :active="route().current('accountant.uploads')"
-                            >
+                        <my-custom-link
+                            :href="route('accountant.uploads')"
+                            :active="route().current('accountant.uploads')"
+                        >
                             <v-icon size="20">mdi-upload</v-icon>
                             <span> Uploads </span>
-                            </my-custom-link>
+                        </my-custom-link>
                     </li>
 
                     <li>
-                            <my-custom-link
-                                :href="route('accountant.reports')"
-                                :active="route().current('accountant.reports')"
-                            >
+                        <my-custom-link
+                            :href="route('accountant.reports')"
+                            :active="route().current('accountant.reports')"
+                        >
                             <v-icon size="20">mdi-poll</v-icon>
                             <span> Reports </span>
-                            </my-custom-link>
+                        </my-custom-link>
+                    </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('accountant.reports')"
+                            :active="route().current('accountant.reports')"
+                        >
+                            <v-icon size="23">mdi-finance</v-icon>
+                            <span> Charts Of Accounts </span>
+                        </my-custom-link>
                     </li>
                 </ul>
             </div>

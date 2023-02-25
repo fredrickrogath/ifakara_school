@@ -15,12 +15,12 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        $<span data-plugin="counterup"
+                                        <span data-plugin="counterup"
                                             >12,145</span
                                         >
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        Income status
+                                        Students Registered
                                     </p>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                         >
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        January's Sales
+                                        Items Boughted
                                     </p>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        $<span data-plugin="counterup"
+                                        <span data-plugin="counterup"
                                             >8947</span
                                         >
                                     </h4>
@@ -150,7 +150,7 @@
                         </div>
 
                         <h4 class="header-title mb-3">
-                            Incoming Finances Analytics
+                            Analytics Performance
                         </h4>
 
                         <div class="d-flex text-center">

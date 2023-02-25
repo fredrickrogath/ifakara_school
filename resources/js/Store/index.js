@@ -6,16 +6,16 @@ import rootMutations from './mutations';
 import rootActions from './actions';
 import rootGettes from './getters';
 
-import counterModules from '../Store/numbers/index';
+import invoiceModules from '../Store/invoice/index';
 
 Vue.use(Vuex);
 
-const counterModule = counterModules;
+const counterModule = invoiceModules;
 
 const store = new Vuex.Store({
     plugins: [createPersistedState()],
     modules: {
-        numbers: counterModule,
+        invoice: counterModule,
     },
     state: {
         posts: [],
