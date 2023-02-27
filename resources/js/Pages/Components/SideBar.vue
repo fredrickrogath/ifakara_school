@@ -592,8 +592,8 @@
 
                     <li>
                         <my-custom-link
-                            :href="route('accountant.reports')"
-                            :active="route().current('accountant.reports')"
+                            :href="route('accountant.chart_of_accounts')"
+                            :active="route().current('accountant.chart_of_accounts')"
                         >
                             <v-icon size="23">mdi-finance</v-icon>
                             <span> Charts Of Accounts </span>

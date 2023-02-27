@@ -35,13 +35,13 @@
                             <accountant-home-page
                                 v-if="route().current('accountant.dashboard')"
                             ></accountant-home-page>
-                            <accountant-create v-if="route().current('accountant.invoice.create')"></accountant-create>
-                            <accountant-incoming v-if="route().current('accountant.invoice.incoming')"></accountant-incoming>
+                            <!-- <accountant-create v-if="route().current('accountant.invoice.create')"></accountant-create>
+                            <accountant-incoming v-if="route().current('accountant.invoice.incoming')"></accountant-incoming> -->
                             <accountant-payment-deatails v-if="route().current('accountant.payment_details')"></accountant-payment-deatails>
-                            <accountant-pending v-if="route().current('accountant.invoice.pending')"></accountant-pending>
+                            <!-- <accountant-pending v-if="route().current('accountant.invoice.pending')"></accountant-pending> -->
                             <accountant-reports v-if="route().current('accountant.reports')"></accountant-reports>
                             <accountant-uploads v-if="route().current('accountant.uploads')"></accountant-uploads>
-                            <accountant-successful v-if="route().current('accountant.invoice.successful')"></accountant-successful>
+                            <accountant-chart-of-accounts v-if="route().current('accountant.chart_of_accounts')"></accountant-chart-of-accounts>
                             <accountant-invoice v-if="route().current('accountant.invoice')"></accountant-invoice>
 
 
@@ -167,13 +167,13 @@ import TopBar from "./Components/TopBar.vue";
 
 import AccountantHomePage from "./Modules/AccountantModule/HomePage.vue";
 import AccountantInvoice from "./Modules/AccountantModule/Invoice.vue";
-import AccountantCreate from "./Modules/AccountantModule/Create.vue";
-import AccountantIncoming from "./Modules/AccountantModule/Incoming.vue";
+// import AccountantCreate from "./Modules/AccountantModule/Create.vue";
+// import AccountantIncoming from "./Modules/AccountantModule/Incoming.vue";
 import AccountantPaymentDeatails from "./Modules/AccountantModule/PaymentDetails.vue";
-import AccountantPending from "./Modules/AccountantModule/Pending.vue";
+// import AccountantPending from "./Modules/AccountantModule/Pending.vue";
 import AccountantReports from "./Modules/AccountantModule/Reports.vue";
 import AccountantUploads from "./Modules/AccountantModule/Uploads.vue";
-import AccountantSuccessful from "./Modules/AccountantModule/Successful.vue";
+import AccountantChartOfAccounts from "./Modules/AccountantModule/Invoices/ChartOfAccounts.vue";
 
 
 import AcademicDashboard from "./Modules/AcademicModule/HomePage.vue";
@@ -219,13 +219,13 @@ export default {
 
         // MY PAGES
         AccountantHomePage,
-        AccountantCreate,
-        AccountantIncoming,
+        // AccountantCreate,
+        // AccountantIncoming,
         AccountantPaymentDeatails,
-        AccountantPending,
+        // AccountantPending,
         AccountantReports,
         AccountantUploads,
-        AccountantSuccessful,
+        AccountantChartOfAccounts,
         AccountantInvoice,
 
 

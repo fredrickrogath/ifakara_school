@@ -45,7 +45,7 @@
                     </template>
 
                     <template v-slot:item.created_at="{ item }">
-                        <span class="text-gray-600">{{item.created_at}}</span>
+                        <span class="text-gray-600">{{formattedDate(item.created_at)}}</span>
                     </template>
                 </v-data-table>
             <!-- </v-card> -->
@@ -55,14 +55,8 @@
     </v-col> -->
 </template>
 
-<script setup>
-import { useDark, useToggle } from "@vueuse/core";
-
-const isDark = useDark();
-// const toggleDark = useToggle(isDark);
-</script>
-
 <script>
+import moment from "moment";
 export default {
     props: {
         // postsData: {
@@ -134,6 +128,10 @@ export default {
     },
 
     methods: {
+        formattedDate(date) {
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        },
+
         getLegerEntries() {
             // console.log("Loading next page");
             axios

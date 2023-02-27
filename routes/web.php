@@ -154,10 +154,9 @@ Route::middleware([
 
     Route::group(['prefix' => 'accountant', 'middleware' => 'is_accountant', 'as' => 'accountant.'], function () {
         Route::get('/dashboard', [\App\Http\Controllers\Accountant\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/invoice_incoming', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_incoming'])->name('invoice.incoming');
-        Route::get('/invoice_pending', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_pending'])->name('invoice.pending');
-        Route::get('/invoice_successful', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_successful'])->name('invoice.successful');
-        Route::get('/invoice_create', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_create'])->name('invoice.create');
+        Route::get('/chart_of_accounts', [\App\Http\Controllers\Accountant\DashboardController::class, 'chart_of_accounts'])->name('chart_of_accounts');
+        // Route::get('/invoice_successful', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_successful'])->name('invoice.successful');
+        // Route::get('/invoice_create', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_create'])->name('invoice.create');
         Route::get('/payment_details', [\App\Http\Controllers\Accountant\DashboardController::class, 'payment_details'])->name('payment_details');
         Route::get('/uploads', [\App\Http\Controllers\Accountant\DashboardController::class, 'uploads'])->name('uploads');
         Route::get('/reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'reports'])->name('reports');
@@ -169,6 +168,7 @@ Route::middleware([
         Route::get('/searchStudent', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'searchStudent'])->name('searchStudent');
         Route::post('/submitTuitionFee', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'submitTuitionFee'])->name('submitTuitionFee');
 
+        Route::get('/getChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getChartOfAccounts'])->name('getChartOfAccounts');
 
     });
 

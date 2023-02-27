@@ -1,5 +1,5 @@
 <template>
-    <div data-app class="">
+    <div data-app>
         <v-row justify="center">
             <v-dialog v-model="dialog" scrollable width="300px">
                 <v-card>
@@ -465,7 +465,7 @@ import Requisitions from "./Invoices/Requisitions.vue";
 import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
 import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
-import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
+import RejectedRequisitions from "./Invoices/ChartOfAccounts.vue";
 
 import Entries from "./Invoices/Entries.vue";
 

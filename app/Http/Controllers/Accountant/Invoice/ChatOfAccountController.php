@@ -43,4 +43,8 @@ class ChatOfAccountController extends Controller
 
         return response()->json('success');
     }
+
+    public function getChartOfAccounts(ChatOfAccountService $chatOfAccountService){
+        return response()->json(['data' => $chatOfAccountService->getChartOfAccounts()]);
+    }
 }
