@@ -1,5 +1,8 @@
 <template>
-    <div class="h-screen card">
+    <div>
+        <spinner v-if="showLoader"></spinner>
+    <div v-else class="h-screen card">
+        
         <!-- <v-card elevation=""> -->
         <v-card-title>
             Chart Of Accounts
@@ -11,6 +14,10 @@
                 single-line
                 hide-details
             ></v-text-field>
+
+            <v-icon class="mx-2 pt-2 px-1" size="22" @click="">
+                mdi-pen-plus
+        </v-icon>
         </v-card-title>
 
         <v-data-table
@@ -82,12 +89,20 @@
         </v-data-table>
         <!-- </v-card> -->
     </div>
+    </div>
 </template>
 
 <script>
 import moment from "moment";
+import Spinner from "./../../.././Components/SpinnerLoader.vue";
 export default {
+    components: {
+        Spinner,
+    },
+    
     mounted() {
+        this.showLoader = true;
+
         this.getChartOfAccounts();
 
         // Receiving broadicasting
@@ -102,6 +117,8 @@ export default {
 
     data() {
         return {
+            showLoader: true,
+
             search: "",
             chartOfAccounts: [],
             headers: [
@@ -223,6 +240,7 @@ export default {
             // console.log("Loading next page");
             axios.get("/accountant/getChartOfAccounts").then((response) => {
                 this.chartOfAccounts = response.data.data;
+                this.showLoader = false;
                 // console.log(response.data.data)
             });
         },
