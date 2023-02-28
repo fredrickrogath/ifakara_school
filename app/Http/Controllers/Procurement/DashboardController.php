@@ -34,7 +34,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function tools_registration(ProcurementService $procurementService){
+    public function tools(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return Inertia::render('Dashboard', $procurementService->dashboardData());
     }

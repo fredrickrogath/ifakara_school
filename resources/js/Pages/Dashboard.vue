@@ -3,7 +3,7 @@
     <!-- Begin page -->
     <div>
         <app-layout>
-            <div id="wrapper">
+            <div id="wrapper" class="bg-gray-100">
                 <!-- Topbar Start -->
                 <!-- <top-bar></top-bar> -->
                 <!-- end Topbar -->
@@ -31,7 +31,7 @@
                 <div class="content-page pt-0 px-0">
                     <div class="content">
                         <!-- Start Content-->
-                        <div class="container-fluid">
+                        <div class="container-fluid px-1">
                             <accountant-home-page
                                 v-if="route().current('accountant.dashboard')"
                             ></accountant-home-page>
@@ -77,7 +77,7 @@
                             <procurement-invoice-create v-if="route().current('procurement.invoice_create')"></procurement-invoice-create>
                             <procurement-invoice-view v-if="route().current('procurement.invoice_view')"></procurement-invoice-view>
                             <procurement-reports v-if="route().current('procurement.reports')"></procurement-reports>
-                            <procurement-tools-registration v-if="route().current('procurement.tools_registration')"></procurement-tools-registration>
+                            <procurement-tools v-if="route().current('procurement.tools')"></procurement-tools>
                             <procurement-tools-view v-if="route().current('procurement.tools_view')"></procurement-tools-view>
                             <procurement-uplaods v-if="route().current('procurement.uploads')"></procurement-uplaods>
 
@@ -204,7 +204,7 @@ import ProcurementDashboard from "./Modules/ProcurementModule/HomePage.vue";
 import ProcurementInvoiceCreate from "./Modules/ProcurementModule/InvoiceCreate.vue";
 import ProcurementInvoiceView from "./Modules/ProcurementModule/InvoiceView.vue";
 import ProcurementReports from "./Modules/ProcurementModule/Reports.vue";
-import ProcurementToolsRegistration from "./Modules/ProcurementModule/ToolsRegistration.vue";
+import ProcurementTools from "./Modules/ProcurementModule/Tools.vue";
 import ProcurementToolsView from "./Modules/ProcurementModule/ToolsView.vue";
 import ProcurementUplaods from "./Modules/ProcurementModule/Uploads.vue";
 
@@ -258,7 +258,7 @@ export default {
         ProcurementInvoiceCreate,
         ProcurementInvoiceView,
         ProcurementReports,
-        ProcurementToolsRegistration,
+        ProcurementTools,
         ProcurementToolsView,
         ProcurementUplaods,
 

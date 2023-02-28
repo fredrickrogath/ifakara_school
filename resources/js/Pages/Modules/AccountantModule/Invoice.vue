@@ -32,17 +32,29 @@
                             <!-- </select>
                             </div> -->
 
-                            <!-- <div class="mb-1 text-gray-600">
+                            <div class="mb-1 text-gray-600">
                                 <label for="simpleinput" class="form-label"
                                     >Identity</label
                                 >
-                                <input
+
+                                <!-- <Select2
+                                    class="form-control form-control-sm"
+                                    style="width: 300px"
+                                    v-model="myValue"
+                                    :options="myOptions"
+                                    :settings="{
+                                        width: '100%',
+                                    }"
+                                    @change="myChangeEvent($event)"
+                                    @select="mySelectEvent($event)"
+                                /> -->
+                                <!-- <input
                                     type="text"
                                     id="simpleinput"
                                     class="form-control form-control-sm"
                                     placeholder="Identity"
-                                />
-                            </div> -->
+                                /> -->
+                            </div>
 
                             <div class="mb-1 text-gray-600">
                                 <label for="example-email" class="form-label"
@@ -150,7 +162,7 @@
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body pt-0">
+                    <div class="card-body pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
                             <div class="btn-group dropend d-block mb-2 mx-2">
@@ -425,24 +437,24 @@
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
-                                    <entries
-                                        v-if="getCurrentTab == 'entries'"
-                                    ></entries>
-                                    <requisitions
-                                        v-if="getCurrentTab == 'home'"
-                                    ></requisitions>
-                                    <accepted-requisitions
-                                        v-if="getCurrentTab == 'accepted'"
-                                    ></accepted-requisitions>
-                                    <deleted-requisitions
-                                        v-if="getCurrentTab == 'deleted'"
-                                    ></deleted-requisitions>
-                                    <starred-requisitions
-                                        v-if="getCurrentTab == 'starred'"
-                                    ></starred-requisitions>
-                                    <rejected-requisitions
-                                        v-if="getCurrentTab == 'rejected'"
-                                    ></rejected-requisitions>
+                                <entries
+                                    v-if="getCurrentTab == 'entries'"
+                                ></entries>
+                                <requisitions
+                                    v-if="getCurrentTab == 'home'"
+                                ></requisitions>
+                                <accepted-requisitions
+                                    v-if="getCurrentTab == 'accepted'"
+                                ></accepted-requisitions>
+                                <deleted-requisitions
+                                    v-if="getCurrentTab == 'deleted'"
+                                ></deleted-requisitions>
+                                <starred-requisitions
+                                    v-if="getCurrentTab == 'starred'"
+                                ></starred-requisitions>
+                                <rejected-requisitions
+                                    v-if="getCurrentTab == 'rejected'"
+                                ></rejected-requisitions>
                                 <!-- </transition> -->
                             </div>
                             <!-- end .mt-3-->
@@ -469,6 +481,8 @@ import RejectedRequisitions from "./Invoices/ChartOfAccounts.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
+import Select2 from "v-select2-component";
+
 export default {
     components: {
         Requisitions,
@@ -478,6 +492,8 @@ export default {
         RejectedRequisitions,
 
         Entries,
+
+        Select2,
     },
 
     mounted() {
@@ -504,6 +520,9 @@ export default {
             name: "",
             amount: "",
             narration: "",
+
+            myValue: "",
+            myOptions: ["op1", "op2", "op3"],
         };
     },
     computed: {
@@ -582,6 +601,13 @@ export default {
                     console.log(response.data.data);
                 });
             // handle response here
+        },
+
+        myChangeEvent(val) {
+            console.log(val);
+        },
+        mySelectEvent({ id, text }) {
+            console.log({ id, text });
         },
     },
 };

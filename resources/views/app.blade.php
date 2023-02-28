@@ -37,7 +37,7 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
 
         <style>
-            .btn:hover {
+            /* .btn:hover {
             color: #fff !important;
             text-decoration: none;
         }
@@ -45,7 +45,7 @@
         .btn:focus {
             color: #fff !important;
             text-decoration: none;
-        }
+        } */
 
         /* .form-control-light {
             background-color: #fff !important;
@@ -59,11 +59,11 @@
         } */
         
         body {
-            width: 106%;
-            height: 106%;
+            /* width: 106%;
+            height: 106%; */
             /* zoom: 100%; */
-            transform: scale(0.95);
-            transform-origin: 0 0;
+            /* transform: scale(0.95);
+            transform-origin: 0 0; */
         }
         </style>
     </head>

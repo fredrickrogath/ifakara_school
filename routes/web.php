@@ -182,8 +182,8 @@ Route::middleware([
 
     Route::group(['prefix' => 'procurement', 'middleware' => 'is_procurement', 'as' => 'procurement.'], function () {
         Route::get('/dashboard', [\App\Http\Controllers\Procurement\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/tools_registration', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools_registration'])->name('tools_registration');
-        Route::get('/tools_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools_view'])->name('tools_view');
+        Route::get('/tools', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools'])->name('tools');
+        // Route::get('/tools_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools_view'])->name('tools_view');
         Route::get('/invoice_create', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice_create'])->name('invoice_create');
         Route::get('/invoice_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice_view'])->name('invoice_view');
         Route::get('/uploads', [\App\Http\Controllers\Procurement\DashboardController::class, 'uploads'])->name('uploads');
