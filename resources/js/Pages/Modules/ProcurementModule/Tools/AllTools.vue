@@ -23,7 +23,7 @@
             <v-data-table
                 mobile-breakpoint="0"
                 :headers="headers"
-                :items="legerEntries"
+                :items="tools"
                 :search="search"
                 class="bg-red-900"
             >
@@ -31,29 +31,35 @@
                     <span class="text-gray-600">{{ item.id }}</span>
                 </template>
 
-                <template v-slot:item.chart_of_account.account_type="{ item }">
+                <template v-slot:item.name="{ item }">
                     <span class="text-gray-600">{{
-                        item.chart_of_account.account_type
+                        item.name
                     }}</span>
                 </template>
 
-                <template v-slot:item.user.name="{ item }">
-                    <span class="text-gray-600">{{ item.user.name }}</span>
+                <template v-slot:item.price="{ item }">
+                    <span class="text-gray-600">{{ formattedPrice(item.price) }}</span>
                 </template>
 
-                <template v-slot:item.amount="{ item }">
+                <template v-slot:item.count="{ item }">
                     <span class="text-gray-600">{{
-                        formattedPrice(item.amount)
+                        item.count
                     }}</span>
                 </template>
 
-                <template v-slot:item.narration="{ item }">
-                    <span class="text-gray-600">{{ item.narration }}</span>
+                <template v-slot:item.description="{ item }">
+                    <span class="text-gray-600">{{ item.description }}</span>
                 </template>
 
                 <template v-slot:item.created_at="{ item }">
                     <span class="text-gray-600">{{
                         formattedDate(item.created_at)
+                    }}</span>
+                </template>
+
+                <template v-slot:item.updated_at="{ item }">
+                    <span class="text-gray-600">{{
+                        formattedDate(item.updated_at)
                     }}</span>
                 </template>
             </v-data-table>
@@ -103,7 +109,7 @@ export default {
             "NewPostPublished",
             (e) => {
                 // console.log('abc');
-                this.getLegerEntries();
+                this.get_tools();
             }
         );
     },
@@ -135,7 +141,7 @@ export default {
             ],
             // posts: this.$store.getters["getPosts"],
             // posts: null,
-            legerEntries: [],
+            tools: [],
         };
     },
 
@@ -154,15 +160,15 @@ export default {
         },
 
         formattedDate(date) {
-            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            return moment(date).format("MMMM Do YYYY");
+            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         get_tools() {
-            // console.log("Loading next page");
             axios.get("/procurement/get_tools").then((response) => {
                 this.tools = response.data.data;
                 this.showLoader = false;
-                console.log(response.data)
+                // console.log(response.data.data)
             });
         },
     },

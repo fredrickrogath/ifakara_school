@@ -4,12 +4,12 @@ namespace App\Services\ProcurementServices\ToolServices;
 
 class ToolService
 {
-    public function add_tool(){
+    public function add_tool($request){
         $created = \App\Models\Tool::create([
-            'name' => 'test 1',
-            'price' => 10000,
-            'count' => 3,
-            'description' => 'blablabla',
+            'name' => $request->name,
+            'price' => $request->price,
+            'count' => $request->count,
+            'description' => $request->narration,
 
         ]);
 

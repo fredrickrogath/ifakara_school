@@ -20,7 +20,7 @@
                     </div> -->
                     <div class="modal-body">
                         <div class="">
-                        <form @submit.prevent="add_tool">
+                        <form @submit.prevent="submitForm">
 
                             <div class="mb-1 text-gray-600">
                                 <label for="example-email" class="form-label"
@@ -486,6 +486,7 @@ export default {
             selectedLegerEntry: "Nothing Selected",
             student: null,
             students: null,
+
             name: "",
             price: "",
             count: '',
@@ -517,14 +518,27 @@ export default {
     },
     methods: {
         //Add methods...
-        async add_tool() {
-            // console.log("Loading next page");
-            axios.post("/procurement/add_tool").then((response) => {
-                // this.tools = response.data.data;
-                // this.showLoader = false;
-                console.log(response.data)
-            });
+
+        async submitForm() {
+            axios
+                .post("/procurement/add_tool", {
+                    name: this.name,
+                    price: this.price,
+                    count: this.count,
+                    narration: this.narration,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.submitFormToMain();
+                    this.name = "";
+                    this.price = "";
+                    this.count = "";
+                    this.narration = "";
+                    console.log(response.data);
+                });
+            // handle response here
         },
+
         // setTab(tab) {
         //     this.$store.dispatch("invoice/setTab", tab);
         // },
