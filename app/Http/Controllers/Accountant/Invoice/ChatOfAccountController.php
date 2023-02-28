@@ -11,18 +11,22 @@ class ChatOfAccountController extends Controller
 {
     //
     public function getSpecificLegerEntries(ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $chatOfAccountService->getSpecificLegerEntries()]);
     }
 
     public function getLegerEntries(ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $chatOfAccountService->getLegerEntries()]);
     }
 
     public function searchStudent(StudentService $studentService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $studentService->searchStudent()]);
     }
 
     public function submitTuitionFee(Request $request){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         \App\Models\TuitionFee::create([
             'charts_of_accounts_id' => 1,
             'user_id' => 1,
@@ -45,6 +49,7 @@ class ChatOfAccountController extends Controller
     }
 
     public function getChartOfAccounts(ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $chatOfAccountService->getChartOfAccounts()]);
     }
 }

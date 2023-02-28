@@ -2,6 +2,7 @@
     <!-- <v-col>
         <v-row> -->
     <div>
+
         <spinner v-if="showLoader"></spinner>
 
         <v-col v-else sm="12" md="12">
@@ -17,10 +18,6 @@
                     single-line
                     hide-details
                 ></v-text-field>
-
-                <v-icon class="ml-4 px-1 mt-1 mr-0 py-1" size="22" @click="">
-                    mdi-pen-plus
-                </v-icon>
             </v-card-title>
             <!-- {{ $page.props.posts }} -->
             <v-data-table
@@ -45,7 +42,9 @@
                 </template>
 
                 <template v-slot:item.amount="{ item }">
-                    <span class="text-gray-600">{{ formattedPrice(item.amount) }}</span>
+                    <span class="text-gray-600">{{
+                        formattedPrice(item.amount)
+                    }}</span>
                 </template>
 
                 <template v-slot:item.narration="{ item }">
@@ -95,8 +94,9 @@ export default {
     },
 
     mounted() {
-        this.showLoader = true;
-        this.getLegerEntries();
+        this.showLoader = false;
+        // this.getLegerEntries();
+        this.get_tools();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
@@ -123,13 +123,13 @@ export default {
                     value: "id",
                 },
                 {
-                    text: "Transaction Type",
-                    value: "chart_of_account.account_type",
+                    text: "Name",
+                    value: "name",
                 },
-                { text: "Made For", value: "user.name", align: "center" },
-                { text: "Amount", value: "amount" },
-                { text: "Narration", value: "narration" },
+                { text: "Price", value: "price", align: "center" },
+                { text: "Count", value: "count" },
                 { text: "Date", value: "created_at" },
+                { text: "Update", value: "updated_at" },
 
                 // { text: "Iron (%)", value: "iron" },
             ],
@@ -157,12 +157,12 @@ export default {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
-        getLegerEntries() {
+        get_tools() {
             // console.log("Loading next page");
-            axios.get("/accountant/getLegerEntries").then((response) => {
-                this.legerEntries = response.data.data;
+            axios.get("/procurement/get_tools").then((response) => {
+                this.tools = response.data.data;
                 this.showLoader = false;
-                // console.log(this.legerEntries)
+                console.log(response.data)
             });
         },
     },

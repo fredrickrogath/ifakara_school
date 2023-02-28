@@ -1,115 +1,69 @@
 <template>
     <div data-app>
-        <v-row justify="center">
-            <v-dialog v-model="dialog" scrollable width="300px">
-                <v-card>
-                    <h5 class="text-center text-gray-600">{{ dialogForm }}</h5>
-                    <!-- <v-divider></v-divider> -->
-                    <div class="px-2">
-                        <form @submit.prevent="submitForm">
-                            <!-- <div class="mb-3 text-gray-600">
-                                <label class="form-label">Student</label> <br />
-                                <input
-                                    value="1"
-                                    type="text"
-                                    class="form-control form-control-sm"
-                                />
-                                <select
-                                    id="topic"
-                                    class="form-control form-control-md"
-                                    v-model="amount"
-                                >
-                                    {{-- <option value='0'>Select topic</option> --}}
-
-                                    Read Departments
-                                    <option
-                                        v-for="student in students"
-                                        :key="student.id"
-                                    >
-                                        {{ student.user.name }}
-                                    </option> -->
-                            <!-- @endforeach -->
-                            <!-- </select>
-                            </div> -->
+        <!-- Right modal content -->
+        <div
+            id="right-modal"
+            class="modal fade"
+            tabindex="-1"
+            role="dialog"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-sm modal-right bg-transparent">
+                <div class="modal-content">
+                    <!-- <div class="modal-header border-0 bg-info">
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div> -->
+                    <div class="modal-body">
+                        <div class="">
+                        <form @submit.prevent="add_tool">
 
                             <div class="mb-1 text-gray-600">
-                                <label for="simpleinput" class="form-label"
-                                    >Identity</label
+                                <label for="example-email" class="form-label"
+                                    >Tool Name</label
                                 >
-
-                                <!-- <Select2
-                                    class="form-control form-control-sm"
-                                    style="width: 300px"
-                                    v-model="myValue"
-                                    :options="myOptions"
-                                    :settings="{
-                                        width: '100%',
-                                    }"
-                                    @change="myChangeEvent($event)"
-                                    @select="mySelectEvent($event)"
-                                /> -->
-                                <!-- <input
+                                <input
                                     type="text"
-                                    id="simpleinput"
+                                    id="example-email"
+                                    v-model="name"
                                     class="form-control form-control-sm"
-                                    placeholder="Identity"
-                                /> -->
+                                    placeholder="Tool Name"
+                                />
                             </div>
 
                             <div class="mb-1 text-gray-600">
                                 <label for="example-email" class="form-label"
-                                    >Amount</label
+                                    >Price</label
                                 >
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="example-email"
-                                    v-model="amount"
+                                    v-model="price"
                                     class="form-control form-control-sm"
-                                    placeholder="Amount"
+                                    placeholder="Tool Price"
                                 />
                             </div>
 
-                            <!-- <div class="mb-1 text-gray-600">
+                            <div class="mb-1 text-gray-600">
                                 <label for="example-email" class="form-label"
-                                    >Amount</label
+                                    >Tool Count</label
                                 >
                                 <input
-                                    type="email"
+                                    type="text"
                                     id="example-email"
-                                    name="amount"
+                                    v-model="count"
                                     class="form-control form-control-sm"
-                                    placeholder="Amount"
+                                    placeholder="Tool Count"
                                 />
-                            </div> -->
-
-                            <!-- <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label"
-                                    >Amount</label
-                                >
-                                <input
-                                    type="email"
-                                    id="example-email"
-                                    name="amount"
-                                    class="form-control form-control-sm"
-                                    placeholder="Amount"
-                                />
-                            </div> -->
-
-                            <!-- <div class="mb-1 text-gray-600">
-                            <label for="example-palaceholder" class="form-label"
-                                >Placeholder</label
-                            >
-                            <input
-                                type="text"
-                                id="example-palaceholder"
-                                class="form-control form-control-sm"
-                                placeholder="placeholder"
-                            />
-                        </div> -->
+                            </div>
 
                             <div class="mb-1 text-gray-600">
                                 <label for="example-textarea" class="form-label"
-                                    >Naration</label
+                                    >Description</label
                                 >
                                 <textarea
                                     class="form-control form-control-sm"
@@ -119,42 +73,32 @@
                                 ></textarea>
                             </div>
 
-                            <!-- <div class="mb-1">
-                            <label for="example-readonly" class="form-label"
-                                >Readonly</label
-                            >
-                            <input
-                                type="text"
-                                id="example-readonly"
-                                class="form-control form-control-sm"
-                                readonly=""
-                                value="Readonly value"
-                            />
-                        </div> -->
-
                             <div
                                 class="d-flex justify-content-between my-1 mt-2"
                             >
                                 <button
-                                    @click="dialog = false"
+                                data-bs-dismiss="modal"
                                     type="submit"
-                                    class="btn btn-success waves-effect waves-light"
+                                    class="btn btn-success text-white btn-sm waves-effect waves-light"
                                 >
                                     Submit
                                 </button>
                                 <button
-                                    @click="dialog = false"
+                                data-bs-dismiss="modal"
                                     type="button"
-                                    class="btn btn-danger waves-effect waves-light"
+                                    class="btn btn-danger btn-sm text-white waves-effect waves-light"
                                 >
                                     Cancel
                                 </button>
                             </div>
                         </form>
                     </div>
-                </v-card>
-            </v-dialog>
-        </v-row>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
 
         <!-- End of Right modal content -->
 
@@ -293,9 +237,22 @@
                             <hr class="bg-gray-100 mb-1 mt-0" /> -->
 
                             <div class="mail-list">
-                                <span class="text-center pl-3 mx-auto font-15"
-                                    >My Office</span
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="ml-3 font-15"
+                                    >My Office</div
                                 >
+
+                                <v-icon
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#right-modal"
+                                    class="ml-4 px-1 mt-1 mr-0 py-1"
+                                    size="22"
+                                    @click=""
+                                >
+                                    mdi-pen-plus
+                                </v-icon>
+                                </div>
 
                                 <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
 
@@ -329,6 +286,19 @@
                                     href="#"
                                     class="list-group-item border-0"
                                     :class="[
+                                        getCurrentTab == 'starred'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-star font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Low Price Tools</a
+                                >
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
                                         getCurrentTab == 'rejected'
                                             ? 'text-warning'
                                             : '',
@@ -342,14 +312,14 @@
                                     href="#"
                                     class="list-group-item border-0"
                                     :class="[
-                                        getCurrentTab == 'starred'
+                                        getCurrentTab == 'deleted'
                                             ? 'text-warning'
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-star font-18 align-middle me-2 pb-1"
+                                        class="mdi mdi-close-thick font-18 align-middle me-2 pb-1"
                                     ></i
-                                    >Low Price Tools</a
+                                    >Broken & Lost Tools</a
                                 >
                                 <a
                                     href="#"
@@ -375,7 +345,9 @@
                                         >TOOLS & EQUIPMENTS</span
                                     >
                                 </h5>
-                                <h6 class="text-uppercase mt-3">Unmatched price</h6>
+                                <h6 class="text-uppercase mt-3">
+                                    Unmatched price
+                                </h6>
                                 <div class="progress my-2 progress-sm">
                                     <div
                                         class="progress-bar progress-lg bg-danger"
@@ -436,8 +408,7 @@
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
-                                <AllTools
-                                ></AllTools>
+                                <AllTools></AllTools>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"
                                 ></requisitions>
@@ -516,7 +487,8 @@ export default {
             student: null,
             students: null,
             name: "",
-            amount: "",
+            price: "",
+            count: '',
             narration: "",
 
             myValue: "",
@@ -545,68 +517,76 @@ export default {
     },
     methods: {
         //Add methods...
-        setTab(tab) {
-            this.$store.dispatch("invoice/setTab", tab);
-        },
-
-        getSpecificLegerEntries() {
+        async add_tool() {
             // console.log("Loading next page");
-            axios
-                .get("/accountant/getSpecificLegerEntries")
-                .then((response) => {
-                    this.legerEntries = response.data;
-                    // console.log(response.data)
-                });
-        },
-
-        setLegerEntry(entry) {
-            this.selectedLegerEntry = entry;
-        },
-
-        getStudents() {
-            axios.get("/accountant/searchStudent").then((response) => {
-                this.students = response.data.data;
-                // console.log(response.data);
+            axios.post("/procurement/add_tool").then((response) => {
+                // this.tools = response.data.data;
+                // this.showLoader = false;
+                console.log(response.data)
             });
         },
+        // setTab(tab) {
+        //     this.$store.dispatch("invoice/setTab", tab);
+        // },
 
-        async submitForm() {
-            axios
-                .post("/accountant/submitTuitionFee", {
-                    amount: this.amount,
-                    narration: this.narration,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    this.submitFormToMain();
-                    this.amount = "";
-                    this.narration = "";
-                    console.log(response.data);
-                });
-            // handle response here
-        },
+        // getSpecificLegerEntries() {
+        //     // console.log("Loading next page");
+        //     axios
+        //         .get("/accountant/getSpecificLegerEntries")
+        //         .then((response) => {
+        //             this.legerEntries = response.data;
+        //             // console.log(response.data)
+        //         });
+        // },
 
-        async submitFormToMain() {
-            axios
-                .post("http://127.0.0.1:8001/api/accountant/getLegerEntries", {
-                    amount: this.amount,
-                    narration: this.narration,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // setLegerEntry(entry) {
+        //     this.selectedLegerEntry = entry;
+        // },
 
-        myChangeEvent(val) {
-            console.log(val);
-        },
-        mySelectEvent({ id, text }) {
-            console.log({ id, text });
-        },
+        // getStudents() {
+        //     axios.get("/accountant/searchStudent").then((response) => {
+        //         this.students = response.data.data;
+        //         // console.log(response.data);
+        //     });
+        // },
+
+        // async submitForm() {
+        //     axios
+        //         .post("/accountant/submitTuitionFee", {
+        //             amount: this.amount,
+        //             narration: this.narration,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             this.submitFormToMain();
+        //             this.amount = "";
+        //             this.narration = "";
+        //             console.log(response.data);
+        //         });
+        //     // handle response here
+        // },
+
+        // async submitFormToMain() {
+        //     axios
+        //         .post("http://127.0.0.1:8001/api/accountant/getLegerEntries", {
+        //             amount: this.amount,
+        //             narration: this.narration,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
+
+        // myChangeEvent(val) {
+        //     console.log(val);
+        // },
+        // mySelectEvent({ id, text }) {
+        //     console.log({ id, text });
+        // },
     },
 };
 </script>
