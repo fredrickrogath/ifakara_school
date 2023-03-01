@@ -52,4 +52,22 @@ class ChatOfAccountController extends Controller
         $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $chatOfAccountService->getChartOfAccounts()]);
     }
+
+    public function addChartOfAccounts(Request $request, ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $chatOfAccountService->addChartOfAccounts($request)]);
+    }
+
+    public function updateChartOfAccount(Request $request, ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $chatOfAccountService->updateChartOfAccount($request)]);
+    }
+
+    public function deleteChartOfAccounts(Request $request, ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $chatOfAccountService->deleteChartOfAccounts($request)]);
+    }
 }
