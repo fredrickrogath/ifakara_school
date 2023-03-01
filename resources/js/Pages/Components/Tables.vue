@@ -7,7 +7,7 @@
         <v-col v-else sm="12" md="12">
             <!-- <v-card flat :dark="isDark"> -->
             <!-- <v-card elevation="0" data-app> -->
-            <v-card-title>
+            <v-card-title class="px-1 pt-0">
                 Transaction Entries
                 <v-spacer></v-spacer>
                 <v-text-field
