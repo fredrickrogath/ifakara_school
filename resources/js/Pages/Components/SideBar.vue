@@ -325,46 +325,13 @@
                     <li class="menu-title mt-2">Apps</li>
 
                     <li>
-                        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                        <my-custom-link
+                            :href="route('procurement.tools')"
+                            :active="route().current('procurement.tools')"
+                        >
                             <v-icon size="20">mdi-tools</v-icon>
                             <span> Tools & Items </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarEcommerce">
-                            <ul class="nav-second-level">
-                                <li>
-                                    <my-custom-link
-                                        :href="
-                                            route(
-                                                'procurement.tools_registration'
-                                            )
-                                        "
-                                        :active="
-                                            route().current(
-                                                'procurement.tools_registration'
-                                            )
-                                        "
-                                    >
-                                        <v-icon size="20">mdi-pen-plus</v-icon>
-                                        <span> Registration </span>
-                                    </my-custom-link>
-                                </li>
-                                <li>
-                                    <my-custom-link
-                                        :href="route('procurement.tools_view')"
-                                        :active="
-                                            route().current(
-                                                'procurement.tools_view'
-                                            )
-                                        "
-                                    >
-                                        <v-icon size="20">mdi-eye</v-icon>
-                                        <span> View </span>
-                                    </my-custom-link>
-                                </li>
-                                <li></li>
-                            </ul>
-                        </div>
+                        </my-custom-link>
                     </li>
 
                     <li>
@@ -592,8 +559,8 @@
 
                     <li>
                         <my-custom-link
-                            :href="route('accountant.reports')"
-                            :active="route().current('accountant.reports')"
+                            :href="route('accountant.chart_of_accounts')"
+                            :active="route().current('accountant.chart_of_accounts')"
                         >
                             <v-icon size="23">mdi-finance</v-icon>
                             <span> Charts Of Accounts </span>

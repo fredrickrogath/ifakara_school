@@ -117,7 +117,7 @@
                                                 class="flex items-center justify-center mt-3"
                                             >
                                                 <jet-button
-                                                    class="ml-4 w-full"
+                                                    class="w-full text-center flex justify-center"
                                                     style="border-radius: 20px"
                                                     :class="{
                                                         'opacity-25':

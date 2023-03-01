@@ -34,25 +34,20 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function invoice_incoming(AccountantService $accountantService){
+    public function chart_of_accounts(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function invoice_pending(AccountantService $accountantService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard', $accountantService->dashboardData());
-    }
+    // public function invoice_successful(AccountantService $accountantService){
+    //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
+    //     return Inertia::render('Dashboard', $accountantService->dashboardData());
+    // }
 
-    public function invoice_successful(AccountantService $accountantService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard', $accountantService->dashboardData());
-    }
-
-    public function invoice_create(AccountantService $accountantService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard', $accountantService->dashboardData());
-    }
+    // public function invoice_create(AccountantService $accountantService){
+    //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
+    //     return Inertia::render('Dashboard', $accountantService->dashboardData());
+    // }
 
     public function payment_details(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 

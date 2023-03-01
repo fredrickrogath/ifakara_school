@@ -11,18 +11,22 @@ class ChatOfAccountController extends Controller
 {
     //
     public function getSpecificLegerEntries(ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $chatOfAccountService->getSpecificLegerEntries()]);
     }
 
     public function getLegerEntries(ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $chatOfAccountService->getLegerEntries()]);
     }
 
     public function searchStudent(StudentService $studentService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $studentService->searchStudent()]);
     }
 
     public function submitTuitionFee(Request $request){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
         \App\Models\TuitionFee::create([
             'charts_of_accounts_id' => 1,
             'user_id' => 1,
@@ -42,5 +46,28 @@ class ChatOfAccountController extends Controller
         event(new \App\Events\NewPostPublished('created'));
 
         return response()->json('success');
+    }
+
+    public function getChartOfAccounts(ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        return response()->json(['data' => $chatOfAccountService->getChartOfAccounts()]);
+    }
+
+    public function addChartOfAccounts(Request $request, ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $chatOfAccountService->addChartOfAccounts($request)]);
+    }
+
+    public function updateChartOfAccount(Request $request, ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $chatOfAccountService->updateChartOfAccount($request)]);
+    }
+
+    public function deleteChartOfAccounts(Request $request, ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $chatOfAccountService->deleteChartOfAccounts($request)]);
     }
 }
