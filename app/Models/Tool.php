@@ -13,6 +13,7 @@ class Tool extends Model
         'name',
         'price',
         'count',
+        'starred',
         'description',
     ];
 }

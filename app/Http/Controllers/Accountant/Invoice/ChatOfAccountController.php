@@ -27,24 +27,7 @@ class ChatOfAccountController extends Controller
 
     public function submitTuitionFee(Request $request){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
-        \App\Models\TuitionFee::create([
-            'charts_of_accounts_id' => 1,
-            'user_id' => 1,
-            'amount' => $request->amount,
-            'narration' => $request->narration,
-
-        ]);
-
-        \App\Models\TuitionFee::create([
-            'charts_of_accounts_id' => 2,
-            'user_id' => 1,
-            'amount' => ($request->amount * 10) / 100,
-            'narration' => $request->narration,
-
-        ]);
-
         event(new \App\Events\NewPostPublished('created'));
-
         return response()->json('success');
     }
 

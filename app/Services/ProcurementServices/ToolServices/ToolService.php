@@ -23,7 +23,19 @@ class ToolService
         return \App\Models\Tool::orderBy('created_at', 'desc')->get();
     }
 
-    // public function getChartOfAccounts(){
-    //     return \App\Models\ChartsOfAccount::orderBy('created_at', 'desc')->get();
-    // }
+    public function updateTools($request){
+        return \App\Models\Tool::find($request->id)->update([
+            $request->column => $request->data
+        ]);
+    }
+
+    public function deleteTools($request){
+        return \App\Models\Tool::findoRFail($request->id)->delete();
+    }
+
+    public function starredTools($request){
+        return \App\Models\Tool::find($request->id)->update([
+            $request->column => !$request->data
+        ]);
+    }
 }

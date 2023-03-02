@@ -23,7 +23,7 @@
                         <form @submit.prevent="submitForm">
 
                             <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label"
+                                <label for="example-email" class="form-label text-gray-500 font-normal"
                                     >Tool Name</label
                                 >
                                 <input
@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label"
+                                <label for="example-email" class="form-label text-gray-500 font-normal"
                                     >Price</label
                                 >
                                 <input
@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label"
+                                <label for="example-email" class="form-label text-gray-500 font-normal"
                                     >Tool Count</label
                                 >
                                 <input
@@ -62,13 +62,13 @@
                             </div>
 
                             <div class="mb-1 text-gray-600">
-                                <label for="example-textarea" class="form-label"
+                                <label for="example-textarea" class="form-label text-gray-500 font-normal"
                                     >Description</label
                                 >
                                 <textarea
                                     class="form-control form-control-sm"
                                     id="example-textarea"
-                                    rows="5"
+                                    rows="2"
                                     v-model="narration"
                                 ></textarea>
                             </div>
@@ -273,19 +273,6 @@
                                     href="#"
                                     class="list-group-item border-0"
                                     :class="[
-                                        getCurrentTab == 'accepted'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-check-bold font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >New Tools</a
-                                >
-                                <a
-                                    href="#"
-                                    class="list-group-item border-0"
-                                    :class="[
                                         getCurrentTab == 'starred'
                                             ? 'text-warning'
                                             : '',
@@ -293,20 +280,7 @@
                                     ><i
                                         class="mdi mdi-star font-18 align-middle me-2 pb-1"
                                     ></i
-                                    >Low Price Tools</a
-                                >
-                                <a
-                                    href="#"
-                                    class="list-group-item border-0"
-                                    :class="[
-                                        getCurrentTab == 'rejected'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-alert-circle font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >High Price Tools</a
+                                    >Starred Tools</a
                                 >
                                 <a
                                     href="#"

@@ -16,6 +16,26 @@ class ChatOfAccountService
         return \App\Models\ChartsOfAccount::orderBy('created_at', 'desc')->get();
     }
 
+    public function submitTuitionFee($request){
+        \App\Models\TuitionFee::create([
+            'charts_of_accounts_id' => 1,
+            'user_id' => 1,
+            'amount' => $request->amount,
+            'narration' => $request->narration,
+
+        ]);
+
+        \App\Models\TuitionFee::create([
+            'charts_of_accounts_id' => 2,
+            'user_id' => 1,
+            'amount' => ($request->amount * 10) / 100,
+            'narration' => $request->narration,
+
+        ]);
+
+        return true;
+    }
+
     public function updateChartOfAccount($request){
         return \App\Models\ChartsOfAccount::find($request->id)->update([
             $request->column => $request->data
@@ -24,9 +44,6 @@ class ChatOfAccountService
 
     public function deleteChartOfAccounts($request){
         return \App\Models\ChartsOfAccount::findoRFail($request->id)->delete();
-        // return \App\Models\ChartsOfAccount::find($request->id)->update([
-        //     $request->column => $request->data
-        // ]);
     }
     
     public function addChartOfAccounts($request){

@@ -18,6 +18,7 @@ class CreateToolsTable extends Migration
             $table->string('name');
             $table->float('price', 20, 2);
             $table->integer ('count');
+            $table->boolean('starred')->default(false);
             $table->string('description')->nullable();
             $table->timestamps();
         });
