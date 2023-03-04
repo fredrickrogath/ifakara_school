@@ -25,7 +25,7 @@ class InvoiceService
     }
 
     public function getInvoices(){
-        return \App\Models\Invoice::orderBy('created_at', 'desc')->get();
+        return \App\Models\Invoice::with('tools', 'seller')->orderBy('created_at', 'desc')->get();
     }
 
     public function updateInvoice($request){

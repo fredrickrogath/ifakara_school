@@ -182,52 +182,6 @@
                     </tbody>
                 </template>
             </v-data-table>
-
-            <!-- <v-data-table
-                mobile-breakpoint="0"
-                :headers="headers"
-                :items="tools"
-                :search="search"
-                class="bg-red-900"
-            >
-                <template v-slot:item.id="{ item }">
-                    <span class="text-gray-600">{{ item.id }}</span>
-                </template>
-
-                <template v-slot:item.name="{ item }">
-                    <span class="text-gray-600">{{
-                        item.name
-                    }}</span>
-                </template>
-
-                <template v-slot:item.price="{ item }">
-                    <span class="text-gray-600">{{ formattedPrice(item.price) }}</span>
-                </template>
-
-                <template v-slot:item.count="{ item }">
-                    <span class="text-gray-600">{{
-                        item.count
-                    }}</span>
-                </template>
-
-                <template v-slot:item.description="{ item }">
-                    <span class="text-gray-600">{{ item.description }}</span>
-                </template>
-
-                <template v-slot:item.created_at="{ item }">
-                    <span class="text-gray-600">{{
-                        formattedDate(item.created_at)
-                    }}</span>
-                </template>
-
-                <template v-slot:item.updated_at="{ item }">
-                    <span class="text-gray-600">{{
-                        formattedDate(item.updated_at)
-                    }}</span>
-                </template>
-            </v-data-table> -->
-            <!-- </v-card> -->
-            <!-- </v-card> -->
         </v-col>
     </div>
     <!-- </v-row>
@@ -291,15 +245,15 @@ export default {
                     value: "id",
                 },
                 {
-                    text: "Name",
-                    value: "name",
+                    text: "Supplier name",
+                    value: "seller",
                 },
-                { text: "Price", value: "price", align: "center" },
-                { text: "Count", value: "count" },
+                // { text: "Price", value: "price", align: "center" },
+                // { text: "Count", value: "count" },
                 { text: "Date", value: "created_at" },
-                { text: "Update", value: "updated_at" },
-                { text: "Starred", value: "starred" },
-                { text: "Action", value: "action" },
+                // { text: "Update", value: "updated_at" },
+                // { text: "Starred", value: "starred" },
+                // { text: "Action", value: "action" },
 
                 // { text: "Iron (%)", value: "iron" },
             ],
@@ -336,8 +290,8 @@ export default {
 
         getInvoices() {
             axios.get("/procurement/getInvoices").then((response) => {
-                this.tools = response.data.data;
-                this.showLoader = false;
+                this.invoices = response.data.data;
+                // this.showLoader = false;
                 console.log(response.data.data)
             });
         },
@@ -353,7 +307,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

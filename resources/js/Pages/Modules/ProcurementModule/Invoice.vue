@@ -684,7 +684,7 @@ export default {
             myValue: "",
             myOptions: ["op1", "op2", "op3"],
 
-            InvoiceGenerate: true,
+            InvoiceGenerate: false,
         };
     },
     computed: {

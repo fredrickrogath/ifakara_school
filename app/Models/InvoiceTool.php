@@ -13,4 +13,9 @@ class InvoiceTool extends Model
         'invoice_id',
         'tool_id',
     ];
+
+    public function tool()
+    {
+        return $this->belongsTo('App\Models\Tool','invoice_id','id');
+    }
 }

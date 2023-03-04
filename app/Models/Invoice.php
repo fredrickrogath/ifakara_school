@@ -15,4 +15,14 @@ class Invoice extends Model
         'narration',
         'status',
     ];
+
+    public function tools()
+    {
+        return $this->hasMany('App\Models\InvoiceTool','invoice_id','id');
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo('App\Models\Seller','seller_id','id');
+    }
 }

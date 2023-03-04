@@ -691,12 +691,6 @@ export default {
                     tools: this.tools,
                 })
                 .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                    // this.tools = [];
-                    // this.tools.push([]);
                     this.clearData()
                 });
         },
@@ -712,7 +706,6 @@ export default {
         async getSellers() {
             axios.get("/procurement/getSellers").then((response) => {
                 this.supplierOptions = response.data.data;
-                // this.showLoader = false;
                 console.log(response.data.data);
             });
         },
@@ -725,9 +718,6 @@ export default {
                     column: column,
                 })
                 .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
                     console.log(response.data.data);
                 });
         },
