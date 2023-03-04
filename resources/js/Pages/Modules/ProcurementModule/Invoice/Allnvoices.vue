@@ -245,20 +245,11 @@ export default {
                     value: "id",
                 },
                 {
-                    text: "Supplier name",
+                    text: "Seller",
                     value: "seller",
                 },
-                // { text: "Price", value: "price", align: "center" },
-                // { text: "Count", value: "count" },
                 { text: "Date", value: "created_at" },
-                // { text: "Update", value: "updated_at" },
-                // { text: "Starred", value: "starred" },
-                // { text: "Action", value: "action" },
-
-                // { text: "Iron (%)", value: "iron" },
             ],
-            // posts: this.$store.getters["getPosts"],
-            // posts: null,
             invoices: [],
 
             idForAction: null,
