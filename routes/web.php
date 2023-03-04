@@ -183,20 +183,46 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'procurement', 'middleware' => 'is_procurement', 'as' => 'procurement.'], function () {
+
+        /*
+        |--------------------------------------------------------------------------
+        | ROUTES FOR THE NAVIGATIONS
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/dashboard', [\App\Http\Controllers\Procurement\DashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/tools', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools'])->name('tools');
-        // Route::get('/tools_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools_view'])->name('tools_view');
-        Route::get('/invoice_create', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice_create'])->name('invoice_create');
-        Route::get('/invoice_view', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice_view'])->name('invoice_view');
+        Route::get('/invoice', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice'])->name('invoice');
         Route::get('/uploads', [\App\Http\Controllers\Procurement\DashboardController::class, 'uploads'])->name('uploads');
         Route::get('/reports', [\App\Http\Controllers\Procurement\DashboardController::class, 'reports'])->name('reports');
 
+        /*
+        |--------------------------------------------------------------------------
+        | ROUTES FOR THE TOOLS
+        |--------------------------------------------------------------------------
+        */
 
         Route::post('/add_tool', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'add_tool'])->name('add_tool');
         Route::get('/get_tools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'get_tools'])->name('get_tools');
         Route::post('/updateTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'updateTools'])->name('updateTools');
         Route::post('/deleteTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'deleteTools'])->name('deleteTools');
         Route::post('/starredTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'starredTools'])->name('starredTools');
+
+        /*
+        |--------------------------------------------------------------------------
+        | ROUTES FOR THE INVOICE
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/getTools', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getTools'])->name('getTools');
+        Route::get('/getSellers', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getSellers'])->name('getSellers');
+        Route::post('/addInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'addInvoice'])->name('addInvoice');
+        Route::get('/getInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoices'])->name('getInvoices');
+        Route::post('/updateInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'updateInvoice'])->name('updateInvoice');
+        Route::post('/deleteInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
+        Route::post('/starredInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'starredInvoices'])->name('starredInvoices');
+
+        Route::post('/submitInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'submitInvoice'])->name('submitInvoice');
     });
 
 

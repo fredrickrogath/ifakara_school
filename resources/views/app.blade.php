@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>ICD | SCHOOL</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <title>ICD | SCHOOL</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        {{-- Template --}}
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        <!-- Plugins css -->
-        <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
-        
-        <!-- App css -->
-        <link href="assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-        <link href="assets/css/config/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    {{-- Template --}}
 
-        <link href="assets/css/config/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
-        <link href="assets/css/config/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+    <!-- Plugins css -->
+    <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
 
-        <!-- icons -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    <link href="assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css"
+        id="bs-default-stylesheet" />
+    <link href="assets/css/config/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-        {{-- End of template --}}
+    <link href="assets/css/config/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css"
+        id="bs-dark-stylesheet" />
+    <link href="assets/css/config/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+
+    <!-- icons -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    {{-- End of template --}}
 
 
-        <!-- Scripts -->
-        @routes
-        <script src="{{ mix('js/app.js') }}" defer></script>
+    <!-- Scripts -->
+    @routes
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
-        <style>
-            /* .btn:hover {
+    <style>
+        /* .btn:hover {
             color: #fff !important;
             text-decoration: none;
         }
@@ -57,7 +60,7 @@
             transform: scale(0.9);
             transform-origin: 0 0;
         } */
-        
+
         body {
             /* width: 106%;
             height: 106%; */
@@ -65,32 +68,38 @@
             /* transform: scale(0.95);
             transform-origin: 0 0; */
         }
-        </style>
-    </head>
-    <body class="font-sans antialiased loading">
-        @inertia
 
-        {{-- <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script> --}}
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script> --}}
+        .above-all {
+            position: absolute;
+            z-index: 9990;
+        }
+    </style>
+</head>
 
+<body class="font-sans antialiased loading">
+    @inertia
 
-        <!-- Vendor js -->
-        <script src="assets/js/vendor.min.js"></script>
-
-        <!-- Plugins js-->
-        <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
-        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-
-        <script src="assets/libs/selectize/js/standalone/selectize.min.js"></script>
-
-        <!-- Dashboar 1 init js-->
-        <script src="assets/js/pages/dashboard-1.init.js"></script>
-
-        <!-- App js-->
-        <script src="assets/js/app.min.js"></script>
+    {{-- <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script> --}}
 
 
-        <!-- third party js -->
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- Plugins js-->
+    <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <script src="assets/libs/selectize/js/standalone/selectize.min.js"></script>
+
+    <!-- Dashboar 1 init js-->
+    <script src="assets/js/pages/dashboard-1.init.js"></script>
+
+    <!-- App js-->
+    <script src="assets/js/app.min.js"></script>
+
+
+    <!-- third party js -->
     <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
     <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
@@ -107,7 +116,8 @@
     <!-- third party js ends -->
 
     <!-- Datatables init -->
-        <script src="assets/js/pages/datatables.init.js"></script>
+    <script src="assets/js/pages/datatables.init.js"></script>
 
-    </body>
+</body>
+
 </html>

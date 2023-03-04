@@ -4,6 +4,12 @@ namespace App\Services\ProcurementServices\ToolServices;
 
 class ToolService
 {
+    /*
+    |--------------------------------------------------------------------------
+    | QUERIES FOR THE TOOL
+    |--------------------------------------------------------------------------
+    */
+
     public function add_tool($request){
         $created = \App\Models\Tool::create([
             'name' => $request->name,

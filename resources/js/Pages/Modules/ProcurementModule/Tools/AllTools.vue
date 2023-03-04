@@ -135,6 +135,14 @@
                                     }}</span
                                 >
 
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'id'"
+                                    >{{
+                                        item[header.value]
+                                    }}</span
+                                >
+
                                 <v-edit-dialog
                                     v-else
                                     :return-value.sync="item[header.value]"

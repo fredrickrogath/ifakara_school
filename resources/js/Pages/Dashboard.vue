@@ -28,7 +28,7 @@
                 <!-- Start Page Content here -->
                 <!-- ============================================================== -->
 
-                <div class="content-page pt-0 px-0">
+                <div class="content-page pt-0 px-0 bg-white">
                     <div class="content">
                         <!-- Start Content-->
                         <div class="container-fluid px-1">
@@ -74,8 +74,7 @@
 
 
                             <procurement-dashboard v-if="route().current('procurement.dashboard')"></procurement-dashboard>
-                            <procurement-invoice-create v-if="route().current('procurement.invoice_create')"></procurement-invoice-create>
-                            <procurement-invoice-view v-if="route().current('procurement.invoice_view')"></procurement-invoice-view>
+                            <procurement-invoice v-if="route().current('procurement.invoice')"></procurement-invoice>
                             <procurement-reports v-if="route().current('procurement.reports')"></procurement-reports>
                             <procurement-tools v-if="route().current('procurement.tools')"></procurement-tools>
                             <procurement-tools-view v-if="route().current('procurement.tools_view')"></procurement-tools-view>
@@ -201,8 +200,7 @@ import HeadProcurementReports from "./Modules/HeadModule/ProcurementReports.vue"
 
 
 import ProcurementDashboard from "./Modules/ProcurementModule/HomePage.vue";
-import ProcurementInvoiceCreate from "./Modules/ProcurementModule/InvoiceCreate.vue";
-import ProcurementInvoiceView from "./Modules/ProcurementModule/InvoiceView.vue";
+import ProcurementInvoice from "./Modules/ProcurementModule/Invoice.vue";
 import ProcurementReports from "./Modules/ProcurementModule/Reports.vue";
 import ProcurementTools from "./Modules/ProcurementModule/Tools.vue";
 import ProcurementToolsView from "./Modules/ProcurementModule/ToolsView.vue";
@@ -255,8 +253,7 @@ export default {
 
 
         ProcurementDashboard,
-        ProcurementInvoiceCreate,
-        ProcurementInvoiceView,
+        ProcurementInvoice,
         ProcurementReports,
         ProcurementTools,
         ProcurementToolsView,

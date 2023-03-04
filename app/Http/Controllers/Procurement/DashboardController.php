@@ -44,12 +44,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function invoice_create(ProcurementService $procurementService){
-        $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard', $procurementService->dashboardData());
-    }
-
-    public function invoice_view(ProcurementService $procurementService){
+    public function invoice(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return Inertia::render('Dashboard', $procurementService->dashboardData());
     }

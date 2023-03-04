@@ -10,6 +10,12 @@ use App\Services\AccountantServices\InvoiceServices\StudentService;
 class ChatOfAccountController extends Controller
 {
     //
+    /*
+    |--------------------------------------------------------------------------
+    | QUERIES FOR THE CHARTOFACCOUNT
+    |--------------------------------------------------------------------------
+    */
+
     public function getSpecificLegerEntries(ChatOfAccountService $chatOfAccountService){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $chatOfAccountService->getSpecificLegerEntries()]);

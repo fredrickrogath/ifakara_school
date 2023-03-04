@@ -335,46 +335,13 @@
                     </li>
 
                     <li>
-                        <a href="#sidebarEcommerce1" data-bs-toggle="collapse">
-                            <v-icon size="22">mdi-cash-multiple</v-icon>
+                        <my-custom-link
+                            :href="route('procurement.invoice')"
+                            :active="route().current('procurement.invoice')"
+                        >
+                        <v-icon size="22">mdi-cash-multiple</v-icon>
                             <span> Invoices </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarEcommerce1">
-                            <ul class="nav-second-level">
-                                <li>
-                                    <my-custom-link
-                                        :href="
-                                            route('procurement.invoice_create')
-                                        "
-                                        :active="
-                                            route().current(
-                                                'procurement.invoice_create'
-                                            )
-                                        "
-                                    >
-                                        <v-icon size="20">mdi-pen-plus</v-icon>
-                                        <span> Create </span>
-                                    </my-custom-link>
-                                </li>
-                                <li>
-                                    <my-custom-link
-                                        :href="
-                                            route('procurement.invoice_view')
-                                        "
-                                        :active="
-                                            route().current(
-                                                'procurement.invoice_view'
-                                            )
-                                        "
-                                    >
-                                        <v-icon size="20">mdi-eye</v-icon>
-                                        <span> View </span>
-                                    </my-custom-link>
-                                </li>
-                                <li></li>
-                            </ul>
-                        </div>
+                        </my-custom-link>
                     </li>
 
                     <li>
