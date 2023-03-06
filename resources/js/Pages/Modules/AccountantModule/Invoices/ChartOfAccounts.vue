@@ -19,26 +19,29 @@
                                 <i
                                     class="dripicons-warning h1 text-warning"
                                 ></i>
-                                <h4 class="mt-2 text-gray-500">Are you sure you want to delete this data ?</h4>
+                                <h4 class="mt-2 text-gray-500">
+                                    Are you sure you want to delete this data ?
+                                </h4>
                                 <p class="mt-3">
-                                    Do not worry, deleting this can be restored in your trash within 30 days.
+                                    Do not worry, deleting this can be restored
+                                    in your trash within 30 days.
                                 </p>
                                 <div class="flex justify-around">
                                     <button
-                                    type="button"
-                                    class="btn btn-sm btn-warning my-1 text-white"
-                                    data-bs-dismiss="modal"
-                                    @click="deleteChartOfAccounts()"
-                                >
-                                    Continue
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger my-1 text-white"
-                                    data-bs-dismiss="modal"
-                                >
-                                    cancel
-                                </button>
+                                        type="button"
+                                        class="btn btn-sm btn-warning my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                        @click="deleteChartOfAccounts()"
+                                    >
+                                        Continue
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        cancel
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -243,20 +246,19 @@
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-
                                 <v-icon
-                                        v-if="header.value == 'action'"
-                                        size="22"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#warning-alert-modal"
-                                        @click="setIdForAction(items[idx]['id'])"
-                                    >
-                                        mdi-delete
-                                    </v-icon>
+                                    v-if="header.value == 'action'"
+                                    size="22"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#warning-alert-modal"
+                                    @click="setIdForAction(items[idx]['id'])"
+                                >
+                                    mdi-delete
+                                </v-icon>
 
                                 <v-edit-dialog
-                                v-else
+                                    v-else
                                     :return-value.sync="item[header.value]"
                                     @save="
                                         save(
@@ -369,12 +371,12 @@ export default {
             ],
 
             account_type: "Income",
-            level1: null,
-            level2: null,
-            level3: null,
+            level1: '',
+            level2: '',
+            level3: '',
             name: "",
-            description: null,
-            notes: null,
+            description: '',
+            notes: '',
 
             idForAction: null,
         };
@@ -399,7 +401,7 @@ export default {
             });
         },
 
-        async setIdForAction(id){
+        async setIdForAction(id) {
             this.idForAction = id;
         },
 
@@ -420,7 +422,7 @@ export default {
                     this.level2 = null;
                     this.level3 = null;
                     this.name = "";
-                    this.description = nul;
+                    this.description = null;
                     this.notes = null;
                 });
             // handle response here

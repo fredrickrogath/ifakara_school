@@ -13,6 +13,20 @@ class Tool extends Model
         'name',
         'price',
         'count',
+        'starred',
         'description',
     ];
+
+    public function invoices()
+{
+    return $this->hasManyThrough(
+        'App\Models\Invoice',
+        'App\Models\InvoiceTool',
+        'tool_id',
+        'id',
+        'id',
+        'invoice_id'
+    );
+}
+
 }

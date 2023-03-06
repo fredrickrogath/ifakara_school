@@ -20,4 +20,22 @@ class ToolsController extends Controller
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return response()->json(['data' => $toolService->get_tools()]);
     }
+
+    public function updateTools(Request $request, ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $toolService->updateTools($request)]);
+    }
+
+    public function deleteTools(Request $request, ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $toolService->deleteTools($request)]);
+    }
+
+    public function starredTools(Request $request, ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $toolService->starredTools($request)]);
+    }
 }
