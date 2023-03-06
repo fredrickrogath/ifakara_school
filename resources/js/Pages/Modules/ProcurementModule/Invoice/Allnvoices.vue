@@ -80,44 +80,39 @@
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-                                <div
-                                    v-if="
-                                        header.value == 'action' ||
-                                        header.value == 'starred'
+                                <v-icon
+                                    v-if="header.value == 'view'"
+                                    size="22"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#warning-alert-modal"
+                                    @click="setIdForAction(items[idx]['id'])"
+                                >
+                                    mdi-eye
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'starred'"
+                                    size="22"
+                                    :class="
+                                        item[header.value] ? 'text-warning' : ''
+                                    "
+                                    @click="
+                                        starredTools(
+                                            items[idx]['id'],
+                                            item[header.value],
+                                            header.value
+                                        )
                                     "
                                 >
-                                    <v-icon
-                                        v-if="header.value == 'action'"
-                                        size="22"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#warning-alert-modal"
-                                        @click="
-                                            setIdForAction(items[idx]['id'])
-                                        "
-                                    >
-                                        mdi-delete
-                                    </v-icon>
+                                    mdi-star
+                                </v-icon>
 
-                                    <v-icon
-                                        v-if="header.value == 'starred'"
-                                        size="22"
-                                        :class="
-                                            item[header.value]
-                                                ? 'text-warning'
-                                                : ''
-                                        "
-                                        @click="
-                                            starredTools(
-                                                items[idx]['id'],
-                                                item[header.value],
-                                                header.value
-                                            )
-                                        "
-                                    >
-                                        mdi-star
-                                    </v-icon>
-                                </div>
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'id'"
+                                    >{{ item[header.value] }}</span
+                                >
 
                                 <span
                                     class="text-gray-600"
@@ -135,7 +130,56 @@
                                     }}</span
                                 >
 
-                                <v-edit-dialog
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'seller'"
+                                    >{{ item[header.value].name }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'tools'"
+                                >
+                                    <div v-for="tool in item[header.value]">
+                                        <span>
+                                            {{ tool.name }}
+                                        </span>
+                                        <span class="mx-1">
+                                            {{ formattedPrice(tool.price) }}
+                                        </span>
+
+                                        <span class="px-1"> * </span>
+
+                                        <span>
+                                            {{ tool.count }}
+                                        </span>
+
+                                        <span class="px-1"> = </span>
+
+                                        <span>
+                                            {{
+                                                formattedPrice(
+                                                    tool.price * tool.count
+                                                )
+                                            }}
+                                        </span>
+
+                                        <span class="px-1"> , </span>
+                                    </div>
+                                </span>
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'tool_sum'"
+                                >
+                                    {{
+                                        formattedPrice(
+                                            totalPrice(item[header.value])
+                                        )
+                                    }}
+                                </span>
+
+                                <!-- <v-edit-dialog
                                     v-else
                                     :return-value.sync="item[header.value]"
                                     @save="
@@ -176,7 +220,7 @@
                                             single-line
                                         ></v-text-field>
                                     </template>
-                                </v-edit-dialog>
+                                </v-edit-dialog> -->
                             </td>
                         </tr>
                     </tbody>
@@ -225,7 +269,7 @@ export default {
             "NewPostPublished",
             (e) => {
                 // console.log('abc');
-                this.getTools();
+                this.getInvoices();
             }
         );
     },
@@ -239,7 +283,7 @@ export default {
             search: "",
             headers: [
                 {
-                    text: "Code",
+                    text: "Invoice #",
                     align: "start",
                     sortable: false,
                     value: "id",
@@ -252,7 +296,13 @@ export default {
                     text: "Tools",
                     value: "tools",
                 },
+                {
+                    text: "Total",
+                    value: "tool_sum",
+                },
+                { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
+                { text: "View", value: "view" },
             ],
             invoices: [],
 
@@ -283,11 +333,17 @@ export default {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
+        totalPrice(item) {
+            return item.reduce((total, item) => {
+                return total + item.price * item.count;
+            }, 0);
+        },
+
         getInvoices() {
             axios.get("/procurement/getInvoices").then((response) => {
                 this.invoices = response.data.data;
                 // this.showLoader = false;
-                console.log(response.data.data)
+                // console.log(response.data.data)
             });
         },
 
@@ -307,7 +363,7 @@ export default {
             // handle response here
         },
 
-        async starredTools(id,data ,column) {
+        async starredTools(id, data, column) {
             axios
                 .post("/procurement/starredTools", {
                     id: id,
@@ -318,7 +374,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -330,7 +386,7 @@ export default {
                 })
                 .then((response) => {
                     // this.students = response.data.data;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

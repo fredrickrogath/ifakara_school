@@ -22,7 +22,7 @@ class Invoice extends Model
     // }
 
     public function tools()
-{
+    {
     return $this->hasManyThrough(
         'App\Models\Tool',
         'App\Models\InvoiceTool',
@@ -31,8 +31,19 @@ class Invoice extends Model
         'id',
         'tool_id'
     );
-}
+    }
 
+    public function toolSum()
+    {
+    return $this->hasManyThrough(
+        'App\Models\Tool',
+        'App\Models\InvoiceTool',
+        'invoice_id',
+        'id',
+        'id',
+        'tool_id'
+    );
+    }
 
     public function seller()
     {

@@ -330,7 +330,7 @@
                 <div class="card h-screen">
                     <div class="card-body pt-1">
                         <!-- Left sidebar -->
-                        <div class="inbox-leftbar">
+                        <div class="inbox-leftbar bg-white h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
                                     type="button"
@@ -585,7 +585,7 @@
                                 </div>
                             </div> -->
 
-                            <div class="">
+                            <div class="bg-white h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
                                     <div v-if="InvoiceGenerateListener">
