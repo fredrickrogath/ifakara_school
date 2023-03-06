@@ -16,10 +16,23 @@ class Invoice extends Model
         'status',
     ];
 
+    // public function tools()
+    // {
+    //     return $this->hasMany('App\Models\InvoiceTool','invoice_id','id');
+    // }
+
     public function tools()
-    {
-        return $this->hasMany('App\Models\InvoiceTool','invoice_id','id');
-    }
+{
+    return $this->hasManyThrough(
+        'App\Models\Tool',
+        'App\Models\InvoiceTool',
+        'invoice_id',
+        'id',
+        'id',
+        'tool_id'
+    );
+}
+
 
     public function seller()
     {

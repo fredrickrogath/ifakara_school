@@ -248,6 +248,10 @@ export default {
                     text: "Seller",
                     value: "seller",
                 },
+                {
+                    text: "Tools",
+                    value: "tools",
+                },
                 { text: "Date", value: "created_at" },
             ],
             invoices: [],
