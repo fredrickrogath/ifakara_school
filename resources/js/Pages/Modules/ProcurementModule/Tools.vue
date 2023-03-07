@@ -8,7 +8,7 @@
             role="dialog"
             aria-hidden="true"
         >
-            <div class="modal-dialog modal-sm modal-right bg-transparent">
+            <div class="modal-dialog modal-lg modal-right bg-transparent">
                 <div class="modal-content">
                     <!-- <div class="modal-header border-0 bg-info">
                         <button
@@ -22,7 +22,7 @@
                         <div class="">
                         <form @submit.prevent="submitForm">
 
-                            <div class="mb-1 text-gray-600">
+                                <div class="mb-1 text-gray-600">
                                 <label for="example-email" class="form-label text-gray-500 font-normal"
                                     >Tool Name</label
                                 >
