@@ -99,10 +99,7 @@
     <div class="modal fade" id="custom-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-light">
-                    <h4 class="modal-title" id="myCenterModalLabel">New Upload</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                
                 <div class="modal-body p-4">
                     <form>
                         <div class="mb-3">
@@ -122,7 +119,6 @@
 
                         <div class="text-end">
                             <button type="submit" class="btn btn-success waves-effect waves-light">Save</button>
-                            <button type="button" class="btn btn-danger waves-effect waves-light" onclick="Custombox.close();">Cancel</button>
                         </div>
                     </form>
                 </div>
