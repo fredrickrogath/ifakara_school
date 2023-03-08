@@ -73,6 +73,7 @@ class InvoiceController extends Controller
 
     public function submitInvoice(Request $request ,InvoiceService $invoiceService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->submitInvoice($request)]);
     }
 
