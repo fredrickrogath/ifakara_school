@@ -701,14 +701,14 @@ export default {
             axios.get("/procurement/getTools").then((response) => {
                 this.toolOptions = response.data.data;
                 // this.showLoader = false;
-                console.log(response.data.data);
+                // console.log(response.data.data);
             });
         },
 
         async getSellers() {
             axios.get("/procurement/getSellers").then((response) => {
                 this.supplierOptions = response.data.data;
-                console.log(response.data.data);
+                // console.log(response.data.data);
             });
         },
 
@@ -720,7 +720,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
         },
 
@@ -732,7 +732,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
         },
 
@@ -743,7 +743,7 @@ export default {
                 })
                 .then((response) => {
                     // this.students = response.data.data;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
