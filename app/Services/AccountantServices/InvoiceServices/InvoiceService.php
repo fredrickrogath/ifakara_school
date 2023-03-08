@@ -28,6 +28,14 @@ class InvoiceService
         return \App\Models\Invoice::with('tools', 'seller', 'toolSum')->orderBy('created_at', 'desc')->get();
     }
 
+    public function acceptedInvoice(){
+        return \App\Models\Invoice::with('tools', 'seller', 'toolSum')->where('status', true)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function rejectedInvoice(){
+        return \App\Models\Invoice::with('tools', 'seller', 'toolSum')->where('status', false)->orderBy('created_at', 'desc')->get();
+    }
+
     // public function updateInvoice($request){
     //     return \App\Models\Invoice::find($request->id)->update([
     //         $request->column => $request->data

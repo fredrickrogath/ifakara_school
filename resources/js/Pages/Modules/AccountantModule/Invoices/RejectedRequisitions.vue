@@ -273,14 +273,14 @@ export default {
 
     mounted() {
         this.showLoader = true;
-        this.acceptedInvoice();
+        this.rejectedInvoice();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
                 // console.log('abc');
-                this.acceptedInvoice();
+                this.rejectedInvoice();
             }
         );
     },
@@ -351,8 +351,8 @@ export default {
             }, 0);
         },
 
-        acceptedInvoice() {
-            axios.get("/accountant/acceptedInvoice").then((response) => {
+        rejectedInvoice() {
+            axios.get("/accountant/rejectedInvoice").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)

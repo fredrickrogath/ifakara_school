@@ -477,7 +477,7 @@ import Requisitions from "./Invoices/Requisitions.vue";
 import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
 import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
-import RejectedRequisitions from "./Invoices/ChartOfAccounts.vue";
+import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 
 import Entries from "./Invoices/Entries.vue";
 

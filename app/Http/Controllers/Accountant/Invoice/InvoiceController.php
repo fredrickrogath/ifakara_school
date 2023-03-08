@@ -20,6 +20,16 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoices()]);
     }
 
+    public function acceptedInvoice(InvoiceService $invoiceService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->acceptedInvoice()]);
+    }
+
+    public function rejectedInvoice(InvoiceService $invoiceService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->rejectedInvoice()]);
+    }
+
     public function getTrashedInvoices(InvoiceService $invoiceService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getTrashedInvoices()]);
