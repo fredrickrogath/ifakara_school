@@ -21,6 +21,16 @@ class ToolsController extends Controller
         return response()->json(['data' => $toolService->get_tools()]);
     }
 
+    public function getStarredTools(Request $request ,ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        return response()->json(['data' => $toolService->getStarredTools()]);
+    }
+
+    public function getTrashedTools(Request $request ,ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        return response()->json(['data' => $toolService->getTrashedTools()]);
+    }
+    
     public function updateTools(Request $request, ToolService $toolService){
         $this->authorize('authorizeProcurement', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
@@ -33,6 +43,18 @@ class ToolsController extends Controller
         return response()->json(['data' => $toolService->deleteTools($request)]);
     }
 
+    public function restoreTools(Request $request, ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $toolService->restoreTools($request)]);
+    }
+
+    public function permanentDeleteTools(Request $request, ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $toolService->permanentDeleteTools($request)]);
+    }
+    
     public function starredTools(Request $request, ToolService $toolService){
         $this->authorize('authorizeProcurement', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));

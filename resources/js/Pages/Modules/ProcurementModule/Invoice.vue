@@ -118,210 +118,6 @@
             <!-- /.modal-dialog -->
         </div>
 
-        <!-- Long Content Scroll Modal -->
-        <div
-            class="modal fade bg-gray-300"
-            id="scrollable-modal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="scrollableModalTitle"
-            aria-hidden="true"
-        >
-            <div
-                class="modal-dialog modal-dialog-scrollable modal-full-width"
-                role="document"
-            >
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="scrollableModalTitle">
-                            {{ pageTitle }}
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="">
-                            <form @submit.prevent="submitForm">
-                                <div class="row">
-                                    <!-- <div class="col-12 bg-gray-200"> -->
-                                    <!-- <div class="card"> -->
-                                    <!-- <div class="card-body text-sm"> -->
-                                    <!-- Logo & title -->
-
-                                    
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="table-responsive">
-                                                <v-icon
-                                                    type="button"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#right-modal"
-                                                    class="ml-4 px-1 mt-1 mr-3 py-1 float-right"
-                                                    size="20"
-                                                    @click=""
-                                                >
-                                                    mdi-pen-plus
-                                                </v-icon>
-                                                <table
-                                                    class="table table-sm mt-4 table-centered"
-                                                >
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Item</th>
-                                                            <th
-                                                                style="
-                                                                    width: 10%;
-                                                                "
-                                                            >
-                                                                Hours
-                                                            </th>
-                                                            <th
-                                                                style="
-                                                                    width: 10%;
-                                                                "
-                                                            >
-                                                                Hours Rate
-                                                            </th>
-                                                            <th
-                                                                style="
-                                                                    width: 10%;
-                                                                "
-                                                                class="text-end"
-                                                            >
-                                                                Total
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>
-                                                                <b
-                                                                    >Web
-                                                                    Design</b
-                                                                >
-                                                                <br />
-                                                                2 Pages static
-                                                                website - my
-                                                                website
-                                                            </td>
-                                                            <td>22</td>
-                                                            <td>$30</td>
-                                                            <td
-                                                                class="text-end"
-                                                            >
-                                                                $660.00
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>
-                                                                <b
-                                                                    >Software
-                                                                    Development</b
-                                                                >
-                                                                <br />
-                                                                Invoice editor
-                                                                software - AB'c
-                                                                Software
-                                                            </td>
-                                                            <td>112.5</td>
-                                                            <td>$35</td>
-                                                            <td
-                                                                class="text-end"
-                                                            >
-                                                                $3937.50
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- end table-responsive -->
-                                        </div>
-                                        <!-- end col -->
-                                    </div>
-                                    <!-- end row -->
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="clearfix pt-5">
-                                                <h6 class="text-muted">
-                                                    Notes:
-                                                </h6>
-
-                                                <small class="text-muted">
-                                                    All accounts are to be paid
-                                                    within 7 days from receipt
-                                                    of invoice. To be paid by
-                                                    cheque or credit card or
-                                                    direct payment online. If
-                                                    account is not paid within 7
-                                                    days the credits details
-                                                    supplied as confirmation of
-                                                    work undertaken will be
-                                                    charged the agreed quoted
-                                                    fee noted above.
-                                                </small>
-                                            </div>
-                                        </div>
-                                        <!-- end col -->
-                                        <div class="col-sm-6">
-                                            <div class="float-end">
-                                                <div>
-                                                    <b>Sub-total:</b>
-                                                    <span class="float-end"
-                                                        >$4597.50</span
-                                                    >
-                                                </div>
-                                                <div>
-                                                    <b>Discount (10%):</b>
-                                                    <span class="float-end">
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        $459.75</span
-                                                    >
-                                                </div>
-                                                <b>$4137.75 USD</b>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <!-- end col -->
-                                    </div>
-                                    <!-- end row -->
-
-                                    <div class="mt-4 mb-1">
-                                        <div class="text-end d-print-none">
-                                            <a
-                                                href="javascript:window.print()"
-                                                class="btn btn-primary waves-effect waves-light"
-                                                ><i
-                                                    class="mdi mdi-printer me-1"
-                                                ></i>
-                                                Print</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-info waves-effect waves-light"
-                                                >Submit</a
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
         <!-- End of Right modal content -->
 
         <div class="row">
@@ -465,11 +261,21 @@
                                     <div class="ml-3 font-15">My Office</div>
 
                                     <v-icon
+                                    v-if="!getInvoiceGenerate"
                                         class="ml-4 px-1 mt-1 mr-0 py-1"
                                         size="22"
-                                        @click="InvoiceGenerate = !InvoiceGenerate"
+                                        @click="setInvoiceGenerate()"
                                     >
                                         mdi-pen-plus
+                                    </v-icon>
+
+                                    <v-icon
+                                    v-else
+                                        class="ml-4 px-1 mt-1 mr-0 py-1"
+                                        size="22"
+                                        @click="setInvoiceGenerate()"
+                                    >
+                                        mdi-check
                                     </v-icon>
                                 </div>
 
@@ -477,9 +283,10 @@
 
                                 <a
                                     href="#"
-                                    class="list-group-item border-0 mt-1 text-warning"
+                                    class="list-group-item border-0 mt-1"
+                                    @click="setTab('all')"
                                     :class="[
-                                        getCurrentTab == 'home'
+                                        getCurrentTab == 'all'
                                             ? 'text-warning'
                                             : '',
                                     ]"
@@ -491,6 +298,7 @@
                                 <a
                                     href="#"
                                     class="list-group-item border-0"
+                                    @click="setTab('starred')"
                                     :class="[
                                         getCurrentTab == 'starred'
                                             ? 'text-warning'
@@ -504,6 +312,7 @@
                                 <a
                                     href="#"
                                     class="list-group-item border-0"
+                                    @click="setTab('deleted')"
                                     :class="[
                                         getCurrentTab == 'deleted'
                                             ? 'text-warning'
@@ -546,53 +355,17 @@
                         <!-- End Left sidebar -->
 
                         <div class="inbox-rightbar pt-1 px-0">
-                            <!-- <div
-                                class="d-md-flex justify-content-between align-items-center"
-                            >
-                                <form class="search-bar">
-                                    <div class="position-relative">
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-light"
-                                            placeholder="Search files..."
-                                        />
-                                        <span class="mdi mdi-magnify"></span>
-                                    </div>
-                                </form>
-                                <div class="mt-2 mt-md-0">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i
-                                            class="mdi mdi-format-list-bulleted"
-                                        ></i>
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i class="mdi mdi-view-grid"></i>
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i
-                                            class="mdi mdi-information-outline"
-                                        ></i>
-                                    </button>
-                                </div>
-                            </div> -->
-
+                        
                             <div class="bg-white h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
-                                <!-- <transition name="fade"> -->
-                                    <div v-if="InvoiceGenerateListener">
+                                <!-- <transition-group name="slide" mode="in-out"> -->
+                                    <div v-show="getInvoiceGenerate" key="1">
                                         <invoice-generate></invoice-generate>
                                     </div>
-                                    <div v-else>
-                                        <AllInvoices></AllInvoices>
+                                    <div v-show="!getInvoiceGenerate" key="2">
+                                        <AllInvoices v-show="getCurrentTab == 'all'"></AllInvoices>
+                                        <starred-invoices v-show="getCurrentTab == 'starred'"></starred-invoices>
+                                        <trashed-invoices v-show="getCurrentTab == 'deleted'"></trashed-invoices>
                                     </div>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"
@@ -609,7 +382,7 @@
                                 <rejected-requisitions
                                     v-if="getCurrentTab == 'rejected'"
                                 ></rejected-requisitions> -->
-                                <!-- </transition> -->
+                                <!-- </transition-group> -->
                             </div>
                             <!-- end .mt-3-->
                         </div>
@@ -631,9 +404,8 @@ import JetApplicationMark from "@/Jetstream/ApplicationMark";
 
 import AllInvoices from "./Invoice/Allnvoices.vue";
 import InvoiceGenerate from "./Invoice/InvoiceGenerate.vue";
-// import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
-// import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
-// import RejectedRequisitions from "./Invoices/ChartOfAccounts.vue";
+import StarredInvoices from "./Invoice/StarredInvoices.vue";
+import TrashedInvoices from "./Invoice/TrashedInvoices.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
@@ -645,9 +417,8 @@ export default {
 
         AllInvoices,
         InvoiceGenerate,
-        // DeletedRequisitions,
-        // StarredRequisitions,
-        // RejectedRequisitions,
+        StarredInvoices,
+        TrashedInvoices,
 
         // Entries,
 
@@ -659,7 +430,7 @@ export default {
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                console.log(e);
+                // console.log(e);
             }
         );
     },
@@ -694,7 +465,7 @@ export default {
         },
 
         getCurrentTab() {
-            return this.$store.getters["invoice/getTab"];
+            return this.$store.getters["ProcurementInvoiceModule/getTab"];
         },
 
         legerEntriesListener() {
@@ -705,8 +476,9 @@ export default {
             return this.selectedLegerEntry;
         },
 
-        InvoiceGenerateListener(){
-            return this.InvoiceGenerate;
+        getInvoiceGenerate() {
+            // return this.InvoiceGenerate;
+            return this.$store.getters["ProcurementInvoiceModule/getInvoiceGenerate"];
         },
     },
     watch: {
@@ -732,13 +504,17 @@ export default {
                     this.price = "";
                     this.count = "";
                     this.narration = "";
-                    console.log(response.data);
+                    // console.log(response.data);
                 });
             // handle response here
         },
-        // setTab(tab) {
-        //     this.$store.dispatch("invoice/setTab", tab);
-        // },
+        setTab(tab) {
+            this.$store.dispatch("ProcurementInvoiceModule/setTab", tab);
+        },
+
+        setInvoiceGenerate() {
+            this.$store.dispatch("ProcurementInvoiceModule/setInvoiceGenerate");
+        },
 
         // getSpecificLegerEntries() {
         //     // console.log("Loading next page");
@@ -803,29 +579,39 @@ export default {
 </script>
 
 <style scoped>
-/* .fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
+.slide-enter-active{
+    animation: slide-in 200ms ease-out forwards;
 }
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
+.slide-leave-active {
+    animation: slide-out 200ms ease-out forwards;
 }
 
-.slide-enter-active,
-.slide-leave-active {
-    transition: transform 0.5s;
+@keyframes slide-in {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
-.slide-enter,
+
+@keyframes slide-out {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-30);
+        opacity: 0;
+    }
+}
+/* .slide-enter,
 .slide-leave-to {
     transform: translateX(-100%);
 } */
 
-/* .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-} */
 </style>

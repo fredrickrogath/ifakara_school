@@ -12,6 +12,7 @@ class InvoiceTool extends Model
     protected $fillable = [
         'invoice_id',
         'tool_id',
+        'count',
     ];
 
     public function tool()

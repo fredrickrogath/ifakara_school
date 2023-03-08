@@ -161,7 +161,7 @@
         <div class="row">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="card">
+                <div class="card h-screen">
                     <div class="card-body pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
@@ -394,7 +394,7 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-1">
+                        <div class="inbox-rightbar pt-1 h-screen">
                             <!-- <div
                                 class="d-md-flex justify-content-between align-items-center"
                             >
@@ -477,7 +477,7 @@ import Requisitions from "./Invoices/Requisitions.vue";
 import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
 import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
-import RejectedRequisitions from "./Invoices/ChartOfAccounts.vue";
+import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 
 import Entries from "./Invoices/Entries.vue";
 

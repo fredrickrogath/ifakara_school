@@ -35,7 +35,7 @@
                                         type="button"
                                         class="btn btn-sm btn-warning my-1 text-white"
                                         data-bs-dismiss="modal"
-                                        @click="deleteTools()"
+                                        @click="deleteInvoice()"
                                     >
                                         Continue
                                     </button>
@@ -81,6 +81,17 @@
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
                                 <v-icon
+                                    v-if="header.value == 'delete'"
+                                    size="22"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#warning-alert-modal"
+                                    @click="setIdForAction(items[idx]['id'])"
+                                >
+                                    mdi-delete
+                                </v-icon>
+
+                                <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
                                     type="button"
@@ -98,7 +109,7 @@
                                         item[header.value] ? 'text-warning' : ''
                                     "
                                     @click="
-                                        starredTools(
+                                        starredInvoice(
                                             items[idx]['id'],
                                             item[header.value],
                                             header.value
@@ -144,27 +155,27 @@
                                         <span>
                                             {{ tool.name }}
                                         </span>
-                                        <span class="mx-1">
+                                        <!-- <span class="mx-1">
                                             {{ formattedPrice(tool.price) }}
-                                        </span>
+                                        </span> -->
 
-                                        <span class="px-1"> * </span>
+                                        <!-- <span class="px-1"> * </span> -->
 
-                                        <span>
+                                        <!-- <span>
                                             {{ tool.count }}
-                                        </span>
+                                        </span> -->
 
-                                        <span class="px-1"> = </span>
+                                        <!-- <span class="px-1"> = </span> -->
 
-                                        <span>
+                                        <!-- <span>
                                             {{
                                                 formattedPrice(
                                                     tool.price * tool.count
                                                 )
                                             }}
-                                        </span>
-
-                                        <span class="px-1"> , </span>
+                                        </span> -->
+                                        
+                                        <!-- <span class="px-1 font-bold"> {{ tool.id == item[header.value].length? ' . ': ' , ' }} </span> -->
                                     </div>
                                 </span>
 
@@ -261,7 +272,7 @@ export default {
     },
 
     mounted() {
-        this.showLoader = false;
+        this.showLoader = true;
         this.getInvoices();
 
         // Receiving broadicasting
@@ -303,6 +314,7 @@ export default {
                 { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
+                { text: "Delete", value: "delete" },
             ],
             invoices: [],
 
@@ -342,7 +354,7 @@ export default {
         getInvoices() {
             axios.get("/procurement/getInvoices").then((response) => {
                 this.invoices = response.data.data;
-                // this.showLoader = false;
+                this.showLoader = false;
                 // console.log(response.data.data)
             });
         },
@@ -363,9 +375,21 @@ export default {
             // handle response here
         },
 
-        async starredTools(id, data, column) {
+        async deleteInvoice() {
             axios
-                .post("/procurement/starredTools", {
+                .post("/procurement/deleteInvoice", {
+                    id: this.idForAction,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
+
+        async starredInvoice(id,data ,column) {
+            axios
+                .post("/procurement/starredInvoice", {
                     id: id,
                     data: data,
                     column: column,
@@ -374,18 +398,6 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
-
-        async deleteTools() {
-            axios
-                .post("/procurement/deleteTools", {
-                    id: this.idForAction,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
                     // console.log(response.data.data);
                 });
             // handle response here
