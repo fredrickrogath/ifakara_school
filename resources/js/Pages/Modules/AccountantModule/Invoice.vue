@@ -161,7 +161,7 @@
         <div class="row">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="card">
+                <div class="card h-screen">
                     <div class="card-body pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
@@ -394,7 +394,7 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-1">
+                        <div class="inbox-rightbar pt-1 h-screen">
                             <!-- <div
                                 class="d-md-flex justify-content-between align-items-center"
                             >

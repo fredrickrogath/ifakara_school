@@ -1,144 +1,444 @@
 <template>
+    <!-- <v-col>
+        <v-row> -->
     <div>
-        <div class="table-responsive">
-            <table class="table table-centered table-nowrap mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th class="border-0">Name</th>
-                        <th class="border-0">Last Modified</th>
-                        <th class="border-0">Size</th>
-                        <th class="border-0">Owner</th>
-                        <th class="border-0">Members</th>
-                        <th class="border-0" style="width: 80px">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="i in 8" :key="i">
-                        <td>
-                            <i data-feather="folder" class="icon-dual"></i>
-                            <span class="ms-2 fw-semibold"
-                                ><a
-                                    href="javascript: void(0);"
-                                    class="text-reset"
-                                    >App Design & Development</a
-                                ></span
-                            >
-                        </td>
-                        <td>
-                            <p class="mb-0">Jan 03, 2020</p>
-                            <span class="font-12">by Andrew</span>
-                        </td>
-                        <td>128 MB</td>
-                        <td>Danielle Thompson</td>
-                        <td id="tooltips-container">
-                            <div class="avatar-group">
-                                <a
-                                    href="javascript: void(0);"
-                                    class="avatar-group-item mb-0"
-                                    data-bs-container="#tooltips-container"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Mat Helme"
-                                >
-                                    <img
-                                        src="assets/images/users/user-1.jpg"
-                                        class="rounded-circle avatar-xs"
-                                        alt="friend"
-                                    />
-                                </a>
+        <spinner v-if="showLoader"></spinner>
 
-                                <a
-                                    href="javascript: void(0);"
-                                    class="avatar-group-item mb-0"
-                                    data-bs-container="#tooltips-container"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Michael Zenaty"
-                                >
-                                    <img
-                                        src="assets/images/users/user-2.jpg"
-                                        class="rounded-circle avatar-xs"
-                                        alt="friend"
-                                    />
-                                </a>
+        <v-col v-else sm="12" md="12">
+            <!-- <v-card flat :dark="isDark"> -->
+            <!-- <v-card elevation="0" data-app> -->
 
-                                <a
-                                    href="javascript: void(0);"
-                                    class="avatar-group-item mb-0"
-                                    data-bs-container="#tooltips-container"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="James Anderson"
-                                >
-                                    <img
-                                        src="assets/images/users/user-3.jpg"
-                                        class="rounded-circle avatar-xs"
-                                        alt="friend"
-                                    />
-                                </a>
-
-                                <a
-                                    href="javascript: void(0);"
-                                    class="avatar-group-item mb-0"
-                                    data-bs-container="#tooltips-container"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Username"
-                                >
-                                    <img
-                                        src="assets/images/users/user-5.jpg"
-                                        class="rounded-circle avatar-xs"
-                                        alt="friend"
-                                    />
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="btn-group dropdown">
-                                <a
-                                    href="javascript: void(0);"
-                                    class="table-action-btn dropdown-toggle arrow-none btn btn-light btn-xs"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    ><i class="mdi mdi-dots-horizontal"></i
-                                ></a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-share-variant me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Share</a
+            <!-- Warning Alert Modal -->
+            <div
+                id="warning-alert-modal2"
+                class="modal fade"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body p-2">
+                            <div class="text-center">
+                                <i
+                                    class="dripicons-warning h1 text-warning"
+                                ></i>
+                                <h4 class="mt-2 text-gray-500">
+                                    Are you sure you want to delete this data ?
+                                </h4>
+                                <p class="mt-3">
+                                    This operation can not be reversed.
+                                </p>
+                                <div class="flex justify-around">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-warning my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                        @click="permanentDeleteInvoice()"
                                     >
-                                    <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-link me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Get Sharable Link</a
+                                        Continue
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger my-1 text-white"
+                                        data-bs-dismiss="modal"
                                     >
-                                    <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-pencil me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Rename</a
-                                    >
-                                    <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-download me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Download</a
-                                    >
-                                    <a class="dropdown-item" href="#"
-                                        ><i
-                                            class="mdi mdi-delete me-2 text-muted vertical-middle"
-                                        ></i
-                                        >Remove</a
-                                    >
+                                        cancel
+                                    </button>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+            <v-card-title class="px-0 pt-0">
+                Invoices
+                <v-spacer></v-spacer>
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+                ></v-text-field>
+            </v-card-title>
+            <!-- {{ $page.props.posts }} -->
+
+            <v-data-table
+                :headers="headers"
+                :items="invoices"
+                item-key="name"
+                :search="search"
+                class="elevation-1"
+            >
+                <template v-slot:body="{ items, headers }">
+                    <tbody>
+                        <tr v-for="(item, idx, k) in items" :key="idx">
+                            <td v-for="(header, key) in headers" :key="key">
+                                <v-icon
+                                    v-if="header.value == 'delete'"
+                                    size="22"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#warning-alert-modal2"
+                                    @click="setIdForAction(items[idx]['id'])"
+                                >
+                                    mdi-delete
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'view'"
+                                    size="22"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#warning-alert-modal"
+                                    @click="setIdForAction(items[idx]['id'])"
+                                >
+                                    mdi-eye
+                                </v-icon>
+
+                                <v-icon
+                                        v-if="header.value == 'starred'"
+                                        size="22"
+                                        :class="
+                                            item[header.value]
+                                                ? 'text-warning'
+                                                : ''
+                                        "
+                                        @click="
+                                            restoreInvoice(
+                                                items[idx]['id'],
+                                                item[header.value],
+                                                header.value
+                                            )
+                                        "
+                                    >
+                                        mdi-restore
+                                    </v-icon>
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'id'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'created_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'updated_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'seller'"
+                                    >{{ item[header.value].name }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'tools'"
+                                >
+                                    <div v-for="tool in item[header.value]">
+                                        <span>
+                                            {{ tool.name }}
+                                        </span>
+                                        <!-- <span class="mx-1">
+                                            {{ formattedPrice(tool.price) }}
+                                        </span> -->
+
+                                        <!-- <span class="px-1"> * </span> -->
+
+                                        <!-- <span>
+                                            {{ tool.count }}
+                                        </span> -->
+
+                                        <!-- <span class="px-1"> = </span> -->
+
+                                        <!-- <span>
+                                            {{
+                                                formattedPrice(
+                                                    tool.price * tool.count
+                                                )
+                                            }}
+                                        </span> -->
+                                        
+                                        <!-- <span class="px-1 font-bold"> {{ tool.id == item[header.value].length? ' . ': ' , ' }} </span> -->
+                                    </div>
+                                </span>
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'tool_sum'"
+                                >
+                                    {{
+                                        formattedPrice(
+                                            totalPrice(item[header.value])
+                                        )
+                                    }}
+                                </span>
+
+                                <!-- <v-edit-dialog
+                                    v-else
+                                    :return-value.sync="item[header.value]"
+                                    @save="
+                                        save(
+                                            items[idx]['id'],
+                                            item[header.value],
+                                            header.value
+                                        )
+                                    "
+                                    @cancel="cancel"
+                                    @open="open"
+                                    @close="close"
+                                    large
+                                >
+                                    <span
+                                        class="text-gray-600"
+                                        :class="
+                                            item[header.value] == null &&
+                                            header.value !== 'action' // header.value == 'level1'
+                                                ? 'bg-gray-100 italic rounded px-1'
+                                                : ''
+                                        "
+                                        >{{
+                                            item[header.value] !== null
+                                                ? header.value == "price"
+                                                    ? formattedPrice(
+                                                          item[header.value]
+                                                      )
+                                                    : item[header.value]
+                                                : "Empty"
+                                        }}</span
+                                    >
+
+                                    <template v-slot:input>
+                                        <v-text-field
+                                            v-model="item[header.value]"
+                                            label="Edit"
+                                            single-line
+                                        ></v-text-field>
+                                    </template>
+                                </v-edit-dialog> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-data-table>
+        </v-col>
     </div>
+    <!-- </v-row>
+    </v-col> -->
 </template>
+
+<script>
+import moment from "moment";
+import Spinner from "../../.././Components/SpinnerLoader.vue";
+export default {
+    components: {
+        Spinner,
+    },
+
+    props: {
+        // postsData: {
+        // type: Number,
+        // default: [],
+        // default(rawProps) {
+        //     return { message: "hello" };
+        // },
+        // DATA TYPES
+        // String
+        // Number
+        // Boolean
+        // Array
+        // Object
+        // Date
+        // Function
+        // Symbol
+        // disabled: [Boolean, Number]
+        // },
+    },
+
+    mounted() {
+        this.showLoader = true;
+        this.getTrashedInvoices();
+
+        // Receiving broadicasting
+        window.Echo.channel("EventTriggered").listen(
+            "NewPostPublished",
+            (e) => {
+                // console.log('abc');
+                this.getTrashedInvoices();
+            }
+        );
+    },
+
+    data() {
+        return {
+            contentFullWidthWhenSideBarHides: 10,
+            storagePath: window.location.origin + "/storage/systemFiles/",
+
+            showLoader: true,
+            search: "",
+            headers: [
+                {
+                    text: "Invoice #",
+                    align: "start",
+                    sortable: false,
+                    value: "id",
+                },
+                {
+                    text: "Seller",
+                    value: "seller",
+                },
+                {
+                    text: "Tools",
+                    value: "tools",
+                },
+                {
+                    text: "Total",
+                    value: "tool_sum",
+                },
+                { text: "Date", value: "created_at" },
+                { text: "View", value: "view" },
+                { text: "Restore", value: "starred" },
+                { text: "Delete", value: "delete" },
+            ],
+            invoices: [],
+
+            idForAction: null,
+        };
+    },
+
+    computed: {
+        contentFullWidthWhenSideBarHidesComputed() {
+            return this.contentFullWidthWhenSideBarHides;
+        },
+    },
+
+    methods: {
+        async setIdForAction(id) {
+            this.idForAction = id;
+        },
+
+        formattedPrice(amount) {
+            return amount.toLocaleString("sw-TZ", {
+                style: "currency",
+                currency: "Tsh",
+            });
+        },
+
+        formattedDate(date) {
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        },
+
+        totalPrice(item) {
+            return item.reduce((total, item) => {
+                return total + item.price * item.count;
+            }, 0);
+        },
+
+        getTrashedInvoices() {
+            axios.get("/accountant/getTrashedInvoices").then((response) => {
+                this.invoices = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data)
+            });
+        },
+
+        async restoreInvoice(id,data ,column) {
+            axios
+                .post("/accountant/restoreInvoice", {
+                    id: id,
+                    data: data,
+                    column: column,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    console.log(response.data.data);
+                });
+            // handle response here
+        },
+
+        async updateTools(id, column, data) {
+            axios
+                .post("/accountant/updateTools", {
+                    id: id,
+                    data: data,
+                    column: column,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
+
+        async deleteInvoice() {
+            axios
+                .post("/accountant/deleteInvoice", {
+                    id: this.idForAction,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
+
+        async permanentDeleteInvoice() {
+            axios
+                .post("/accountant/permanentDeleteInvoice", {
+                    id: this.idForAction,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
+
+        async starredInvoice(id,data ,column) {
+            axios
+                .post("/accountant/starredInvoice", {
+                    id: id,
+                    data: data,
+                    column: column,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    console.log(response.data.data);
+                });
+            // handle response here
+        },
+
+        save(id, column, data) {
+            this.updateTools(id, data, column);
+            // console.log(id + " , " +data);
+        },
+        cancel() {},
+        open() {},
+        close() {},
+    },
+};
+</script>

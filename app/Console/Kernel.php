@@ -30,9 +30,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         // $schedule->command('demo:cron')->hourly();
 
-        $schedule->command('demo:cron')
+        // $schedule->command('demo:cron')->everyMinute();
 
-        ->everyMinute();
+        $schedule->command('trashClear:monthly')->everyMinute();
     }
 
     /**
