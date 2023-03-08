@@ -44,6 +44,28 @@ class InvoiceService
         ]);
     }
 
+    public function starredInvoice($request){
+        return \App\Models\Invoice::find($request->id)->update([
+            $request->column => !$request->data
+        ]);
+    }
+
+    public function getTrashedInvoices(){
+        return \App\Models\Invoice::onlyTrashed()->with('tools', 'seller', 'toolSum')->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getStarredInvoices(){
+        return \App\Models\Invoice::with('tools', 'seller', 'toolSum')->where('starred', true)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function restoreInvoice($request){
+        return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->restore();
+    }
+
+    public function permanentDeleteInvoice($request){
+        return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->forceDelete();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | QUERIES FOR THE INVOICE GENERATION
@@ -70,6 +92,7 @@ class InvoiceService
             \App\Models\InvoiceTool::create([
                 'invoice_id' => $invoice->id,
                 'tool_id' => $tool['id'],
+                'count' => $tool['count'],
             ]);
         }
         return true;

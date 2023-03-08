@@ -20,6 +20,7 @@ class CreateToolsTable extends Migration
             $table->integer ('count');
             $table->boolean('starred')->default(false);
             $table->string('description')->nullable();
+            $table->softDeletes('deleted_at');
             $table->timestamps();
         });
     }

@@ -271,6 +271,7 @@
 <script>
 import moment from "moment";
 import Select2 from "v-select2-component";
+// import SnackBar from "../../.././Components/SnackBar.vue";
 
 import Spinner from "../../.././Components/SpinnerLoader.vue";
 
@@ -278,6 +279,7 @@ export default {
     components: {
         Spinner,
         Select2,
+        // SnackBar,
     },
 
     props: {
@@ -744,6 +746,10 @@ export default {
                     console.log(response.data.data);
                 });
             // handle response here
+        },
+
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
         },
 
         save(id, column, data) {

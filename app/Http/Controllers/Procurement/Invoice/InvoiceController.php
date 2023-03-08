@@ -21,6 +21,16 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoices()]);
     }
 
+    public function getTrashedInvoices(InvoiceService $invoiceService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getTrashedInvoices()]);
+    }
+
+    public function getStarredInvoices(InvoiceService $invoiceService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getStarredInvoices()]);
+    }
+    
     public function updateInvoice(Request $request, InvoiceService $invoiceService){
         $this->authorize('authorizeProcurement', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
@@ -33,12 +43,24 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->deleteInvoice($request)]);
     }
 
+    public function restoreInvoice(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->restoreInvoice($request)]);
+    }
+
+    public function permanentDeleteInvoice(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->permanentDeleteInvoice($request)]);
+    }
+    
     public function starredInvoices(Request $request, InvoiceService $invoiceService){
         $this->authorize('authorizeProcurement', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->starredInvoices($request)]);
     }
-
+    
     public function getTools(InvoiceService $invoiceService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getTools()]);
@@ -52,5 +74,11 @@ class InvoiceController extends Controller
     public function submitInvoice(Request $request ,InvoiceService $invoiceService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->submitInvoice($request)]);
+    }
+
+    public function starredInvoice(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->starredInvoice($request)]);
     }
 }

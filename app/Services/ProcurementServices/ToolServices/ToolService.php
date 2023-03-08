@@ -29,6 +29,14 @@ class ToolService
         return \App\Models\Tool::orderBy('created_at', 'desc')->get();
     }
 
+    public function getStarredTools(){
+        return \App\Models\Tool::where('starred', true)->orderBy('created_at', 'desc')->get();
+    }
+
+    public  function getTrashedTools(){
+        return \App\Models\Tool::onlyTrashed()->orderBy('created_at', 'desc')->get();
+    }
+    
     public function updateTools($request){
         return \App\Models\Tool::find($request->id)->update([
             $request->column => $request->data
@@ -39,6 +47,14 @@ class ToolService
         return \App\Models\Tool::findoRFail($request->id)->delete();
     }
 
+    public function restoreTools($request){
+        return \App\Models\Tool::onlyTrashed()->findoRFail($request->id)->restore();
+    }
+
+    public function permanentDeleteTools($request){
+        return \App\Models\Tool::onlyTrashed()->findoRFail($request->id)->forceDelete();
+    }
+    
     public function starredTools($request){
         return \App\Models\Tool::find($request->id)->update([
             $request->column => !$request->data

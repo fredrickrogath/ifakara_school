@@ -19,6 +19,8 @@ class CreateInvoicesTable extends Migration
             $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
             $table->string('narration');
             $table->boolean('status')->default(false);
+            $table->boolean('starred')->default(false);
+            $table->softDeletes('deleted_at');
             $table->timestamps();
         });
     }

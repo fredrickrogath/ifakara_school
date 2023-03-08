@@ -258,9 +258,10 @@
 
                                 <a
                                     href="#"
-                                    class="list-group-item border-0 mt-1 text-warning"
+                                    class="list-group-item border-0 mt-1"
+                                    @click="setTab('all')"
                                     :class="[
-                                        getCurrentTab == 'home'
+                                        getCurrentTab == 'all'
                                             ? 'text-warning'
                                             : '',
                                     ]"
@@ -272,6 +273,7 @@
                                 <a
                                     href="#"
                                     class="list-group-item border-0"
+                                    @click="setTab('starred')"
                                     :class="[
                                         getCurrentTab == 'starred'
                                             ? 'text-warning'
@@ -285,8 +287,9 @@
                                 <a
                                     href="#"
                                     class="list-group-item border-0"
+                                    @click="setTab('lost')"
                                     :class="[
-                                        getCurrentTab == 'deleted'
+                                        getCurrentTab == 'lost'
                                             ? 'text-warning'
                                             : '',
                                     ]"
@@ -298,6 +301,7 @@
                                 <a
                                     href="#"
                                     class="list-group-item border-0"
+                                    @click="setTab('deleted')"
                                     :class="[
                                         getCurrentTab == 'deleted'
                                             ? 'text-warning'
@@ -339,7 +343,7 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-1 px-0">
+                        <div class="inbox-rightbar pt-1 px-0 h-screen">
                             <!-- <div
                                 class="d-md-flex justify-content-between align-items-center"
                             >
@@ -381,24 +385,18 @@
 
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
-                                <!-- <transition name="fade"> -->
-                                <AllTools></AllTools>
-                                <!-- <requisitions
-                                    v-if="getCurrentTab == 'home'"
-                                ></requisitions>
-                                <accepted-requisitions
-                                    v-if="getCurrentTab == 'accepted'"
-                                ></accepted-requisitions>
-                                <deleted-requisitions
-                                    v-if="getCurrentTab == 'deleted'"
-                                ></deleted-requisitions>
-                                <starred-requisitions
+                                <transition name="fade">
+                                <AllTools v-if="getCurrentTab == 'all'"></AllTools>
+                                <starred-tools
                                     v-if="getCurrentTab == 'starred'"
-                                ></starred-requisitions>
-                                <rejected-requisitions
-                                    v-if="getCurrentTab == 'rejected'"
-                                ></rejected-requisitions> -->
-                                <!-- </transition> -->
+                                ></starred-tools>
+                                <broken-tools
+                                    v-if="getCurrentTab == 'accepted'"
+                                ></broken-tools>
+                                <trashed-tools
+                                    v-if="getCurrentTab == 'deleted'"
+                                ></trashed-tools>
+                                </transition>
                             </div>
                             <!-- end .mt-3-->
                         </div>
@@ -417,10 +415,9 @@
 
 <script>
 import AllTools from "./Tools/AllTools.vue";
-// import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
-// import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
-// import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
-// import RejectedRequisitions from "./Invoices/ChartOfAccounts.vue";
+import StarredTools from "./Tools/StarredTools.vue";
+import BrokenTools from "./Tools/BrokenTools.vue";
+import TrashedTools from "./Tools/TrashedTools.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
@@ -429,10 +426,9 @@ import AllTools from "./Tools/AllTools.vue";
 export default {
     components: {
         AllTools,
-        // AcceptedRequisitions,
-        // DeletedRequisitions,
-        // StarredRequisitions,
-        // RejectedRequisitions,
+        StarredTools,
+        BrokenTools,
+        TrashedTools,
 
         // Entries,
 
@@ -473,7 +469,7 @@ export default {
     computed: {
         //Add computed properties
         getCurrentTab() {
-            return this.$store.getters["invoice/getTab"];
+            return this.$store.getters["ProcurementToolModule/getTab"];
         },
 
         legerEntriesListener() {
@@ -513,9 +509,9 @@ export default {
             // handle response here
         },
 
-        // setTab(tab) {
-        //     this.$store.dispatch("invoice/setTab", tab);
-        // },
+        setTab(tab) {
+            this.$store.dispatch("ProcurementToolModule/setTab", tab);
+        },
 
         // getSpecificLegerEntries() {
         //     // console.log("Loading next page");
