@@ -10,7 +10,7 @@
 
             <!-- Warning Alert Modal -->
             <div
-                id="warning-alert-modal"
+                id="warning-alert-modal1"
                 class="modal fade"
                 tabindex="-1"
                 role="dialog"
@@ -35,7 +35,7 @@
                                         type="button"
                                         class="btn btn-sm btn-warning my-1 text-white"
                                         data-bs-dismiss="modal"
-                                        @click="deleteTools()"
+                                        @click="deleteInvoice()"
                                     >
                                         Continue
                                     </button>
@@ -85,7 +85,7 @@
                                     size="22"
                                     type="button"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
+                                    data-bs-target="#warning-alert-modal1"
                                     @click="setIdForAction(items[idx]['id'])"
                                 >
                                     mdi-delete
@@ -109,7 +109,7 @@
                                         item[header.value] ? 'text-warning' : ''
                                     "
                                     @click="
-                                        starredTools(
+                                        starredInvoices(
                                             items[idx]['id'],
                                             item[header.value],
                                             header.value
@@ -375,9 +375,9 @@ export default {
             // handle response here
         },
 
-        async starredTools(id, data, column) {
+        async starredInvoices(id, data, column) {
             axios
-                .post("/procurement/starredTools", {
+                .post("/procurement/starredInvoices", {
                     id: id,
                     data: data,
                     column: column,
@@ -391,9 +391,9 @@ export default {
             // handle response here
         },
 
-        async deleteTools() {
+        async deleteInvoice() {
             axios
-                .post("/procurement/deleteTools", {
+                .post("/procurement/deleteInvoice", {
                     id: this.idForAction,
                 })
                 .then((response) => {
