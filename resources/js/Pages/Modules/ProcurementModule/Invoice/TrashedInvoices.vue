@@ -91,17 +91,6 @@
                                 </v-icon>
 
                                 <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
-                                >
-                                    mdi-eye
-                                </v-icon>
-
-                                <v-icon
                                         v-if="header.value == 'starred'"
                                         size="22"
                                         :class="
@@ -313,7 +302,7 @@ export default {
                     value: "tool_sum",
                 },
                 { text: "Date", value: "created_at" },
-                { text: "View", value: "view" },
+                // { text: "View", value: "view" },
                 { text: "Restore", value: "starred" },
                 { text: "Delete", value: "delete" },
             ],

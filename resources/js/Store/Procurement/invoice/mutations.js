@@ -10,4 +10,9 @@ export default {
     setSnackBarState(state){
         state.snackBarState = !state.snackBarState;
     },
+
+    setInvoiceView(state, id){
+        state.invoiceView = !state.invoiceView;
+        state.invoiceId = id;
+    },
 };

@@ -9,6 +9,8 @@ import rootGettes from './getters';
 import invoiceModules from '../Store/invoice/index';
 import Procurementinvoice from '../Store/Procurement/invoice/index';
 import Procurementtool from '../Store/Procurement/tool/index';
+import ProcurementUpload from '../Store/Procurement/Upload/index';
+import AccountantInvoice from '../Store/Accountant/invoice/index';
 
 Vue.use(Vuex);
 
@@ -18,6 +20,10 @@ const ProcurementInvoiceModule = Procurementinvoice;
 
 const ProcurementToolModule = Procurementtool;
 
+const ProcurementUploadModule = ProcurementUpload;
+
+const AccountantInvoiceModule  = AccountantInvoice;
+
 const store = new Vuex.Store({
     plugins: [createPersistedState()],
     modules: {
@@ -26,6 +32,10 @@ const store = new Vuex.Store({
         ProcurementInvoiceModule: ProcurementInvoiceModule,
 
         ProcurementToolModule: ProcurementToolModule,
+
+        ProcurementUploadModule: ProcurementUploadModule,
+
+        AccountantInvoiceModule: AccountantInvoiceModule,
     },
     state: {
         posts: [],

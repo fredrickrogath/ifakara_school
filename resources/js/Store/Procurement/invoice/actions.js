@@ -11,5 +11,9 @@ export default {
     
     setSnackBarState(context){
         context.commit("setSnackBarState");
+    },
+
+    setInvoiceView(context, id){
+        context.commit("setInvoiceView", id);
     }
 };

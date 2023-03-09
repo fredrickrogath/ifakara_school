@@ -40,14 +40,14 @@ class trashClear extends Command
     {
         \Log::info("Trash cleaner is working fine!");
 
-        \App\Models\Invoice::where('deleted_at', '<', Carbon::now()->addMinute())->forceDelete();
+        \App\Models\Invoice::where('deleted_at', '<', Carbon::now()->subDays(29))->forceDelete();
         \App\Models\Tool::where('deleted_at', '<', Carbon::now()->subDays(29))->forceDelete();
 
         event(new \App\Events\NewPostPublished('created'));
 
         return 'Trash cleared successfully';
 
-        // everyMinute()
+        // addMinute()
         // return 0;
     }
 }

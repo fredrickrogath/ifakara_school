@@ -94,10 +94,7 @@
                                 <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
+                                    @click=" setInvoiceView(items[idx]['id'])"
                                 >
                                     mdi-eye
                                 </v-icon>
@@ -189,49 +186,6 @@
                                         )
                                     }}
                                 </span>
-
-                                <!-- <v-edit-dialog
-                                    v-else
-                                    :return-value.sync="item[header.value]"
-                                    @save="
-                                        save(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                    @cancel="cancel"
-                                    @open="open"
-                                    @close="close"
-                                    large
-                                >
-                                    <span
-                                        class="text-gray-600"
-                                        :class="
-                                            item[header.value] == null &&
-                                            header.value !== 'action' // header.value == 'level1'
-                                                ? 'bg-gray-100 italic rounded px-1'
-                                                : ''
-                                        "
-                                        >{{
-                                            item[header.value] !== null
-                                                ? header.value == "price"
-                                                    ? formattedPrice(
-                                                          item[header.value]
-                                                      )
-                                                    : item[header.value]
-                                                : "Empty"
-                                        }}</span
-                                    >
-
-                                    <template v-slot:input>
-                                        <v-text-field
-                                            v-model="item[header.value]"
-                                            label="Edit"
-                                            single-line
-                                        ></v-text-field>
-                                    </template>
-                                </v-edit-dialog> -->
                             </td>
                         </tr>
                     </tbody>
@@ -401,6 +355,10 @@ export default {
                     console.log(response.data.data);
                 });
             // handle response here
+        },
+
+        setInvoiceView(id) {
+            this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
         },
 
         save(id, column, data) {
