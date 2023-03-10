@@ -64,6 +64,7 @@
                                     >Search</label
                                 >
                                 <input
+                                v-model="search"
                                     type="search"
                                     class="form-control"
                                     id="inputPassword2"

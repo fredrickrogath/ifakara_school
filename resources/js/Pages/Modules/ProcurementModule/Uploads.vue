@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-1">
+    <div>
         <!-- Modal -->
         <div
             class="modal fade"
@@ -74,7 +74,7 @@
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="card h-screen">
-                    <div class="card-body">
+                    <div class="card-body pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
                             <div class="mail-list">

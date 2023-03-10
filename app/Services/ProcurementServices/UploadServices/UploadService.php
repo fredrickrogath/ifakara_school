@@ -30,9 +30,13 @@ class UploadService
     }
 
     public function getUploads(){
-        return \App\Models\Upload::orderBy('created_at', 'desc')->get();
+        return \App\Models\Upload::orderBy('title', 'asc')->get();
     }
 
+    public function getNewUploads(){
+        return \App\Models\Upload::orderBy('created_at', 'asc')->get();
+    }
+    
     // public function deleteInvoice($request){
     //     return \App\Models\Invoice::findoRFail($request->id)->delete();
     // }

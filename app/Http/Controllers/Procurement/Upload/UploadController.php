@@ -21,10 +21,10 @@ class UploadController extends Controller
         return response()->json(['data' => $uploadService->getUploads()]);
     }
 
-    // public function getStarredTools(Request $request ,UploadService $uploadService){
-    //     $this->authorize('authorizeProcurement', \App\Models\User::class); 
-    //     return response()->json(['data' => $uploadService->getStarredTools()]);
-    // }
+    public function getNewUploads(Request $request ,UploadService $uploadService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        return response()->json(['data' => $uploadService->getNewUploads()]);
+    }
 
     // public function getTrashedTools(Request $request ,UploadService $uploadService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class); 

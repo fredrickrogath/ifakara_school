@@ -255,7 +255,7 @@ Route::middleware([
         // Route::get('/getSellers', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getSellers'])->name('getSellers');
         Route::post('/upload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'upload'])->name('upload');
         Route::get('/getUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getUploads'])->name('getUploads');
-        // Route::get('/getStarredUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getStarredUploads'])->name('getStarredUploads');
+        Route::get('/getNewUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getNewUploads'])->name('getNewUploads');
         // Route::get('/getTrashedUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getTrashedUploads'])->name('getTrashedUploads');
         // Route::post('/updateUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'updateUpload'])->name('updateUpload');
         // Route::post('/restoreUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
