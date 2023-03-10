@@ -359,13 +359,18 @@
                             <div class="bg-white h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
-                                    <div v-show="getInvoiceGenerate" key="1">
+                                    <div v-show="getInvoiceGenerate && !getInvoiceView" key="1">
                                         <invoice-generate></invoice-generate>
                                     </div>
-                                    <div v-show="!getInvoiceGenerate" key="2">
+
+                                    <div v-show="getInvoiceView && !getInvoiceGenerate">
+                                        <view-invoices></view-invoices>
+                                    </div>
+                                    <div v-show="!getInvoiceGenerate && !getInvoiceView" key="2">
                                         <AllInvoices v-show="getCurrentTab == 'all'"></AllInvoices>
                                         <starred-invoices v-show="getCurrentTab == 'starred'"></starred-invoices>
                                         <trashed-invoices v-show="getCurrentTab == 'deleted'"></trashed-invoices>
+                                        <!-- <view-invoices v-show="getCurrentTab == 'view'"></view-invoices> -->
                                     </div>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"
@@ -406,6 +411,7 @@ import AllInvoices from "./Invoice/Allnvoices.vue";
 import InvoiceGenerate from "./Invoice/InvoiceGenerate.vue";
 import StarredInvoices from "./Invoice/StarredInvoices.vue";
 import TrashedInvoices from "./Invoice/TrashedInvoices.vue";
+import ViewInvoices from "./Invoice/ViewInvoices.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
@@ -419,6 +425,7 @@ export default {
         InvoiceGenerate,
         StarredInvoices,
         TrashedInvoices,
+        ViewInvoices,
 
         // Entries,
 
@@ -468,6 +475,10 @@ export default {
             return this.$store.getters["ProcurementInvoiceModule/getTab"];
         },
 
+        getInvoiceView() {
+            return this.$store.getters["ProcurementInvoiceModule/getInvoiceView"];
+        },
+        
         legerEntriesListener() {
             return this.legerEntries !== null ? this.legerEntries.data : null;
         },

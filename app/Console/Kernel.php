@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
 
         // $schedule->command('demo:cron')->everyMinute();
 
-        $schedule->command('trashClear:monthly')->everyMinute();
+        $schedule->command('trashClear:monthly')->daily();
     }
 
     /**

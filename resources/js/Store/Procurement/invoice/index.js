@@ -11,6 +11,9 @@ export default {
             tab: 'all',
             invoiceGenerate: false,
 
+            invoiceView: false,
+            invoiceId: null,
+
             // SNACKBAR
             snackBarState: false,
             snackBarMessage: 'Successfully submited',

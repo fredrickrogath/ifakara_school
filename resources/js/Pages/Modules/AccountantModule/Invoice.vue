@@ -395,66 +395,34 @@
                         <!-- End Left sidebar -->
 
                         <div class="inbox-rightbar pt-1 h-screen">
-                            <!-- <div
-                                class="d-md-flex justify-content-between align-items-center"
-                            >
-                                <form class="search-bar">
-                                    <div class="position-relative">
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-light"
-                                            placeholder="Search files..."
-                                        />
-                                        <span class="mdi mdi-magnify"></span>
-                                    </div>
-                                </form>
-                                <div class="mt-2 mt-md-0">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i
-                                            class="mdi mdi-format-list-bulleted"
-                                        ></i>
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i class="mdi mdi-view-grid"></i>
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i
-                                            class="mdi mdi-information-outline"
-                                        ></i>
-                                    </button>
-                                </div>
-                            </div> -->
 
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
-                                <entries
-                                    v-if="getCurrentTab == 'entries'"
+                                <div v-show="getInvoiceView">
+                                    <view-invoice></view-invoice>
+                                </div>
+
+                                <div v-show="!getInvoiceView">
+                                    <entries
+                                    v-show="getCurrentTab == 'entries'"
                                 ></entries>
                                 <requisitions
-                                    v-if="getCurrentTab == 'home'"
+                                    v-show="getCurrentTab == 'home'"
                                 ></requisitions>
                                 <accepted-requisitions
-                                    v-if="getCurrentTab == 'accepted'"
+                                    v-show="getCurrentTab == 'accepted'"
                                 ></accepted-requisitions>
                                 <deleted-requisitions
-                                    v-if="getCurrentTab == 'deleted'"
+                                    v-show="getCurrentTab == 'deleted'"
                                 ></deleted-requisitions>
                                 <starred-requisitions
-                                    v-if="getCurrentTab == 'starred'"
+                                    v-show="getCurrentTab == 'starred'"
                                 ></starred-requisitions>
                                 <rejected-requisitions
-                                    v-if="getCurrentTab == 'rejected'"
+                                    v-show="getCurrentTab == 'rejected'"
                                 ></rejected-requisitions>
+                                </div>
                                 <!-- </transition> -->
                             </div>
                             <!-- end .mt-3-->
@@ -478,6 +446,7 @@ import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
 import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
+import ViewInvoice from "./Invoices/ViewInvoice.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -490,6 +459,7 @@ export default {
         DeletedRequisitions,
         StarredRequisitions,
         RejectedRequisitions,
+        ViewInvoice,
 
         Entries,
 
@@ -528,7 +498,11 @@ export default {
     computed: {
         //Add computed properties
         getCurrentTab() {
-            return this.$store.getters["invoice/getTab"];
+            return this.$store.getters["AccountantInvoiceModule/getTab"];
+        },
+
+        getInvoiceView() {
+            return this.$store.getters["AccountantInvoiceModule/getInvoiceView"];
         },
 
         legerEntriesListener() {
@@ -548,7 +522,7 @@ export default {
     methods: {
         //Add methods...
         setTab(tab) {
-            this.$store.dispatch("invoice/setTab", tab);
+            this.$store.dispatch("AccountantInvoiceModule/setTab", tab);
         },
 
         getSpecificLegerEntries() {
@@ -601,6 +575,10 @@ export default {
                     console.log(response.data.data);
                 });
             // handle response here
+        },
+
+        setInvoiceView(id) {
+            this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
         },
 
         myChangeEvent(val) {

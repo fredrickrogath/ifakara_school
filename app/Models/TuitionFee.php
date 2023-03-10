@@ -14,7 +14,6 @@ class TuitionFee extends Model
         'user_id',
         'amount',
         'narration',
-        
     ];
 
     public function user()

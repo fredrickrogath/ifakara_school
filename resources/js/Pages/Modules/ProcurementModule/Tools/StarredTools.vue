@@ -306,7 +306,7 @@ export default {
                 { text: "Price", value: "price", align: "center" },
                 { text: "Count", value: "count" },
                 { text: "Date", value: "created_at" },
-                { text: "Update", value: "updated_at" },
+                // { text: "Update", value: "updated_at" },
                 { text: "Starred", value: "starred" },
                 { text: "Action", value: "action" },
 

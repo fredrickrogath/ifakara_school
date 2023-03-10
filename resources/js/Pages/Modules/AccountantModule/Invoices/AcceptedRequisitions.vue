@@ -94,10 +94,7 @@
                                 <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
+                                    @click=" setInvoiceView(items[idx]['id'])"
                                 >
                                     mdi-eye
                                 </v-icon>
@@ -401,6 +398,10 @@ export default {
                     console.log(response.data.data);
                 });
             // handle response here
+        },
+
+        setInvoiceView(id) {
+            this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
         },
 
         save(id, column, data) {
