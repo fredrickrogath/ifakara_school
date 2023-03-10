@@ -2,7 +2,7 @@
     <div>
         <!-- Warning Alert Modal -->
         <div
-            id="warning-alert-modal"
+            id="warning-alert-modal1"
             class="modal fade"
             tabindex="-1"
             role="dialog"
@@ -99,7 +99,7 @@
                             size="22"
                             type="button"
                             data-bs-toggle="modal"
-                            data-bs-target="#warning-alert-modal"
+                            data-bs-target="#warning-alert-modal1"
                             @click="setIdForAction(item.id)"
                         >
                             mdi-delete
@@ -142,14 +142,14 @@ import moment from "moment";
 export default {
     mounted() {
         // this.showLoader = true;
-        this.getUploads();
+        this.getNewUploads();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
                 // console.log('abc');
-                this.getUploads();
+                this.getNewUploads();
             }
         );
     },
@@ -194,8 +194,8 @@ export default {
             this.idForAction = id;
         },
 
-        getUploads() {
-            axios.get("/procurement/getUploads").then((response) => {
+        getNewUploads() {
+            axios.get("/procurement/getNewUploads").then((response) => {
                 this.uploads = response.data.data;
                 // this.showLoader = false;
                 // console.log(response.data.data);

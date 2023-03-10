@@ -148,7 +148,9 @@
 
                         <div class="inbox-rightbar pt-1 px-0">
                             <div class="bg-white h-screen">
-                                <all-uploads></all-uploads>
+                                <all-uploads v-show="getCurrentTab == 'all'"></all-uploads>
+                                <new-uploads v-show="getCurrentTab == 'new'"></new-uploads>
+                                <trashed-uploads v-show="getCurrentTab == 'deleted'"></trashed-uploads>
                             </div>
                         </div>
                     </div>
@@ -163,10 +165,14 @@
 
 <script>
 import AllUploads from "./Uploads/AllUploads.vue";
+import NewUploads from "./Uploads/NewUploads.vue";
+import TrashedUploads from "./Uploads/TrashedUploads.vue";
 
 export default {
     components: {
         AllUploads,
+        NewUploads,
+        TrashedUploads,
     },
     mounted() {
         // Receiving broadicasting

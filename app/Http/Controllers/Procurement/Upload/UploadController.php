@@ -43,17 +43,17 @@ class UploadController extends Controller
         return response()->json(['data' => $uploadService->deleteUpload($request)]);
     }
 
-    // public function restoreTools(Request $request, UploadService $uploadService){
-    //     $this->authorize('authorizeProcurement', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
-    //     return response()->json(['data' => $uploadService->restoreTools($request)]);
-    // }
+    public function restoreUpload(Request $request, UploadService $uploadService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $uploadService->restoreUpload($request)]);
+    }
 
-    // public function permanentDeleteTools(Request $request, UploadService $uploadService){
-    //     $this->authorize('authorizeProcurement', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
-    //     return response()->json(['data' => $uploadService->permanentDeleteTools($request)]);
-    // }
+    public function permanentDeleteUpload(Request $request, UploadService $uploadService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $uploadService->permanentDeleteUpload($request)]);
+    }
     
     // public function starredTools(Request $request, UploadService $uploadService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);

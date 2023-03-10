@@ -34,7 +34,7 @@ class UploadService
     }
 
     public function getNewUploads(){
-        return \App\Models\Upload::orderBy('created_at', 'asc')->get();
+        return \App\Models\Upload::orderBy('created_at', 'desc')->get();
     }
     
     public function deleteUpload($request){
@@ -45,12 +45,12 @@ class UploadService
         return \App\Models\Upload::onlyTrashed()->orderBy('title', 'asc')->get();
     }
 
-    // public function restoreInvoice($request){
-    //     return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->restore();
-    // }
+    public function restoreUpload($request){
+        return \App\Models\Upload::onlyTrashed()->findoRFail($request->id)->restore();
+    }
 
-    // public function permanentDeleteInvoice($request){
-    //     return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->forceDelete();
-    // }
+    public function permanentDeleteUpload($request){
+        return \App\Models\Upload::onlyTrashed()->findoRFail($request->id)->forceDelete();
+    }
 
 }
