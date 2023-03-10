@@ -37,13 +37,13 @@ class UploadService
         return \App\Models\Upload::orderBy('created_at', 'asc')->get();
     }
     
-    // public function deleteInvoice($request){
-    //     return \App\Models\Invoice::findoRFail($request->id)->delete();
-    // }
+    public function deleteUpload($request){
+        return \App\Models\Upload::findoRFail($request->id)->delete();
+    }
 
-    // public function getTrashedInvoices(){
-    //     return \App\Models\Invoice::onlyTrashed()->with('tools', 'seller', 'toolSum')->orderBy('created_at', 'desc')->get();
-    // }
+    public function getTrashedUploads(){
+        return \App\Models\Upload::onlyTrashed()->orderBy('title', 'asc')->get();
+    }
 
     // public function restoreInvoice($request){
     //     return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->restore();

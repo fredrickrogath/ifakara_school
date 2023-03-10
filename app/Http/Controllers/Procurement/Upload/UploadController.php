@@ -26,10 +26,10 @@ class UploadController extends Controller
         return response()->json(['data' => $uploadService->getNewUploads()]);
     }
 
-    // public function getTrashedTools(Request $request ,UploadService $uploadService){
-    //     $this->authorize('authorizeProcurement', \App\Models\User::class); 
-    //     return response()->json(['data' => $uploadService->getTrashedTools()]);
-    // }
+    public function getTrashedUploads(Request $request ,UploadService $uploadService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        return response()->json(['data' => $uploadService->getTrashedUploads()]);
+    }
     
     // public function updateTools(Request $request, uploadService $uploadService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);
@@ -37,11 +37,11 @@ class UploadController extends Controller
     //     return response()->json(['data' => $uploadService->updateTools($request)]);
     // }
 
-    // public function deleteTools(Request $request, UploadService $uploadService){
-    //     $this->authorize('authorizeProcurement', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
-    //     return response()->json(['data' => $uploadService->deleteTools($request)]);
-    // }
+    public function deleteUpload(Request $request, UploadService $uploadService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $uploadService->deleteUpload($request)]);
+    }
 
     // public function restoreTools(Request $request, UploadService $uploadService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);

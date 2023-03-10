@@ -256,12 +256,12 @@ Route::middleware([
         Route::post('/upload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'upload'])->name('upload');
         Route::get('/getUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getUploads'])->name('getUploads');
         Route::get('/getNewUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getNewUploads'])->name('getNewUploads');
-        // Route::get('/getTrashedUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getTrashedUploads'])->name('getTrashedUploads');
+        Route::get('/getTrashedUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getTrashedUploads'])->name('getTrashedUploads');
         // Route::post('/updateUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'updateUpload'])->name('updateUpload');
         // Route::post('/restoreUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
         // Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
         // Route::post('/starredUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'starredUpload'])->name('starredUpload');
-        // Route::post('/deleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::post('/deleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
         // Route::post('/starredUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'starredUploads'])->name('starredUploads');
 
         // Route::post('/submitUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'submitUpload'])->name('submitInvoice');
