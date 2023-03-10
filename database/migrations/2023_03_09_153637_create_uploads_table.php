@@ -17,7 +17,9 @@ class CreateUploadsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('path');
+            $table->string('title');
             $table->string('description');
+            $table->softDeletes('deleted_at');
             $table->timestamps();
         });
     }

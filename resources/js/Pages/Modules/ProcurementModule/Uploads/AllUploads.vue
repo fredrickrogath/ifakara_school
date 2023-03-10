@@ -47,12 +47,11 @@
                 <!-- /.modal-dialog -->
             </div>
             <!-- /.modal -->
-            
+
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-8 text-center">
-                        {{ getCurrentTab }}
                         <h4>Table for all documents</h4>
                     </div>
 
@@ -83,14 +82,18 @@
                 :search="search"
                 class="bg-red-900"
             >
-                <!-- <template v-slot:item.id="{ item }">
-                    <span class="text-gray-600">{{ item.id }}</span>
-                </template> -->
+                <template v-slot:item.title="{ item }">
+                    <span class="text-gray-600">{{ item.title }}</span>
+                </template>
 
                 <template v-slot:item.name="{ item }">
                     <span class="text-gray-600">{{ item.name }}</span>
                 </template>
 
+                <template v-slot:item.description="{ item }">
+                    <span class="text-gray-600">{{ item.description }}</span>
+                </template>
+                
                 <template v-slot:item.action="{ item }">
                     <span class="text-gray-600">
                         <v-icon
@@ -161,19 +164,19 @@ export default {
         return {
             search: "",
             headers: [
-                // {
-                //     text: "Code",
-                //     align: "start",
-                //     sortable: false,
-                //     value: "id",
-                // },
+                {
+                    text: "Title",
+                    align: "start",
+                    sortable: false,
+                    value: "title",
+                },
                 {
                     text: "Name of document",
                     value: "name",
                 },
                 // { text: "Made For", value: "user.name", align: "center" },
                 // { text: "Amount", value: "amount" },
-                // { text: "Narration", value: "narration" },
+                { text: "Description", value: "description" },
                 { text: "Date", value: "created_at" },
 
                 { text: "View", value: "view" },

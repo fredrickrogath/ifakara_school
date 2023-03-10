@@ -18,6 +18,7 @@ class UploadService
         $created = \App\Models\Upload::create([
             'name' => $fileName,
             'path' => $filePath,
+            'title' => $request->title,
             'description' => $request->description,
 
         ]);

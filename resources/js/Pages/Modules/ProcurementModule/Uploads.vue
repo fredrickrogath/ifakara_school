@@ -72,8 +72,8 @@
 
         <div class="row">
             <!-- Right Sidebar -->
-            <div class="col-md-4">
-                <div class="card">
+            <div class="col-12">
+                <div class="card h-screen">
                     <div class="card-body">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
@@ -145,13 +145,15 @@
                         </div>
 
                         <!-- <div class="clearfix"></div> -->
+
+                        <div class="inbox-rightbar pt-1 px-0">
+                            <div class="bg-white h-screen">
+                                <all-uploads></all-uploads>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- end card -->
-            </div>
-
-            <div class="col-md-8">
-                <all-uploads></all-uploads>
             </div>
         </div>
 
@@ -209,7 +211,7 @@ export default {
             formData.append("title", this.title);
             formData.append("description", this.description);
             axios.post("/procurement/upload", formData).then((response) => {
-                this.file = null;
+                this.$refs.file.value = "";
                 this.title = "";
                 this.description = "";
             });
