@@ -18,10 +18,10 @@ class Invoice extends Model
         'starred',
     ];
 
-    // public function tools()
-    // {
-    //     return $this->hasMany('App\Models\InvoiceTool','invoice_id','id');
-    // }
+    public function invoiceTool()
+    {
+        return $this->hasMany('App\Models\InvoiceTool','invoice_id','id');
+    }
 
     public function tools()
     {

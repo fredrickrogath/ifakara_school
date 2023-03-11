@@ -59,6 +59,11 @@
             <v-card-title class="px-0 pt-0">
                 Invoices
                 <v-spacer></v-spacer>
+
+                <!-- <v-btn color="primary" @click="generatePdfReport"
+                    >Generate PDF Report</v-btn
+                > -->
+
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -67,7 +72,6 @@
                     hide-details
                 ></v-text-field>
             </v-card-title>
-            <!-- {{ $page.props.posts }} -->
 
             <v-data-table
                 :headers="headers"
@@ -94,7 +98,7 @@
                                 <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
-                                    @click=" setInvoiceView(items[idx]['id'])"
+                                    @click="setInvoiceView(items[idx]['id'])"
                                 >
                                     mdi-eye
                                 </v-icon>
@@ -152,27 +156,6 @@
                                         <span>
                                             {{ tool.name }}
                                         </span>
-                                        <!-- <span class="mx-1">
-                                            {{ formattedPrice(tool.price) }}
-                                        </span> -->
-
-                                        <!-- <span class="px-1"> * </span> -->
-
-                                        <!-- <span>
-                                            {{ tool.count }}
-                                        </span> -->
-
-                                        <!-- <span class="px-1"> = </span> -->
-
-                                        <!-- <span>
-                                            {{
-                                                formattedPrice(
-                                                    tool.price * tool.count
-                                                )
-                                            }}
-                                        </span> -->
-                                        
-                                        <!-- <span class="px-1 font-bold"> {{ tool.id == item[header.value].length? ' . ': ' , ' }} </span> -->
                                     </div>
                                 </span>
 
@@ -181,54 +164,9 @@
                                     v-else-if="header.value == 'tool_sum'"
                                 >
                                     {{
-                                        formattedPrice(
-                                            totalPrice(item[header.value])
-                                        )
+                                        formattedPrice(totalPrice(item.invoice_tool))
                                     }}
                                 </span>
-
-                                <!-- <v-edit-dialog
-                                    v-else
-                                    :return-value.sync="item[header.value]"
-                                    @save="
-                                        save(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                    @cancel="cancel"
-                                    @open="open"
-                                    @close="close"
-                                    large
-                                >
-                                    <span
-                                        class="text-gray-600"
-                                        :class="
-                                            item[header.value] == null &&
-                                            header.value !== 'action' // header.value == 'level1'
-                                                ? 'bg-gray-100 italic rounded px-1'
-                                                : ''
-                                        "
-                                        >{{
-                                            item[header.value] !== null
-                                                ? header.value == "price"
-                                                    ? formattedPrice(
-                                                          item[header.value]
-                                                      )
-                                                    : item[header.value]
-                                                : "Empty"
-                                        }}</span
-                                    >
-
-                                    <template v-slot:input>
-                                        <v-text-field
-                                            v-model="item[header.value]"
-                                            label="Edit"
-                                            single-line
-                                        ></v-text-field>
-                                    </template>
-                                </v-edit-dialog> -->
                             </td>
                         </tr>
                     </tbody>
@@ -242,6 +180,9 @@
 
 <script>
 import moment from "moment";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
 import Spinner from "../../.././Components/SpinnerLoader.vue";
 export default {
     components: {
@@ -326,6 +267,50 @@ export default {
     },
 
     methods: {
+        generatePdfReport() {
+            // Create a new instance of jsPDF
+            const doc = new jsPDF();
+            const title = "Invoice PDF Report";
+            // Define image source URL
+            const imageURL = "http://127.0.0.1:8000/imagesSTOP/logo.png";
+
+            // Define the columns and rows for the report
+            const columns = this.headers.map((header) => header.text);
+            const rows = this.invoices.map((item) => {
+                const row = [];
+                for (const key in item) {
+                    if (key !== "id" && key !== "tools") {
+                        row.push(item[key]);
+                    }
+                }
+                return row;
+            });
+
+            // Add title
+            doc.text(title, 10, 10);
+
+            // Add title
+            doc.text('title', 5, 6);
+
+            // Add the table to the PDF
+            doc.autoTable({
+                head: [columns],
+                body: rows,
+            });
+
+            // Add header after the table
+            doc.setFontSize(10);
+            // doc.setFontType("bold");
+            doc.text(
+                "Report generated on " + new Date().toLocaleString(),
+                10,
+                doc.autoTable.previous.finalY + 10
+            );
+
+            // Save the PDF
+            doc.save("report.pdf");
+        },
+
         async setIdForAction(id) {
             this.idForAction = id;
         },
@@ -344,7 +329,7 @@ export default {
 
         totalPrice(item) {
             return item.reduce((total, item) => {
-                return total + item.price * item.count;
+                return total + item.tool.price * item.count;
             }, 0);
         },
 
@@ -352,7 +337,7 @@ export default {
             axios.get("/procurement/getInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                console.log(response.data.data)
             });
         },
 
@@ -384,7 +369,7 @@ export default {
             // handle response here
         },
 
-        async starredInvoice(id,data ,column) {
+        async starredInvoice(id, data, column) {
             axios
                 .post("/procurement/starredInvoice", {
                     id: id,

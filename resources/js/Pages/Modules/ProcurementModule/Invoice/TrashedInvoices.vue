@@ -175,7 +175,7 @@
                                 >
                                     {{
                                         formattedPrice(
-                                            totalPrice(item[header.value])
+                                            totalPrice(item.invoice_tool)
                                         )
                                     }}
                                 </span>
@@ -337,7 +337,7 @@ export default {
 
         totalPrice(item) {
             return item.reduce((total, item) => {
-                return total + item.price * item.count;
+                return total + item.tool.price * item.count;
             }, 0);
         },
 
