@@ -1,124 +1,99 @@
 <template>
     <div class="pt-1">
         <div class="row">
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern shadow">
+            <div class="col-md-6 col-xl-3">
+                <div class="card" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-blue rounded">
-                                    <i
-                                        class="fe-aperture avatar-title font-22 text-white"
-                                    ></i>
+                                    <i class="fe-aperture avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
-                                    <h4 class="my-1">
-                                        $<span data-plugin="counterup"
-                                            >12,145</span
-                                        >
-                                    </h4>
-                                    <p class="text-muted mb-1 text-truncate">
-                                        Income status
-                                    </p>
+                                    <h3 class="text-dark my-1"><span data-plugin="counterup">12,145</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Tools & Items</p>
                                 </div>
                             </div>
                         </div>
+                       
                     </div>
                 </div>
                 <!-- end card-->
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
-                    <div class="card-body shadow">
+            <div class="col-md-6 col-xl-3">
+                <div class="card" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-success rounded">
-                                    <i
-                                        class="fe-shopping-cart avatar-title font-22 text-white"
-                                    ></i>
+                                    <i class="fe-shopping-cart avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
-                                    <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            >1576</span
-                                        >
-                                    </h4>
-                                    <p class="text-muted mb-1 text-truncate">
-                                        January's Sales
-                                    </p>
+                                    <h3 class="text-dark my-1"><span data-plugin="counterup">1576</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Invoices</p>
                                 </div>
                             </div>
                         </div>
+                       
                     </div>
                 </div>
                 <!-- end card-->
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
-                    <div class="card-body shadow">
+            <div class="col-md-6 col-xl-3">
+                <div class="card" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm bg-primary rounded">
-                                    <i
-                                        class="fe-bar-chart-2 avatar-title font-22 text-white"
-                                    ></i>
+                                <div class="avatar-sm bg-warning rounded">
+                                    <i class="fe-bar-chart-2 avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
-                                    <h4 class="my-1">
-                                        $<span data-plugin="counterup"
-                                            >8947</span
-                                        >
-                                    </h4>
-                                    <p class="text-muted mb-1 text-truncate">
-                                        Payouts
-                                    </p>
+                                    <h3 class="text-dark my-1"><span data-plugin="counterup">8947</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">General</p>
                                 </div>
                             </div>
                         </div>
+                       
                     </div>
                 </div>
                 <!-- end card-->
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
-                    <div class="card-body shadow">
+            <div class="col-md-6 col-xl-3">
+                <div class="card" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-info rounded">
-                                    <i
-                                        class="fe-cpu avatar-title font-22 text-white"
-                                    ></i>
+                                    <i class="fe-cpu avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
-                                    <h4 class="my-1">
-                                        <span data-plugin="counterup">178</span>
-                                    </h4>
-                                    <p class="text-muted mb-1 text-truncate">
-                                        Available Stores
-                                    </p>
+                                    <h3 class="text-dark my-1"><span data-plugin="counterup">178</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Available Stores</p>
                                 </div>
                             </div>
                         </div>
+                      
                     </div>
                 </div>
                 <!-- end card-->
             </div>
             <!-- end col -->
         </div>
+        <!-- end row -->
 
         <!-- end row -->
     </div>
