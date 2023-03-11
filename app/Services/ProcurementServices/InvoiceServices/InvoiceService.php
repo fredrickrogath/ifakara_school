@@ -28,6 +28,10 @@ class InvoiceService
         return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
     }
 
+    public function getInvoiceView(){
+        return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
+    }
+    
     public function updateInvoice($request){
         return \App\Models\Invoice::find($request->id)->update([
             $request->column => $request->data

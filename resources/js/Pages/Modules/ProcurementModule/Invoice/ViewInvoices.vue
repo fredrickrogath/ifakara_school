@@ -100,7 +100,7 @@
                             </div> <!-- end table-responsive -->
                         </div> <!-- end col -->
                     </div>
-                    <!-- end row -->
+                    <!-- end row --> 
 
                     <div class="row">
                         <div class="col-sm-6">
