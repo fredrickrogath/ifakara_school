@@ -14,7 +14,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mt-3">
-                                <p><b>Hello, {{ invoice.seller }}</b></p>
+                                <p>
+                                    <b>Hello, {{ seller }}</b>
+                                </p>
                                 <small>Procumerement</small>
                             </div>
                         </div>
@@ -80,16 +82,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="data in invoice.invoice_tool" :key="data.id">
+                                        <tr
+                                            v-for="data in invoice.invoice_tool"
+                                            :key="data.id"
+                                        >
                                             <td>1</td>
                                             <td>
-                                                <b>{{ data.tool.name }}</b> <br />
+                                                <b>{{ data.tool.name }}</b>
+                                                <br />
                                                 <!-- 2 Pages static website - my
                                                 website -->
                                             </td>
                                             <td>{{ data.count }}</td>
-                                            <td>{{ formattedPrice(data.tool.price) }}</td>
-                                            <td class="text-end">{{ formattedPrice(data.count * data.tool.price) }}</td>
+                                            <td>
+                                                {{
+                                                    formattedPrice(
+                                                        data.tool.price
+                                                    )
+                                                }}
+                                            </td>
+                                            <td class="text-end">
+                                                {{
+                                                    formattedPrice(
+                                                        data.count *
+                                                            data.tool.price
+                                                    )
+                                                }}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -113,15 +132,26 @@
                             <div class="float-end">
                                 <p>
                                     <b>Sub-total:</b>
-                                    <span class="float-end">{{ formattedPrice(total) }}</span>
+                                    <span class="float-end">{{
+                                        formattedPrice(total)
+                                    }}</span>
                                 </p>
                                 <p>
                                     <b>Discount (18%):</b>
                                     <span class="float-end">
-                                        &nbsp;&nbsp;&nbsp; {{ formattedPrice(total * (18 / 100)) }}</span
+                                        &nbsp;&nbsp;&nbsp;
+                                        {{
+                                            formattedPrice(total * (18 / 100))
+                                        }}</span
                                     >
                                 </p>
-                                <h3>{{ formattedPrice(total - (total * (18 / 100))) }}</h3>
+                                <h3>
+                                    {{
+                                        formattedPrice(
+                                            total - total * (18 / 100)
+                                        )
+                                    }}
+                                </h3>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -153,13 +183,15 @@
 
 <script>
 export default {
-    mounted() {console.log('hello');
+    mounted() {
+        console.log("hello");
         this.showLoader = true;
     },
 
     data() {
         return {
             showLoader: false,
+            seller: '',
             invoice: [],
             total: 0,
             id: null,
@@ -179,42 +211,46 @@ export default {
             }, 0);
         },
 
-        setInvoiceView() {
-            this.$store.dispatch(
-                "ProcurementInvoiceModule/setInvoiceView",
-                null
-            );
+        async sellerName(invoice) {
+            if (typeof invoice !== "undefined" && invoice !== null) {
+                // Access properties of the invoice object here
+                this.seller = invoice.seller.name;
+            }
         },
 
         async getInvoiceView() {
-                axios
-                    .post("/procurement/getInvoiceView", {
-                        id: this.getInvoiceId,
-                    })
-                    .then((response) => {
-                        // this.showLoader = false;
-                        this.totalPrice(response.data.data)
-                        this.invoice = response.data.data;
-                        // this.amount = "";
-                        // this.narration = "";
-                        // console.log(response.data.data);
-                    });
-            }
-            // handle response here
+            axios
+                .post("/procurement/getInvoiceView", {
+                    id: this.getInvoiceId,
+                })
+                .then((response) => {
+                    // this.showLoader = false;
+                    this.totalPrice(response.data.data);
+                    this.invoice = response.data.data;
+                    this.sellerName(this.invoice)
+                    // this.amount = "";
+                    // this.narration = "";
+                    // console.log(response.data.data);
+                });
+        },
+        // handle response here
     },
 
     watch: {
-        id(newVal, oldVal){
-            if(newVal !== null){
-                this.getInvoiceView()
+        id(newVal, oldVal) {
+            if (newVal !== null) {
+                this.getInvoiceView();
             }
-            console.log(`The message has changed from "${oldVal}" to "${newVal}"`)
+            console.log(
+                `The message has changed from "${oldVal}" to "${newVal}"`
+            );
         },
     },
 
     computed: {
         getInvoiceId() {
-            this.id = this.$store.getters["ProcurementInvoiceModule/getInvoiceId"];
+            this.id =
+                this.$store.getters["ProcurementInvoiceModule/getInvoiceId"];
             return this.$store.getters["ProcurementInvoiceModule/getInvoiceId"];
         },
     },
