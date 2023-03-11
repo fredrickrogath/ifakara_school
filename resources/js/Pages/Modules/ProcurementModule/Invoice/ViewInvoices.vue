@@ -46,18 +46,6 @@
                         </div> <!-- end col -->
                         <!-- end col -->
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-6">
-                            <h6>Invoice Address</h6>
-                            <address>
-                                Accountant<br>
-                                Diocese of Ifakara Cathedral<br>
-                                Ifakara Morogoro <br>
-                                Tanzania<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                            </address>
-                        </div> <!-- end col -->
-                    </div>
                     <!-- end row -->
 
                     <div class="row">
