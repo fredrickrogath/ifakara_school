@@ -28,6 +28,10 @@ class InvoiceService
         return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
     }
 
+    public function getInvoiceView($request){
+        return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
+    }
+
     public function acceptedInvoice(){
         return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->orderBy('created_at', 'desc')->get();
     }

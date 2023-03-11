@@ -184,7 +184,6 @@
 <script>
 export default {
     mounted() {
-        console.log("hello");
         this.showLoader = true;
     },
 
@@ -198,6 +197,10 @@ export default {
         };
     },
     methods: {
+        setInvoiceView() {
+            this.$store.dispatch("ProcurementInvoiceModule/setInvoiceView", null);
+        },
+
         formattedPrice(amount) {
             return amount.toLocaleString("sw-TZ", {
                 style: "currency",
@@ -213,7 +216,6 @@ export default {
 
         async sellerName(invoice) {
             if (typeof invoice !== "undefined" && invoice !== null) {
-                // Access properties of the invoice object here
                 this.seller = invoice.seller.name;
             }
         },
@@ -224,16 +226,12 @@ export default {
                     id: this.getInvoiceId,
                 })
                 .then((response) => {
-                    // this.showLoader = false;
+                    this.showLoader = false;
                     this.totalPrice(response.data.data);
                     this.invoice = response.data.data;
                     this.sellerName(this.invoice)
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
                 });
         },
-        // handle response here
     },
 
     watch: {
