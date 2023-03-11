@@ -21,6 +21,11 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoices()]);
     }
 
+    public function getInvoiceView(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getInvoiceView($request)]);
+    }
+    
     public function getTrashedInvoices(InvoiceService $invoiceService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getTrashedInvoices()]);
