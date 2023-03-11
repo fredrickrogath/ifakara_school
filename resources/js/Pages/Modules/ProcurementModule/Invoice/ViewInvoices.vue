@@ -1,16 +1,17 @@
 <template>
     <div class="pt-10">
-        <div class="d-flex justify-content-between">
 
-            <a @click="setInvoiceView()" class="btn text-lg-700">
-            <strong class="text-danger" style="font-size: large;"><i class="fe-arrow-left"></i> </strong> 
-            </a>
-        </div>
 
         <div class="col-12">
+
             <div class="card">
                 <div class="card-body">
-                   
+                    <div class="d-flex justify-content-between">
+
+                        <a @click="setInvoiceView()" class="btn text-lg-700">
+                            <strong class="text-danger" style="font-size: large;"><i class="fe-arrow-left"></i> </strong>
+                        </a>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mt-3">
