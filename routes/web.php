@@ -234,6 +234,7 @@ Route::middleware([
         Route::get('/getSellers', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getSellers'])->name('getSellers');
         Route::post('/addInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'addInvoice'])->name('addInvoice');
         Route::get('/getInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoices'])->name('getInvoices');
+        Route::get('/getInvoiceView', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoiceView'])->name('getInvoiceView');
         Route::get('/getStarredInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getStarredInvoices'])->name('getStarredInvoices');
         Route::get('/getTrashedInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');
         Route::post('/updateInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'updateInvoice'])->name('updateInvoice');
