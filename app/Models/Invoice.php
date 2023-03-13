@@ -16,6 +16,7 @@ class Invoice extends Model
         'narration',
         'status',
         'starred',
+        'status_from_financial',
     ];
 
     public function invoiceTool()

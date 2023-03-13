@@ -25,11 +25,17 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoiceView($request)]);
     }
 
+    public function acceptInvoice(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->acceptInvoice($request)]);
+    }
+
     public function acceptedInvoice(InvoiceService $invoiceService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->acceptedInvoice()]);
     }
-
+    
     public function rejectedInvoice(InvoiceService $invoiceService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->rejectedInvoice()]);
@@ -94,5 +100,12 @@ class InvoiceController extends Controller
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);
     //     event(new \App\Events\NewPostPublished('created'));
     //     return response()->json(['data' => $invoiceService->starredInvoice($request)]);
+    // }
+
+
+    // API
+    // public function getInvoices(InvoiceService $invoiceService){
+    //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
+    //     return response()->json(['data' => $invoiceService->getInvoices()]);
     // }
 }

@@ -685,7 +685,7 @@ export default {
             this.count = "";
         },
 
-        async submitInvoice() {
+        async submitInvoice() {console.log(this.supplierId)
             axios
                 .post("/procurement/submitInvoice", {
                     sellerId: this.supplierId,
