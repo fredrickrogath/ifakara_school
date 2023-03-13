@@ -30,8 +30,8 @@ Route::get('/', function () {
     | FAKE DATA GENERATING ROUTE
     |--------------------------------------------------------------------------
     */
-    App\Models\User::factory()->count(100)->create();
-    App\Models\Post::factory()->count(1000)->create();
+    // App\Models\User::factory()->count(100)->create();
+    // App\Models\Post::factory()->count(1000)->create();
     // php artisan schedule:work
     /*
     |--------------------------------------------------------------------------
@@ -184,6 +184,7 @@ Route::middleware([
         Route::post('/deleteInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
         Route::post('/starredInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'starredInvoice'])->name('starredInvoice');
         Route::get('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
+        Route::post('/acceptInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'acceptInvoice'])->name('acceptInvoice');
         Route::get('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
     });
 

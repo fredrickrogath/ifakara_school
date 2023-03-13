@@ -40,11 +40,11 @@ class InvoiceService
         return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', false)->orderBy('created_at', 'desc')->get();
     }
 
-    // public function updateInvoice($request){
-    //     return \App\Models\Invoice::find($request->id)->update([
-    //         $request->column => $request->data
-    //     ]);
-    // }
+    public function acceptInvoice($request){
+        return \App\Models\Invoice::find($request->id)->update([
+            'status' => !$request->status,
+        ]);
+    }
 
     public function deleteInvoice($request){
         return \App\Models\Invoice::findoRFail($request->id)->delete();

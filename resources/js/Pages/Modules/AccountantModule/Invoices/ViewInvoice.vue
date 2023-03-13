@@ -6,6 +6,26 @@
                     ><i class="fe-arrow-left"></i>
                 </strong>
             </a>
+
+            <form @submit.prevent="acceptInvoice">
+                <div class="d-flex justify-content-between my-1 mt-2">
+                    <button
+                        type="submit"
+                        class="btn btn-success text-white btn-sm waves-effect waves-light"
+                        v-if="!this.invoice.status"
+                    >
+                        Submit to financial
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger text-white btn-sm waves-effect waves-light"
+                        v-else
+                    >
+                        Unsubmit to financial
+                    </button>
+                </div>
+            </form>
         </div>
 
         <div class="col-12">
@@ -86,29 +106,29 @@
                                             v-for="data in invoice.invoice_tool"
                                             :key="data.id"
                                         >
-                                            <td>1</td>
-                                            <td>
-                                                <b>{{ data.tool.name }}</b>
-                                                <br />
-                                                <!-- 2 Pages static website - my
-                                                website -->
-                                            </td>
-                                            <td>{{ data.count }}</td>
-                                            <td>
-                                                {{
-                                                    formattedPrice(
-                                                        data.tool.price
-                                                    )
-                                                }}
-                                            </td>
-                                            <td class="text-end">
-                                                {{
-                                                    formattedPrice(
-                                                        data.count *
+                                            <template v-if="formattedData">
+                                                <td>1</td>
+                                                <td>
+                                                    <b>{{ data.tool.name }}</b>
+                                                    <br />
+                                                </td>
+                                                <td>{{ data.count }}</td>
+                                                <td>
+                                                    {{
+                                                        formattedPrice(
                                                             data.tool.price
-                                                    )
-                                                }}
-                                            </td>
+                                                        )
+                                                    }}
+                                                </td>
+                                                <td class="text-end">
+                                                    {{
+                                                        formattedPrice(
+                                                            data.count *
+                                                                data.tool.price
+                                                        )
+                                                    }}
+                                                </td>
+                                            </template>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -185,20 +205,35 @@
 export default {
     mounted() {
         this.showLoader = true;
+
+        // Receiving broadicasting
+        window.Echo.channel("EventTriggered").listen(
+            "NewPostPublished",
+            (e) => {
+                this.getInvoiceView();
+                // console.log(e);
+            }
+        );
     },
 
     data() {
         return {
             showLoader: false,
-            seller: '',
+            objectData: [],
+            seller: "",
+            supplier: [],
             invoice: [],
             total: 0,
+            count: 0,
             id: null,
         };
     },
     methods: {
         setInvoiceView() {
-            this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", null);
+            this.$store.dispatch(
+                "AccountantInvoiceModule/setInvoiceView",
+                null
+            );
         },
 
         formattedPrice(amount) {
@@ -212,11 +247,13 @@ export default {
             this.total = invoice.invoice_tool.reduce((total, item) => {
                 return total + item.tool.price * item.count;
             }, 0);
+            this.objectData.splice(0, this.objectData.length);
         },
 
         async sellerName(invoice) {
             if (typeof invoice !== "undefined" && invoice !== null) {
                 this.seller = invoice.seller.name;
+                // this.supplier = invoice.seller;
             }
         },
 
@@ -229,7 +266,35 @@ export default {
                     this.showLoader = false;
                     this.totalPrice(response.data.data);
                     this.invoice = response.data.data;
-                    this.sellerName(this.invoice)
+                    this.sellerName(this.invoice);
+                });
+        },
+
+        async invoiceFormation(data) {
+            this.objectData.push({
+                toolName: data.tool.name,
+                toolPrice: data.tool.price,
+                toolCount: data.count,
+            });
+            // console.log(this.objectData);
+        },
+
+        async acceptInvoice() {
+            axios
+                .post(
+                    // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
+                    "/accountant/acceptInvoice",
+                    {
+                        id: this.invoice.id,
+                        status: this.invoice.status,
+                        // invoice: this.objectData,
+                    }
+                )
+                .then((response) => {
+                    this.showLoader = false;
+                    // Clear objectData
+                    console.log(response.data.data);
+                    // console.log(this.objectData);
                 });
         },
     },
@@ -250,6 +315,15 @@ export default {
             this.id =
                 this.$store.getters["AccountantInvoiceModule/getInvoiceId"];
             return this.$store.getters["AccountantInvoiceModule/getInvoiceId"];
+        },
+
+        formattedData() {
+            return this.invoice.invoice_tool.map((data) => {
+                return this.invoiceFormation(
+                    data,
+                    this.invoice.invoice_tool.length
+                );
+            });
         },
     },
 };
