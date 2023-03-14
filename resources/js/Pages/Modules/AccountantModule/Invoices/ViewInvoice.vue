@@ -44,22 +44,27 @@
                         <div class="col-md-4 offset-md-2">
                             <div class="mt-3 float-end">
                                 <p>
-                                    <strong> Invoice id :</strong
+                                    <strong> Invoice id : </strong
                                     ><span>{{ getInvoiceId }}</span>
                                 </p>
                                 <p>
                                     <strong>Invoice Date : </strong>
                                     <span class="float-end">
-                                        &nbsp;&nbsp;&nbsp;&nbsp; Jan 17,
-                                        2016</span
+                                        &nbsp;&nbsp;&nbsp;&nbsp; {{ formattedDate(this.invoice.created_at) }}</span
                                     >
                                 </p>
                                 <p>
                                     <strong>Invoice Status : </strong>
                                     <span class="float-end"
-                                        ><span class="badge bg-danger"
+                                        >
+                                        <span v-if="!this.invoice.status_from_financial" class="badge bg-danger"
                                             >Unpaid</span
-                                        ></span
+                                        >
+
+                                        <span v-else class="badge bg-success"
+                                            >Paid</span
+                                        >
+                                        </span
                                     >
                                 </p>
                             </div>
@@ -202,6 +207,7 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
     mounted() {
         this.showLoader = true;
@@ -234,6 +240,11 @@ export default {
                 "AccountantInvoiceModule/setInvoiceView",
                 null
             );
+        },
+
+        formattedDate(date) {
+            return moment(date).format("MMMM Do YYYY");
+            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         formattedPrice(amount) {
