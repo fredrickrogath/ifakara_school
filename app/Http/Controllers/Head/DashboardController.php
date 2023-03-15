@@ -40,6 +40,11 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $headService->dashboardData());
     }
 
+    public function departments(HeadService $headService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $headService->dashboardData());
+    }
+    
     public function accountant_invoices(HeadService $headService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return Inertia::render('Dashboard', $headService->dashboardData());

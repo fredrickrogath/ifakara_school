@@ -15,8 +15,14 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('middle_name')->nullable();
+            $table->string('last_name');
+            $table->string('gender');
+            $table->string('from');
+            $table->string('parent');
+            $table->string('parent_contact')->nullable();
             $table->foreignId('class_level_id')->constrained('class_levels')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -197,6 +197,16 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('head.departments')"
+                            :active="route().current('head.departments')"
+                        >
+                            <v-icon size="22">mdi-account-group</v-icon>
+                            <span> Departiment </span>
+                        </my-custom-link>
+                    </li>
                 </ul>
             </div>
         </div>

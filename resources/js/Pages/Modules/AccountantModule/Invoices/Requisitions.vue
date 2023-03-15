@@ -165,7 +165,7 @@
                                         <!-- <span class="px-1"> = </span> -->
 
                                         <!-- <span>
-                                            {{
+                                             {{
                                                 formattedPrice(
                                                     tool.price * tool.count
                                                 )
