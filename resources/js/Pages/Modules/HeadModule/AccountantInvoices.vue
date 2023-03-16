@@ -1,139 +1,211 @@
 <template>
-    <div class="pt-1">
+    <div data-app>
+
         <div class="row">
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern shadow">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="avatar-sm bg-blue rounded">
-                                    <i
-                                        class="fe-aperture avatar-title font-22 text-white"
-                                    ></i>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="text-end">
-                                    <h4 class="my-1">
-                                        $<span data-plugin="counterup"
-                                            >12,145</span
-                                        >
-                                    </h4>
-                                    <p class="text-muted mb-1 text-truncate">
-                                        Income status
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end card-->
-            </div>
-            <!-- end col -->
+            <!-- Right Sidebar -->
+            <div class="col-12">
+                <div class="card h-screen">
+                    <div class="card-body pt-1">
+                        <!-- Left sidebar -->
+                        <div class="inbox-leftbar">
+                            <div class="mail-list">
+                                <span class="text-center pl-3 mx-auto"
+                                    >From Leger Entry</span
+                                >
 
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
-                    <div class="card-body shadow">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="avatar-sm bg-success rounded">
-                                    <i
-                                        class="fe-shopping-cart avatar-title font-22 text-white"
-                                    ></i>
-                                </div>
+                                <a
+                                    @click="setTab('entries')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1"
+                                    :class="[
+                                        getCurrentTab == 'entries'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >All Entries
+                                </a>
                             </div>
-                            <div class="col-6">
-                                <div class="text-end">
-                                    <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            >1576</span
-                                        >
-                                    </h4>
-                                    <p class="text-muted mb-1 text-truncate">
-                                        January's Sales
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end card-->
-            </div>
-            <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
-                    <div class="card-body shadow">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="avatar-sm bg-primary rounded">
-                                    <i
-                                        class="fe-bar-chart-2 avatar-title font-22 text-white"
-                                    ></i>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="text-end">
-                                    <h4 class="my-1">
-                                        $<span data-plugin="counterup"
-                                            >8947</span
-                                        >
-                                    </h4>
-                                    <p class="text-muted mb-1 text-truncate">
-                                        Payouts
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end card-->
-            </div>
-            <!-- end col -->
+                            <hr class="bg-gray-100 mb-1 mt-0" />
 
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
-                    <div class="card-body shadow">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="avatar-sm bg-info rounded">
-                                    <i
-                                        class="fe-cpu avatar-title font-22 text-white"
-                                    ></i>
-                                </div>
+                            <div class="mail-list">
+                                <span class="text-center pl-3 mx-auto"
+                                    >From Procurement</span
+                                >
+
+                                <a
+                                    @click="setTab('home')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1"
+                                    :class="[
+                                        getCurrentTab == 'home'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >All Requisitions
+                                </a>
+                                <a
+                                    @click="setTab('accepted')"
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
+                                        getCurrentTab == 'accepted'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-check-bold font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Accepted Requisitions</a
+                                >
+                                <a
+                                    @click="setTab('rejected')"
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
+                                        getCurrentTab == 'rejected'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-alert-circle font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Rejected Requisitions</a
+                                >
+                                <a
+                                    @click="setTab('starred')"
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
+                                        getCurrentTab == 'starred'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-star font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Starred Requisitions</a
+                                >
+                                <a
+                                    @click="setTab('deleted')"
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
+                                        getCurrentTab == 'deleted'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-delete font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Deleted Requisitions</a
+                                >
                             </div>
-                            <div class="col-6">
-                                <div class="text-end">
-                                    <h4 class="my-1">
-                                        <span data-plugin="counterup">178</span>
-                                    </h4>
-                                    <p class="text-muted mb-1 text-truncate">
-                                        Available Stores
-                                    </p>
+
+                            <div class="mt-2 ml-3">
+                                <h5>
+                                    <span
+                                        class="badge rounded-pill p-1 px-2 badge-soft-secondary"
+                                        >TASKS</span
+                                    >
+                                </h5>
+                                <h6 class="text-uppercase mt-3">Pending</h6>
+                                <div class="progress my-2 progress-sm">
+                                    <div
+                                        class="progress-bar progress-lg bg-danger"
+                                        role="progressbar"
+                                        style="width: 46%"
+                                        aria-valuenow="46"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                    ></div>
                                 </div>
+                                <p class="text-muted font-12 mb-0">
+                                    7 (25%) of 35 incomplete tasks
+                                </p>
                             </div>
                         </div>
+                        <!-- End Left sidebar -->
+
+                        <div class="inbox-rightbar pt-1 h-screen">
+
+                            <div class="">
+                                <!-- <h5 class="mb-3">Recent</h5> -->
+                                <!-- <transition name="fade"> -->
+                                <div v-show="getInvoiceView">
+                                    <view-invoice></view-invoice>
+                                </div>
+
+                                <div v-show="!getInvoiceView">
+                                    <entries
+                                    v-show="getCurrentTab == 'entries'"
+                                ></entries>
+                                <requisitions
+                                    v-show="getCurrentTab == 'home'"
+                                ></requisitions>
+                                <accepted-requisitions
+                                    v-show="getCurrentTab == 'accepted'"
+                                ></accepted-requisitions>
+                                <deleted-requisitions
+                                    v-show="getCurrentTab == 'deleted'"
+                                ></deleted-requisitions>
+                                <starred-requisitions
+                                    v-show="getCurrentTab == 'starred'"
+                                ></starred-requisitions>
+                                <rejected-requisitions
+                                    v-show="getCurrentTab == 'rejected'"
+                                ></rejected-requisitions>
+                                </div>
+                                <!-- </transition> -->
+                            </div>
+                            <!-- end .mt-3-->
+                        </div>
+                        <!-- end inbox-rightbar-->
+
+                        <div class="clearfix"></div>
                     </div>
                 </div>
-                <!-- end card-->
+                <!-- end card -->
             </div>
-            <!-- end col -->
+            <!-- end Col -->
         </div>
-
-        <!-- end row -->
+        <!-- End row -->
     </div>
 </template>
 
 <script>
-export default {
-    mounted() {
-        let recaptchaScript = document.createElement("script");
-        recaptchaScript.setAttribute(
-            "src",
-            "assets/js/pages/ecommerce-dashboard.init.js"
-        );
-        document.head.appendChild(recaptchaScript);
+import Requisitions from "./Invoices/Requisitions.vue";
+import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
+import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
+import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
+import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
+import ViewInvoice from "./Invoices/ViewInvoice.vue";
 
+import Entries from "./Invoices/Entries.vue";
+
+// import Select2 from "v-select2-component";
+
+export default {
+    components: {
+        Requisitions,
+        AcceptedRequisitions,
+        DeletedRequisitions,
+        StarredRequisitions,
+        RejectedRequisitions,
+        ViewInvoice,
+
+        Entries,
+
+        // Select2,
+    },
+
+    mounted() {
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
@@ -144,16 +216,144 @@ export default {
     },
 
     data() {
-        return { echo: null };
+        return {
+            echo: null,
+            // dialogm1: "",
+            // dialog: false,
+            // dialogForm: "",
+            // legerEntries: null,
+            // legerEntries1: null,
+            // selectedLegerEntry: "Nothing Selected",
+            // student: null,
+            // students: null,
+            // name: "",
+            // amount: "",
+            // narration: "",
+
+            // myValue: "",
+            // myOptions: ["op1", "op2", "op3"],
+        };
     },
     computed: {
         //Add computed properties
+        getCurrentTab() {
+            return this.$store.getters["HeadInvoiceModule/getTab"];
+        },
+
+        getInvoiceView() {
+            return this.$store.getters["HeadInvoiceModule/getInvoiceView"];
+        },
+
+        legerEntriesListener() {
+            return this.legerEntries !== null ? this.legerEntries.data : null;
+        },
+
+        setLegerEntryListener() {
+            return this.selectedLegerEntry;
+        },
     },
     watch: {
         //Add watchers...
+        student() {
+            this.getStudents();
+        },
     },
     methods: {
         //Add methods...
+        setTab(tab) {
+            this.$store.dispatch("HeadInvoiceModule/setTab", tab);
+        },
+
+        getSpecificLegerEntries() {
+            // console.log("Loading next page");
+            axios
+                .get("/head/getSpecificLegerEntries")
+                .then((response) => {
+                    this.legerEntries = response.data;
+                    // console.log(response.data)
+                });
+        },
+
+        setLegerEntry(entry) {
+            this.selectedLegerEntry = entry;
+        },
+
+        getStudents() {
+            axios.get("/head/searchStudent").then((response) => {
+                this.students = response.data.data;
+                // console.log(response.data);
+            });
+        },
+
+        async submitForm() {
+            axios
+                .post("/head/submitTuitionFee", {
+                    amount: this.amount,
+                    narration: this.narration,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.submitFormToMain();
+                    this.amount = "";
+                    this.narration = "";
+                    console.log(response.data);
+                });
+            // handle response here
+        },
+
+        // async submitFormToMain() {
+        //     axios
+        //         .post("http://127.0.0.1:8001/api/accountant/getLegerEntries", {
+        //             amount: this.amount,
+        //             narration: this.narration,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
+
+        setInvoiceView(id) {
+            this.$store.dispatch("HeadInvoiceModule/setInvoiceView", id);
+        },
+
+        myChangeEvent(val) {
+            console.log(val);
+        },
+        mySelectEvent({ id, text }) {
+            console.log({ id, text });
+        },
     },
 };
 </script>
+
+<style scoped>
+/* .fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+    transition: transform 0.5s;
+}
+.slide-enter,
+.slide-leave-to {
+    transform: translateX(-100%);
+} */
+
+/* .fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+} */
+</style>

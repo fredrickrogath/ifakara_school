@@ -13,6 +13,8 @@ import ProcurementUpload from '../Store/Procurement/Upload/index';
 import AccountantInvoice from '../Store/Accountant/invoice/index';
 import AcademicStudent from '../Store/Academic/student/index';
 import HeadDepartment from "../Store/head/department/index";
+import HeadInvoice from '../Store/head/invoice/index';
+import HeadTool from '../Store/head/tool/index';
 
 Vue.use(Vuex);
 
@@ -30,6 +32,10 @@ const AcademicStudentModule = AcademicStudent;
 
 const HeadDepartmentModule = HeadDepartment;
 
+const HeadInvoiceModule = HeadInvoice;
+
+const HeadToolModule = HeadTool;
+
 const store = new Vuex.Store({
     plugins: [createPersistedState()],
     modules: {
@@ -46,6 +52,10 @@ const store = new Vuex.Store({
         AcademicStudentModule: AcademicStudentModule,
 
         HeadDepartmentModule: HeadDepartmentModule,
+        
+        HeadInvoiceModule: HeadInvoiceModule,
+
+        HeadToolModule: HeadToolModule,
     },
     state: {
         posts: [],

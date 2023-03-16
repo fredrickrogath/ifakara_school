@@ -12,13 +12,13 @@ class StudentController extends Controller
     //
     // public function addInvoice(Request $request ,InvoiceService $invoiceService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('academic student'));
     //     return response()->json(['data' => $invoiceService->addInvoice($request)]);
     // }
 
     public function addStudent(Request $request, StudentService $studentService){
         $this->authorize('authorizeAcademic', \App\Models\User::class); 
-        event(new \App\Events\NewPostPublished('created'));
+        event(new \App\Events\NewPostPublished('academic student'));
         return response()->json(['data' => $studentService->addStudent($request)]);
     }
 
@@ -29,7 +29,7 @@ class StudentController extends Controller
 
     // public function acceptInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('academic student'));
     //     return response()->json(['data' => $invoiceService->acceptInvoice($request)]);
     // }
 
@@ -55,31 +55,31 @@ class StudentController extends Controller
     
     // public function updateInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('academic student'));
     //     return response()->json(['data' => $invoiceService->updateInvoice($request)]);
     // }
 
     // public function deleteInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('academic student'));
     //     return response()->json(['data' => $invoiceService->deleteInvoice($request)]);
     // }
 
     // public function restoreInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('academic student'));
     //     return response()->json(['data' => $invoiceService->restoreInvoice($request)]);
     // }
 
     // public function permanentDeleteInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('academic student'));
     //     return response()->json(['data' => $invoiceService->permanentDeleteInvoice($request)]);
     // }
     
     // public function starredInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('academic student'));
     //     return response()->json(['data' => $invoiceService->starredInvoice($request)]);
     // }
     
@@ -100,7 +100,7 @@ class StudentController extends Controller
 
     // public function starredInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('academic student'));
     //     return response()->json(['data' => $invoiceService->starredInvoice($request)]);
     // }
 }
