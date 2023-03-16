@@ -88,6 +88,11 @@ Route::middleware([
         Route::get('/procurement_item_registration', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_item_registration'])->name('procurement_item_registration');
         Route::get('/procurement_uploads', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_uploads'])->name('procurement_uploads');
         Route::get('/procurement_reports', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_reports'])->name('procurement_reports');
+        Route::get('/departments', [\App\Http\Controllers\Head\DashboardController::class, 'departments'])->name('departments');
+
+        Route::get('/getStaffs', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'getStaffs'])->name('getStaffs');
+        Route::post('/addStaff', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'addStaff'])->name('addStaff');
+        Route::get('/getDepartments', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'getDepartments'])->name('getDepartments');
     });
 
 
@@ -124,6 +129,20 @@ Route::middleware([
         Route::get('/staffs', [\App\Http\Controllers\Academic\DashboardController::class, 'staffs'])->name('staffs');
         Route::get('/departiment', [\App\Http\Controllers\Academic\DashboardController::class, 'departiment'])->name('departiment');
         Route::get('/reports', [\App\Http\Controllers\Academic\DashboardController::class, 'reports'])->name('reports');
+
+        Route::get('/getStudents', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudents'])->name('getStudents');
+        Route::post('/addStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'addStudent'])->name('addStudent');
+        Route::get('/getStudentClasses', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
+        // Route::post('/getInvoiceView', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getInvoiceView'])->name('getInvoiceView');
+        // Route::get('/getStarredInvoices', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStarredInvoices'])->name('getStarredInvoices');
+        // Route::get('/getTrashedInvoices', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');
+        // Route::post('/permanentDeleteInvoice', [\App\Http\Controllers\Academic\Student\StudentController::class, 'permanentDeleteInvoice'])->name('permanentDeleteInvoice');
+        // Route::post('/restoreInvoice', [\App\Http\Controllers\Academic\Student\StudentController::class, 'restoreInvoice'])->name('restoreInvoice');
+        // Route::post('/deleteInvoice', [\App\Http\Controllers\Academic\Student\StudentController::class, 'deleteInvoice'])->name('deleteInvoice');
+        // Route::post('/starredInvoice', [\App\Http\Controllers\Academic\Student\StudentController::class, 'starredInvoice'])->name('starredInvoice');
+        // Route::get('/acceptedInvoice', [\App\Http\Controllers\Academic\Student\StudentController::class, 'acceptedInvoice'])->name('acceptedInvoice');
+        // Route::post('/acceptInvoice', [\App\Http\Controllers\Academic\Student\StudentController::class, 'acceptInvoice'])->name('acceptInvoice');
+        // Route::get('/rejectedInvoice', [\App\Http\Controllers\Academic\Student\StudentController::class, 'rejectedInvoice'])->name('rejectedInvoice');
     });
 
 
@@ -156,8 +175,6 @@ Route::middleware([
     Route::group(['prefix' => 'accountant', 'middleware' => 'is_accountant', 'as' => 'accountant.'], function () {
         Route::get('/dashboard', [\App\Http\Controllers\Accountant\DashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/chart_of_accounts', [\App\Http\Controllers\Accountant\DashboardController::class, 'chart_of_accounts'])->name('chart_of_accounts');
-        // Route::get('/invoice_successful', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_successful'])->name('invoice.successful');
-        // Route::get('/invoice_create', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_create'])->name('invoice.create');
         Route::get('/payment_details', [\App\Http\Controllers\Accountant\DashboardController::class, 'payment_details'])->name('payment_details');
         Route::get('/uploads', [\App\Http\Controllers\Accountant\DashboardController::class, 'uploads'])->name('uploads');
         Route::get('/reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'reports'])->name('reports');
@@ -254,20 +271,13 @@ Route::middleware([
         |--------------------------------------------------------------------------
         */
 
-        // Route::get('/getTools', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getTools'])->name('getTools');
-        // Route::get('/getSellers', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getSellers'])->name('getSellers');
         Route::post('/upload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'upload'])->name('upload');
         Route::get('/getUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getUploads'])->name('getUploads');
         Route::get('/getNewUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getNewUploads'])->name('getNewUploads');
         Route::get('/getTrashedUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getTrashedUploads'])->name('getTrashedUploads');
-        // Route::post('/updateUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'updateUpload'])->name('updateUpload');
         Route::post('/restoreUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
         Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
-        // Route::post('/starredUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'starredUpload'])->name('starredUpload');
         Route::post('/deleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
-        // Route::post('/starredUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'starredUploads'])->name('starredUploads');
-
-        // Route::post('/submitUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'submitUpload'])->name('submitInvoice');
     });
 
 

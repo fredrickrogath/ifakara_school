@@ -11,12 +11,18 @@ class Student extends Model
 
     protected $fillable = [
         'class_level_id',
-        'user_id',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'gender',
+        'from',
+        'parent',
+        'parent_contact',
     ];
 
-    public function user()
-    {
-        // return $this->belongsTo('Model', 'foreign_key', 'owner_key'); 
-        return $this->belongsTo('App\Models\User','user_id','id');
-    }
+    // public function user()
+    // {
+    //     // return $this->belongsTo('Model', 'foreign_key', 'owner_key'); 
+    //     return $this->belongsTo('App\Models\User','user_id','id');
+    // }
 }
