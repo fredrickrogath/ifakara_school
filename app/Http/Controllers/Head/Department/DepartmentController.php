@@ -11,13 +11,13 @@ class DepartmentController extends Controller
     //
     public function addStaff(Request $request ,DepartmentService $departmentService){
         $this->authorize('authorizeHead', \App\Models\User::class);
-        event(new \App\Events\NewPostPublished('created'));
+        event(new \App\Events\NewPostPublished('head'));
         return response()->json(['data' => $departmentService->addStaff($request)]);
     }
 
     public function getStaffs(Request $request, DepartmentService $departmentService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        event(new \App\Events\NewPostPublished('created'));
+        event(new \App\Events\NewPostPublished('head getStaffs route'));
         return response()->json(['data' => $departmentService->getStaffs($request)]);
     }
 
@@ -28,7 +28,7 @@ class DepartmentController extends Controller
 
     // public function acceptInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('head'));
     //     return response()->json(['data' => $invoiceService->acceptInvoice($request)]);
     // }
 
@@ -54,31 +54,31 @@ class DepartmentController extends Controller
     
     // public function updateInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('head'));
     //     return response()->json(['data' => $invoiceService->updateInvoice($request)]);
     // }
 
     // public function deleteInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('head'));
     //     return response()->json(['data' => $invoiceService->deleteInvoice($request)]);
     // }
 
     // public function restoreInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('head'));
     //     return response()->json(['data' => $invoiceService->restoreInvoice($request)]);
     // }
 
     // public function permanentDeleteInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('head'));
     //     return response()->json(['data' => $invoiceService->permanentDeleteInvoice($request)]);
     // }
     
     // public function starredInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('head'));
     //     return response()->json(['data' => $invoiceService->starredInvoice($request)]);
     // }
     
@@ -99,7 +99,7 @@ class DepartmentController extends Controller
 
     // public function starredInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
+    //     event(new \App\Events\NewPostPublished('head'));
     //     return response()->json(['data' => $invoiceService->starredInvoice($request)]);
     // }
 }

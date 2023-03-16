@@ -52,7 +52,7 @@
                             <academic-student-registration v-if="route().current('academic.students_registration')"></academic-student-registration>
                             <academic-upload-results v-if="route().current('academic.upload_results')"></academic-upload-results>
                             <academic-view v-if="route().current('academic.view')"></academic-view>
-                            <academic-staffs v-if="route().current('academic.staffs')"></academic-staffs>
+                            <!-- <academic-staffs v-if="route().current('academic.staffs')"></academic-staffs> -->
                             <academic-departiment v-if="route().current('academic.departiment')"></academic-departiment>
                             <academic-create v-if="route().current('academic.reports')"></academic-create>
 
@@ -179,7 +179,7 @@ import AcademicDashboard from "./Modules/AcademicModule/HomePage.vue";
 import AcademicStudentRegistration from "./Modules/AcademicModule/StudentsRegistration.vue";
 import AcademicUploadResults from "./Modules/AcademicModule/UploadResults.vue";
 import AcademicView from "./Modules/AcademicModule/View.vue";
-import AcademicStaffs from "./Modules/AcademicModule/Staffs.vue";
+// import AcademicStaffs from "./Modules/AcademicModule/Staffs.vue";
 import AcademicDepartiment from "./Modules/AcademicModule/Departiment.vue";
 import AcademicReports from "./Modules/AcademicModule/Reports.vue";
 
@@ -232,7 +232,7 @@ export default {
         AcademicStudentRegistration,
         AcademicUploadResults,
         AcademicView,
-        AcademicStaffs,
+        // AcademicStaffs,
         AcademicDepartiment,
         AcademicReports,
 

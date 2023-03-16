@@ -283,7 +283,7 @@
                         </div>
                     </li>
 
-                    <li>
+                    <!-- <li>
                         <my-custom-link
                             :href="route('academic.staffs')"
                             :active="route().current('academic.staffs')"
@@ -291,7 +291,7 @@
                             <v-icon size="22">mdi-account-group</v-icon>
                             <span> Staffs </span>
                         </my-custom-link>
-                    </li>
+                    </li> -->
 
                     <li>
                         <my-custom-link
