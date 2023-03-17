@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services\ProcurementServices\UploadServices;
+use Illuminate\Support\Facades\Auth;
 
 class UploadService
 {
@@ -19,6 +20,7 @@ class UploadService
             'name' => $fileName,
             'path' => $filePath,
             'title' => $request->title,
+            'user_id' => auth()->user()->id,
             'description' => $request->description,
 
         ]);
@@ -30,11 +32,23 @@ class UploadService
     }
 
     public function getUploads(){
-        return \App\Models\Upload::orderBy('title', 'asc')->get();
+        return \App\Models\Upload::with('user')
+        ->join('users', 'users.id', '=', 'uploads.user_id')
+        ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
+        ->where('users.role', 6)
+        ->where('uploads.user_id', Auth::user()->id)
+        ->orderBy('title', 'asc')
+        ->get();
     }
 
     public function getNewUploads(){
-        return \App\Models\Upload::orderBy('created_at', 'desc')->get();
+        return \App\Models\Upload::with('user')
+        ->join('users', 'users.id', '=', 'uploads.user_id')
+        ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
+        ->where('users.role', 6)
+        ->where('uploads.user_id', Auth::user()->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
     }
     
     public function deleteUpload($request){
@@ -42,7 +56,14 @@ class UploadService
     }
 
     public function getTrashedUploads(){
-        return \App\Models\Upload::onlyTrashed()->orderBy('title', 'asc')->get();
+        return \App\Models\Upload::with('user')
+        ->onlyTrashed()
+        ->join('users', 'users.id', '=', 'uploads.user_id')
+        ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
+        ->where('users.role', 6)
+        ->where('uploads.user_id', Auth::user()->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
     }
 
     public function restoreUpload($request){

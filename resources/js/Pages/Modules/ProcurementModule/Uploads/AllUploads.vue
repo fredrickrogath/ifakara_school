@@ -85,7 +85,7 @@
                     <span class="text-gray-600">{{ item.title }}</span>
                 </template>
 
-                <template v-slot:item.name="{ item }">
+                <template v-slot:item.name="{ item }">{{ item.name }}
                     <span class="text-gray-600">{{ item.name }}</span>
                 </template>
 
@@ -108,7 +108,7 @@
                 </template>
 
                 <template v-slot:item.view="{ item }">
-                    <a class="text-gray-600" :href="storagePath + item.path">
+                    <a class="text-gray-600" :href="storagePath + item.path" target="_blank">
                         <v-icon size="22" @click=""> mdi-eye </v-icon>
                     </a>
                 </template>

@@ -42,6 +42,7 @@
         "v-money": "^0.8.1",
         "v-select2-component": "^0.4.7",
         "vue-apexcharts": "^1.6.2",
+        "vue-chartjs": "^5.2.0",
         "vue-google-charts": "^1.1.0",
         "vue-sidebar-menu": "^4.8.1",
         "vue2-filters": "^0.14.0",

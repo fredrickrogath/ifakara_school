@@ -67,7 +67,6 @@
                                         <span> Reports </span>
                                     </my-custom-link>
                                 </li>
-                                <li></li>
                             </ul>
                         </div>
                     </li>
@@ -283,25 +282,26 @@
                         </div>
                     </li>
 
-                    <!-- <li>
-                        <my-custom-link
-                            :href="route('academic.staffs')"
-                            :active="route().current('academic.staffs')"
-                        >
-                            <v-icon size="22">mdi-account-group</v-icon>
-                            <span> Staffs </span>
-                        </my-custom-link>
-                    </li> -->
-
+                    
                     <li>
                         <my-custom-link
-                            :href="route('academic.departiment')"
-                            :active="route().current('academic.departiment')"
+                        :href="route('academic.departiment')"
+                        :active="route().current('academic.departiment')"
                         >
-                            <v-icon size="22">mdi-account-group</v-icon>
-                            <span> Departiment </span>
-                        </my-custom-link>
-                    </li>
+                        <v-icon size="22">mdi-account-group</v-icon>
+                        <span> Departiment </span>
+                    </my-custom-link>
+                </li>
+
+                <li>
+                    <my-custom-link
+                        :href="route('academic.uploads')"
+                        :active="route().current('academic.uploads')"
+                    >
+                        <v-icon size="22">mdi-upload</v-icon>
+                        <span> Uploads </span>
+                    </my-custom-link>
+                </li>
 
                     <li>
                         <my-custom-link
