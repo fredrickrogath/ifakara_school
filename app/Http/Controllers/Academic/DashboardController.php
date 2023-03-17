@@ -49,7 +49,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $academicService->dashboardData());
     }
 
-    public function staffs(AcademicService $academicService){
+    public function uploads(AcademicService $academicService){
         $this->authorize('authorizeAcademic', \App\Models\User::class);
         return Inertia::render('Dashboard', $academicService->dashboardData());
     }

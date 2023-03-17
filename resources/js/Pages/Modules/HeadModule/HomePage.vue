@@ -399,12 +399,20 @@
             </div>
             <!-- end col-->
         </div>
+
+        <div>
+            <pie-chart3-d></pie-chart3-d>
+        </div>
         <!-- end row -->
     </div>
 </template>
 
 <script>
+import PieChart3D from "../.././Components/Charts/GoogleCharts/PieChart3D.vue";
 export default {
+    components:{
+        PieChart3D,
+    },
     mounted() {
         let recaptchaScript = document.createElement("script");
         recaptchaScript.setAttribute(
