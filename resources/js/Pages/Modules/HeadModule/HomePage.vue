@@ -7,17 +7,13 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-blue rounded">
-                                    <i
-                                        class="fe-aperture avatar-title font-22 text-white"
-                                    ></i>
+                                    <i class="fe-aperture avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            >12,145</span
-                                        >
+                                        <span data-plugin="counterup">12,145</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Students Registered
@@ -37,17 +33,13 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-success rounded">
-                                    <i
-                                        class="fe-shopping-cart avatar-title font-22 text-white"
-                                    ></i>
+                                    <i class="fe-shopping-cart avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            >1576</span
-                                        >
+                                        <span data-plugin="counterup">1576</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Items Boughted
@@ -67,17 +59,13 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-primary rounded">
-                                    <i
-                                        class="fe-bar-chart-2 avatar-title font-22 text-white"
-                                    ></i>
+                                    <i class="fe-bar-chart-2 avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            >8947</span
-                                        >
+                                        <span data-plugin="counterup">8947</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Payouts
@@ -97,9 +85,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-info rounded">
-                                    <i
-                                        class="fe-cpu avatar-title font-22 text-white"
-                                    ></i>
+                                    <i class="fe-cpu avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -123,27 +109,18 @@
         <!-- end row -->
 
         <div class="row">
-            <div class="col-xl-8 col-md-6">
+            <div class="col-xl-6 col-md-6">
                 <div class="card">
                     <div class="card-body pb-2">
                         <div class="float-end d-none d-md-inline-block">
                             <div class="btn-group mb-2">
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-light"
-                                >
+                                <button type="button" class="btn btn-xs btn-light">
                                     Today
                                 </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-light"
-                                >
+                                <button type="button" class="btn btn-xs btn-light">
                                     Weekly
                                 </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-secondary"
-                                >
+                                <button type="button" class="btn btn-xs btn-secondary">
                                     Monthly
                                 </button>
                             </div>
@@ -154,7 +131,7 @@
                         </h4>
 
                         <div class="d-flex text-center">
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <p class="text-muted mb-0 mt-3">Current Week</p>
                                 <h4 class="fw-normal mb-3">
                                     <small
@@ -182,13 +159,19 @@
                                     ></small>
                                     <span>$95,025</span>
                                 </h4>
+                            </div> -->
+                            <div class="text-center">
+                                <pie-chart3-d></pie-chart3-d>
                             </div>
                         </div>
-                        <div
+                        <!-- <div
                             id="revenue-chart"
                             class="apex-charts mt-3"
                             data-colors="#6658dd,#1abc9c"
-                        ></div>
+                        ></div> -->
+
+
+
                     </div>
                 </div>
                 <!-- end card -->
@@ -199,21 +182,19 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mb-1">
-                            Recently Finance Reports
+                            Recently Student Registered
                         </h4>
 
                         <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0"
-                            >
+                            <table class="table table-centered table-nowrap table-hover mb-0">
                                 <thead>
                                     <tr>
                                         <th class="border-top-0">Identity</th>
                                         <th class="border-top-0">
-                                            Departiment
+                                            Full name
                                         </th>
-                                        <th class="border-top-0">Title</th>
-                                        <th class="border-top-0">Published</th>
+                                        <th class="border-top-0">Class</th>
+                                        <th class="border-top-0">Registered Date</th>
                                         <th class="border-top-0">View</th>
                                         <th class="border-top-0">Download</th>
                                     </tr>
@@ -221,16 +202,11 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <img
-                                                src="assets/images/users/user-2.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
+                                            <img src="assets/images/users/user-2.jpg" alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg" />
                                         </td>
                                         <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
+                                            <span class="text-center">Finance</span>
                                         </td>
                                         <td>Finacial report of ...</td>
                                         <td>27.03.2018</td>
@@ -238,23 +214,16 @@
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
                                         <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
+                                            <v-icon size="22">mdi-download</v-icon>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img
-                                                src="assets/images/users/user-3.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
+                                            <img src="assets/images/users/user-3.jpg" alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg" />
                                         </td>
                                         <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
+                                            <span class="text-center">Procurement</span>
                                         </td>
 
                                         <td>Finacial report of ...</td>
@@ -264,23 +233,16 @@
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
                                         <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
+                                            <v-icon size="22">mdi-download</v-icon>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img
-                                                src="assets/images/users/user-1.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
+                                            <img src="assets/images/users/user-1.jpg" alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg" />
                                         </td>
                                         <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
+                                            <span class="text-center">Procurement</span>
                                         </td>
                                         <td>Finacial report of ...</td>
                                         <td>28.03.2018</td>
@@ -288,23 +250,16 @@
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
                                         <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
+                                            <v-icon size="22">mdi-download</v-icon>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img
-                                                src="assets/images/users/user-4.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
+                                            <img src="assets/images/users/user-4.jpg" alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg" />
                                         </td>
                                         <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
+                                            <span class="text-center">Finance</span>
                                         </td>
                                         <td>Finacial report of ...</td>
                                         <td>29.03.2018</td>
@@ -312,23 +267,16 @@
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
                                         <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
+                                            <v-icon size="22">mdi-download</v-icon>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img
-                                                src="assets/images/users/user-5.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
+                                            <img src="assets/images/users/user-5.jpg" alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg" />
                                         </td>
                                         <td>
-                                            <span class="text-center"
-                                                >Account</span
-                                            >
+                                            <span class="text-center">Account</span>
                                         </td>
                                         <td>Finacial report of ...</td>
                                         <td>31.03.2018</td>
@@ -336,23 +284,16 @@
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
                                         <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
+                                            <v-icon size="22">mdi-download</v-icon>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img
-                                                src="assets/images/users/user-3.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
+                                            <img src="assets/images/users/user-3.jpg" alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg" />
                                         </td>
                                         <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
+                                            <span class="text-center">Finance</span>
                                         </td>
                                         <td>Finacial report of ...</td>
                                         <td>28.03.2018</td>
@@ -360,23 +301,16 @@
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
                                         <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
+                                            <v-icon size="22">mdi-download</v-icon>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img
-                                                src="assets/images/users/user-1.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
+                                            <img src="assets/images/users/user-1.jpg" alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg" />
                                         </td>
                                         <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
+                                            <span class="text-center">Procurement</span>
                                         </td>
                                         <td>Finacial report of ...</td>
                                         <td>28.03.2018</td>
@@ -384,9 +318,7 @@
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
                                         <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
+                                            <v-icon size="22">mdi-download</v-icon>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -400,9 +332,9 @@
             <!-- end col-->
         </div>
 
-        <div>
+        <!-- <div>
             <pie-chart3-d></pie-chart3-d>
-        </div>
+        </div> -->
         <!-- end row -->
     </div>
 </template>
@@ -410,7 +342,7 @@
 <script>
 import PieChart3D from "../.././Components/Charts/GoogleCharts/PieChart3D.vue";
 export default {
-    components:{
+    components: {
         PieChart3D,
     },
     mounted() {

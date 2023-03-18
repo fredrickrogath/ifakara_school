@@ -148,26 +148,7 @@ Route::middleware([
         Route::post('/starredTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'starredTools'])->name('starredTools');
 
         /*
-        |--------------------------------------------------------------------------
-        | UPLOADS
-        |--------------------------------------------------------------------------
-        */
-
-        Route::get('/getAcademicUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getAcademicUploads'])->name('getAcademicUploads');
-        Route::get('/getAccountantUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getAccountantUploads'])->name('getAccountantUploads');
-        Route::get('/getProcurementUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getProcurementUploads'])->name('getProcurementUploads');
-    });
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | ROUTES FOR THE ACADEMIC
-    |--------------------------------------------------------------------------
-    */
-
-    Route::group(['prefix' => 'academic', 'middleware' => 'is_academic', 'as' => 'academic.'], function () {
-        /*
-        |--------------------------------------------------------------------------
+        |---------------------------------------
         | NAVIGATIONS
         |--------------------------------------------------------------------------
         */
