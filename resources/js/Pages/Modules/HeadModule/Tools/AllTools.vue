@@ -271,7 +271,7 @@ export default {
     },
 
     mounted() {
-        this.showLoader = false;
+        this.showLoader = true;
         // this.getLegerEntries();
         this.getTools();
 
@@ -344,7 +344,7 @@ export default {
         },
 
         getTools() {
-            axios.get("/procurement/get_tools").then((response) => {
+            axios.get("/head/get_tools").then((response) => {
                 this.tools = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
@@ -353,7 +353,7 @@ export default {
 
         async updateTools(id, column, data) {
             axios
-                .post("/procurement/updateTools", {
+                .post("/head/updateTools", {
                     id: id,
                     data: data,
                     column: column,
@@ -369,7 +369,7 @@ export default {
 
         async starredTools(id,data ,column) {
             axios
-                .post("/procurement/starredTools", {
+                .post("/head/starredTools", {
                     id: id,
                     data: data,
                     column: column,
@@ -385,7 +385,7 @@ export default {
 
         async deleteTools() {
             axios
-                .post("/procurement/deleteTools", {
+                .post("/head/deleteTools", {
                     id: this.idForAction,
                 })
                 .then((response) => {

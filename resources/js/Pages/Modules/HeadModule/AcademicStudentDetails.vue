@@ -375,7 +375,7 @@
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
                                     <div v-show="getAddStudent && !getInvoiceView" key="1">
-                                        <add-student></add-student>
+                                        <!-- <add-student></add-student> -->
                                     </div>
 
                                     <div v-show="getInvoiceView && !getAddStudent">
@@ -427,7 +427,7 @@ import NewStudents from "./StudentsRegistration/NewStudents.vue";
 import PaidStudents from "./StudentsRegistration/PaidStudents.vue";
 import UnpaidStudents from "./StudentsRegistration/UnpaidStudents.vue";
 import ViewStudent from "./StudentsRegistration/ViewStudent.vue";
-import AddStudent from "./StudentsRegistration/AddStudent.vue";
+// import AddStudent from "./StudentsRegistration/AddStudent.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
@@ -442,7 +442,7 @@ export default {
         PaidStudents,
         UnpaidStudents,
         ViewStudent,
-        AddStudent,
+        // AddStudent,
 
         // Entries,
 
