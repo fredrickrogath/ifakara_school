@@ -95,7 +95,8 @@ Route::middleware([
         Route::get('/procurement_uploads', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_uploads'])->name('procurement_uploads');
         Route::get('/procurement_reports', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_reports'])->name('procurement_reports');
         Route::get('/departments', [\App\Http\Controllers\Head\DashboardController::class, 'departments'])->name('departments');
-
+        Route::get('/about_school', [\App\Http\Controllers\Head\DashboardController::class, 'about_school'])->name('about_school');     
+        
         /*
         |--------------------------------------------------------------------------
         | DEPARTMENTS & STAFFS
@@ -156,6 +157,16 @@ Route::middleware([
         Route::get('/getAcademicUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getAcademicUploads'])->name('getAcademicUploads');
         Route::get('/getAccountantUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getAccountantUploads'])->name('getAccountantUploads');
         Route::get('/getProcurementUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getProcurementUploads'])->name('getProcurementUploads');
+
+        /*
+        |--------------------------------------------------------------------------
+        | ABOUT SCHOOL
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post('/registerSchool', [\App\Http\Controllers\Head\School\SchoolController::class, 'registerSchool'])->name('registerSchool');
+        // Route::get('/getAccountantUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getAccountantUploads'])->name('getAccountantUploads');
+        // Route::get('/getProcurementUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getProcurementUploads'])->name('getProcurementUploads');
     });
 
 

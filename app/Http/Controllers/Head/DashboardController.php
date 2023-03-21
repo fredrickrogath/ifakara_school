@@ -89,4 +89,9 @@ class DashboardController extends Controller
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return Inertia::render('Dashboard', $headService->dashboardData());
     }
+
+    public function about_school(HeadService $headService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $headService->dashboardData());
+    }
 }
