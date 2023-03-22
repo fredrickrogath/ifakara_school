@@ -334,16 +334,25 @@
 
         <!-- <div>
             <pie-chart3-d></pie-chart3-d>
-        </div> -->
-        <!-- end row -->
+            <google-donut></google-donut>
+            <google-bar></google-bar>
+            <google-grouped-bar></google-grouped-bar>
+        </div>
+         end row -->
     </div>
 </template>
 
 <script>
 import PieChart3D from "../.././Components/Charts/GoogleCharts/PieChart3D.vue";
+import GoogleDonut from "../.././Components/Charts/GoogleCharts/GoogleDonut.vue";
+import GoogleBar from "../.././Components/Charts/GoogleCharts/GoogleBar.vue";
+import GoogleGroupedBar from "../.././Components/Charts/GoogleCharts/GoogleGroupedBar.vue";
 export default {
     components: {
         PieChart3D,
+        GoogleDonut,
+        GoogleBar,
+        GoogleGroupedBar,
     },
     mounted() {
         let recaptchaScript = document.createElement("script");

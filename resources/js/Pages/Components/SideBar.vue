@@ -206,6 +206,16 @@
                             <span> Departiment </span>
                         </my-custom-link>
                     </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('head.about_school')"
+                            :active="route().current('head.about_school')"
+                        >
+                            <v-icon size="22">mdi-school</v-icon>
+                            <span> About School </span>
+                        </my-custom-link>
+                    </li>
                 </ul>
             </div>
         </div>

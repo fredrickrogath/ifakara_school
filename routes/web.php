@@ -5,16 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Post;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', function () {
     /*
@@ -95,7 +86,8 @@ Route::middleware([
         Route::get('/procurement_uploads', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_uploads'])->name('procurement_uploads');
         Route::get('/procurement_reports', [\App\Http\Controllers\Head\DashboardController::class, 'procurement_reports'])->name('procurement_reports');
         Route::get('/departments', [\App\Http\Controllers\Head\DashboardController::class, 'departments'])->name('departments');
-
+        Route::get('/about_school', [\App\Http\Controllers\Head\DashboardController::class, 'about_school'])->name('about_school');     
+        
         /*
         |--------------------------------------------------------------------------
         | DEPARTMENTS & STAFFS
@@ -148,7 +140,36 @@ Route::middleware([
         Route::post('/starredTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'starredTools'])->name('starredTools');
 
         /*
-        |---------------------------------------
+        |--------------------------------------------------------------------------
+        | UPLOADS
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/getAcademicUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getAcademicUploads'])->name('getAcademicUploads');
+        Route::get('/getAccountantUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getAccountantUploads'])->name('getAccountantUploads');
+        Route::get('/getProcurementUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getProcurementUploads'])->name('getProcurementUploads');
+
+        /*
+        |--------------------------------------------------------------------------
+        | ABOUT SCHOOL
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post('/registerSchool', [\App\Http\Controllers\Head\School\SchoolController::class, 'registerSchool'])->name('registerSchool');
+        // Route::get('/getAccountantUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getAccountantUploads'])->name('getAccountantUploads');
+        // Route::get('/getProcurementUploads', [\App\Http\Controllers\Head\Upload\UploadController::class, 'getProcurementUploads'])->name('getProcurementUploads');
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ROUTES FOR THE ACADEMIC
+    |--------------------------------------------------------------------------
+    */
+
+    Route::group(['prefix' => 'academic', 'middleware' => 'is_academic', 'as' => 'academic.'], function () {
+        /*
+        |--------------------------------------------------------------------------
         | NAVIGATIONS
         |--------------------------------------------------------------------------
         */

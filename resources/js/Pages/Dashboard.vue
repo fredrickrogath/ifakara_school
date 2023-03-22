@@ -70,6 +70,7 @@
                             <head-procurement-uploads v-if="route().current('head.procurement_uploads')"></head-procurement-uploads>
                             <head-procurement-reports v-if="route().current('head.procurement_reports')"></head-procurement-reports>
                             <head-department v-if="route().current('head.departments')"></head-department>
+                            <head-about-school v-if="route().current('head.about_school')"></head-about-school>
 
 
 
@@ -198,6 +199,7 @@ import HeadProcurementItemRegistration from "./Modules/HeadModule/ProcurementIte
 import HeadProcurementUploads from "./Modules/HeadModule/ProcurementUploads.vue";
 import HeadProcurementReports from "./Modules/HeadModule/ProcurementReports.vue";
 import HeadDepartment from "./Modules/HeadModule/Departments.vue";
+import HeadAboutSchool from "./Modules/HeadModule/AboutSchool.vue";
 
 
 
@@ -252,6 +254,7 @@ export default {
         HeadProcurementUploads,
         HeadProcurementReports,
         HeadDepartment,
+        HeadAboutSchool,
 
 
 
