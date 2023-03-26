@@ -15,7 +15,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        $<span data-plugin="counterup"
+                                        <span data-plugin="counterup"
                                             >12,145</span
                                         >
                                     </h4>
@@ -75,7 +75,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        $<span data-plugin="counterup"
+                                        <span data-plugin="counterup"
                                             >8947</span
                                         >
                                     </h4>

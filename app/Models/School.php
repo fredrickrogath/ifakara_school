@@ -13,5 +13,8 @@ class School extends Model
         'name',
         'logo_path',
         'api',
+        'email',
+        'location',
+        'mobile',
     ];
 }

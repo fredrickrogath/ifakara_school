@@ -17,6 +17,7 @@ class CreateDepartmentsTable extends Migration
             $table->id();
             $table->string('department');
             $table->integer('identifier');
+            $table->foreignId('school_id')->nullable();
             $table->timestamps();
         });
     }
