@@ -28,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'school_id',
     ];
 
     /**
@@ -71,6 +72,20 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\Post::class, 'user_id');
     }
 
+    public function getRole($id)
+    {
+        if($id == \App\Models\User::is_head)
+        return 'head';
+        elseif($id == \App\Models\User::is_academic)
+        return 'academic';
+        elseif($id == \App\Models\User::is_secretary)
+        return 'secretary';
+        elseif($id == \App\Models\User::is_accountant)
+        return 'accountant';
+        elseif($id == \App\Models\User::is_procurement)
+        return 'procurement';
+    }
+
 
     /**
      * User roles.
@@ -83,13 +98,13 @@ class User extends Authenticatable
 
     public const is_academic = 3;
 
-    // public const is_secretary = 4;
+    public const is_secretary = 4;
     
     public const is_accountant = 5;
 
     public const is_procurement = 6;
 
-    // public const is_student = 7;
+    public const is_student = 7;
 
     // public const is_internal_auditor = 8;
 

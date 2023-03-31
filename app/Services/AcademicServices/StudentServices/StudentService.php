@@ -20,6 +20,7 @@ class StudentService
             'from' => $request->location,
             'parent' => $request->parent,
             'parent_contact' => $request->contact,
+            'school_id' => auth()->user()->school_id,
         ]);
 
         if($created){
@@ -44,12 +45,45 @@ class StudentService
         return \App\Models\Student::orderBy('created_at', 'desc')->get();
     }
 
-    // public function acceptInvoice($request){
-    //     return \App\Models\Invoice::find($request->id)->update([
-    //         'status_from_financial' => !$request->status_from_financial,
-    //     ]);
-    // }
+    public function getStudent($request){
+        return \App\Models\Student::where('id', $request->studentId)->get()->first();
+    }
+    
+    public function editStudent($request){
+        return \App\Models\Student::find($request->studentId)->update([
+            'class_level_id' => $request->class_level_id,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'from' => $request->from,
+            'parent' => $request->parent,
+            'parent_contact' => $request->parent_contact,
+            'school_id' => auth()->user()->school_id,
+        ]);
+    }
 
+    public function permissionToEditStudent($request){
+        $created = \App\Models\Notification::create([
+            'object_id' => $request->studentId,
+            'object_type' => \App\Models\User::is_student,
+            'to_role' => \App\Models\User::is_secretary,
+            'from_role' => \App\Models\User::is_academic,
+        ]);
+
+        if($created){
+            return \App\Models\Student::find($request->studentId)->update([
+                'permission_received' => !$request->permission_received,
+            ]);
+            return true;
+        }
+        return false;
+    }
+
+    public function checkPermissionToEditStudent($request){
+        return \App\Models\Notification::where('object_id', $request->studentId)->where('read', true)->get()->first();
+    }
+    
     // public function deleteInvoice($request){
     //     return \App\Models\Invoice::findoRFail($request->id)->delete();
     // }

@@ -45,13 +45,15 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
             Route::get('/getStaffs', [\App\Http\Controllers\Secretary\Staff\StaffController::class, 'getStaffs'])->name('getStaffs');
             Route::get('/getStudents', [\App\Http\Controllers\Secretary\Student\StudentController::class, 'getStudents'])->name('getStudents');
             Route::post('/addStaff', [\App\Http\Controllers\Secretary\SecretaryController::class, 'addStaff'])->name('addStaff');
-            Route::get('/getDepartments', [\App\Http\Controllers\Secretary\Staff\StaffController::class, 'getDepartments'])->name('getDepartments');
+            Route::post('/getDepartments', [\App\Http\Controllers\Secretary\Staff\StaffController::class, 'getDepartments'])->name('getDepartments');
     
     
     
             Route::get('/getSchools', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchools'])->name('getSchools');
             Route::post('/addStaff', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'addStaff'])->name('addStaff');
             Route::post('/getSchoolStaffs', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolStaffs'])->name('getSchoolStaffs');
+            Route::post('/getSchoolStudents', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolStudents'])->name('getSchoolStudents');
+            Route::get('/getSchoolPermissions', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolPermissions'])->name('getSchoolPermissions');
     
     
             Route::post('/registerSchool', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'registerSchool'])->name('registerSchool');

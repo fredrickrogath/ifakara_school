@@ -10,9 +10,10 @@ export default {
         return {
             tab: 'all',
             addStudent: false,
+            editStudent: false,
 
-            invoiceView: false,
-            invoiceId: null,
+            // invoiceView: false,
+            studentId: null,
 
             // SNACKBAR
             snackBarState: false,

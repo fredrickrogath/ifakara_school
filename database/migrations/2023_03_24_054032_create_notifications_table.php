@@ -16,8 +16,9 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->integer('object_id');
-            $table->string('object_type');
+            $table->integer('object_type');
             $table->integer('to_role');
+            $table->integer('from_role');
             $table->boolean('read')->default(false);
             $table->timestamps();
         });

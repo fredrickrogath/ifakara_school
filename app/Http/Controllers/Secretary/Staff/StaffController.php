@@ -40,8 +40,8 @@ class StaffController extends Controller
     //     return response()->json(['data' => $invoiceService->acceptInvoice($request)]);
     // }
 
-    public function getDepartments(StaffService $staffsService){
+    public function getDepartments(Request $request,StaffService $staffsService){
         // $this->authorize('authorizeHead', \App\Models\User::class); 
-        return response()->json(['data' => $staffsService->getDepartments()]);
+        return response()->json(['data' => $staffsService->getDepartments($request)]);
     }
 }

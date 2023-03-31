@@ -15,7 +15,8 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->integer('object_id');
+            $table->integer('to_role');
+            $table->integer('from_role');
             $table->text('body');
             $table->foreignId('notification_id')->constrained('notifications')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('read')->default(false);

@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students
+                Students {{ getStudentId }}
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -75,6 +75,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="7"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -94,9 +95,17 @@
                                 <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
-                                    @click=" setInvoiceView(items[idx]['id'])"
+                                    @click="setInvoiceView(items[idx]['id'])"
                                 >
                                     mdi-eye
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'edit'"
+                                    size="22"
+                                    @click="setEditStudent(items[idx]['id'])"
+                                >
+                                    mdi-pen
                                 </v-icon>
 
                                 <v-icon
@@ -148,54 +157,42 @@
                                     class="text-gray-600"
                                     v-else-if="header.value == 'middle_name'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'last_name'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'gender'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'from'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'parent'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'parent_contact'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
                             </td>
                         </tr>
@@ -240,14 +237,38 @@ export default {
         this.showLoader = true;
         this.getStudents();
 
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         console.log('abc');
+        //         // this.getTools();
+        //     }
+        // );
+
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        // window.Echo.channel("StudentTriggered").listen(
+        //     ".Api\\Secretary\\StudentEvent",
+        //     (e) => {
+        //         console.log('abc');
+        //         this.getStudents();
+        //     }
+        // );
+
+        window.Echo.channel("academic-trigger-add-student").listen(
+            "Academic\\StudentEvent",
             (e) => {
-                // console.log('abc');
                 this.getStudents();
             }
         );
+
+         // Receiving broadicasting
+        //  window.Echo.channel("student-trigger-from-financial-secretary").listen(
+        //     "ApiSecretaryStudentEvent",
+        //     (e) => {
+        //         console.log('student-trigger-from-financial-secretary');
+        //         // this.getTools();
+        //     }
+        // );
     },
 
     data() {
@@ -277,9 +298,9 @@ export default {
                     value: "gender",
                 },
                 { text: "Location", value: "from" },
-                { text: "Parent", value: "parent" },
-                { text: "Contact", value: "parent_contact" },
-                { text: "Date", value: "created_at" },
+                // { text: "Parent", value: "parent" },
+                // { text: "Contact", value: "parent_contact" },
+                { text: "Edit", value: "edit" },
             ],
             students: [],
 
@@ -290,6 +311,15 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        // getStudentId() {
+        //     this.$store.dispatch("AcademicStudentModule/setStudentId", id);
+        //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
+        // },
+
+        getStudentId() {
+            return this.$store.getters["AcademicStudentModule/getStudentId"];
         },
     },
 
@@ -310,6 +340,11 @@ export default {
             // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
+        setEditStudent(id) {
+            this.$store.dispatch("AcademicStudentModule/setStudentId", id);
+            this.$store.dispatch("AcademicStudentModule/setEditStudent");
+        },
+
         // totalPrice(item) {
         //     return item.reduce((total, item) => {
         //         return total + item.tool.price * item.count;
@@ -320,7 +355,7 @@ export default {
             axios.get("/academic/getStudents").then((response) => {
                 this.students = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data)
+                // console.log(response.data.data)
             });
         },
 
@@ -352,7 +387,7 @@ export default {
             // handle response here
         },
 
-        async starredInvoice(id,data ,column) {
+        async starredInvoice(id, data, column) {
             axios
                 .post("/accountant/starredInvoice", {
                     id: id,
@@ -363,7 +398,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

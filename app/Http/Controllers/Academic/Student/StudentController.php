@@ -18,7 +18,9 @@ class StudentController extends Controller
 
     public function addStudent(Request $request, StudentService $studentService){
         $this->authorize('authorizeAcademic', \App\Models\User::class); 
-        event(new \App\Events\NewPostPublished('academic student'));
+        // event(new \App\Events\NewPostPublished('academic student'));
+        event(new \App\Events\Academic\StudentEvent('academic student'));
+        event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
         return response()->json(['data' => $studentService->addStudent($request)]);
     }
 
@@ -43,6 +45,32 @@ class StudentController extends Controller
         return response()->json(['data' => $studentService->getStudents()]);
     }
 
+    public function getStudent(Request $request, StudentService $studentService){
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getStudent($request)]);
+    }
+
+    public function editStudent(Request $request, StudentService $studentService){
+        event(new \App\Events\Academic\StudentEvent('academic student'));
+        event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->editStudent($request)]);
+    }
+
+    public function permissionToEditStudent(Request $request, StudentService $studentService){
+        // event(new \App\Events\Academic\StudentEvent('academic student'));
+        // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->permissionToEditStudent($request)]);
+    }
+
+    public function checkPermissionToEditStudent(Request $request, StudentService $studentService){
+        // event(new \App\Events\Academic\StudentEvent('academic student'));
+        // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->checkPermissionToEditStudent($request)]);
+    }
+    
     // public function getTrashedInvoices(InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
     //     return response()->json(['data' => $invoiceService->getTrashedInvoices()]);

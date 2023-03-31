@@ -18,7 +18,17 @@ class Student extends Model
         'from',
         'parent',
         'parent_contact',
+        'school_id',
+        'permission_received',
+        'permission_seen',
+        'head_permission',
+        'financial_secreatary_permission',
     ];
+
+    public function getStudent($id)
+    {
+        return \App\Models\Student::where('id', $id)->get()->first();
+    }
 
     // public function user()
     // {

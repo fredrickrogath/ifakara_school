@@ -16,6 +16,7 @@ class StaffService
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->identifier,
+            'school_id' => $request->schoolId,
             'password' => Hash::make($request->password),
         ]);
 
@@ -33,8 +34,8 @@ class StaffService
     //     return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     // }
 
-    public function getDepartments(){
-        return \App\Models\Department::orderBy('created_at', 'desc')->get();
+    public function getDepartments($request){
+        return \App\Models\Department::where('school_id', $request->schoolId)->orderBy('created_at', 'desc')->get();
     }
 
     public function getStudents(){

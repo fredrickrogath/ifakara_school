@@ -16,6 +16,12 @@ class SchoolController extends Controller
         return response()->json(['data' => $schoolsService->getSchools($request)]);
     }
 
+    public function addStaff(Request $request ,SchoolsService $schoolsService){
+        // $this->authorize('authorizeHead', \App\Models\User::class);
+        // event(new \App\Events\NewPostPublished('head'));
+        event(new \App\Events\Api\Secretary\SchoolEvent());
+        return response()->json(['data' => $schoolsService->addStaff($request)]);
+    }
     
     public function registerSchool(Request $request ,SchoolsService $schoolsService){
         // $this->authorize('authorizeHead', \App\Models\User::class);
@@ -29,6 +35,19 @@ class SchoolController extends Controller
         return response()->json(['data' => $schoolsService->getSchoolStaffs($request)]);
     }
 
+    public function getSchoolStudents(Request $request, SchoolsService $schoolsService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        return response()->json(['data' => $schoolsService->getSchoolStudents($request)]);
+    }
+
+    public function getSchoolPermissions(SchoolsService $schoolsService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        return response()->json(['data' => $schoolsService->getSchoolPermissions()]);
+    }
+
+    
     // public function getInvoiceView(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
     //     return response()->json(['data' => $invoiceService->getInvoiceView($request)]);

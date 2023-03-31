@@ -198,9 +198,13 @@ Route::middleware([
         */
 
         Route::get('/getStudents', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudents'])->name('getStudents');
+        Route::post('/getStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudent'])->name('getStudent');
+        Route::post('/editStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'editStudent'])->name('editStudent');
+        Route::post('/permissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
+        Route::post('/checkPermissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'checkPermissionToEditStudent'])->name('checkPermissionToEditStudent');
         Route::post('/addStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
-
+        
         /*
         |--------------------------------------------------------------------------
         | DEPARTMENTS & STAFFS
@@ -449,32 +453,41 @@ Route::middleware([
 */
 
 
-    Route::get('/trigger/{data}', function ($data) {
-    echo "<p>You have sent $data</p>";
-    event(new App\Events\NewPostPublished($data));
-    });
+    // Route::get('/trigger', function () {
+        // public function getSellers(){
+            // return \App\Http\Resources\NotificationResource::collection(\App\Models\Notification::get());
+        // }
+    // echo "<p>You have sent $data</p>";
+    // event(new App\Events\NewPostPublished($data));
+    // });
 
-    Route::get('storagee/', function($fileName){
-        return Storage::disk('public')->url('storage/systemFiles/images/1.jpg');
-    });
+    // Route::get('/trigger/{data}', function ($data) {
+    //     echo "<p>You have sent $data</p>";
+    //     event(new \App\Events\ApiSecretaryStudentEvent($data));
+    //     });
+
+    
+    // Route::get('storagee/', function($fileName){
+    //     return Storage::disk('public')->url('storage/systemFiles/images/1.jpg');
+    // });
 
     //Add fake users for testing
-    Route::get('/add/users', function () {
-    // dd(\App\Models\User::with(['posts' => function($query) {
-    //     // $query->orderBy('id','desc');
-    // }])->get()->first());
+    // Route::get('/add/users', function () {
+    // // dd(\App\Models\User::with(['posts' => function($query) {
+    // //     // $query->orderBy('id','desc');
+    // // }])->get()->first());
 
-    // dd(\App\Models\Post::with(['user' => function($query) {
-    //     // $query->orderBy('id','desc');
-    // }])->get()->first());
+    // // dd(\App\Models\Post::with(['user' => function($query) {
+    // //     // $query->orderBy('id','desc');
+    // // }])->get()->first());
 
-    // App\Models\User::factory()->count(100)->create();
-    });
+    // // App\Models\User::factory()->count(100)->create();
+    // });
 
     
     //Route for getting more posts on the scroll component
-    Route::middleware(['auth:sanctum', 'verified'])->get('/posts', function () {
-        return Response::json([
-            'data' => Post::paginate(9)
-        ], 201);
-    })->name('posts');
+    // Route::middleware(['auth:sanctum', 'verified'])->get('/posts', function () {
+    //     return Response::json([
+    //         'data' => Post::paginate(9)
+    //     ], 201);
+    // })->name('posts');

@@ -26,6 +26,21 @@ class SchoolsService
     //     return false;
     // }
 
+    public function addStaff($request){
+        $created = \App\Models\User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->identifier,
+            'school_id' => $request->schoolId,
+            'password' => Hash::make($request->password),
+        ]);
+
+        if($created){
+            return true;
+        }
+        return false;
+    }
+
     public function registerSchool($request){
 
         // $validatedData = $request->validate([
@@ -69,6 +84,10 @@ class SchoolsService
         return \App\Models\User::where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getSchoolStudents($request){
+        return \App\Models\Student::where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
+    }
+
     // public function getInvoiceView($request){
     //     return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     // }
@@ -81,6 +100,10 @@ class SchoolsService
         return \App\Models\Student::orderBy('created_at', 'desc')->get();
     }
 
+    public function getSchoolPermissions(){
+        return  \App\Http\Resources\NotificationResource::collection(\App\Models\Notification::orderBy('created_at', 'desc')->get());
+    }
+    
     // public function acceptInvoice($request){
     //     return \App\Models\Invoice::find($request->id)->update([
     //         'status_from_financial' => !$request->status_from_financial,

@@ -8,6 +8,14 @@ export default {
     setAddStudent(context){
         context.commit("setAddStudent");
     },
+
+    setStudentId(context, id){
+        context.commit("setStudentId", id);
+    },
+
+    setEditStudent(context){
+        context.commit("setEditStudent");
+    },
     
     setSnackBarState(context){
         context.commit("setSnackBarState");
