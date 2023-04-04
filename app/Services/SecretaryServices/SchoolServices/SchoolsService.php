@@ -103,6 +103,44 @@ class SchoolsService
     public function getSchoolPermissions(){
         return  \App\Http\Resources\NotificationResource::collection(\App\Models\Notification::orderBy('created_at', 'desc')->get());
     }
+
+    public function alterPermission($request){
+        \App\Models\Notification::find($request->id)->update([
+            'read' => true,
+        ]);
+        if($request->object_type == 'student'){
+            \App\Models\Student::find($request->object_id)->update([
+                'financial_secreatary_permission' => !$request->permission,
+            ]);
+        }elseif ($request->object_type !== 'student') {
+            \App\Models\Student::find($request->object_id)->update([
+                'financial_secreatary_permission' => !$request->permission,
+            ]);
+        }
+
+        return true;
+    }
+
+    public function getComments($request){
+        return \App\Models\Comment::where('notification_id', $request->id)->orderBy('created_at', 'asc')->get();
+    }
+
+    public function sendComment($request){
+        $notification = \App\Models\Notification::where('id', $request->id)->get()->first();
+
+        $created = \App\Models\Comment::create([
+            'to_role' => $notification->to_role,
+            'from_role' => \App\Models\User::is_secretary,
+            'body' => $request->body,
+            'notification_id' => $notification->id,
+        ]);
+
+        if($created){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
     // public function acceptInvoice($request){
     //     return \App\Models\Invoice::find($request->id)->update([

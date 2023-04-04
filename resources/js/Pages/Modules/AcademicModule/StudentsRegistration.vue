@@ -123,8 +123,8 @@
         <div class="row">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="card h-screen">
-                    <div class="card-body pt-0">
+                <div class="h-screen">
+                    <div class="pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar bg-white h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
@@ -374,14 +374,18 @@
                             <div class="bg-white h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
-                                    <div v-show="getAddStudent && !getEditStudent" key="1">
+                                    <div v-show="getAddStudent && !getEditStudent && !getCommentView" key="1">
                                         <add-student></add-student>
                                     </div>
 
-                                    <div v-show="getEditStudent && !getAddStudent" key="2">
+                                    <div v-show="getCommentView && !getAddStudent && getEditStudent" key="4">
+                                        <comments></comments>
+                                    </div>
+
+                                    <div v-show="getEditStudent && !getAddStudent && !getCommentView" key="2">
                                         <edit-student></edit-student>
                                     </div>
-                                    <div v-show="!getEditStudent && !getAddStudent" key="3">
+                                    <div v-show="!getEditStudent && !getAddStudent && !getCommentView" key="3">
                                         <all-students v-show="getCurrentTab == 'all'"></all-students>
                                         <new-students v-show="getCurrentTab == 'new'"></new-students>
                                         <paid-students v-show="getCurrentTab == 'paid'"></paid-students>
@@ -429,6 +433,7 @@ import UnpaidStudents from "./StudentsRegistration/UnpaidStudents.vue";
 import ViewStudent from "./StudentsRegistration/ViewStudent.vue";
 import AddStudent from "./StudentsRegistration/AddStudent.vue";
 import EditStudent from "./StudentsRegistration/EditStudent.vue";
+import Comments from "./StudentsRegistration/Comments.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
@@ -445,6 +450,7 @@ export default {
         ViewStudent,
         AddStudent,
         EditStudent,
+        Comments,
 
         // Entries,
 
@@ -512,6 +518,10 @@ export default {
 
         getEditStudent() {
             return this.$store.getters["AcademicStudentModule/getEditStudent"];
+        },
+
+        getCommentView() {
+            return this.$store.getters["AcademicStudentModule/getCommentView"];
         },
     },
     watch: {

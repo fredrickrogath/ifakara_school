@@ -23,4 +23,9 @@ export default {
         state.invoiceView = !state.invoiceView;
         state.invoiceId = id;
     },
+
+    setCommentView(state) {
+        state.commentView = !state.commentView;
+    },
+    
 };

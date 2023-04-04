@@ -25,7 +25,11 @@ export default {
 
     getStudentId(state){
         return state.studentId;
-    }
+    },
+
+    getCommentView(state){
+        return state.commentView;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

@@ -51,16 +51,18 @@ class StudentController extends Controller
     }
 
     public function editStudent(Request $request, StudentService $studentService){
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
         event(new \App\Events\Academic\StudentEvent('academic student'));
         event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
-        $this->authorize('authorizeAcademic', \App\Models\User::class); 
         return response()->json(['data' => $studentService->editStudent($request)]);
     }
 
     public function permissionToEditStudent(Request $request, StudentService $studentService){
         // event(new \App\Events\Academic\StudentEvent('academic student'));
         // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
-        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        event(new \App\Events\Academic\Student\PermissionEvent());
+        event(new \App\Events\Api\Secretary\Student\PermissionEvent());
+        event(new \App\Events\Head\Academic\Student\PermissionEvent());
         return response()->json(['data' => $studentService->permissionToEditStudent($request)]);
     }
 
@@ -70,6 +72,35 @@ class StudentController extends Controller
         $this->authorize('authorizeAcademic', \App\Models\User::class); 
         return response()->json(['data' => $studentService->checkPermissionToEditStudent($request)]);
     }
+
+    // public function getCommentsForStudentPermission(Request $request, StudentService $studentService){
+    //     // event(new \App\Events\Academic\StudentEvent('academic student'));
+    //     // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+    //     $this->authorize('authorizeAcademic', \App\Models\User::class); 
+    //     return response()->json(['data' => $studentService->getCommentsForStudentPermission($request)]);
+    // }
+
+    public function getComments(Request $request, StudentService $studentService){
+        // event(new \App\Events\Academic\StudentEvent('academic student'));
+        // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getComments($request)]);
+    }
+
+    public function sendComment(Request $request, StudentService $studentService){
+        // event(new \App\Events\Academic\StudentEvent('academic student'));
+        // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        event(new \App\Events\Api\Secretary\CommentEvent());
+        return response()->json(['data' => $studentService->sendComment($request)]);
+    }
+
+    // public function getCommentsForStudentPermission(Request $request, StudentService $studentService){
+    //     // event(new \App\Events\Academic\StudentEvent('academic student'));
+    //     // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+    //     $this->authorize('authorizeAcademic', \App\Models\User::class); 
+    //     return response()->json(['data' => $studentService->getCommentsForStudentPermission($request)]);
+    // }
     
     // public function getTrashedInvoices(InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 

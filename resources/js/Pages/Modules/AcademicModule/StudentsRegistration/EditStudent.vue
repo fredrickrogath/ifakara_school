@@ -42,23 +42,75 @@
                                                 {{ firstName }} {{ middleName }}
                                             </h5>
 
-                                            <h4
-                                                v-if="!permissionSeen && permissionReceived"
-                                                class="d-flex justify-content-center text-green-500 mt-4 button-list mb-1 mx-5 mb-sm-0 center"
-                                            >
-                                                Request Received
-                                            </h4>
+                                            <div>
+                                                <div
+                                                    class="d-flex justify-content-center align-content-center"
+                                                >
+                                                    <div>
+                                                        <h4
+                                                            v-if="
+                                                                !permissionSeen &&
+                                                                permissionReceived
+                                                            "
+                                                            class="d-flex justify-content-center text-green-500 button-list mb-1 mx-2 mb-sm-0 center"
+                                                        >
+                                                            Request Received
+                                                        </h4>
 
-                                            <h4
-                                                v-if="permissionSeen && permissionReceived"
-                                                class="d-flex justify-content-center text-green-500 mt-4 button-list mb-1 mx-5 mb-sm-0 center"
-                                            >
-                                                Request Received & Reviewed
-                                            </h4>
+                                                        <h4
+                                                            v-if="
+                                                                permissionSeen &&
+                                                                permissionReceived
+                                                            "
+                                                            class="d-flex justify-content-center text-green-500 button-list mb-1 mx-4 mb-sm-0 center"
+                                                        >
+                                                            Request Received &
+                                                            Reviewed
+                                                        </h4>
+                                                    </div>
+
+                                                    <v-icon
+                                                        v-if="
+                                                            permissionReceived
+                                                        "
+                                                        size="22"
+                                                        class="mt-1"
+                                                        @click=""
+                                                    >
+                                                        mdi-close
+                                                    </v-icon>
+                                                </div>
+                                            </div>
 
                                             <div
-                                            v-if="!permissionSeen && !permissionReceived"
+                                                v-if="
+                                                    permissionReceived
+                                                "
+                                            >
+                                                <div
+                                                    class="d-flex justify-content-center align-content-center mt-4 ml-5"
+                                                >
+                                                    <v-icon
+                                                        size="28"
+                                                        class="mr-5"
+                                                        @click="
+                                                            setCommentView()
+                                                        "
+                                                    >
+                                                        mdi-chat-processing
+                                                    </v-icon>
 
+                                                    <!-- <v-icon size="22" @click="">
+                                                        mdi-close
+                                                    </v-icon> -->
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                v-if="
+                                                    !permissionSeen &&
+                                                    !permissionReceived
+                                                "
                                                 class="d-flex justify-content-center mt-2 button-list mb-1 mx-5 mb-sm-0 center"
                                             >
                                                 <button
@@ -312,11 +364,10 @@ export default {
         this.initialize();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        window.Echo.channel("academic-trigger-student-permission").listen(
+            "Academic\\Student\\PermissionEvent",
             (e) => {
-                // console.log('abc');
-                // this.getTools();
+                this.initialize();
             }
         );
     },
@@ -370,6 +421,7 @@ export default {
             // totalPrice: 0,
 
             studentlId: null,
+            schoolId: null,
 
             permissionFromFinancialSecretary: 0,
 
@@ -407,7 +459,8 @@ export default {
     methods: {
         async initialize() {
             this.getStudent();
-            this.checkPermissionToEditStudent();
+            // this.checkPermissionToEditStudent();
+            // this.getCommentsForStudentPermission();
         },
 
         // clearData() {
@@ -419,6 +472,10 @@ export default {
             // this.studentlId = null;
             this.$store.dispatch("AcademicStudentModule/setStudentId", null);
             this.$store.dispatch("AcademicStudentModule/setEditStudent");
+        },
+
+        setCommentView() {
+            this.$store.dispatch("AcademicStudentModule/setCommentView");
         },
 
         // getStudent() {
@@ -452,20 +509,25 @@ export default {
                     // this.clearData()
                     this.showLoader = false;
 
-                    if(response.data.data != null) {
+                    if (response.data.data != null) {
                         this.firstName = response.data.data.first_name;
-                    this.middleName = response.data.data.middle_name;
-                    this.lastName = response.data.data.last_name;
-                    this.location = response.data.data.from;
-                    this.gender = response.data.data.gender;
-                    this.parent = response.data.data.parent;
-                    this.contact = response.data.data.parent_contact;
-                    this.classLevel = response.data.data.class_level_id;
-                    this.permissionFromFinancialSecretary =
-                        response.data.data.financial_secreatary_permission;
-                        this.permissionReceived = response.data.data.permission_received;
-                        this.permissionSeen = response.data.data.permission_seen;
-                    console.log(response.data.data);
+                        this.middleName = response.data.data.middle_name;
+                        this.lastName = response.data.data.last_name;
+                        this.location = response.data.data.from;
+                        this.gender = response.data.data.gender;
+                        this.parent = response.data.data.parent;
+                        this.contact = response.data.data.parent_contact;
+                        this.classLevel = response.data.data.class_level_id;
+                        this.permissionFromFinancialSecretary =
+                            response.data.data.financial_secreatary_permission;
+                        this.permissionReceived =
+                            response.data.data.permission_received;
+                        this.permissionSeen =
+                            response.data.data.permission_seen;
+                        this.schoolId = response.data.data.school_id;
+
+                        // this.getCommentsForStudentPermission();
+                        // console.log(this.schoolId);
                     }
                 });
         },
@@ -496,15 +558,31 @@ export default {
             axios
                 .post("/academic/permissionToEditStudent", {
                     studentId: this.getStudentId,
+                    schoolId: this.schoolId,
                     permission_received: this.permissionReceived,
                 })
                 .then((response) => {
-                    this.initialize()
+                    this.initialize();
                     this.showLoader = false;
                     // this.setEditStudent();
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
         },
+
+        // async getCommentsForStudentPermission() {
+        //     this.showLoader = true;
+        //     axios
+        //         .post("/academic/getCommentsForStudentPermission", {
+        //             studentId: this.getStudentId,
+        //             schoolId: this.schoolId,
+        //         })
+        //         .then((response) => {
+        //             // this.initialize()
+        //             this.showLoader = false;
+        //             // this.setEditStudent();
+        //             console.log(response.data.data);
+        //         });
+        // },
 
         async checkPermissionToEditStudent() {
             this.showLoader = true;
@@ -517,7 +595,7 @@ export default {
                     this.showLoader = false;
                     // this.setEditStudent();
                     this.permissionToEdit = response.data.data;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
         },
 

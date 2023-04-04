@@ -23,5 +23,11 @@ export default {
 
     setInvoiceView(context, id){
         context.commit("setInvoiceView", id);
-    }
+    },
+
+    setCommentView(context){
+        context.commit("setCommentView");
+    },
+
+    
 };

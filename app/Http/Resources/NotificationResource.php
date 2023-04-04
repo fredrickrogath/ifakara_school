@@ -21,6 +21,8 @@ class NotificationResource extends JsonResource
                 'to_role' => \App\Models\User::getRole($this->to_role),
                 'from_role' => \App\Models\User::getRole($this->from_role),
                 'object_type' => 'student',
+                'financial_secreatary_permission' => \App\Models\Student::getStudent($this->object_id),
+                
                 // 'text' => $this->name . '  =>  Price : Tsh ' . number_format($this->price),
                 // 'price' => $this->price,
             ];

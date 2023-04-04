@@ -19,6 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->integer('object_type');
             $table->integer('to_role');
             $table->integer('from_role');
+            $table->foreignId('school_id')->constrained('schools')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('read')->default(false);
             $table->timestamps();
         });

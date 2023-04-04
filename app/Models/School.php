@@ -17,4 +17,16 @@ class School extends Model
         'location',
         'mobile',
     ];
+
+    public function comments()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Comment',
+            'App\Models\Notification',
+            'school_id', // Foreign key on the notifications table
+            'notification_id', // Foreign key on the comments table
+            'id', // Local key on the schools table
+            'object_id' // Local key on the notifications table
+        )->where('object_type', 'App\Models\Student');
+    }
 }

@@ -47,6 +47,29 @@ class SchoolController extends Controller
         return response()->json(['data' => $schoolsService->getSchoolPermissions()]);
     }
 
+    public function alterPermission(Request $request, SchoolsService $schoolsService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        event(new \App\Events\Academic\Student\PermissionEvent());
+        event(new \App\Events\Api\Secretary\Student\PermissionEvent());
+        event(new \App\Events\Head\Academic\Student\PermissionEvent());
+        return response()->json(['data' => $schoolsService->alterPermission($request)]);
+    }
+
+    public function getComments(Request $request, SchoolsService $schoolsService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        // event(new \App\Events\Academic\Student\PermissionEvent());
+        // event(new \App\Events\Api\Secretary\Student\PermissionEvent());
+        // event(new \App\Events\Head\Academic\Student\PermissionEvent());
+        return response()->json(['data' => $schoolsService->getComments($request)]);
+    }
+
+    public function sendComment(Request $request, SchoolsService $schoolsService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        // event(new \App\Events\Academic\Student\PermissionEvent());
+        event(new \App\Events\Api\Secretary\CommentEvent());
+        // event(new \App\Events\Head\Academic\Student\PermissionEvent());
+        return response()->json(['data' => $schoolsService->sendComment($request)]);
+    }
     
     // public function getInvoiceView(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 

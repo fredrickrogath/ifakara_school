@@ -69,6 +69,7 @@ class StudentService
             'object_type' => \App\Models\User::is_student,
             'to_role' => \App\Models\User::is_secretary,
             'from_role' => \App\Models\User::is_academic,
+            'school_id' => $request->schoolId,
         ]);
 
         if($created){
@@ -80,10 +81,54 @@ class StudentService
         return false;
     }
 
-    public function checkPermissionToEditStudent($request){
-        return \App\Models\Notification::where('object_id', $request->studentId)->where('read', true)->get()->first();
-    }
+    // public function checkPermissionToEditStudent($request){
+    //     return \App\Models\Notification::where('object_id', $request->studentId)->where('read', true)->get()->first();
+    // }
     
+    public function getComments($request){
+        $notification = \App\Models\Notification::with('comments')->where('object_id', $request->id)->get()->first();
+    return $notification;
+    }
+
+    public function sendComment($request){
+        $notification = \App\Models\Notification::where('id', $request->id)->get()->first();
+        
+        $created = \App\Models\Comment::create([
+            'to_role' => \App\Models\User::is_secretary,
+            'from_role' => \App\Models\User::is_academic,
+            'body' => $request->body,
+            'notification_id' => $notification->id,
+        ]);
+
+        if($created){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // public function getComments($request){
+    //     return \App\Models\Comment::where('notification_id', $request->id)->orderBy('created_at', 'asc')->get();
+    // }
+
+    // public function sendComment($request){
+    //     $notification = \App\Models\Notification::where('id', $request->id)->get()->first();
+
+    //     $created = \App\Models\Comment::create([
+    //         'to_role' => $notification->to_role,
+    //         'from_role' => $notification->from_role,
+    //         'body' => $request->body,
+    //         'notification_id' => $notification->id,
+    //     ]);
+
+    //     if($created){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    //     // return \App\Models\Comment::where('notification_id', $request->id)->orderBy('created_at', 'desc')->get();
+    // }
+
     // public function deleteInvoice($request){
     //     return \App\Models\Invoice::findoRFail($request->id)->delete();
     // }

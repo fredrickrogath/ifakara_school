@@ -11,6 +11,7 @@ export default {
             tab: 'all',
             addStudent: false,
             editStudent: false,
+            commentView: false,
 
             // invoiceView: false,
             studentId: null,

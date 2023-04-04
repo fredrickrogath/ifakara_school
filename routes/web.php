@@ -137,6 +137,17 @@ Route::middleware([
         Route::post('/addStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
 
+        // Route::get('/getStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudents'])->name('getStudents');
+        Route::post('/getStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudent'])->name('getStudent');
+        Route::post('/editStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'editStudent'])->name('editStudent');
+        // Route::post('/permissionToEditStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
+        // Route::post('/checkPermissionToEditStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'checkPermissionToEditStudent'])->name('checkPermissionToEditStudent');
+        // Route::post('/getCommentsForStudentPermission', [\App\Http\Controllers\Head\Student\StudentController::class, 'getCommentsForStudentPermission'])->name('getCommentsForStudentPermission');
+        // Route::post('/addStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'addStudent'])->name('addStudent');
+        Route::get('/getStudentClasses', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
+        Route::post('/getComments', [\App\Http\Controllers\Head\Student\StudentController::class, 'getComments'])->name('getComments');
+        Route::post('/sendComment', [\App\Http\Controllers\Head\Student\StudentController::class, 'sendComment'])->name('sendComment');
+
         /*
         |--------------------------------------------------------------------------
         | TOOLS
@@ -202,8 +213,11 @@ Route::middleware([
         Route::post('/editStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'editStudent'])->name('editStudent');
         Route::post('/permissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
         Route::post('/checkPermissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'checkPermissionToEditStudent'])->name('checkPermissionToEditStudent');
+        // Route::post('/getCommentsForStudentPermission', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getCommentsForStudentPermission'])->name('getCommentsForStudentPermission');
         Route::post('/addStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
+        Route::post('/getComments', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getComments'])->name('getComments');
+             Route::post('/sendComment', [\App\Http\Controllers\Academic\Student\StudentController::class, 'sendComment'])->name('sendComment');
         
         /*
         |--------------------------------------------------------------------------
@@ -454,11 +468,11 @@ Route::middleware([
 
 
     // Route::get('/trigger', function () {
-        // public function getSellers(){
-            // return \App\Http\Resources\NotificationResource::collection(\App\Models\Notification::get());
-        // }
-    // echo "<p>You have sent $data</p>";
-    // event(new App\Events\NewPostPublished($data));
+    //     // public function getSellers(){
+    //         return \App\Http\Resources\NotificationResource::collection(\App\Models\Notification::get());
+    //     // }
+    // // echo "<p>You have sent $data</p>";
+    // // event(new App\Events\NewPostPublished($data));
     // });
 
     // Route::get('/trigger/{data}', function ($data) {

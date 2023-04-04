@@ -14,6 +14,12 @@ class Notification extends Model
         'object_type',
         'to_role',
         'from_role',
+        'school_id',
         'read',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(\App\Models\Comment::class);
+    }
 }
