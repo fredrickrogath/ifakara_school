@@ -54,6 +54,7 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
             Route::post('/getSchoolStaffs', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolStaffs'])->name('getSchoolStaffs');
             Route::post('/getSchoolStudents', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolStudents'])->name('getSchoolStudents');
             Route::get('/getSchoolPermissions', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolPermissions'])->name('getSchoolPermissions');
+            Route::get('/getSchoolPermissionsNotifications', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolPermissionsNotifications'])->name('getSchoolPermissionsNotifications');
             Route::post('/alterPermission', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'alterPermission'])->name('alterPermission');
             Route::post('/getComments', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getComments'])->name('getComments');
             Route::post('/sendComment', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'sendComment'])->name('sendComment');

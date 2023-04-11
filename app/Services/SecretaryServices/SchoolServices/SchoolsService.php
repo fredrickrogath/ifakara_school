@@ -125,6 +125,10 @@ class SchoolsService
         return \App\Models\Comment::where('notification_id', $request->id)->orderBy('created_at', 'asc')->get();
     }
 
+    public function getSchoolPermissionsNotifications(){
+        return \App\Models\Notification::where('read', false)->orderBy('created_at', 'asc')->get()->count();
+    }
+    
     public function sendComment($request){
         $notification = \App\Models\Notification::where('id', $request->id)->get()->first();
 

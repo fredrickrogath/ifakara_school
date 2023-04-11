@@ -86,4 +86,9 @@ class SchoolController extends Controller
         // $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $schoolsService->getDepartments()]);
     }
+
+    public function getSchoolPermissionsNotifications(SchoolsService $schoolsService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $schoolsService->getSchoolPermissionsNotifications()]);
+    }
 }

@@ -1,8 +1,8 @@
 <template>
-    <div class="component-wrapper py-6">
+    <div class="component-wrapper py-1">
         <GChart
             type="PieChart"
-            style="width: 200px"
+            style="width: 500px; height: 300px;"
             :data="chartData"
             :options="chartOptions"
         />

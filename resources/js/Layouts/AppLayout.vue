@@ -334,11 +334,6 @@
                     <div
                         v-if="show"
                         class="absolute w-full bg-white dark:bg-gray-900 z-10"
-                        :style="[
-                            isDark
-                                ? { 'background-color': '#1e1e1e' }
-                                : { background: '#FFF' },
-                        ]"
                     >
                         <div
                             :class="{
@@ -561,12 +556,12 @@
 </template>
 
 <!-- For dark mode triggering in tailwind -->
-<script setup>
+<!-- <script setup>
 import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-</script>
+</script> -->
 
 <script>
 import JetApplicationMark from "@/Jetstream/ApplicationMark";
