@@ -95,12 +95,12 @@ class StudentController extends Controller
         return response()->json(['data' => $studentService->sendComment($request)]);
     }
 
-    // public function getCommentsForStudentPermission(Request $request, StudentService $studentService){
-    //     // event(new \App\Events\Academic\StudentEvent('academic student'));
-    //     // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
-    //     $this->authorize('authorizeAcademic', \App\Models\User::class); 
-    //     return response()->json(['data' => $studentService->getCommentsForStudentPermission($request)]);
-    // }
+    public function headDashboardGetStudents(StudentService $studentService){
+        // event(new \App\Events\Academic\StudentEvent('academic student'));
+        // event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->headDashboardGetStudents()]);
+    }
     
     // public function getTrashedInvoices(InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 

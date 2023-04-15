@@ -78,4 +78,18 @@ class InvoiceService
         return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->forceDelete();
     }
 
+    public function headDashboardGetInvoices(){
+        $procurement = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', false)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
+        $accountantSchool = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
+        $accountantFinancial = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('status_from_financial', true)->orderBy('created_at', 'desc')->get();
+        return [
+            'procurement' => $procurement,
+            'procurementCount' => $procurement->count(),
+            'accountantSchool' => $accountantSchool,
+            'accountantSchoolCount' => $accountantSchool->count(),
+            'accountantFinancial' => $accountantFinancial,
+            'accountantFinancialCount' => $accountantFinancial->count(),
+        ];
+    }
+
 }

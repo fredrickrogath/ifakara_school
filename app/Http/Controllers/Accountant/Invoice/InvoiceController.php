@@ -81,10 +81,10 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->starredInvoice($request)]);
     }
     
-    // public function getTools(InvoiceService $invoiceService){
-    //     $this->authorize('authorizeProcurement', \App\Models\User::class); 
-    //     return response()->json(['data' => $invoiceService->getTools()]);
-    // }
+    public function headDashboardGetInvoices(InvoiceService $invoiceService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->headDashboardGetInvoices()]);
+    }
 
     // public function getSellers(InvoiceService $invoiceService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class); 

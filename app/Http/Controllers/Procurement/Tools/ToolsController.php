@@ -60,4 +60,10 @@ class ToolsController extends Controller
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $toolService->starredTools($request)]);
     }
+
+    public function headDashboardGetTools(ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        // event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $toolService->headDashboardGetTools()]);
+    }
 }

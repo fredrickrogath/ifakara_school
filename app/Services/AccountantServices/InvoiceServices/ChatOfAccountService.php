@@ -58,4 +58,15 @@ class ChatOfAccountService
 
         ]);
     }
+
+    public function headDashboardGetStudents(){
+        $totalStudents = \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+        $paidStudents = 1;
+        $unpaidStudents = 2;
+        return [
+            'totalStudents' => $totalStudents->count(),
+            'paidStudents' => $paidStudents,
+            'unpaidStudents' => $unpaidStudents,
+        ];
+    }
 }

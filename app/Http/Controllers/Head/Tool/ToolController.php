@@ -21,6 +21,11 @@ class ToolController extends Controller
         return response()->json(['data' => $toolService->get_tools()]);
     }
 
+    public function headDashboardGetTools(ToolService $toolService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $toolService->headDashboardGetTools()]);
+    }
+    
     public function getStarredTools(Request $request ,ToolService $toolService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $toolService->getStarredTools()]);

@@ -59,4 +59,10 @@ class ChatOfAccountController extends Controller
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $chatOfAccountService->deleteChartOfAccounts($request)]);
     }
+
+    public function headDashboardGetStudents(ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $chatOfAccountService->headDashboardGetStudents()]);
+    }
 }

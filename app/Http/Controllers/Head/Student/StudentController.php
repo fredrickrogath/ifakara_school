@@ -38,6 +38,11 @@ class StudentController extends Controller
         return response()->json(['data' => $studentService->getStudents()]);
     }
 
+    public function headDashboardGetStudents(StudentService $studentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->headDashboardGetStudents()]);
+    }
+    
     public function getStudent(Request $request, StudentService $studentService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $studentService->getStudent($request)]);

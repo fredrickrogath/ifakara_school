@@ -28,7 +28,7 @@
                 <!-- Start Page Content here -->
                 <!-- ============================================================== -->
 
-                <div class="content-page pt-0 px-0 bg-white">
+                <div class="content-page pt-0 px-0 bg-gray-100">
                     <div class="content">
                         <!-- Start Content-->
                         <div class="container-fluid px-1">

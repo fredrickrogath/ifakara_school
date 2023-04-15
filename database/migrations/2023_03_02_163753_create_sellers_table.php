@@ -19,6 +19,7 @@ class CreateSellersTable extends Migration
             $table->string('location')->nullable();
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
+            // $table->foreignId('school_id')->constrained('schools')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

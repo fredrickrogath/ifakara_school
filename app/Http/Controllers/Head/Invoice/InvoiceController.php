@@ -15,6 +15,11 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoices()]);
     }
 
+    public function headDashboardGetInvoices(InvoiceService $invoiceService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->headDashboardGetInvoices()]);
+    }
+    
     public function getInvoiceView(Request $request, InvoiceService $invoiceService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getInvoiceView($request)]);

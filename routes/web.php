@@ -148,6 +148,16 @@ Route::middleware([
         Route::post('/getComments', [\App\Http\Controllers\Head\Student\StudentController::class, 'getComments'])->name('getComments');
         Route::post('/sendComment', [\App\Http\Controllers\Head\Student\StudentController::class, 'sendComment'])->name('sendComment');
 
+        Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        Route::get('/headDashboardGetStaffs', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'headDashboardGetStaffs'])->name('headDashboardGetStudents');
+        Route::get('/headDashboardGetTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
+        Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        
         /*
         |--------------------------------------------------------------------------
         | TOOLS
@@ -218,6 +228,7 @@ Route::middleware([
         Route::get('/getStudentClasses', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
         Route::post('/getComments', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getComments'])->name('getComments');
              Route::post('/sendComment', [\App\Http\Controllers\Academic\Student\StudentController::class, 'sendComment'])->name('sendComment');
+             Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Academic\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
         
         /*
         |--------------------------------------------------------------------------
@@ -228,6 +239,7 @@ Route::middleware([
         Route::get('/getStaffs', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'getStaffs'])->name('getStaffs');
         Route::post('/addStaff', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'addStaff'])->name('addStaff');
         Route::get('/getDepartments', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'getDepartments'])->name('getDepartments');
+        Route::get('/headDashboardGetStaffs', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'headDashboardGetStaffs'])->name('headDashboardGetStaffs');
 
         /*
         |--------------------------------------------------------------------------
@@ -242,6 +254,7 @@ Route::middleware([
         Route::post('/restoreUpload', [\App\Http\Controllers\Academic\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
         Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Academic\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
         Route::post('/deleteUpload', [\App\Http\Controllers\Academic\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::get('/headDashboardGetUploads', [\App\Http\Controllers\Academic\Upload\UploadController::class, 'headDashboardGetUploads'])->name('headDashboardGetUploads');
     });
 
 
@@ -285,6 +298,11 @@ Route::middleware([
         Route::get('/reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'reports'])->name('reports');
         Route::get('/invoice', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice'])->name('invoice');
 
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStaffs', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'headDashboardGetStaffs'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
+        // Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
+
         /*
         |--------------------------------------------------------------------------
         | ENTRIES
@@ -306,7 +324,7 @@ Route::middleware([
         Route::post('/addChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addChartOfAccounts'])->name('addChartOfAccounts');
         Route::post('/updateChartOfAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'updateChartOfAccount'])->name('updateChartOfAccount');
         Route::post('/deleteChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'deleteChartOfAccounts'])->name('deleteChartOfAccounts');
-
+        Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
         /*
         |--------------------------------------------------------------------------
         | UPLOADS
@@ -320,6 +338,7 @@ Route::middleware([
         Route::post('/restoreUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
         Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
         Route::post('/deleteUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::get('/headDashboardGetUploads', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'headDashboardGetUploads'])->name('headDashboardGetUploads');
 
         /*
         |--------------------------------------------------------------------------
@@ -338,6 +357,7 @@ Route::middleware([
         Route::get('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
         Route::post('/acceptInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'acceptInvoice'])->name('acceptInvoice');
         Route::get('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
+        Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
     });
 
 
@@ -377,6 +397,7 @@ Route::middleware([
         Route::post('/restoreTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'restoreTools'])->name('restoreTools');
         Route::post('/permanentDeleteTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'permanentDeleteTools'])->name('permanentDeleteTools');
         Route::post('/starredTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'starredTools'])->name('starredTools');
+        Route::get('/headDashboardGetTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
 
         /*
         |--------------------------------------------------------------------------
@@ -398,6 +419,7 @@ Route::middleware([
         Route::post('/deleteInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
         Route::post('/starredInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'starredInvoices'])->name('starredInvoices');
         Route::post('/submitInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'submitInvoice'])->name('submitInvoice');
+        Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
 
 
         /*
@@ -413,9 +435,10 @@ Route::middleware([
         Route::post('/restoreUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
         Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
         Route::post('/deleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::get('/headDashboardGetUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'headDashboardGetUploads'])->name('headDashboardGetUploads');
     });
 
-
+    
 
     /*
     |--------------------------------------------------------------------------

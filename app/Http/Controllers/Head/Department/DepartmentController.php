@@ -21,6 +21,12 @@ class DepartmentController extends Controller
         return response()->json(['data' => $departmentService->getStaffs($request)]);
     }
 
+    public function headDashboardGetStaffs(DepartmentService $departmentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        // event(new \App\Events\NewPostPublished('head headDashboardGetStaffs route'));
+        return response()->json(['data' => $departmentService->headDashboardGetStaffs()]);
+    }
+    
     // public function getInvoiceView(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
     //     return response()->json(['data' => $invoiceService->getInvoiceView($request)]);

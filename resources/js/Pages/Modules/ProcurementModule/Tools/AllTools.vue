@@ -347,7 +347,7 @@ export default {
             axios.get("/procurement/get_tools").then((response) => {
                 this.tools = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                console.log(response.data.data)
             });
         },
 

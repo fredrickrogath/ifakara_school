@@ -1,8 +1,8 @@
 <template>
-    <div class="pt-1">
-        <div class="row">
+    <div class="pt-0 bg-gray-100">
+        <div class="row bg-gray-100">
             <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern shadow">
+                <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -15,12 +15,12 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            >12,145</span
-                                        >
+                                        <span data-plugin="counterup">
+                                            {{ students }}
+                                        </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        Income status
+                                        Students
                                     </p>
                                 </div>
                             </div>
@@ -31,8 +31,8 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
+            <div class="col-md-3 col-xl-3 px-0">
+                <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
@@ -45,24 +45,21 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            >1576</span
-                                        >
+                                        <span data-plugin="counterup">12</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        January's Sales
+                                        Paid Fees
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- end card-->
             </div>
             <!-- end col -->
 
             <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
+                <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
@@ -75,24 +72,21 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            >8947</span
-                                        >
+                                        <span data-plugin="counterup">87</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        Payouts
+                                        Unpaid Fees
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- end card-->
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
+            <div class="col-md-3 col-xl-3 px-0">
+                <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
@@ -105,156 +99,490 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">178</span>
+                                        <span data-plugin="counterup"
+                                            > {{ totalUploads }} </span
+                                        >
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        Available Stores
+                                        {{ uploadTitles }}
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- end card-->
             </div>
             <!-- end col -->
         </div>
 
         <!-- end row -->
 
-        <div class="row">
-            <v-card-title class="px-0 pt-0">
-                Invoices
-                <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
-            </v-card-title>
-            <!-- {{ $page.props.posts }} -->
-
-            <v-data-table
-                :headers="headers"
-                :items="invoices"
-                item-key="name"
-                :search="search"
-                :items-per-page="3"
-                class="elevation-1"
-            >
-                <template v-slot:body="{ items, headers }">
-                    <tbody>
-                        <tr v-for="(item, idx, k) in items" :key="idx">
-                            <td v-for="(header, key) in headers" :key="key">
-                                <v-icon
-                                    v-if="header.value == 'delete'"
-                                    size="22"
+        <div class="row pt-0 mt-0">
+            <div class="col-xl-8 col-md-6 mb-0 pb-0">
+                <div class="card">
+                    <div class="card-body pb-2">
+                        <div class="float-end d-none d-md-inline-block">
+                            <!-- <div class="btn-group mb-2">
+                                <button
                                     type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
+                                    class="btn btn-xs btn-light"
                                 >
-                                    mdi-delete
-                                </v-icon>
+                                    Today
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-xs btn-light"
+                                >
+                                    Weekly
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-xs btn-secondary"
+                                >
+                                    Monthly
+                                </button>
+                            </div> -->
+                        </div>
 
-                                <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    @click="setInvoiceView(items[idx]['id'])"
-                                >
-                                    mdi-eye
-                                </v-icon>
+                        <h4 class="header-title mb-2">Analytics Performance</h4>
 
-                                <v-icon
-                                    v-if="header.value == 'starred'"
-                                    size="22"
-                                    :class="
-                                        item[header.value] ? 'text-warning' : ''
-                                    "
-                                    @click="
-                                        starredInvoice(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                >
-                                    mdi-star
-                                </v-icon>
+                        <!-- <div class="d-flex text-center">
+                            <div class="col-md-4">
+                                <p class="text-muted mb-0 mt-0">Current Week</p>
+                                <h4 class="fw-normal mb-0">
+                                    <small
+                                        class="mdi mdi-checkbox-blank-circle text-primary align-middle me-1"
+                                    ></small>
+                                    <span>$58,254</span>
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-muted mb-0 mt-0">
+                                    Previous Week
+                                </p>
+                                <h4 class="fw-normal mb-0">
+                                    <small
+                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
+                                    ></small>
+                                    <span>$69,524</span>
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-muted mb-0 mt-0">Targets</p>
+                                <h4 class="fw-normal mb-0">
+                                    <small
+                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
+                                    ></small>
+                                    <span>$95,025</span>
+                                </h4>
+                            </div>
+                        </div> -->
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'id'"
-                                    >{{ item[header.value] }}</span
-                                >
+                        <v-card flat>
+                            <v-tabs color="deep-purple accent-4" right>
+                                <v-tab>Students</v-tab>
+                                <v-tab>Cash Flow</v-tab>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'created_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                <v-tab-item key="1">
+                                    <v-container fluid>
+                                        <pie-chart3-d
+                                            :data="registeredStudents"
+                                        ></pie-chart3-d>
+                                    </v-container>
+                                </v-tab-item>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'updated_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                <v-tab-item key="2">
+                                    <v-container fluid>
+                                        <pie-chart3-d
+                                            :data="finances"
+                                        ></pie-chart3-d>
+                                    </v-container>
+                                </v-tab-item>
+                            </v-tabs>
+                        </v-card>
+                        <!-- <div class="">
+                            <google-donut></google-donut>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col-->
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'seller'"
-                                    >{{ item[header.value].name }}</span
-                                >
+            <!-- <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-1">
+                            Recently Finance Reports
+                        </h4>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'tools'"
-                                >
-                                    <div v-for="tool in item[header.value]">
-                                        <span>
-                                            {{ tool.name }}
-                                        </span>
-                                    </div>
-                                </span>
+                        <div class="table-responsive">
+                            <table
+                                class="table table-centered table-nowrap table-hover mb-0"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">Identity</th>
+                                        <th class="border-top-0">
+                                            Departiment
+                                        </th>
+                                        <th class="border-top-0">Title</th>
+                                        <th class="border-top-0">Published</th>
+                                        <th class="border-top-0">View</th>
+                                        <th class="border-top-0">Download</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-2.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>27.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-3.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
+                                        </td>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'tool_sum'"
+                                        <td>Finacial report of ...</td>
+
+                                        <td>28.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-1.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>28.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-4.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>29.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-5.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Account</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>31.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-3.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>28.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-1.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>28.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- end col-->
+
+            <div class="col-xl-8 col-md-6 mb-0 pb-0">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- <div class="float-end d-none d-md-inline-block"> -->
+                        <!-- <div class="btn-group mb-2">
+                                <button
+                                    type="button"
+                                    class="btn btn-xs btn-light"
                                 >
-                                    {{
-                                        formattedPrice(
-                                            totalPrice(item.invoice_tool)
-                                        )
-                                    }}
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-data-table>
+                                    Today
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-xs btn-light"
+                                >
+                                    Weekly
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-xs btn-secondary"
+                                >
+                                    Monthly
+                                </button>
+                            </div> -->
+                        <!-- </div> -->
+
+                        <h4 class="header-title">Invoices Status</h4>
+
+                        <!-- <div class="d-flex text-center">
+                            <div class="col-md-4">
+                                <p class="text-muted mb-0 mt-0">Current Week</p>
+                                <h4 class="fw-normal mb-0">
+                                    <small
+                                        class="mdi mdi-checkbox-blank-circle text-primary align-middle me-1"
+                                    ></small>
+                                    <span>$58,254</span>
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-muted mb-0 mt-0">
+                                    Previous Week
+                                </p>
+                                <h4 class="fw-normal mb-0">
+                                    <small
+                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
+                                    ></small>
+                                    <span>$69,524</span>
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-muted mb-0 mt-0">Targets</p>
+                                <h4 class="fw-normal mb-0">
+                                    <small
+                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
+                                    ></small>
+                                    <span>$95,025</span>
+                                </h4>
+                            </div>
+                        </div> -->
+                        <div class="">
+                            <google-bar
+                                :data="chartData"
+                                YText="Invoice Count"
+                                height="400"
+                            ></google-bar>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
         </div>
+
+        <!-- <div>
+            <div class="col-xl-12 col-md-12 mx-0 px-0 mt-0 pt-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-1">School Staffs</h4>
+
+                        <div class="table-responsive">
+                            <table
+                                class="table table-centered table-nowrap table-hover mb-0"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">Identity</th>
+                                        <th class="border-top-0">Name</th>
+                                        <th class="border-top-0">
+                                            Departiment
+                                        </th>
+                                        <th class="border-top-0">Email</th>
+                                        <th class="border-top-0">
+                                            Registered On
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="staff in staffs" :key="staff.id">
+                                        <td>
+                                            <img
+                                                class="h-8 w-8 rounded-full object-cover"
+                                                :src="
+                                                    $page.props.user
+                                                        .profile_photo_url
+                                                "
+                                                :alt="$page.props.user.name"
+                                            />
+                                            <img
+                                                src="assets/images/users/user-2.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            /> 
+                                        </td>
+                                        <td>
+                                            <span class="text-center">
+                                                {{ staff.name }}
+                                            </span>
+                                        </td>
+                                        <td>{{ department(staff.role) }}</td>
+                                        <td>{{ staff.email }}</td>
+                                        <td>
+                                            {{
+                                                formattedDate(staff.created_at)
+                                            }}
+                                        </td>
+                                         <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div>   
+            <pie-chart3-d></pie-chart3-d>
+            <google-donut></google-donut>
+            <google-bar></google-bar>
+            <google-grouped-bar></google-grouped-bar>
+        </div> -->
+        <!-- end row -->
     </div>
 </template>
 
 <script>
 import moment from "moment";
+import PieChart3D from "../.././Components/Charts/GoogleCharts/PieChart3D.vue";
+import GoogleDonut from "../.././Components/Charts/GoogleCharts/GoogleDonut.vue";
+import GoogleBar from "../.././Components/Charts/GoogleCharts/GoogleBar.vue";
+import GoogleGroupedBar from "../.././Components/Charts/GoogleCharts/GoogleGroupedBar.vue";
 export default {
+    components: {
+        PieChart3D,
+        GoogleDonut,
+        GoogleBar,
+        GoogleGroupedBar,
+    },
     mounted() {
-        this.showLoader = true;
-        this.getInvoices();
+        this.initialize();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                // console.log('abc');
-                this.getInvoices();
+                console.log(e);
             }
         );
     },
@@ -262,32 +590,17 @@ export default {
     data() {
         return {
             echo: null,
-            search: "",
-            headers: [
-                {
-                    text: "Invoice #",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
-                {
-                    text: "Seller",
-                    value: "seller",
-                },
-                {
-                    text: "Tools",
-                    value: "tools",
-                },
-                {
-                    text: "Total",
-                    value: "tool_sum",
-                },
-                { text: "Starred", value: "starred" },
-                { text: "Date", value: "created_at" },
-                { text: "View", value: "view" },
-                { text: "Delete", value: "delete" },
-            ],
-            invoices: [],
+            students: null,
+            paidStudents: null,
+            unpaidStudents: null,
+            registeredStudents: [],
+            totalUploads: null,
+            uploadTitles: '',
+            staffs: null,
+            tools: [],
+            finances: [],
+            invoices: null,
+            chartData: [],
         };
     },
     computed: {
@@ -298,31 +611,91 @@ export default {
     },
     methods: {
         //Add methods...
-        formattedPrice(amount) {
-            return amount.toLocaleString("sw-TZ", {
-                style: "currency",
-                currency: "Tsh",
-            });
+        async initialize() {
+            this.headDashboardGetStudents();
+            this.headDashboardGetInvoices();
+            this.headDashboardGetUploads();
+            // this.headDashboardGetTools();
+
+            this.finances = [
+                ["Language", "Finances"],
+                ["Incomes", 120000],
+                ["Expenses", 320000],
+                ["Liabilities", 6700000],
+                ["Assets", 700000],
+            ];
         },
 
-        formattedDate(date) {
-            // return moment(date).format("MMMM Do YYYY");
-            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-        },
-
-        totalPrice(item) {
-            return item.reduce((total, item) => {
-                return total + item.tool.price * item.count;
-            }, 0);
-        },
-
-        getInvoices() {
-            axios.get("/accountant/getInvoices").then((response) => {
-                this.invoices = response.data.data;
+        async headDashboardGetStudents() {console.log('hello')
+            axios.get("/accountant/headDashboardGetStudents").then((response) => {
+                this.students = response.data.data.totalStudents;
                 // this.showLoader = false;
-                // console.log(response.data.data);
+                this.registeredStudents = [
+                    ["Language", "Students"],
+                    // ["Total Students", response.data.data.totalStudents],
+                    ["Paid Students", response.data.data.paidStudents],
+                    ["Unpaid Students", response.data.data.unpaidStudents],
+                ];
+
+                console.log(response.data.data);
             });
         },
+
+        async headDashboardGetInvoices() {
+            axios.get("/accountant/headDashboardGetInvoices").then((response) => {
+                // this.classOptions = response.data.data;
+                // this.showLoader = false;
+                this.chartData = [
+                    ["Language", "INVOICES"],
+                    ["procurement", response.data.data.procurementCount],
+                    [
+                        "Accountant School",
+                        response.data.data.accountantSchoolCount,
+                    ],
+                    [
+                        "Accountant Financial",
+                        response.data.data.accountantFinancialCount,
+                    ],
+                ];
+                // console.log(response.data.data);
+                // console.log(this.chartData);
+            });
+        },
+
+        async headDashboardGetUploads() {
+            axios.get("/accountant/headDashboardGetUploads").then((response) => {
+                this.totalUploads = response.data.data.totalUploads;
+                this.uploadTitles = response.data.data.uploadTitles;
+                // console.log(response.data.data)
+            });
+        },
+        // async headDashboardGetTools() {
+        //     axios.get("/accountant/headDashboardGetTools").then((response) => {
+        //         this.tools = [
+        //             ["Language", "Tools"],
+        //             ["Total tools", response.data.data.totalTools],
+        //             ["New Tools", response.data.data.newTools],
+        //             ["Broken Tools", response.data.data.brokenTools],
+        //         ];
+        //     });
+        // },
+
+        // department(role) {
+        //     if (role == 3) {
+        //         return "Academic";
+        //     } else if (role == 1) {
+        //         return "Head Master";
+        //     } else if (role == 5) {
+        //         return "Accountant";
+        //     } else if (role == 6) {
+        //         return "Procurement";
+        //     }
+        // },
+
+        // formattedDate(date) {
+        //     // return moment(date).format("MMMM Do YYYY");
+        //     return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        // },
     },
 };
 </script>

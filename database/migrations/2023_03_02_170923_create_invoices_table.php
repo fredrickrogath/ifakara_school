@@ -21,6 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->boolean('status')->default(false);
             $table->boolean('status_from_financial')->default(false);
             $table->boolean('starred')->default(false);
+            $table->
             $table->softDeletes('deleted_at');
             $table->timestamps();
         });

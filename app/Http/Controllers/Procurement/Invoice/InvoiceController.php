@@ -87,4 +87,10 @@ class InvoiceController extends Controller
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->starredInvoice($request)]);
     }
+
+    public function headDashboardGetInvoices(InvoiceService $invoiceService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        // event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->headDashboardGetInvoices()]);
+    }
 }

@@ -15,6 +15,7 @@ class ToolService
             'name' => $request->name,
             'price' => $request->price,
             'count' => $request->count,
+            'user_id' => auth()->user()->id,
             'description' => $request->narration,
 
         ]);
@@ -59,5 +60,18 @@ class ToolService
         return \App\Models\Tool::find($request->id)->update([
             $request->column => !$request->data
         ]);
+    }
+
+    public function headDashboardGetTools(){
+        $totalTools = \App\Models\Tool::orderBy('created_at', 'desc')->get();
+        $newTools = 1;
+        $brokenTools = 0;
+        return [
+            'totalTools' => $totalTools->count(),
+            'newToolTitle' => 'New Tools',
+            'newTools' => $newTools,
+            'brokenToolTitle' => 'Broken Tool',
+            'brokenTools' => $brokenTools,
+        ];
     }
 }
