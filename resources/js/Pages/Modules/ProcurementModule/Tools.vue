@@ -1,5 +1,7 @@
 <template>
     <div data-app>
+
+        <!-- End of Right modal content -->
         <!-- Right modal content -->
         <div
             id="right-modal"
@@ -34,6 +36,7 @@
                                     placeholder="Tool Name"
                                 />
                             </div>
+                            
 
                             <div class="mb-1 text-gray-600">
                                 <label for="example-email" class="form-label text-gray-500 font-normal"
@@ -100,141 +103,13 @@
             <!-- /.modal-dialog -->
         </div>
 
-        <!-- End of Right modal content -->
-
         <div class="row">
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="card h-screen">
-                    <div class="card-body pt-1">
+                    <div class="pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
-                            <!-- <div class="btn-group dropend d-block mb-2 mx-2">
-                                <button
-                                    type="button"
-                                    class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
-                                    Select Entry Type
-                                </button>
-
-                                <div class="dropdown-menu">
-                                    <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        @click="
-                                            (dialog = true),
-                                                (dialogForm = 'Sales')
-                                        "
-                                    >
-                                        <v-icon size="18" class="me-1"
-                                            >mdi-cart</v-icon
-                                        >
-                                        Sales</a
-                                    >
-                                    <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        @click="
-                                            getSpecificLegerEntries();
-                                            setLegerEntry(
-                                                'Income Entry Selected'
-                                            );
-                                        "
-                                        ><v-icon size="16" class="me-1"
-                                            >mdi-cash-multiple</v-icon
-                                        >
-                                        Income</a
-                                    >
-                                    <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        @click="
-                                            (dialog = true),
-                                                (dialogForm = 'Loans')
-                                        "
-                                    >
-                                        <v-icon size="18" class="me-1"
-                                            >mdi-scale-balance</v-icon
-                                        >
-                                        Loans</a
-                                    >
-                                </div>
-                            </div> -->
-
-                            <!-- <div class="btn-group d-block mb-0 mx-2">
-                                <button
-                                    type="button"
-                                    class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
-                                    {{ setLegerEntryListener }}
-                                </button>
-
-                                <div class="dropdown-menu">
-                                    <a
-                                        v-for="item in legerEntriesListener"
-                                        :key="item.id"
-                                        class="dropdown-item"
-                                        href="#"
-                                        @click="
-                                            (dialog = true),
-                                                (dialogForm = item.name)
-                                        "
-                                        ><i class="mdi mdi-cart me-1"></i>
-                                        {{ item.name }}</a
-                                    >
-                                    <a
-                                        v-if="legerEntriesListener == null"
-                                        class="dropdown-item"
-                                        href="#"
-                                    >
-                                        Please Select Entry</a
-                                    >
-                                     <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        @click="
-                                            (dialog = true),
-                                                (dialogForm = 'Loans')
-                                        "
-                                    >
-                                        <v-icon size="14" class="me-1"
-                                            >mdi-scale-balance</v-icon
-                                        >
-                                        Loans</a
-                                    >
-                                </div>
-                            </div> -->
-
-                            <!-- <hr class="bg-gray-100 mb-1" /> -->
-
-                            <!-- <div class="mail-list">
-                                <span class="text-center pl-3 mx-auto"
-                                    >From Leger Entry</span
-                                >
-
-                                <a
-                                    @click="setTab('entries')"
-                                    href="#"
-                                    class="list-group-item border-0 mt-1"
-                                    :class="[
-                                        getCurrentTab == 'entries'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >All Entries
-                                </a>
-                            </div>
-
-                            <hr class="bg-gray-100 mb-1 mt-0" /> -->
 
                             <div class="mail-list">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -253,6 +128,23 @@
                                     mdi-pen-plus
                                 </v-icon>
                                 </div>
+
+                                <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
+
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 mt-1"
+                                    @click="setTab('Sellers')"
+                                    :class="[
+                                        getCurrentTab == 'Sellers'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-store font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Sellers
+                                </a>
 
                                 <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
 
@@ -344,54 +236,17 @@
                         <!-- End Left sidebar -->
 
                         <div class="inbox-rightbar pt-1 px-0 h-screen">
-                            <!-- <div
-                                class="d-md-flex justify-content-between align-items-center"
-                            >
-                                <form class="search-bar">
-                                    <div class="position-relative">
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-light"
-                                            placeholder="Search files..."
-                                        />
-                                        <span class="mdi mdi-magnify"></span>
-                                    </div>
-                                </form>
-                                <div class="mt-2 mt-md-0">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i
-                                            class="mdi mdi-format-list-bulleted"
-                                        ></i>
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i class="mdi mdi-view-grid"></i>
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i
-                                            class="mdi mdi-information-outline"
-                                        ></i>
-                                    </button>
-                                </div>
-                            </div> -->
 
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <transition name="fade">
                                 <AllTools v-if="getCurrentTab == 'all'"></AllTools>
+                                <Sellers v-if="getCurrentTab == 'Sellers'"></Sellers>
                                 <starred-tools
                                     v-if="getCurrentTab == 'starred'"
                                 ></starred-tools>
                                 <broken-tools
-                                    v-if="getCurrentTab == 'accepted'"
+                                    v-if="getCurrentTab == 'lost'"
                                 ></broken-tools>
                                 <trashed-tools
                                     v-if="getCurrentTab == 'deleted'"
@@ -418,6 +273,7 @@ import AllTools from "./Tools/AllTools.vue";
 import StarredTools from "./Tools/StarredTools.vue";
 import BrokenTools from "./Tools/BrokenTools.vue";
 import TrashedTools from "./Tools/TrashedTools.vue";
+import Sellers from "./Tools/Sellers.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
@@ -429,6 +285,7 @@ export default {
         StarredTools,
         BrokenTools,
         TrashedTools,
+        Sellers,
 
         // Entries,
 

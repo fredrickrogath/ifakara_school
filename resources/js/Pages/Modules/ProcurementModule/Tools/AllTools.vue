@@ -18,7 +18,7 @@
             >
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
-                        <div class="modal-body p-2">
+                        <div class="modal-body p-2">    
                             <div class="text-center">
                                 <i
                                     class="dripicons-warning h1 text-warning"

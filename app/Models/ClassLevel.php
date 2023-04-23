@@ -11,5 +11,6 @@ class ClassLevel extends Model
 
     protected $fillable = [
         'class_level',
+        'school_id',
     ];
 }

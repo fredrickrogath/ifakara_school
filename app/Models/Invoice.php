@@ -17,6 +17,7 @@ class Invoice extends Model
         'status',
         'starred',
         'status_from_financial',
+        'status_from_financial_bishop',
     ];
 
     public function invoiceTool()

@@ -16,6 +16,7 @@ class CreateClassLevelsTable extends Migration
         Schema::create('class_levels', function (Blueprint $table) {
             $table->id();
             $table->string('class_level');
+            $table->foreignId('school_id');
             $table->timestamps();
         });
     }

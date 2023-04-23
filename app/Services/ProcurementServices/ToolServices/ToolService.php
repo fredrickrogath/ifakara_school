@@ -27,9 +27,17 @@ class ToolService
     }
 
     public function get_tools(){
-        return \App\Models\Tool::orderBy('created_at', 'desc')->get();
+        return \App\Models\Tool::where('broken', false)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getSellers(){
+        return \App\Models\Seller::where('broken', false)->orderBy('created_at', 'desc')->get();
+    }
+    
+    public function getBrokenTools(){
+        return \App\Models\Tool::where('broken', true)->orderBy('created_at', 'desc')->get();
+    }
+    
     public function getStarredTools(){
         return \App\Models\Tool::where('starred', true)->orderBy('created_at', 'desc')->get();
     }
@@ -44,6 +52,34 @@ class ToolService
         ]);
     }
 
+    public function addBrokenTool($request){
+        $tool = \App\Models\Tool::where('name' ,$request->toolName);
+        
+        // return $tool->count();
+        if($tool->count() == 1){
+            $tool = $tool->get()->first();
+            $created = \App\Models\Tool::create([
+                'name' => $tool->name,
+                'price' => $tool->price,
+                'count' => $tool->count,
+                'broken' => true,
+                'user_id' => auth()->user()->id,
+                'description' => $tool->narration,
+    
+            ]);
+            if($created){
+                return true;
+            }
+        }else{
+            $tool = $tool->where('broken', true)->get()->first();
+            $tool->update([
+                'count' => $tool->count + $request->count,
+            ]);
+
+            return true;
+        }
+    }
+    
     public function deleteTools($request){
         return \App\Models\Tool::findoRFail($request->id)->delete();
     }
