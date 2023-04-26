@@ -401,7 +401,8 @@ Route::middleware([
         Route::post('/starredTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'starredTools'])->name('starredTools');
         Route::get('/headDashboardGetTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
 
-        Route::get('/getSellers', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getSellers'])->name('getSellers');
+        Route::get('/getSellersList', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getSellersList'])->name('getSellersList');
+        Route::post('/addSeller', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'addSeller'])->name('addSeller');
 
         /*
         |--------------------------------------------------------------------------

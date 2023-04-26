@@ -79,10 +79,22 @@ class ToolsController extends Controller
         return response()->json(['data' => $toolService->getBrokenTools()]);
     }
 
-    public function getSellers(ToolService $toolService){
+    public function getSellersList(ToolService $toolService){
         $this->authorize('authorizeProcurement', \App\Models\User::class);
         // event(new \App\Events\NewPostPublished('created'));
-        return response()->json(['data' => $toolService->getSellers()]);
+        return response()->json(['data' => $toolService->getSellersList()]);
     }
 
+    public function addSeller(Request $request, ToolService $toolService){
+        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        event(new \App\Events\Procurement\ToolEvent('created'));
+        return response()->json(['data' => $toolService->addSeller($request)]);
+    }
+
+    public function getToolDashboardData(Request $request, ToolService $toolService){
+        // $this->authorize('authorizeProcurement', \App\Models\User::class);
+        // event(new \App\Events\Procurement\ToolEvent('created'));
+        return response()->json(['data' => $toolService->getToolDashboardData($request)]);
+    }
+    
 }

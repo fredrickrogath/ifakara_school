@@ -60,5 +60,12 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
             Route::post('/sendComment', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'sendComment'])->name('sendComment');
      
             Route::post('/registerSchool', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'registerSchool'])->name('registerSchool');
+
+            Route::post('/getToolDashboardData', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getToolDashboardData'])->name('getToolDashboardData');
+            Route::post('/getInvoiceDashboardData', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoiceDashboardData'])->name('getInvoiceDashboardData');
         });
+
+        // Route::group(['prefix' => 'procurement', 'middleware' => 'is_procurement', 'as' => 'procurement.'], function () {
+            
+        // });
         

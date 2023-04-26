@@ -173,11 +173,9 @@
 
                 <v-icon
                     type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#right-modal-broken"
                     class="ml-4 px-1 mt-3 mr-0 py-1"
                     size="22"
-                    @click=""
+                    @click="setAddSeller()"
                 >
                     mdi-pen-plus
                 </v-icon>
@@ -253,6 +251,12 @@
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'id'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'name'"
                                     >{{ item[header.value] }}</span
                                 >
 
@@ -407,10 +411,17 @@ export default {
         this.getTools();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         // console.log('abc');
+        //         this.getTools();
+        //     }
+        // );
+
+        window.Echo.channel("tool-add-seller-event").listen(
+            "Procurement\\ToolEvent",
             (e) => {
-                // console.log('abc');
                 this.getTools();
             }
         );
@@ -432,7 +443,7 @@ export default {
                 },
                 {
                     text: "Name",
-                    value: "text",
+                    value: "name",
                 },
                 { text: "Location", value: "location", align: "center" },
                 { text: "Mobile", value: "mobile" },
@@ -481,11 +492,15 @@ export default {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
+        setAddSeller() {
+            this.$store.dispatch("ProcurementToolModule/setInvoiceGenerate");
+        },
+
         getTools() {
-            axios.get("/procurement/getSellers").then((response) => {
+            axios.get("/procurement/getSellersList").then((response) => {
                 this.tools = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data);
+                // console.log(response.data.data);
             });
         },
 
@@ -548,7 +563,7 @@ export default {
                     // this.price = "";
                     // this.count = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

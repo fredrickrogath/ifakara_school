@@ -1,6 +1,5 @@
 <template>
     <div data-app>
-
         <!-- End of Right modal content -->
         <!-- Right modal content -->
         <div
@@ -22,80 +21,86 @@
                     </div> -->
                     <div class="modal-body">
                         <div class="">
-                        <form @submit.prevent="submitForm">
+                            <form @submit.prevent="submitForm">
+                                <div class="mb-1 text-gray-600">
+                                    <label
+                                        for="example-email"
+                                        class="form-label text-gray-500 font-normal"
+                                        >Tool Name</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="example-email"
+                                        v-model="name"
+                                        class="form-control form-control-sm"
+                                        placeholder="Tool Name"
+                                    />
+                                </div>
 
                                 <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label text-gray-500 font-normal"
-                                    >Tool Name</label
-                                >
-                                <input
-                                    type="text"
-                                    id="example-email"
-                                    v-model="name"
-                                    class="form-control form-control-sm"
-                                    placeholder="Tool Name"
-                                />
-                            </div>
-                            
+                                    <label
+                                        for="example-email"
+                                        class="form-label text-gray-500 font-normal"
+                                        >Price</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="example-email"
+                                        v-model="price"
+                                        class="form-control form-control-sm"
+                                        placeholder="Tool Price"
+                                    />
+                                </div>
 
-                            <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label text-gray-500 font-normal"
-                                    >Price</label
-                                >
-                                <input
-                                    type="text"
-                                    id="example-email"
-                                    v-model="price"
-                                    class="form-control form-control-sm"
-                                    placeholder="Tool Price"
-                                />
-                            </div>
+                                <div class="mb-1 text-gray-600">
+                                    <label
+                                        for="example-email"
+                                        class="form-label text-gray-500 font-normal"
+                                        >Tool Count</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="example-email"
+                                        v-model="count"
+                                        class="form-control form-control-sm"
+                                        placeholder="Tool Count"
+                                    />
+                                </div>
 
-                            <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label text-gray-500 font-normal"
-                                    >Tool Count</label
-                                >
-                                <input
-                                    type="text"
-                                    id="example-email"
-                                    v-model="count"
-                                    class="form-control form-control-sm"
-                                    placeholder="Tool Count"
-                                />
-                            </div>
+                                <div class="mb-1 text-gray-600">
+                                    <label
+                                        for="example-textarea"
+                                        class="form-label text-gray-500 font-normal"
+                                        >Description</label
+                                    >
+                                    <textarea
+                                        class="form-control form-control-sm"
+                                        id="example-textarea"
+                                        rows="2"
+                                        v-model="narration"
+                                    ></textarea>
+                                </div>
 
-                            <div class="mb-1 text-gray-600">
-                                <label for="example-textarea" class="form-label text-gray-500 font-normal"
-                                    >Description</label
+                                <div
+                                    class="d-flex justify-content-between my-1 mt-2"
                                 >
-                                <textarea
-                                    class="form-control form-control-sm"
-                                    id="example-textarea"
-                                    rows="2"
-                                    v-model="narration"
-                                ></textarea>
-                            </div>
-
-                            <div
-                                class="d-flex justify-content-between my-1 mt-2"
-                            >
-                                <button
-                                data-bs-dismiss="modal"
-                                    type="submit"
-                                    class="btn btn-success text-white btn-sm waves-effect waves-light"
-                                >
-                                    Submit
-                                </button>
-                                <button
-                                data-bs-dismiss="modal"
-                                    type="button"
-                                    class="btn btn-danger btn-sm text-white waves-effect waves-light"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                                    <button
+                                        data-bs-dismiss="modal"
+                                        type="submit"
+                                        class="btn btn-success text-white btn-sm waves-effect waves-light"
+                                    >
+                                        Submit
+                                    </button>
+                                    <button
+                                        data-bs-dismiss="modal"
+                                        type="button"
+                                        class="btn btn-danger btn-sm text-white waves-effect waves-light"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -110,23 +115,22 @@
                     <div class="pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
-
                             <div class="mail-list">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="ml-3 font-15"
-                                    >My Office</div
+                                <div
+                                    class="d-flex justify-content-between align-items-center"
                                 >
+                                    <div class="ml-3 font-15">My Office</div>
 
-                                <v-icon
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#right-modal"
-                                    class="ml-4 px-1 mt-1 mr-0 py-1"
-                                    size="22"
-                                    @click=""
-                                >
-                                    mdi-pen-plus
-                                </v-icon>
+                                    <v-icon
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#right-modal"
+                                        class="ml-4 px-1 mt-1 mr-0 py-1"
+                                        size="22"
+                                        @click=""
+                                    >
+                                        mdi-pen-plus
+                                    </v-icon>
                                 </div>
 
                                 <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
@@ -236,22 +240,30 @@
                         <!-- End Left sidebar -->
 
                         <div class="inbox-rightbar pt-1 px-0 h-screen">
-
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
-                                <transition name="fade">
-                                <AllTools v-if="getCurrentTab == 'all'"></AllTools>
-                                <Sellers v-if="getCurrentTab == 'Sellers'"></Sellers>
-                                <starred-tools
-                                    v-if="getCurrentTab == 'starred'"
-                                ></starred-tools>
-                                <broken-tools
-                                    v-if="getCurrentTab == 'lost'"
-                                ></broken-tools>
-                                <trashed-tools
-                                    v-if="getCurrentTab == 'deleted'"
-                                ></trashed-tools>
-                                </transition>
+                                <div v-show="getAddSeller">
+                                    <add-seller></add-seller>
+                                </div>
+                                <div v-show="!getAddSeller">
+                                    <transition name="fade">
+                                        <AllTools
+                                            v-if="getCurrentTab == 'all'"
+                                        ></AllTools>
+                                        <sellers
+                                            v-if="getCurrentTab == 'Sellers'"
+                                        ></sellers>
+                                        <starred-tools
+                                            v-if="getCurrentTab == 'starred'"
+                                        ></starred-tools>
+                                        <broken-tools
+                                            v-if="getCurrentTab == 'lost'"
+                                        ></broken-tools>
+                                        <trashed-tools
+                                            v-if="getCurrentTab == 'deleted'"
+                                        ></trashed-tools>
+                                    </transition>
+                                </div>
                             </div>
                             <!-- end .mt-3-->
                         </div>
@@ -275,6 +287,8 @@ import BrokenTools from "./Tools/BrokenTools.vue";
 import TrashedTools from "./Tools/TrashedTools.vue";
 import Sellers from "./Tools/Sellers.vue";
 
+import AddSeller from "./Tools/AddSeller.vue";
+
 // import Entries from "./Invoices/Entries.vue";
 
 // import Select2 from "v-select2-component";
@@ -286,6 +300,7 @@ export default {
         BrokenTools,
         TrashedTools,
         Sellers,
+        AddSeller,
 
         // Entries,
 
@@ -316,7 +331,7 @@ export default {
 
             name: "",
             price: "",
-            count: '',
+            count: "",
             narration: "",
 
             myValue: "",
@@ -327,6 +342,10 @@ export default {
         //Add computed properties
         getCurrentTab() {
             return this.$store.getters["ProcurementToolModule/getTab"];
+        },
+
+        getAddSeller() {
+            return this.$store.getters["ProcurementToolModule/getInvoiceGenerate"];
         },
 
         legerEntriesListener() {

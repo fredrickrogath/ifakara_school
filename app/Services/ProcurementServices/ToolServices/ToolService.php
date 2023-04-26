@@ -26,12 +26,28 @@ class ToolService
         return false;
     }
 
+    public function addSeller($request){
+        $created = \App\Models\Seller::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'location' => $request->location,
+            'user_id' => auth()->user()->id,
+            'mobile' => $request->mobile,
+
+        ]);
+
+        if($created){
+            return true;
+        }
+        return false;
+    }
+
     public function get_tools(){
         return \App\Models\Tool::where('broken', false)->orderBy('created_at', 'desc')->get();
     }
 
-    public function getSellers(){
-        return \App\Models\Seller::where('broken', false)->orderBy('created_at', 'desc')->get();
+    public function getSellersList(){
+        return \App\Models\Seller::orderBy('created_at', 'desc')->get();
     }
     
     public function getBrokenTools(){
@@ -102,6 +118,20 @@ class ToolService
         $totalTools = \App\Models\Tool::orderBy('created_at', 'desc')->get();
         $newTools = 1;
         $brokenTools = 0;
+        return [
+            'totalTools' => $totalTools->count(),
+            'newToolTitle' => 'New Tools',
+            'newTools' => $newTools,
+            'brokenToolTitle' => 'Broken Tool',
+            'brokenTools' => $brokenTools,
+        ];
+    }
+
+    public function getToolDashboardData(){
+        $totalTools = \App\Models\Tool::orderBy('created_at', 'desc')->get();
+        $newTools = 1;
+        $brokenTools = 0;
+        
         return [
             'totalTools' => $totalTools->count(),
             'newToolTitle' => 'New Tools',
