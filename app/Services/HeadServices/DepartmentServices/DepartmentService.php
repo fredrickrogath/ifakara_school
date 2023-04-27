@@ -16,6 +16,7 @@ class DepartmentService
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->identifier,
+            'school_id' => auth()->user()->school_id,
             'password' => Hash::make($request->password),
         ]);
 
@@ -29,6 +30,10 @@ class DepartmentService
         return \App\Models\User::where('role', '!=', 1)->orderBy('created_at', 'desc')->get();
     }
 
+    public function headDashboardGetStaffs(){
+        return \App\Models\User::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+    }
+    
     // public function getInvoiceView($request){
     //     return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     // }

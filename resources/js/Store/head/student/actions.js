@@ -15,5 +15,17 @@ export default {
 
     setInvoiceView(context, id){
         context.commit("setInvoiceView", id);
-    }
+    },
+
+    setCommentView(context){
+        context.commit("setCommentView");
+    },
+
+    setStudentId(context, id){
+        context.commit("setStudentId", id);
+    },
+
+    setEditStudent(context){
+        context.commit("setEditStudent");
+    },
 };

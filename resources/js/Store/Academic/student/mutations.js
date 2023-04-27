@@ -7,12 +7,25 @@ export default {
         state.addStudent = !state.addStudent;
     },
 
-    setSnackBarState(state){
+    setStudentId(state, id) {
+        state.studentId = id;
+    },
+
+    setEditStudent(state) {
+        state.editStudent = !state.editStudent;
+    },
+
+    setSnackBarState(state) {
         state.snackBarState = !state.snackBarState;
     },
 
-    setInvoiceView(state, id){
+    setInvoiceView(state, id) {
         state.invoiceView = !state.invoiceView;
         state.invoiceId = id;
     },
+
+    setCommentView(state) {
+        state.commentView = !state.commentView;
+    },
+    
 };

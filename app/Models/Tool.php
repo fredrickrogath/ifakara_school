@@ -14,6 +14,8 @@ class Tool extends Model
         'name',
         'price',
         'count',
+        'broken',
+        'user_id',
         'starred',
         'description',
     ];

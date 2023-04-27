@@ -17,6 +17,7 @@ class CreateInvoiceToolsTable extends Migration
             $table->id();
             $table->foreignId('invoice_id')->constrained('invoices')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('tool_id')->constrained('tools')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->integer('count');
             $table->timestamps();
         });

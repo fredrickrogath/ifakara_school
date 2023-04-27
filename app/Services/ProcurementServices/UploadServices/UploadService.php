@@ -74,4 +74,12 @@ class UploadService
         return \App\Models\Upload::onlyTrashed()->findoRFail($request->id)->forceDelete();
     }
 
+    public function headDashboardGetUploads(){
+        $totalUploads = \App\Models\Upload::where('user_id', auth()->user()->id)->get();
+
+        return [
+            'totalUploads' => $totalUploads->count(),
+            'uploadTitles' => 'Uploads'
+        ];
+    }
 }

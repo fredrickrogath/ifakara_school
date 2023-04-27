@@ -128,6 +128,27 @@ Route::middleware([
         Route::post('/addStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
 
+        // Route::get('/getStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudents'])->name('getStudents');
+        Route::post('/getStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudent'])->name('getStudent');
+        Route::post('/editStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'editStudent'])->name('editStudent');
+        // Route::post('/permissionToEditStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
+        // Route::post('/checkPermissionToEditStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'checkPermissionToEditStudent'])->name('checkPermissionToEditStudent');
+        // Route::post('/getCommentsForStudentPermission', [\App\Http\Controllers\Head\Student\StudentController::class, 'getCommentsForStudentPermission'])->name('getCommentsForStudentPermission');
+        // Route::post('/addStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'addStudent'])->name('addStudent');
+        Route::get('/getStudentClasses', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
+        Route::post('/getComments', [\App\Http\Controllers\Head\Student\StudentController::class, 'getComments'])->name('getComments');
+        Route::post('/sendComment', [\App\Http\Controllers\Head\Student\StudentController::class, 'sendComment'])->name('sendComment');
+
+        Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        Route::get('/headDashboardGetStaffs', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'headDashboardGetStaffs'])->name('headDashboardGetStudents');
+        Route::get('/headDashboardGetTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
+        Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        
         /*
         |--------------------------------------------------------------------------
         | TOOLS
@@ -189,9 +210,17 @@ Route::middleware([
         */
 
         Route::get('/getStudents', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudents'])->name('getStudents');
+        Route::post('/getStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudent'])->name('getStudent');
+        Route::post('/editStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'editStudent'])->name('editStudent');
+        Route::post('/permissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
+        Route::post('/checkPermissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'checkPermissionToEditStudent'])->name('checkPermissionToEditStudent');
+        // Route::post('/getCommentsForStudentPermission', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getCommentsForStudentPermission'])->name('getCommentsForStudentPermission');
         Route::post('/addStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
-
+        Route::post('/getComments', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getComments'])->name('getComments');
+             Route::post('/sendComment', [\App\Http\Controllers\Academic\Student\StudentController::class, 'sendComment'])->name('sendComment');
+             Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Academic\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        
         /*
         |--------------------------------------------------------------------------
         | DEPARTMENTS & STAFFS
@@ -201,6 +230,7 @@ Route::middleware([
         Route::get('/getStaffs', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'getStaffs'])->name('getStaffs');
         Route::post('/addStaff', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'addStaff'])->name('addStaff');
         Route::get('/getDepartments', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'getDepartments'])->name('getDepartments');
+        Route::get('/headDashboardGetStaffs', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'headDashboardGetStaffs'])->name('headDashboardGetStaffs');
 
         /*
         |--------------------------------------------------------------------------
@@ -215,6 +245,7 @@ Route::middleware([
         Route::post('/restoreUpload', [\App\Http\Controllers\Academic\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
         Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Academic\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
         Route::post('/deleteUpload', [\App\Http\Controllers\Academic\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::get('/headDashboardGetUploads', [\App\Http\Controllers\Academic\Upload\UploadController::class, 'headDashboardGetUploads'])->name('headDashboardGetUploads');
     });
 
 
@@ -258,6 +289,11 @@ Route::middleware([
         Route::get('/reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'reports'])->name('reports');
         Route::get('/invoice', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice'])->name('invoice');
 
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStaffs', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'headDashboardGetStaffs'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
+        // Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
+
         /*
         |--------------------------------------------------------------------------
         | ENTRIES
@@ -279,7 +315,7 @@ Route::middleware([
         Route::post('/addChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addChartOfAccounts'])->name('addChartOfAccounts');
         Route::post('/updateChartOfAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'updateChartOfAccount'])->name('updateChartOfAccount');
         Route::post('/deleteChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'deleteChartOfAccounts'])->name('deleteChartOfAccounts');
-
+        Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
         /*
         |--------------------------------------------------------------------------
         | UPLOADS
@@ -293,6 +329,7 @@ Route::middleware([
         Route::post('/restoreUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
         Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
         Route::post('/deleteUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::get('/headDashboardGetUploads', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'headDashboardGetUploads'])->name('headDashboardGetUploads');
 
         /*
         |--------------------------------------------------------------------------
@@ -311,6 +348,7 @@ Route::middleware([
         Route::get('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
         Route::post('/acceptInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'acceptInvoice'])->name('acceptInvoice');
         Route::get('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
+        Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
     });
 
 
@@ -342,7 +380,9 @@ Route::middleware([
         */
 
         Route::post('/add_tool', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'add_tool'])->name('add_tool');
+        Route::post('/addBrokenTool', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'addBrokenTool'])->name('addBrokenTool');
         Route::get('/get_tools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'get_tools'])->name('get_tools');
+        Route::get('/getBrokenTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getBrokenTools'])->name('getBrokenTools');
         Route::get('/getStarredTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getStarredTools'])->name('getStarredTools');
         Route::get('/getTrashedTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getTrashedTools'])->name('getTrashedTools');
         Route::post('/updateTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'updateTools'])->name('updateTools');
@@ -350,6 +390,10 @@ Route::middleware([
         Route::post('/restoreTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'restoreTools'])->name('restoreTools');
         Route::post('/permanentDeleteTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'permanentDeleteTools'])->name('permanentDeleteTools');
         Route::post('/starredTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'starredTools'])->name('starredTools');
+        Route::get('/headDashboardGetTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
+
+        Route::get('/getSellersList', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getSellersList'])->name('getSellersList');
+        Route::post('/addSeller', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'addSeller'])->name('addSeller');
 
         /*
         |--------------------------------------------------------------------------
@@ -371,6 +415,7 @@ Route::middleware([
         Route::post('/deleteInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
         Route::post('/starredInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'starredInvoices'])->name('starredInvoices');
         Route::post('/submitInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'submitInvoice'])->name('submitInvoice');
+        Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
 
 
         /*
@@ -386,9 +431,10 @@ Route::middleware([
         Route::post('/restoreUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
         Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
         Route::post('/deleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::get('/headDashboardGetUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'headDashboardGetUploads'])->name('headDashboardGetUploads');
     });
 
-
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -440,32 +486,41 @@ Route::middleware([
 */
 
 
-    Route::get('/trigger/{data}', function ($data) {
-    echo "<p>You have sent $data</p>";
-    event(new App\Events\NewPostPublished($data));
-    });
+    // Route::get('/trigger', function () {
+    //     // public function getSellers(){
+    //         return \App\Http\Resources\NotificationResource::collection(\App\Models\Notification::get());
+    //     // }
+    // // echo "<p>You have sent $data</p>";
+    // // event(new App\Events\NewPostPublished($data));
+    // });
 
-    Route::get('storagee/', function($fileName){
-        return Storage::disk('public')->url('storage/systemFiles/images/1.jpg');
-    });
+    // Route::get('/trigger/{data}', function ($data) {
+    //     echo "<p>You have sent $data</p>";
+    //     event(new \App\Events\ApiSecretaryStudentEvent($data));
+    //     });
+
+    
+    // Route::get('storagee/', function($fileName){
+    //     return Storage::disk('public')->url('storage/systemFiles/images/1.jpg');
+    // });
 
     //Add fake users for testing
-    Route::get('/add/users', function () {
-    // dd(\App\Models\User::with(['posts' => function($query) {
-    //     // $query->orderBy('id','desc');
-    // }])->get()->first());
+    // Route::get('/add/users', function () {
+    // // dd(\App\Models\User::with(['posts' => function($query) {
+    // //     // $query->orderBy('id','desc');
+    // // }])->get()->first());
 
-    // dd(\App\Models\Post::with(['user' => function($query) {
-    //     // $query->orderBy('id','desc');
-    // }])->get()->first());
+    // // dd(\App\Models\Post::with(['user' => function($query) {
+    // //     // $query->orderBy('id','desc');
+    // // }])->get()->first());
 
-    // App\Models\User::factory()->count(100)->create();
-    });
+    // // App\Models\User::factory()->count(100)->create();
+    // });
 
     
     //Route for getting more posts on the scroll component
-    Route::middleware(['auth:sanctum', 'verified'])->get('/posts', function () {
-        return Response::json([
-            'data' => Post::paginate(9)
-        ], 201);
-    })->name('posts');
+    // Route::middleware(['auth:sanctum', 'verified'])->get('/posts', function () {
+    //     return Response::json([
+    //         'data' => Post::paginate(9)
+    //     ], 201);
+    // })->name('posts');

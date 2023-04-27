@@ -15,6 +15,18 @@ class UserFactory extends Factory
      *
      * @return array
      */
+    public function getNumber(){
+        $characters = '1356';
+$randomString = '';
+$length = 10;
+
+for ($i = 0; $i < $length; $i++) {
+    $randomString .= $characters[rand(0, strlen($characters) - 1)];
+}
+
+return $randomString;
+    }
+
     public function definition()
     {
         return [

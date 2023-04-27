@@ -13,6 +13,7 @@ class InvoiceTool extends Model
         'invoice_id',
         'tool_id',
         'count',
+        'user_id',
     ];
 
     public function tool()

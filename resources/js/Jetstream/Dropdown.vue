@@ -16,10 +16,9 @@
             leave-class="transform opacity-100 scale-100"
             leave-to-class="transform opacity-0 scale-95">
             <div v-show="open"
-                    class="absolute z-50 mt-2 rounded-md shadow-lg"
+                    class="absolute z-50 mt-2 rounded-md shadow-lg bg-white"
                     :class="[widthClass, alignmentClasses]"
                     style="display: none;"
-                    :style="[isDark ? {'background-color': '#1e1e1e'} : {'background': '#FFF'}]"
                     @click="open = false">
                 <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
                     <slot name="content"></slot>
@@ -29,12 +28,12 @@
     </div>
 </template>
 
-<script setup>
+<!-- <script setup>
 import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-</script>
+</script> -->
 
 <script>
     export default {

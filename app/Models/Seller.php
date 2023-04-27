@@ -13,6 +13,7 @@ class Seller extends Model
         'name',
         'location',
         'mobile',
+        'user_id',
         'email',
     ];
 }

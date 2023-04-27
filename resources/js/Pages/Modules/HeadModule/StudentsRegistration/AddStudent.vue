@@ -21,7 +21,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="firstName"
                                             />
                                         </div>
@@ -35,7 +35,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="lastName"
                                             />
                                         </div>
@@ -47,7 +47,7 @@
                                                 >Student Gender
                                             </label>
                                             <select
-                                                class="form-select"
+                                                class="form-select form-select-sm"
                                                 id="gender"
                                                 v-model="gender"
                                             >
@@ -69,7 +69,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="parent"
                                             />
                                         </div>
@@ -86,7 +86,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="middleName"
                                             />
                                         </div>
@@ -100,7 +100,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="location"
                                             />
                                         </div>
@@ -112,7 +112,7 @@
                                                 >Select Class
                                             </label>
                                             <select
-                                                class="form-select"
+                                                class="form-select form-select-sm"
                                                 v-model="classLevel"
                                                 id="gender"
                                             >
@@ -135,7 +135,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="contact"
                                             />
                                         </div>
@@ -148,14 +148,14 @@
                                                 class="button-list mb-1 mb-sm-0"
                                             >
                                                 <button v-if="!showLoader"
-                                                    class="btn btn-primary text-white"
+                                                    class="btn btn-sm btn-primary text-white"
                                                     type="submit"
                                                 >
                                                     Submit
                                                 </button>
                                                 <button
                                                 v-else
-                                                    class="btn btn-primary"
+                                                    class="btn btn-sm btn-primary"
                                                     type="button"
                                                     disabled
                                                 >
@@ -360,13 +360,13 @@ export default {
         //     this.count = "";
         // },
         setAddStudent() {
-            this.$store.dispatch("AcademicStudentModule/setAddStudent");
+            this.$store.dispatch("HeadStudentModule/setAddStudent");
         },
 
         async addStudent() {
             this.showLoader = true;
             axios
-                .post("/academic/addStudent", {
+                .post("/head/addStudent", {
                     id: 1,
                     firstName: this.firstName,
                     middleName: this.middleName,
@@ -394,7 +394,7 @@ export default {
         },
 
         async getclasses() {
-            axios.get("/academic/getStudentClasses").then((response) => {
+            axios.get("/head/getStudentClasses").then((response) => {
                 this.classOptions = response.data.data;
                 // this.showLoader = false;
                 // console.log(response.data.data);

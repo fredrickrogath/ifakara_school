@@ -1,8 +1,8 @@
 <template>
-    <div class="component-wrapper py-6">
+    <div class="component-wrapper py-1">
         <GChart
             type="PieChart"
-            style="width: 200px"
+            style="width: 500px; height: 320px;"
             :data="chartData"
             :options="chartOptions"
         />
@@ -17,17 +17,24 @@ export default {
         GChart,
     },
 
+    props: {
+      data: {
+        type: Array,
+        required: true,
+      },
+    },
+  
+    mounted() {
+      if (this.data) {
+        this.renderChart();
+        // console.log("utuyuytuy" + this.data);
+      }
+    },
+
     data() {
         return {
             // Array will be automatically processed with visualization.arrayToDataTable function
-            chartData: [
-                ["Language", "Speakers (in millions)"],
-                ["Bengali", 83],
-                ["Hindi", 300],
-                ["Marathi", 72],
-                ["Tamil", 81],
-                ["Telugu", 74],
-            ],
+            chartData: this.data,
             chartOptions: {
                 chart: {
                     title: "Company Performance",
@@ -44,6 +51,21 @@ export default {
                 tooltip: {textStyle: { fontSize: 15} },
             },
         };
+    },
+
+    methods: {
+      renderChart() {
+        this.chartData = this.data;
+      },
+    },
+
+    watch: {
+      data(newData) {
+        if (newData) {
+        //   console.log(newData);
+          this.renderChart();
+        }
+      },
     },
 };
 </script>

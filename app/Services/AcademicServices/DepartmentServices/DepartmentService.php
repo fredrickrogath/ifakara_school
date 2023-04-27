@@ -41,6 +41,10 @@ class DepartmentService
         return \App\Models\Student::orderBy('created_at', 'desc')->get();
     }
 
+    public function headDashboardGetStaffs(){
+        return \App\Models\User::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+    }
+    
     // public function acceptInvoice($request){
     //     return \App\Models\Invoice::find($request->id)->update([
     //         'status_from_financial' => !$request->status_from_financial,

@@ -20,6 +20,7 @@ class StudentService
             'from' => $request->location,
             'parent' => $request->parent,
             'parent_contact' => $request->contact,
+            'school_id' => auth()->user()->school_id,
         ]);
 
         if($created){
@@ -42,6 +43,57 @@ class StudentService
 
     public function getStudents(){
         return \App\Models\Student::orderBy('created_at', 'desc')->get();
+    }
+
+    public function headDashboardGetStudents(){
+        $totalStudents = \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+        $paidStudents = 1;
+        $unpaidStudents = 2;
+        return [
+            'totalStudents' => $totalStudents->count(),
+            'paidStudents' => $paidStudents,
+            'unpaidStudents' => $unpaidStudents,
+        ];
+    }
+    
+    public function getStudent($request){
+        return \App\Models\Student::where('id', $request->studentId)->get()->first();
+    }
+
+    public function getComments($request){
+        $notification = \App\Models\Notification::with('comments')->where('object_id', $request->id)->get()->first();
+    return $notification;
+    }
+
+    public function editStudent($request){
+        return \App\Models\Student::find($request->studentId)->update([
+            'class_level_id' => $request->class_level_id,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'from' => $request->from,
+            'parent' => $request->parent,
+            'parent_contact' => $request->parent_contact,
+            'school_id' => auth()->user()->school_id,
+        ]);
+    }
+
+    public function sendComment($request){
+        $notification = \App\Models\Notification::where('id', $request->id)->get()->first();
+        
+        $created = \App\Models\Comment::create([
+            'to_role' => \App\Models\User::is_secretary,
+            'from_role' => \App\Models\User::is_head,
+            'body' => $request->body,
+            'notification_id' => $notification->id,
+        ]);
+
+        if($created){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     // public function acceptInvoice($request){

@@ -20,7 +20,9 @@ class CreateToolsTable extends Migration
             $table->integer ('count');
             $table->boolean('starred')->default(false);
             $table->string('description')->nullable();
+            $table->boolean('broken')->default(false);
             $table->softDeletes('deleted_at');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->timestamps();
         });
     }

@@ -12,7 +12,8 @@ class StudentController extends Controller
     //
     public function addStudent(Request $request, StudentService $studentService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        event(new \App\Events\NewPostPublished('academic student'));
+        event(new \App\Events\Academic\StudentEvent('academic student'));
+        event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
         return response()->json(['data' => $studentService->addStudent($request)]);
     }
 
@@ -36,4 +37,33 @@ class StudentController extends Controller
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $studentService->getStudents()]);
     }
+
+    public function headDashboardGetStudents(StudentService $studentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->headDashboardGetStudents()]);
+    }
+    
+    public function getStudent(Request $request, StudentService $studentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getStudent($request)]);
+    }
+
+    public function getComments(Request $request, StudentService $studentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getComments($request)]);
+    }
+
+    public function editStudent(Request $request, StudentService $studentService){
+        event(new \App\Events\Academic\StudentEvent('academic student'));
+        event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->editStudent($request)]);
+    }
+
+    public function sendComment(Request $request, StudentService $studentService){
+        event(new \App\Events\Api\Secretary\CommentEvent());
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->sendComment($request)]);
+    }
+    
 }

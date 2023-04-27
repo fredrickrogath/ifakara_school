@@ -22,10 +22,10 @@ class DepartmentController extends Controller
         return response()->json(['data' => $departmentService->getStaffs($request)]);
     }
 
-    // public function getInvoiceView(Request $request, InvoiceService $invoiceService){
-    //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
-    //     return response()->json(['data' => $invoiceService->getInvoiceView($request)]);
-    // }
+    public function headDashboardGetStaffs(DepartmentService $departmentService){
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $departmentService->headDashboardGetStaffs()]);
+    }
 
     // public function acceptInvoice(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 

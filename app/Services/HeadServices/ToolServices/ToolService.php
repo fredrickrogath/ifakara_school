@@ -29,6 +29,17 @@ class ToolService
         return \App\Models\Tool::orderBy('created_at', 'desc')->get();
     }
 
+    public function headDashboardGetTools(){
+        $totalTools = \App\Models\Tool::orderBy('created_at', 'desc')->get();
+        $newTools = 1;
+        $brokenTools = 0;
+        return [
+            'totalTools' => $totalTools->count(),
+            'newTools' => $newTools,
+            'brokenTools' => $brokenTools,
+        ];
+    }
+    
     public function getStarredTools(){
         return \App\Models\Tool::where('starred', true)->orderBy('created_at', 'desc')->get();
     }

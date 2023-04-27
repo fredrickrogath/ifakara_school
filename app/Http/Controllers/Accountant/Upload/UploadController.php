@@ -55,9 +55,9 @@ class UploadController extends Controller
         return response()->json(['data' => $uploadService->permanentDeleteUpload($request)]);
     }
     
-    // public function starredTools(Request $request, UploadService $uploadService){
-    //     $this->authorize('authorizeAccountant', \App\Models\User::class);
-    //     event(new \App\Events\NewPostPublished('created'));
-    //     return response()->json(['data' => $uploadService->starredTools($request)]);
-    // }
+    public function headDashboardGetUploads(UploadService $uploadService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $uploadService->headDashboardGetUploads()]);
+    }
 }

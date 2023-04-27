@@ -15,4 +15,21 @@ export default {
         state.invoiceView = !state.invoiceView;
         state.invoiceId = id;
     },
+
+    setInvoiceView(state, id) {
+        state.invoiceView = !state.invoiceView;
+        state.invoiceId = id;
+    },
+
+    setCommentView(state) {
+        state.commentView = !state.commentView;
+    },
+
+    setEditStudent(state) {
+        state.editStudent = !state.editStudent;
+    },
+    
+    setStudentId(state, id) {
+        state.studentId = id;
+    },
 };

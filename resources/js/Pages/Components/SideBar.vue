@@ -106,7 +106,7 @@
                                     </my-custom-link>
                                 </li>
 
-                                <li>
+                                <!-- <li>
                                     <my-custom-link
                                         :href="route('head.academic_invoices')"
                                         :active="
@@ -118,7 +118,7 @@
                                         <v-icon size="20">mdi-cash</v-icon>
                                         <span> Invoices </span>
                                     </my-custom-link>
-                                </li>
+                                </li> -->
 
                                 <li>
                                     <my-custom-link

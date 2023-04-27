@@ -2,9 +2,7 @@
     <div>
         <jet-banner />
 
-        <div
-            class="min-h-screen shadow-xl bg-white"
-        >
+        <div class="min-h-screen shadow-xl bg-white">
             <nav
                 class="border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50 fixed-top bg-white"
             >
@@ -22,19 +20,11 @@
                             </div>
 
                             <!-- Navigation Links -->
-                            <!-- <div
+                            <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
-                                <jet-nav-link
-                                    :href="route('head.dashboard')"
-                                    :active="
-                                        route().current('head.dashboard') ||
-                                        route().current('head.*')
-                                    "
-                                >
-                                    Dashboard
-                                </jet-nav-link>
-                            </div> -->
+                                <main-loader></main-loader>
+                            </div>
 
                             <!-- <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
@@ -57,7 +47,6 @@
                                     Dashboard
                                 </jet-nav-link>
                             </div> -->
-
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -334,11 +323,6 @@
                     <div
                         v-if="show"
                         class="absolute w-full bg-white dark:bg-gray-900 z-10"
-                        :style="[
-                            isDark
-                                ? { 'background-color': '#1e1e1e' }
-                                : { background: '#FFF' },
-                        ]"
                     >
                         <div
                             :class="{
@@ -561,12 +545,12 @@
 </template>
 
 <!-- For dark mode triggering in tailwind -->
-<script setup>
+<!-- <script setup>
 import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-</script>
+</script> -->
 
 <script>
 import JetApplicationMark from "@/Jetstream/ApplicationMark";
@@ -576,6 +560,8 @@ import JetDropdownLink from "@/Jetstream/DropdownLink";
 import JetNavLink from "@/Jetstream/NavLink";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink";
 
+import MainLoader from ".././Pages/Components/MainLoader.vue";
+
 export default {
     components: {
         JetApplicationMark,
@@ -584,6 +570,7 @@ export default {
         JetDropdownLink,
         JetNavLink,
         JetResponsiveNavLink,
+        MainLoader,
     },
 
     created() {

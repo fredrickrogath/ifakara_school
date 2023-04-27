@@ -7,6 +7,10 @@ export default {
         return state.addStudent;
     },
 
+    getEditStudent(state){
+        return state.editStudent;
+    },
+    
     getSnackBarMessage(state){
         return state.snackBarMessage;
     },
@@ -19,9 +23,13 @@ export default {
         return state.invoiceView;
     },
 
-    getInvoiceId(state){
-        return state.invoiceId;
-    }
+    getStudentId(state){
+        return state.studentId;
+    },
+
+    getCommentView(state){
+        return state.commentView;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

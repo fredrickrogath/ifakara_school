@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students
+                Students {{ getStudentId }} mm {{ getEditStudent }}
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -114,6 +114,14 @@
                                     "
                                 >
                                     mdi-star
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'edit'"
+                                    size="22"
+                                    @click="setEditStudent(items[idx]['id'])"
+                                >
+                                    mdi-pen
                                 </v-icon>
 
                                 <span
@@ -241,10 +249,9 @@ export default {
         this.getStudents();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        window.Echo.channel("academic-trigger-add-student").listen(
+            "Academic\\StudentEvent",
             (e) => {
-                // console.log('abc');
                 this.getStudents();
             }
         );
@@ -258,7 +265,7 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
+            {
                     text: "First Name",
                     align: "start",
                     sortable: false,
@@ -277,9 +284,9 @@ export default {
                     value: "gender",
                 },
                 { text: "Location", value: "from" },
-                { text: "Parent", value: "parent" },
-                { text: "Contact", value: "parent_contact" },
-                { text: "Date", value: "created_at" },
+                // { text: "Parent", value: "parent" },
+                // { text: "Contact", value: "parent_contact" },
+                { text: "Edit", value: "edit" },
             ],
             students: [],
 
@@ -290,6 +297,14 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        getStudentId() {
+            return this.$store.getters["HeadStudentModule/getStudentId"];
+        },
+
+        getEditStudent() {
+            return this.$store.getters["HeadStudentModule/getEditStudent"];
         },
     },
 
@@ -310,17 +325,16 @@ export default {
             // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
-        // totalPrice(item) {
-        //     return item.reduce((total, item) => {
-        //         return total + item.tool.price * item.count;
-        //     }, 0);
-        // },
+        setEditStudent(id) {
+            this.$store.dispatch("HeadStudentModule/setStudentId", id);
+            this.$store.dispatch("HeadStudentModule/setEditStudent");
+        },
 
         getStudents() {
             axios.get("/head/getStudents").then((response) => {
                 this.students = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data)
+                // console.log(response.data.data)
             });
         },
 

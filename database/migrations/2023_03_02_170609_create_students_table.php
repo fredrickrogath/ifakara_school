@@ -23,6 +23,11 @@ class CreateStudentsTable extends Migration
             $table->string('parent');
             $table->string('parent_contact')->nullable();
             $table->foreignId('class_level_id')->constrained('class_levels')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('school_id')->nullable();
+            $table->boolean('permission_received')->default(false);
+            $table->boolean('permission_seen')->default(false);
+            $table->boolean('head_permission')->default(false);
+            $table->boolean('financial_secreatary_permission')->default(false);
             $table->timestamps();
         });
     }

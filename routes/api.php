@@ -34,3 +34,38 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
         Route::post('/acceptInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptInvoice'])->name('acceptInvoice');
         Route::get('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
 });
+
+/*
+        |--------------------------------------------------------------------------
+        | DEPARTMENTS & STAFFS
+        |--------------------------------------------------------------------------
+        */
+        Route::group(['prefix' => 'secretary', 'as' => 'secretary.'], function () {
+
+            Route::get('/getStaffs', [\App\Http\Controllers\Secretary\Staff\StaffController::class, 'getStaffs'])->name('getStaffs');
+            Route::get('/getStudents', [\App\Http\Controllers\Secretary\Student\StudentController::class, 'getStudents'])->name('getStudents');
+            Route::post('/addStaff', [\App\Http\Controllers\Secretary\SecretaryController::class, 'addStaff'])->name('addStaff');
+            Route::post('/getDepartments', [\App\Http\Controllers\Secretary\Staff\StaffController::class, 'getDepartments'])->name('getDepartments');
+    
+    
+    
+            Route::get('/getSchools', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchools'])->name('getSchools');
+            Route::post('/addStaff', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'addStaff'])->name('addStaff');
+            Route::post('/getSchoolStaffs', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolStaffs'])->name('getSchoolStaffs');
+            Route::post('/getSchoolStudents', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolStudents'])->name('getSchoolStudents');
+            Route::get('/getSchoolPermissions', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolPermissions'])->name('getSchoolPermissions');
+            Route::get('/getSchoolPermissionsNotifications', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getSchoolPermissionsNotifications'])->name('getSchoolPermissionsNotifications');
+            Route::post('/alterPermission', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'alterPermission'])->name('alterPermission');
+            Route::post('/getComments', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'getComments'])->name('getComments');
+            Route::post('/sendComment', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'sendComment'])->name('sendComment');
+     
+            Route::post('/registerSchool', [\App\Http\Controllers\Secretary\Schools\SchoolController::class, 'registerSchool'])->name('registerSchool');
+
+            Route::post('/getToolDashboardData', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getToolDashboardData'])->name('getToolDashboardData');
+            Route::post('/getInvoiceDashboardData', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoiceDashboardData'])->name('getInvoiceDashboardData');
+        });
+
+        // Route::group(['prefix' => 'procurement', 'middleware' => 'is_procurement', 'as' => 'procurement.'], function () {
+            
+        // });
+        

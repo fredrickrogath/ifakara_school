@@ -21,7 +21,19 @@ export default {
 
     getInvoiceId(state){
         return state.invoiceId;
-    }
+    },
+
+    getStudentId(state){
+        return state.studentId;
+    },
+
+    getCommentView(state){
+        return state.commentView;
+    },
+
+    getEditStudent(state){
+        return state.editStudent;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state
