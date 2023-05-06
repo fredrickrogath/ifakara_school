@@ -132,40 +132,11 @@
 
                         <h4 class="header-title mb-2">Analytics Performance</h4>
 
-                        <!-- <div class="d-flex text-center">
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">Current Week</p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-primary align-middle me-1"
-                                    ></small>
-                                    <span>$58,254</span>
-                                </h4>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">
-                                    Previous Week
-                                </p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
-                                    ></small>
-                                    <span>$69,524</span>
-                                </h4>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">Targets</p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
-                                    ></small>
-                                    <span>$95,025</span>
-                                </h4>
-                            </div> -->
+                      
                             <div class="text-center">
                                 <pie-chart3-d></pie-chart3-d>
                             </div>
-                        </div> -->
+                      
 
                         <v-card flat>
                             <v-tabs color="deep-purple accent-4" right>
