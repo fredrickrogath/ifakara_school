@@ -500,15 +500,7 @@
             </div>
             <!-- end col -->
         </div>
-
-        <!-- <div>   
-            <pie-chart3-d></pie-chart3-d>
-            <google-donut></google-donut>
-            <google-bar></google-bar>
-            <google-grouped-bar></google-grouped-bar>
-        </div> -->
-        <!-- end row -->
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
