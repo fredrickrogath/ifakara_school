@@ -18,6 +18,7 @@ class CreateTuitionFeesTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('charts_of_accounts_id')->constrained('charts_of_accounts')->onDelete('cascade')->onUpdate('cascade');
             $table->float('amount', 20, 2);
+            $table->integer('school_id');
             $table->string('narration');
             $table->timestamps();
         });

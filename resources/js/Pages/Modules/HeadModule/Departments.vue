@@ -389,7 +389,7 @@
 </template>
 
 <script>
-import JetApplicationMark from "@/Jetstream/ApplicationMark";
+// import JetApplicationMark from "@/Jetstream/ApplicationMark";
 
 import AllStaffs from "./Departments/AllStaffs.vue";
 import NewStaffs from "./Departments/NewStaffs.vue";
@@ -402,7 +402,7 @@ import Select2 from "v-select2-component";
 
 export default {
     components: {
-        JetApplicationMark,
+        // JetApplicationMark,
 
         AllStaffs,
         NewStaffs,

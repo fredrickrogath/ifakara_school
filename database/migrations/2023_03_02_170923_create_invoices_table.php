@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('invoice_no');
             $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
             $table->string('narration');
+            $table->integer('school_id');
             $table->boolean('status')->default(false);
             $table->boolean('status_from_financial')->default(false);
             $table->boolean('starred')->default(false);

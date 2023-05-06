@@ -16,6 +16,7 @@ class ChartsOfAccount extends Model
         'level3',
         'name',
         'description',
+        'school_id',
         'notes',
     ];
 }

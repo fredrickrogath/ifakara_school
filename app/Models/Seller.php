@@ -14,6 +14,7 @@ class Seller extends Model
         'location',
         'mobile',
         'user_id',
+        'school_id',
         'email',
     ];
 }

@@ -15,6 +15,7 @@ class ToolService
             'name' => $request->name,
             'price' => $request->price,
             'count' => $request->count,
+            'school_id' => auth()->user()->school_id,
             'user_id' => auth()->user()->id,
             'description' => $request->narration,
 
@@ -32,6 +33,7 @@ class ToolService
             'email' => $request->email,
             'location' => $request->location,
             'user_id' => auth()->user()->id,
+            'school_id' => auth()->user()->school_id,
             'mobile' => $request->mobile,
 
         ]);
@@ -44,6 +46,10 @@ class ToolService
 
     public function get_tools(){
         return \App\Models\Tool::where('broken', false)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getToolsForInternalAuditor($request){
+        return \App\Models\Tool::where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getSellersList(){
@@ -80,6 +86,7 @@ class ToolService
                 'count' => $tool->count,
                 'broken' => true,
                 'user_id' => auth()->user()->id,
+                'school_id' => auth()->user()->school_id,
                 'description' => $tool->narration,
     
             ]);
