@@ -9,6 +9,10 @@ use App\Services\HeadServices\UploadServices\UploadService;
 
 class UploadController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     public function getAcademicUploads(Request $request ,UploadService $uploadService){
         $this->authorize('authorizeHead', \App\Models\User::class); 

@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div class="pt-0 bg-gray-100">
         <div class="row bg-gray-100">
             <div class="col-md-3 col-xl-3">
@@ -452,9 +453,13 @@
             </div>
             <!-- end col -->
         </div>
+<<<<<<< HEAD
 
     </div>
     <!-- </div> -->
+=======
+    </div>
+>>>>>>> 20e480b9e56a58e6816be3dc75edf6d2d0a011d4
 </template>
 
 <script>

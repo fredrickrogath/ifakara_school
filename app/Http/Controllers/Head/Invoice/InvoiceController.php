@@ -9,6 +9,10 @@ use App\Services\HeadServices\InvoiceServices\InvoiceService;
 
 class InvoiceController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     public function getInvoices(InvoiceService $invoiceService){
         $this->authorize('authorizeHead', \App\Models\User::class); 

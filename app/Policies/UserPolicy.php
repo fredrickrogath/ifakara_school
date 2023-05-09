@@ -16,7 +16,7 @@ class UserPolicy
 
         return $user->role == \App\Models\User::is_head
                 ? Response::allow()
-                : Response::deny('Kijana : You are not head office.');
+                : Response::deny('You are not head office.');
     }
 
     //Determine if the user is allowed to view bishop dashboard
@@ -24,7 +24,7 @@ class UserPolicy
 
         return $user->role == \App\Models\User::is_bishop
                 ? Response::allow()
-                : Response::deny('Kijana : You are not a bishop.');
+                : Response::deny('You are not a bishop.');
     }
 
     //Determine if the user is allowed to view academic dashboard
@@ -32,7 +32,7 @@ class UserPolicy
 
         return $user->role == \App\Models\User::is_academic
                 ? Response::allow()
-                : Response::deny('Kijana : You are not academic.');
+                : Response::deny('You are not academic.');
     }
 
     //Determine if the user is allowed to view secretary dashboard
@@ -40,7 +40,7 @@ class UserPolicy
 
         return $user->role == \App\Models\User::is_secretary
                 ? Response::allow()
-                : Response::deny('Kijana : You are not a secretary.');
+                : Response::deny('You are not a secretary.');
     }
 
     //Determine if the user is allowed to view accountant dashboard
@@ -48,7 +48,7 @@ class UserPolicy
 
         return $user->role == \App\Models\User::is_accountant
                 ? Response::allow()
-                : Response::deny('Kijana : You are not accountant.');
+                : Response::deny('You are not accountant.');
     }
 
     //Determine if the user is allowed to view procurement dashboard
@@ -56,7 +56,7 @@ class UserPolicy
 
         return $user->role == \App\Models\User::is_procurement
                 ? Response::allow()
-                : Response::deny('Kijana : You are not in procurement.');
+                : Response::deny('You are not in procurement.');
     }
 
     //Determine if the user is allowed to view accountant_main dashboard
@@ -64,7 +64,7 @@ class UserPolicy
 
         return $user->role == \App\Models\User::is_accountant_main
                 ? Response::allow()
-                : Response::deny('Kijana : You are not accountant_main.');
+                : Response::deny('You are not accountant_main.');
     }
 
     //Determine if the user is allowed to view internal aauditor dashboard
@@ -72,7 +72,7 @@ class UserPolicy
 
         return $user->role == \App\Models\User::is_internal_auditor
                 ? Response::allow()
-                : Response::deny('Kijana : You are not internal auditor.');
+                : Response::deny('You are not internal auditor.');
     }
 
     /**

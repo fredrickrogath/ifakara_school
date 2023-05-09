@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['check_screen_size']);
+    }
+    
     // Determining user's role before redirects to specified dashbaord
 
     public function DetermineUserRole(){

@@ -8,6 +8,10 @@ use App\Services\AcademicServices\StudentServices\StudentService;
 
 class StudentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+
     //
     //
     // public function addInvoice(Request $request ,InvoiceService $invoiceService){
@@ -20,7 +24,7 @@ class StudentController extends Controller
         $this->authorize('authorizeAcademic', \App\Models\User::class); 
         // event(new \App\Events\NewPostPublished('academic student'));
         event(new \App\Events\Academic\StudentEvent('academic student'));
-        event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        event(new \App\Events\Api\Secretary\StudentEvent(auth()->user()->school_id));
         return response()->json(['data' => $studentService->addStudent($request)]);
     }
 

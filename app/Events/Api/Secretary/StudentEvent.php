@@ -14,17 +14,18 @@ class StudentEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
-    public $actor;
+    // public $message;
+    // public $actor;
+    public $schoolId;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($schoolId)
     {
-        $this->message = $data;
+        $this->schoolId = $schoolId;
         // $this->actor = auth()->user()->id;
         // echo "<p>NewPostPublished('$data') object has been created.</p>";
     }
@@ -36,6 +37,6 @@ class StudentEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('Student');
+        return new Channel('school-student-trigger-from-financial-secretary.' . $this->schoolId);
 }
 }

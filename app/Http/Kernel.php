@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'is_head' => \App\Http\Middleware\IsHeadMiddleware::class,
         'is_bishop' => \App\Http\Middleware\IsBishopMiddleware::class,
+        'check_screen_size' => \App\Http\Middleware\CheckScreenSize::class,
         'is_academic' => \App\Http\Middleware\IsAcademicMiddleware::class,
         'is_secretary' => \App\Http\Middleware\IsSecretaryMiddleware::class,
         'is_accountant' => \App\Http\Middleware\IsAccountantMiddleware::class,

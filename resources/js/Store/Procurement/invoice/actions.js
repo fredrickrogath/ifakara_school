@@ -9,8 +9,8 @@ export default {
         context.commit("setInvoiceGenerate");
     },
     
-    setSnackBarState(context){
-        context.commit("setSnackBarState");
+    setSnackBarState(context, message){
+        context.commit("setSnackBarState", message);
     },
 
     setInvoiceView(context, id){

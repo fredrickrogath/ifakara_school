@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class SecretaryController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     
 }
