@@ -7,15 +7,15 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm bg-blue rounded">
-                                    <i class="fe-aperture avatar-title font-22 text-white"></i>
+                                <div class="avatar-sm  rounded">
+                                    <i class=" fas fa-users font-10 text-primary" style="font-size:40px;"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ students }}
+                                            {{ students ? students : 'please wait ...' }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -35,8 +35,8 @@
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm bg-success rounded">
-                                    <i class="fe-shopping-cart avatar-title font-22 text-white"></i>
+                                <div class="avatar-sm rounded">
+                                    <i class="fas fa-money-check avatar-title font-22 text-danger" style="font-size:40px"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -60,8 +60,8 @@
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm bg-primary rounded">
-                                    <i class="fe-bar-chart-2 avatar-title font-22 text-white"></i>
+                                <div class="avatar-sm rounded">
+                                    <i class="fas fa-minus-square  avatar-title  text-warning" style="font-size:40px"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -92,7 +92,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"> {{ totalTool }} </span>
+                                        <span data-plugin="counterup"> {{ totalTool ? totalTool : 'please wait ...'  }} </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Tools
@@ -109,9 +109,9 @@
         <!-- end row -->
 
         <div class="row pt-0 mt-0">
-            <div class="col-xl-8 col-md-6 mb-0 pb-0">
+            <div class="col-xl-6 col-md-6">   
                 <div class="card">
-                    <div class="card-body pb-2">
+                    <div class="card-body">
                         <div class="float-end d-none d-md-inline-block">
                             <!-- <div class="btn-group mb-2">
                                 <button
@@ -132,10 +132,10 @@
                         <h4 class="header-title mb-2">Analytics Performance</h4>
 
 
-                        <div class="text-center">
+                        <!-- <div class="text-center">
                             <pie-chart3-d></pie-chart3-d>
                         </div>
-
+ -->
 
                         <v-card flat>
                             <v-tabs color="deep-purple accent-4" right>
@@ -322,7 +322,7 @@
             </div> -->
             <!-- end col-->
 
-            <div class="col-xl-8 col-md-6 mb-0 pb-0">
+            <div class="col-xl-6 col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <!-- <div class="float-end d-none d-md-inline-block"> -->
@@ -472,7 +472,7 @@ export default {
     mounted() {
         this.initialize();
 
-        // Receiving broadicasting
+        // Receiving broadicasting  
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {

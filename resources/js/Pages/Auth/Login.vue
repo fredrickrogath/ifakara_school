@@ -3,50 +3,29 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-8 col-12">
-                    <div
-                        class="card bg-pattern"
-                        style="
+                    <div class="card bg-pattern" style="
                            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-                        "
-                    >
+                        ">
                         <div class="card-body p-4">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="text-center w-75 m-auto">
                                         <div class="auth-logo">
-                                            <a
-                                                href="/"
-                                                class="logo logo-dark text-center"
-                                            >
-                                                <span
-                                                    class="logo-lg text-md"
-                                                    style="
+                                            <a href="/" class="logo logo-dark text-center">
+                                                <span class="logo-lg text-md" style="
                                                         font-size: 20px;
                                                         font-weight: 700;
-                                                    "
-                                                >
-                                                    <img
-                                                        src=""
-                                                        w-100
-                                                        h-100
-                                                        alt=""
-                                                    />
+                                                    ">
+                                                    <img src="" w-100 h-100 alt="" />
                                                 </span>
                                                 <h4 style="font-weight: 700">
                                                     Login Here
                                                 </h4>
                                             </a>
 
-                                            <a
-                                                href=""
-                                                class="logo logo-light text-center"
-                                            >
+                                            <a href="" class="logo logo-light text-center">
                                                 <span class="logo-lg">
-                                                    <img
-                                                        src="site/images/favicon.ico'"
-                                                        alt=""
-                                                        height="22"
-                                                    />
+                                                    <img src="site/images/favicon.ico'" alt="" height="22" />
                                                 </span>
                                             </a>
                                         </div>
@@ -58,72 +37,37 @@
 
                                         <jet-validation-errors class="mb-0" />
 
-                                        <div
-                                            v-if="status"
-                                            class="mb-4 font-medium text-sm text-green-600"
-                                        >
+                                        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                                             {{ status }}
                                         </div>
 
                                         <form @submit.prevent="submit">
                                             <div>
-                                                <jet-label
-                                                    for="email"
-                                                    value="Email"
-                                                />
-                                                <jet-input
-                                                    id="email"
-                                                    type="email"
-                                                    class="mt-1 block w-full"
-                                                    v-model="form.email"
-                                                    required
-                                                    autofocus
-                                                />
+                                                <jet-label for="email" value="Email" />
+                                                <jet-input id="email" type="email" class="mt-1 block w-full"
+                                                    v-model="form.email" required autofocus />
                                             </div>
 
                                             <div class="mt-2">
-                                                <jet-label
-                                                    for="password"
-                                                    value="Password"
-                                                />
-                                                <jet-input
-                                                    id="password"
-                                                    type="password"
-                                                    class="mt-1 block w-full"
-                                                    v-model="form.password"
-                                                    required
-                                                    autocomplete="current-password"
-                                                />
+                                                <jet-label for="password" value="Password" />
+                                                <jet-input id="password" type="password" class="mt-1 block w-full"
+                                                    v-model="form.password" required autocomplete="current-password" />
                                             </div>
 
                                             <div class="block mt-3">
-                                                <label
-                                                    class="flex items-center"
-                                                >
-                                                    <jet-checkbox
-                                                        name="remember"
-                                                        class="border border-gray-900"
-                                                        v-model="form.remember"
-                                                    />
-                                                    <span
-                                                        class="ml-2 text-sm text-gray-600"
-                                                        >Remember me</span
-                                                    >
+                                                <label class="flex items-center">
+                                                    <jet-checkbox name="remember" class="border border-gray-900"
+                                                        v-model="form.remember" />
+                                                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
                                                 </label>
                                             </div>
 
-                                            <div
-                                                class="flex items-center justify-center mt-3"
-                                            >
-                                                <jet-button
-                                                    class="w-full text-center flex justify-center"
-                                                    style="border-radius: 20px"
-                                                    :class="{
+                                            <div class="flex items-center justify-center mt-3">
+                                                <jet-button class="w-full text-center flex justify-center"
+                                                    style="border-radius: 20px" :class="{
                                                         'opacity-25':
                                                             form.processing,
-                                                    }"
-                                                    :disabled="form.processing"
-                                                >
+                                                    }" :disabled="form.processing">
                                                     Login
                                                 </jet-button>
                                             </div>
@@ -132,15 +76,10 @@
                                     <div class="row mt-3">
                                         <div class="col-12 text-center">
                                             <p>
-                                                <inertia-link
-                                                    v-if="canResetPassword"
-                                                    :href="
-                                                        route(
-                                                            'password.request'
-                                                        )
-                                                    "
-                                                    class="underline text-sm text-gray-600 hover:text-gray-900"
-                                                >
+                                                <inertia-link v-if="canResetPassword" :href="route(
+                                                    'password.request'
+                                                )
+                                                    " class="underline text-sm text-gray-600 hover:text-gray-900">
                                                     Forgot your password?
                                                 </inertia-link>
                                             </p>
@@ -162,12 +101,8 @@
                                 <div class="col-md-6">
                                     <h4 class=" text-center fw-bold">IFAKARA CATHOLIC DIOCESE</h4>
 
-                    
-                                    <img
-                                                    src="site/img/bg-img/login.jpeg"
-                                                    alt="..."
-                                                    class="d-block img-fluid"
-                                                />
+
+                                    <img src="site/img/bg-img/login.jpeg" alt="..." class="d-block img-fluid" />
                                 </div>
                             </div>
                         </div>
@@ -182,14 +117,13 @@
                 <!-- end row -->
             </div>
             <!-- end container -->
-            <small class="text-center text-sm text-black fixed-bottom mb-3">&copy; 2023 Ifakara Catholic Diosece. All Rights Reserved.</small>
+            <!-- <small class="text-center text-sm text-black fixed-bottom mb-3">&copy; 2023 Ifakara Catholic Diosece. All Rights
+                Reserved.</small> -->
         </div>
         <!-- end page -->
-        <!-- <footer class="footer footer-alt text-dark-50">    
-            <script>
-                document.write(new Date().getFullYear())
-            </script> &copy; | <a href="" class="text-dark-50">Ifakara catholic diocese</a>
-        </footer> -->
+        <footer class="footer footer-alt text-dark-50">
+            2023 &copy; | <a href="" class="text-dark-50">Ifakara catholic diocese</a>
+        </footer>
     </div>
 </template>
 
