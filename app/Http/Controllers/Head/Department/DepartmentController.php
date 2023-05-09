@@ -8,6 +8,10 @@ use App\Services\HeadServices\DepartmentServices\DepartmentService;
 
 class DepartmentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     public function addStaff(Request $request ,DepartmentService $departmentService){
         $this->authorize('authorizeHead', \App\Models\User::class);

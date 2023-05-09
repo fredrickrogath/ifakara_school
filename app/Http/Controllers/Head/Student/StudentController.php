@@ -9,6 +9,10 @@ use App\Services\HeadServices\StudentServices\StudentService;
 
 class StudentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     public function addStudent(Request $request, StudentService $studentService){
         $this->authorize('authorizeHead', \App\Models\User::class); 

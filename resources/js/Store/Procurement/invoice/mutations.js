@@ -7,7 +7,8 @@ export default {
         state.invoiceGenerate = !state.invoiceGenerate;
     },
 
-    setSnackBarState(state){
+    setSnackBarState(state, message){
+        state.snackBarMessage = message;
         state.snackBarState = !state.snackBarState;
     },
 

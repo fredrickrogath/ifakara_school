@@ -19,7 +19,7 @@ class SchoolController extends Controller
     public function addStaff(Request $request ,SchoolsService $schoolsService){
         // $this->authorize('authorizeHead', \App\Models\User::class);
         // event(new \App\Events\NewPostPublished('head'));
-        event(new \App\Events\Api\Secretary\SchoolEvent());
+        event(new \App\Events\Api\Secretary\StaffEvent($request->schoolId));
         return response()->json(['data' => $schoolsService->addStaff($request)]);
     }
     

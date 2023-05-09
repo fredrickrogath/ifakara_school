@@ -246,23 +246,23 @@
                                     <add-seller></add-seller>
                                 </div>
                                 <div v-show="!getAddSeller">
-                                    <transition name="fade">
+                                    <!-- <transition name="fade"> -->
                                         <AllTools
-                                            v-if="getCurrentTab == 'all'"
+                                            v-show="getCurrentTab == 'all'"
                                         ></AllTools>
                                         <sellers
-                                            v-if="getCurrentTab == 'Sellers'"
+                                            v-show="getCurrentTab == 'Sellers'"
                                         ></sellers>
                                         <starred-tools
-                                            v-if="getCurrentTab == 'starred'"
+                                            v-show="getCurrentTab == 'starred'"
                                         ></starred-tools>
                                         <broken-tools
-                                            v-if="getCurrentTab == 'lost'"
+                                            v-show="getCurrentTab == 'lost'"
                                         ></broken-tools>
                                         <trashed-tools
-                                            v-if="getCurrentTab == 'deleted'"
+                                            v-show="getCurrentTab == 'deleted'"
                                         ></trashed-tools>
-                                    </transition>
+                                    <!-- </transition> -->
                                 </div>
                             </div>
                             <!-- end .mt-3-->

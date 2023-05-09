@@ -56,8 +56,11 @@
             </div>
             <!-- /.modal -->
 
+            <snack-bar></snack-bar>
+
             <v-card-title class="px-0 pt-0">
                 Tools & Equipments
+                <snack-bar message="Task completed successfully"></snack-bar>
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -245,9 +248,11 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
 export default {
     components: {
         Spinner,
+        SnackBar
     },
 
     props: {
@@ -324,6 +329,12 @@ export default {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
         },
+
+        // getSnackBarState() {
+        //     return this.$store.getters[
+        //         "ProcurementInvoiceModule/getSnackBarState"
+        //     ];
+        // },
     },
 
     methods: {
@@ -341,6 +352,10 @@ export default {
         formattedDate(date) {
             // return moment(date).format("MMMM Do YYYY");
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        },
+
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
         },
 
         encrypt() {
@@ -403,6 +418,7 @@ export default {
                 .then((response) => {
                     // this.students = response.data.data;
                     // console.log(response.data.data);
+                    this.setSnackBarState()
                 });
             // handle response here
         },

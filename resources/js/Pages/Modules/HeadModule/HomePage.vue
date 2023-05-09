@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div class="pt-0 bg-gray-100">
         <div class="row bg-gray-100">
             <div class="col-md-3 col-xl-3">
@@ -500,7 +501,7 @@
             </div>
             <!-- end col -->
         </div>
-    <!-- </div> -->
+    </div>
 </template>
 
 <script>

@@ -9,6 +9,10 @@ use App\Services\AccountantServices\InvoiceServices\StudentService;
 
 class ChatOfAccountController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     /*
     |--------------------------------------------------------------------------

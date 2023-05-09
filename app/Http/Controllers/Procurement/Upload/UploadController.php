@@ -9,6 +9,10 @@ use App\Services\ProcurementServices\UploadServices\UploadService;
 
 class UploadController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     public function upload(Request $request ,UploadService $uploadService){
         $this->authorize('authorizeProcurement', \App\Models\User::class);

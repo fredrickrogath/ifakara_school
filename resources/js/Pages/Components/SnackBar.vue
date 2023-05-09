@@ -1,23 +1,32 @@
 <template>
     <div class="text-center">
+        <span class="d-none" v-if="getSnackBarState"></span>
         <v-snackbar
-            v-model="getSnackBarState"
+            v-model="getSnackBar"
             :timeout="timeout"
             rounded="pill"
-            color="green"
+            color="#22c55e"
             :top="true"
             :right="true"
+            :absolute="true"
         >
-            {{ getSnackBarMessage }}
+            {{ text }}
         </v-snackbar>
     </div>
 </template>
 
 <script>
 export default {
+    props: ['message'],
+
+    mounted(){
+        this.text = this.message;
+    },
+
     data: () => ({
-        text: "My timeout is set to 2000.",
-        timeout: 2000,
+        text: "",
+        timeout: 3000,
+        getSnackBar: false,
     }),
 
     computed: {
@@ -26,20 +35,12 @@ export default {
                 "ProcurementInvoiceModule/getSnackBarState"
             ];
         },
-
-        getSnackBarMessage() {
-            return this.$store.getters[
-                "ProcurementInvoiceModule/getSnackBarMessage"
-            ];
-        },
     },
 
-    methods: {
-      // getSnackBarState() {
-      //       return this.$store.getters[
-      //           "ProcurementInvoiceModule/getSnackBarState"
-      //       ];
-      //   },
-    }
+    watch: {
+        getSnackBarState(newVal) {
+            this.getSnackBar = true;
+        },
+    },
 };
 </script>

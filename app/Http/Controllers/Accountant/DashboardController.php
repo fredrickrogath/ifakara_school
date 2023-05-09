@@ -10,6 +10,10 @@ use App\Services\AccountantServices\AccountantService;
 
 class DashboardController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     /*
     |--------------------------------------------------------------------------
     | protects only specific functions

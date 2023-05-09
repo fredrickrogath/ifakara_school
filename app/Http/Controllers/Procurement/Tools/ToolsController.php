@@ -9,6 +9,10 @@ use App\Services\ProcurementServices\ToolServices\ToolService;
 
 class ToolsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+
     //
     public function add_tool(Request $request ,ToolService $toolService){
         $this->authorize('authorizeProcurement', \App\Models\User::class);

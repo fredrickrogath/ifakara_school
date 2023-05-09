@@ -29,6 +29,10 @@ class DashboardController extends Controller
     }
     */
 
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+
     public function dashboard(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return Inertia::render('Dashboard', $procurementService->dashboardData());
