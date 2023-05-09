@@ -13,6 +13,7 @@ class TuitionFee extends Model
         'charts_of_accounts_id',
         'user_id',
         'amount',
+        'school_id',
         'narration',
     ];
 

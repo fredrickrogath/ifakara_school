@@ -17,6 +17,7 @@ class Tool extends Model
         'broken',
         'user_id',
         'starred',
+        'school_id',
         'description',
     ];
 

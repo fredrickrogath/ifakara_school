@@ -15,6 +15,7 @@ class Upload extends Model
         'path',
         'title',
         'user_id',
+        'school_id',
         'description',
     ];
 

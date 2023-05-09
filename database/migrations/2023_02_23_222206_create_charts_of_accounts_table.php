@@ -22,6 +22,7 @@ class CreateChartsOfAccountsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('notes')->nullable();
+            $table->integer('school_id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->timestamps();
         });

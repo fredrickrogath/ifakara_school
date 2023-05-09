@@ -14,6 +14,7 @@ class Invoice extends Model
         'invoice_no',
         'seller_id',
         'narration',
+        'school_id',
         'status',
         'starred',
         'status_from_financial',

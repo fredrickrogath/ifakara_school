@@ -13,6 +13,7 @@ class InvoiceTool extends Model
         'invoice_id',
         'tool_id',
         'count',
+        'school_id',
         'user_id',
     ];
 

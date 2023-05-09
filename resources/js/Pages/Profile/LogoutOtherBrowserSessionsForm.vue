@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center mt-5">
+            <div class="flex items-center mt-5 text-white">
                 <jet-button @click.native="confirmLogout">
                     Logout Other Browser Sessions
                 </jet-button>

@@ -20,7 +20,7 @@ class CreateSellersTable extends Migration
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            // $table->foreignId('school_id')->constrained('schools')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('school_id');
             $table->timestamps();
         });
     }

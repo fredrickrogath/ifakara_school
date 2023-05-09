@@ -22,6 +22,7 @@ class CreateToolsTable extends Migration
             $table->string('description')->nullable();
             $table->boolean('broken')->default(false);
             $table->softDeletes('deleted_at');
+            $table->integer('school_id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->timestamps();
         });

@@ -18,7 +18,7 @@
             >
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
-                        <div class="modal-body p-2">    
+                        <div class="modal-body p-2">
                             <div class="text-center">
                                 <i
                                     class="dripicons-warning h1 text-warning"
@@ -138,10 +138,10 @@
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'id'"
-                                    >{{
-                                        item[header.value]
-                                    }}</span
                                 >
+                                    {{ encrypt() }}
+                                    <!-- {{ item[header.value] }} -->
+                                </span>
 
                                 <v-edit-dialog
                                     v-else
@@ -343,11 +343,23 @@ export default {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
+        encrypt() {
+            let result = "";
+            const characters =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (let i = 0; i < 4; i++) {
+                result += characters.charAt(
+                    Math.floor(Math.random() * characters.length)
+                );
+            }
+            return "wU" + result.slice(2);
+        },
+
         getTools() {
             axios.get("/procurement/get_tools").then((response) => {
                 this.tools = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data)
+                // console.log(response.data.data);
             });
         },
 
@@ -362,12 +374,12 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
 
-        async starredTools(id,data ,column) {
+        async starredTools(id, data, column) {
             axios
                 .post("/procurement/starredTools", {
                     id: id,
@@ -378,7 +390,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -390,7 +402,7 @@ export default {
                 })
                 .then((response) => {
                     // this.students = response.data.data;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

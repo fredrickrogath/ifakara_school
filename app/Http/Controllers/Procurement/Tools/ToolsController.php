@@ -96,5 +96,11 @@ class ToolsController extends Controller
         // event(new \App\Events\Procurement\ToolEvent('created'));
         return response()->json(['data' => $toolService->getToolDashboardData($request)]);
     }
+
+    public function getToolsForInternalAuditor(Request $request, ToolService $toolService){
+        // $this->authorize('authorizeProcurement', \App\Models\User::class);
+        // event(new \App\Events\Procurement\ToolEvent('created'));
+        return response()->json(['data' => $toolService->getToolsForInternalAuditor($request)]);
+    }
     
 }

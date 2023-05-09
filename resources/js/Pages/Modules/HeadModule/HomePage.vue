@@ -91,9 +91,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            > {{ totalTool }} </span
-                                        >
+                                        <span data-plugin="counterup"> {{ totalTool }} </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Tools
@@ -132,11 +130,11 @@
 
                         <h4 class="header-title mb-2">Analytics Performance</h4>
 
-                      
-                            <div class="text-center">
-                                <pie-chart3-d></pie-chart3-d>
-                            </div>
-                      
+
+                        <div class="text-center">
+                            <pie-chart3-d></pie-chart3-d>
+                        </div>
+
 
                         <v-card flat>
                             <v-tabs color="deep-purple accent-4" right>
@@ -146,25 +144,19 @@
 
                                 <v-tab-item key="1">
                                     <v-container fluid>
-                                        <pie-chart3-d
-                                            :data="registeredStudents"
-                                        ></pie-chart3-d>
+                                        <pie-chart3-d :data="registeredStudents"></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
 
                                 <v-tab-item key="2">
                                     <v-container fluid>
-                                        <pie-chart3-d
-                                            :data="tools"
-                                        ></pie-chart3-d>
+                                        <pie-chart3-d :data="tools"></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
 
                                 <v-tab-item key="3">
                                     <v-container fluid>
-                                        <pie-chart3-d
-                                            :data="finances"
-                                        ></pie-chart3-d>
+                                        <pie-chart3-d :data="finances"></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
                             </v-tabs>
@@ -389,11 +381,7 @@
                             </div>
                         </div> -->
                         <div class="">
-                            <google-bar
-                                :data="chartData"
-                                YText="Invoice Count"
-                                height="400"
-                            ></google-bar>
+                            <google-bar :data="chartData" YText="Invoice Count" height="400"></google-bar>
                         </div>
                     </div>
                 </div>
@@ -408,9 +396,7 @@
                         <h4 class="header-title mb-1">School Staffs</h4>
 
                         <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0"
-                            >
+                            <table class="table table-centered table-nowrap table-hover mb-0">
                                 <thead>
                                     <tr>
                                         <th class="border-top-0">Identity</th>
@@ -428,14 +414,9 @@
                                 <tbody>
                                     <tr v-for="staff in staffs" :key="staff.id">
                                         <td>
-                                            <img
-                                                class="h-8 w-8 rounded-full object-cover"
-                                                :src="
-                                                    $page.props.user
-                                                        .profile_photo_url
-                                                "
-                                                :alt="$page.props.user.name"
-                                            />
+                                            <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user
+                                                    .profile_photo_url
+                                                " :alt="$page.props.user.name" />
                                             <!-- <img
                                                 src="assets/images/users/user-2.jpg"
                                                 alt="user-pic"
@@ -472,14 +453,8 @@
             <!-- end col -->
         </div>
 
-        <!-- <div>   
-            <pie-chart3-d></pie-chart3-d>
-            <google-donut></google-donut>
-            <google-bar></google-bar>
-            <google-grouped-bar></google-grouped-bar>
-        </div> -->
-        <!-- end row -->
     </div>
+    <!-- </div> -->
 </template>
 
 <script>

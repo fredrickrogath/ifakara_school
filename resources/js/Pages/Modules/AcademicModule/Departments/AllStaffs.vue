@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students
+                Staff
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"

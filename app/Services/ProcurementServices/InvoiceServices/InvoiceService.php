@@ -15,6 +15,7 @@ class InvoiceService
             'name' => $request->name,
             'price' => $request->price,
             'count' => $request->count,
+            'school_id' => auth()->user()->school_id,
             'description' => $request->narration,
 
         ]);
@@ -118,6 +119,7 @@ class InvoiceService
         $invoice = \App\Models\Invoice::create([
             'invoice_no' => 0000,
             'seller_id' => $request->sellerId,
+            'school_id' => auth()->user()->school_id,
             'narration' => '...'
         ]);
 
@@ -126,6 +128,7 @@ class InvoiceService
                 'invoice_id' => $invoice->id,
                 'tool_id' => $tool['id'],
                 'user_id' => auth()->user()->id,
+                'school_id' => auth()->user()->school_id,
                 'count' => $tool['count'],
             ]);
         }

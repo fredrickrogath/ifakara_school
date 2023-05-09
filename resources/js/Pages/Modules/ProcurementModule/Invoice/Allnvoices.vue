@@ -123,7 +123,10 @@
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'id'"
-                                    >{{ item[header.value] }}</span
+                                    >
+                                    <!-- {{ item[header.value] }} -->
+                                    {{ encrypt() }}
+                                    </span
                                 >
 
                                 <span
@@ -267,6 +270,18 @@ export default {
     },
 
     methods: {
+        encrypt() {
+            let result = "";
+            const characters =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (let i = 0; i < 4; i++) {
+                result += characters.charAt(
+                    Math.floor(Math.random() * characters.length)
+                );
+            }
+            return "wU" + result.slice(2);
+        },
+
         generatePdfReport() {
             // Create a new instance of jsPDF
             const doc = new jsPDF();

@@ -123,9 +123,9 @@
         <div class="row">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="h-screen">
-                    <div class="pt-1">
-                        <!-- Left sidebar -->
+                <div class="card h-screen">
+                    <div class="card-body px-0">
+                        <!-- Left sidebar -->   
                         <div class="inbox-leftbar bg-white h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
@@ -254,10 +254,8 @@
 
                             <hr class="bg-gray-100 mb-1 mt-0" /> -->
 
-                            <div class="mail-list">
-                                <div
-                                    class="d-flex justify-content-between align-items-center"
-                                >
+                             <div class="mail-list">
+                                <div class="d-flex justify-content-between align-items-center">
                                     <div class="ml-3 font-15">My Office</div>
 
                                     <v-icon
@@ -369,7 +367,7 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-1 px-0">
+                        <div class="inbox-rightbar">
                         
                             <div class="bg-white h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
