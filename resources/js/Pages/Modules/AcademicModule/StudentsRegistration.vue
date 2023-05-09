@@ -123,15 +123,9 @@
         <div class="row bg-white">
             <!-- Right Sidebar -->
             <div class="col-12">
-<<<<<<< HEAD
-                <div class="card h-screen">
-                    <div class="card-body px-0">
-                        <!-- Left sidebar -->   
-=======
                 <div class="">
                     <div class="pt-1">
                         <!-- Left sidebar -->
->>>>>>> 20e480b9e56a58e6816be3dc75edf6d2d0a011d4
                         <div class="inbox-leftbar bg-white h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
