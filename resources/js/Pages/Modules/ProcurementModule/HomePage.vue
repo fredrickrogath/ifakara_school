@@ -16,7 +16,7 @@
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ totalTools }}
+                                            {{ totalTools? totalTools : 0 }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -48,7 +48,7 @@
                                         <span data-plugin="counterup">12</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ newToolTitle }}
+                                        {{ newToolTitle? newToolTitle : 'Please wait' }}
                                     </p>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                         <span data-plugin="counterup">87</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ brokenToolTitle }}
+                                        {{ brokenToolTitle? brokenToolTitle : 'Please wait' }}
                                     </p>
                                 </div>
                             </div>
@@ -100,11 +100,11 @@
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup"
-                                            > {{ totalUploads }} </span
+                                            > {{ totalUploads? totalUploads : 0 }} </span
                                         >
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ uploadTitles }}
+                                        {{ uploadTitles? uploadTitles : 'Please wait' }}
                                     </p>
                                 </div>
                             </div>

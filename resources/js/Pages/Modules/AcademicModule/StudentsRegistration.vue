@@ -496,7 +496,7 @@ export default {
             return document.title || "No Title";
         },
 
-        getCurrentTab() {
+        getCurrentTab() {console.log('hello')
             return this.$store.getters["AcademicStudentModule/getTab"];
         },
 

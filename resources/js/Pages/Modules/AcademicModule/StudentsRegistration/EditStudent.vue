@@ -8,6 +8,9 @@
             <div class="row pt-2">
                 <div class="col-12">
                     <div class="h-screen">
+
+                        <snackbar message="Task completed successfully"></snackbar>
+                        
                         <div class="mt-0 pt-0 mb-1">
                             <v-icon
                                 class="ml-1 pr-0 mr-0"

@@ -1,5 +1,8 @@
 <template>
     <div class="pt-10">
+
+        <snackbar message="Task completed successfully"></snackbar>
+
         <div class="d-flex justify-content-between">
             <a @click="setInvoiceView()" class="btn text-lg-700">
                 <strong class="text-danger" style="font-size: large"
@@ -182,7 +185,13 @@
 </template>
 
 <script>
+import Snackbar from "../../.././Components/SnackBar.vue";
+
 export default {
+    components:{
+        Snackbar
+    },
+
     mounted() {
         this.showLoader = true;
     },

@@ -74,6 +74,9 @@
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="card h-screen">
+
+                    <snackbar message="Task completed successfully"></snackbar>
+                    
                     <div class="card-body pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">

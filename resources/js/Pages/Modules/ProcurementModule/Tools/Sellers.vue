@@ -1,8 +1,4 @@
 <template>
-    <div>
-        hello world
-    </div>
-</template><template>
     <!-- <v-col>
         <v-row> -->
     <div>
@@ -160,10 +156,14 @@
                 <!-- /.modal-dialog -->
             </div>
 
-            <v-card-title class="px-0 pt-0">
-                Broken Tools & Equipments
+            <v-card-title class="px-0 pt-0 bg-info">
+                Sellers
                 <v-spacer></v-spacer>
+
+                <snackbar message="Task completed successfully"></snackbar>
+                
                 <v-text-field
+
                     v-model="search"
                     append-icon="mdi-magnify"
                     label="Search"
@@ -380,9 +380,11 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import Snackbar from "../../.././Components/SnackBar.vue";
 export default {
     components: {
         Spinner,
+        Snackbar,
     },
 
     props: {

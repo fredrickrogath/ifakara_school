@@ -46,6 +46,9 @@
         <!-- /.modal -->
 
         <div class="card">
+
+            <snackbar message="Task completed successfully"></snackbar>
+            
             <div class="card-body">
                 <div class="row">
                     <div class="col-8 text-center">

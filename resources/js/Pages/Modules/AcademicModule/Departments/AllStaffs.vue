@@ -57,8 +57,11 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students
+                Staffs
                 <v-spacer></v-spacer>
+
+                <snackbar message="Task completed successfully"></snackbar>
+                
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"

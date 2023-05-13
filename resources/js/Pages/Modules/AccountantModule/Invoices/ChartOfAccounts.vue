@@ -215,6 +215,9 @@
             <v-card-title class="px-1 pt-0">
                 Chart Of Accounts
                 <v-spacer></v-spacer>
+
+                <snackbar message="Task completed successfully"></snackbar>
+                
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"

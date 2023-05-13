@@ -5,6 +5,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+
+                            <snackbar message="Task completed successfully"></snackbar>
+                            
                             <div class="card-body">
                                 <!-- Logo & title -->
                                 <div class="clearfix">

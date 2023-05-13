@@ -56,7 +56,7 @@
             </div>
             <!-- /.modal -->
 
-            <snack-bar></snack-bar>
+            <!-- <snack-bar></snack-bar> -->
 
             <v-card-title class="px-0 pt-0">
                 Tools & Equipments
@@ -252,7 +252,7 @@ import SnackBar from "../../../Components/SnackBar.vue";
 export default {
     components: {
         Spinner,
-        SnackBar
+        SnackBar,
     },
 
     props: {
@@ -357,7 +357,7 @@ export default {
         setSnackBarState() {
             this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
         },
-
+        
         encrypt() {
             let result = "";
             const characters =
@@ -386,6 +386,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
@@ -402,6 +403,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";

@@ -47,6 +47,9 @@
         <!-- /.modal -->
 
         <div class="card">
+
+            <snackbar message="Task completed successfully"></snackbar>
+
             <div class="card-body">
                 <div class="row">
                     <div class="col-8 text-center">
@@ -139,7 +142,13 @@
 
 <script>
 import moment from "moment";
+import Snackbar from "../../.././Components/SnackBar.vue";
+
 export default {
+    components:{
+        Snackbar,
+    },
+
     mounted() {
         // this.showLoader = true;
         this.getNewUploads();
