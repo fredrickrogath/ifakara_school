@@ -156,7 +156,7 @@
                 <!-- /.modal-dialog -->
             </div>
 
-            <v-card-title class="px-0 pt-0 bg-info">
+            <v-card-title class="px-0 pt-0">
                 Sellers
                 <v-spacer></v-spacer>
 

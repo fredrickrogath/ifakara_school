@@ -348,6 +348,10 @@ export default {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
         getTools() {
             axios.get("/procurement/getTrashedTools").then((response) => {
                 this.tools = response.data.data;
@@ -364,10 +368,11 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -380,10 +385,11 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -394,8 +400,9 @@ export default {
                     id: this.idForAction,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
