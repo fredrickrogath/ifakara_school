@@ -1,7 +1,7 @@
 <template>
     
     <div class="pt-0 bg-gray-100">
-        <div class="row bg-gray-100">
+        <div class="row bg-grey-100">
             <div class="col-md-3 col-xl-3">
                 <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">

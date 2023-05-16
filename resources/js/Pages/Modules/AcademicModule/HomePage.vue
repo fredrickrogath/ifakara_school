@@ -1,22 +1,20 @@
 <template>
-    <div class="pt-0 bg-gray-100">
-        <div class="row bg-gray-100">
+    <div class="bg-gray-100">
+        <div class="row bg-grey-100 mb-5">
             <div class="col-md-3 col-xl-3">
                 <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm bg-blue rounded">
-                                    <i
-                                        class="fe-aperture avatar-title font-22 text-white"
-                                    ></i>
+                                <div class="avatar-sm  rounded">
+                                    <i class=" fas fa-users font-10 text-primary" style="font-size:40px;"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ students }}
+                                            {{ students ? students : 'please wait ...' }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -36,10 +34,8 @@
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm bg-success rounded">
-                                    <i
-                                        class="fe-shopping-cart avatar-title font-22 text-white"
-                                    ></i>
+                                <div class="avatar-sm rounded">
+                                    <i class="fas fa-money-check avatar-title font-22 text-danger" style="font-size:40px"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -63,10 +59,8 @@
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm bg-primary rounded">
-                                    <i
-                                        class="fe-bar-chart-2 avatar-title font-22 text-white"
-                                    ></i>
+                                <div class="avatar-sm rounded">
+                                    <i class="fas fa-minus-square  avatar-title  text-warning" style="font-size:40px"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -91,20 +85,16 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-info rounded">
-                                    <i
-                                        class="fe-cpu avatar-title font-22 text-white"
-                                    ></i>
+                                    <i class="fe-cpu avatar-title font-22 text-white"></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            > {{ totalUploads }} </span
-                                        >
+                                        <span data-plugin="counterup"> {{ totalTool ? totalTool : 'please wait ...'  }} </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ uploadTitles }}
+                                        Tools
                                     </p>
                                 </div>
                             </div>
@@ -114,6 +104,7 @@
             </div>
             <!-- end col -->
         </div>
+
 
         <!-- end row -->
 
