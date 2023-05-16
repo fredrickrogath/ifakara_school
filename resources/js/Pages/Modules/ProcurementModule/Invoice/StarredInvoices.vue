@@ -59,6 +59,9 @@
             <v-card-title class="px-0 pt-0">
                 Invoices
                 <v-spacer></v-spacer>
+
+                <snackbar message="Task completed successfully"></snackbar>
+
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -243,9 +246,12 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import Snackbar from "../../.././Components/Snackbar.vue";
+
 export default {
     components: {
         Spinner,
+        Snackbar,
     },
 
     props: {
@@ -348,6 +354,10 @@ export default {
             }, 0);
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
         getStarredInvoices() {
             axios.get("/procurement/getStarredInvoices").then((response) => {
                 this.invoices = response.data.data;
@@ -380,6 +390,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
@@ -394,6 +405,7 @@ export default {
                     id: this.idForAction,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // console.log(response.data.data);
                 });

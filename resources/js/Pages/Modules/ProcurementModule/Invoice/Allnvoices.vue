@@ -60,6 +60,8 @@
                 Invoices
                 <v-spacer></v-spacer>
 
+                <snackbar message="Task completed successfully"></snackbar>
+
                 <!-- <v-btn color="primary" @click="generatePdfReport"
                     >Generate PDF Report</v-btn
                 > -->
@@ -187,9 +189,12 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import Snackbar from "../../.././Components/SnackBar.vue";
+
 export default {
     components: {
         Spinner,
+        Snackbar,
     },
 
     props: {
@@ -348,6 +353,10 @@ export default {
             }, 0);
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
         getInvoices() {
             axios.get("/procurement/getInvoices").then((response) => {
                 this.invoices = response.data.data;
@@ -364,6 +373,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
@@ -378,6 +388,7 @@ export default {
                     id: this.idForAction,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // console.log(response.data.data);
                 });
@@ -392,6 +403,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";

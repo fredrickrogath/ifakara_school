@@ -59,6 +59,9 @@
             <v-card-title class="px-0 pt-0">
                 Starred Tools
                 <v-spacer></v-spacer>
+
+                <snackbar message="Task completed successfully"></snackbar>
+
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -245,9 +248,12 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import Snackbar from "../../.././Components/Snackbar.vue";
+
 export default {
     components: {
         Spinner,
+        Snackbar,
     },
 
     props: {

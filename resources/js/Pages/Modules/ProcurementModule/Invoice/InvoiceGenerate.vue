@@ -5,6 +5,9 @@
         <spinner v-if="showLoader"></spinner>
 
         <v-col v-else sm="12" md="12">
+
+            <snack-bar message="Task completed successfully"></snack-bar>
+
             <div class="d-flex justify-content-between">
                 <div class="col-5">
                     <div class="mb-1">Select Supplier</div>
@@ -271,7 +274,7 @@
 <script>
 import moment from "moment";
 import Select2 from "v-select2-component";
-// import SnackBar from "../../.././Components/SnackBar.vue";
+import SnackBar from "../../.././Components/SnackBar.vue";
 
 import Spinner from "../../.././Components/SpinnerLoader.vue";
 
@@ -279,7 +282,7 @@ export default {
     components: {
         Spinner,
         Select2,
-        // SnackBar,
+        SnackBar,
     },
 
     props: {
@@ -666,6 +669,14 @@ export default {
             console.log(e);
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
+        setInvoiceGenerate() {
+            this.$store.dispatch("ProcurementInvoiceModule/setInvoiceGenerate");
+        },
+
         async buildInvoiceTools() {
             this.totalPrice = this.totalPrice + this.price * this.count;
 
@@ -685,7 +696,7 @@ export default {
             this.count = "";
         },
 
-        async submitInvoice() {console.log(this.supplierId)
+        async submitInvoice() {
             axios
                 .post("/procurement/submitInvoice", {
                     sellerId: this.supplierId,
@@ -694,6 +705,8 @@ export default {
                 })
                 .then((response) => {
                     this.clearData()
+                    this.setInvoiceGenerate()
+                    this.setSnackBarState()
                 });
         },
 

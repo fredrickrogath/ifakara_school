@@ -6,6 +6,7 @@
 
         <v-col sm="12" md="12">
             <div class="row">
+
                 <div class="col-12">
                     <div class="card h-screen">
 
@@ -135,7 +136,7 @@
 <script>
 import moment from "moment";
 import Select2 from "v-select2-component";
-// import SnackBar from "../../.././Components/SnackBar.vue";
+import SnackBar from "../../.././Components/SnackBar.vue";
 
 import Spinner from "../../.././Components/SpinnerLoader.vue";
 
@@ -143,7 +144,7 @@ export default {
     components: {
         Spinner,
         Select2,
-        // SnackBar,
+        SnackBar,
     },
 
     props: {
@@ -317,6 +318,7 @@ export default {
                 .then((response) => {
                     // this.clearData()
                     this.showLoader = false;
+                    this.setSnackBarState();
                     this.setAddSeller();
 
                     this.name = "";
