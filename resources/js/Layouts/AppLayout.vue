@@ -18,7 +18,7 @@
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <main-loader></main-loader>
-                            </div> 
+                            </div>
 
                             <!-- <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
@@ -87,9 +87,7 @@
                                                 </jet-dropdown-link>
 
                                                 <jet-dropdown-link :href="route('teams.create')
-                                                    " v-if="$page.props.jetstream
-            .canCreateTeams
-        ">
+                                                    " v-if="$page.props.jetstream .canCreateTeams">
                                                     Create New Team
                                                 </jet-dropdown-link>
 
@@ -139,11 +137,11 @@
                                 <jet-dropdown align="right" width="48">
                                     <template #trigger>
                                         <button v-if="$page.props.jetstream
-                                                .managesProfilePhotos
+                                            .managesProfilePhotos
                                             "
                                             class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                                             <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user
-                                                    .profile_photo_url
+                                                .profile_photo_url
                                                 " :alt="$page.props.user.name" />
                                         </button>
 
@@ -173,7 +171,7 @@
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream
-                                                .hasApiFeatures
+                                            .hasApiFeatures
                                             ">
                                             API Tokens
                                         </jet-dropdown-link>
@@ -256,10 +254,10 @@
                             <div class="pt-4 pb-1 border-t border-gray-200">
                                 <div class="flex items-center px-4">
                                     <div v-if="$page.props.jetstream
-                                            .managesProfilePhotos
+                                        .managesProfilePhotos
                                         " class="flex-shrink-0 mr-3">
                                         <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user
-                                                .profile_photo_url
+                                            .profile_photo_url
                                             " :alt="$page.props.user.name" />
                                     </div>
 
@@ -294,7 +292,7 @@
 
                                     <!-- Team Management -->
                                     <template v-if="$page.props.jetstream
-                                            .hasTeamFeatures
+                                        .hasTeamFeatures
                                         ">
                                         <div class="border-t border-gray-200"></div>
 
@@ -308,8 +306,7 @@
                                             $page.props.user
                                                 .current_team
                                         )
-                                            " :active="route().current('teams.show')
-        ">
+                                            " :active="route().current('teams.show') ">
                                             Team Settings
                                         </jet-responsive-nav-link>
 
