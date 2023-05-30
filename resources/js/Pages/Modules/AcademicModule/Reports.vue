@@ -1,536 +1,504 @@
 <template>
-    <div>
-        <table cellspacing="5" cellpadding="5" border="0">
-        <tbody><tr>
-            <td>Minimum date:</td>
-            <td><input type="text" id="min" name="min"></td>
-        </tr>
-        <tr>
-            <td>Maximum date:</td>
-            <td><input type="text" id="max" name="max"></td>
-        </tr>
-    </tbody></table>
-    <table id="example" class="display nowrap" style="width:100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011-04-25</td>
-                <td>$320,800</td>
-            </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011-07-25</td>
-                <td>$170,750</td>
-            </tr>
-            <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-                <td>2009-01-12</td>
-                <td>$86,000</td>
-            </tr>
-            <tr>
-                <td>Cedric Kelly</td>
-                <td>Senior Javascript Developer</td>
-                <td>Edinburgh</td>
-                <td>22</td>
-                <td>2012-03-29</td>
-                <td>$433,060</td>
-            </tr>
-            <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>33</td>
-                <td>2008-11-28</td>
-                <td>$162,700</td>
-            </tr>
-            <tr>
-                <td>Brielle Williamson</td>
-                <td>Integration Specialist</td>
-                <td>New York</td>
-                <td>61</td>
-                <td>2012-12-02</td>
-                <td>$372,000</td>
-            </tr>
-            <tr>
-                <td>Herrod Chandler</td>
-                <td>Sales Assistant</td>
-                <td>San Francisco</td>
-                <td>59</td>
-                <td>2012-08-06</td>
-                <td>$137,500</td>
-            </tr>
-            <tr>
-                <td>Rhona Davidson</td>
-                <td>Integration Specialist</td>
-                <td>Tokyo</td>
-                <td>55</td>
-                <td>2010-10-14</td>
-                <td>$327,900</td>
-            </tr>
-            <tr>
-                <td>Colleen Hurst</td>
-                <td>Javascript Developer</td>
-                <td>San Francisco</td>
-                <td>39</td>
-                <td>2009-09-15</td>
-                <td>$205,500</td>
-            </tr>
-            <tr>
-                <td>Sonya Frost</td>
-                <td>Software Engineer</td>
-                <td>Edinburgh</td>
-                <td>23</td>
-                <td>2008-12-13</td>
-                <td>$103,600</td>
-            </tr>
-            <tr>
-                <td>Jena Gaines</td>
-                <td>Office Manager</td>
-                <td>London</td>
-                <td>30</td>
-                <td>2008-12-19</td>
-                <td>$90,560</td>
-            </tr>
-            <tr>
-                <td>Quinn Flynn</td>
-                <td>Support Lead</td>
-                <td>Edinburgh</td>
-                <td>22</td>
-                <td>2013-03-03</td>
-                <td>$342,000</td>
-            </tr>
-            <tr>
-                <td>Charde Marshall</td>
-                <td>Regional Director</td>
-                <td>San Francisco</td>
-                <td>36</td>
-                <td>2008-10-16</td>
-                <td>$470,600</td>
-            </tr>
-            <tr>
-                <td>Haley Kennedy</td>
-                <td>Senior Marketing Designer</td>
-                <td>London</td>
-                <td>43</td>
-                <td>2012-12-18</td>
-                <td>$313,500</td>
-            </tr>
-            <tr>
-                <td>Tatyana Fitzpatrick</td>
-                <td>Regional Director</td>
-                <td>London</td>
-                <td>19</td>
-                <td>2010-03-17</td>
-                <td>$385,750</td>
-            </tr>
-            <tr>
-                <td>Michael Silva</td>
-                <td>Marketing Designer</td>
-                <td>London</td>
-                <td>66</td>
-                <td>2012-11-27</td>
-                <td>$198,500</td>
-            </tr>
-            <tr>
-                <td>Paul Byrd</td>
-                <td>Chief Financial Officer (CFO)</td>
-                <td>New York</td>
-                <td>64</td>
-                <td>2010-06-09</td>
-                <td>$725,000</td>
-            </tr>
-            <tr>
-                <td>Gloria Little</td>
-                <td>Systems Administrator</td>
-                <td>New York</td>
-                <td>59</td>
-                <td>2009-04-10</td>
-                <td>$237,500</td>
-            </tr>
-            <tr>
-                <td>Bradley Greer</td>
-                <td>Software Engineer</td>
-                <td>London</td>
-                <td>41</td>
-                <td>2012-10-13</td>
-                <td>$132,000</td>
-            </tr>
-            <tr>
-                <td>Dai Rios</td>
-                <td>Personnel Lead</td>
-                <td>Edinburgh</td>
-                <td>35</td>
-                <td>2012-09-26</td>
-                <td>$217,500</td>
-            </tr>
-            <tr>
-                <td>Jenette Caldwell</td>
-                <td>Development Lead</td>
-                <td>New York</td>
-                <td>30</td>
-                <td>2011-09-03</td>
-                <td>$345,000</td>
-            </tr>
-            <tr>
-                <td>Yuri Berry</td>
-                <td>Chief Marketing Officer (CMO)</td>
-                <td>New York</td>
-                <td>40</td>
-                <td>2009-06-25</td>
-                <td>$675,000</td>
-            </tr>
-            <tr>
-                <td>Caesar Vance</td>
-                <td>Pre-Sales Support</td>
-                <td>New York</td>
-                <td>21</td>
-                <td>2011-12-12</td>
-                <td>$106,450</td>
-            </tr>
-            <tr>
-                <td>Doris Wilder</td>
-                <td>Sales Assistant</td>
-                <td>Sydney</td>
-                <td>23</td>
-                <td>2010-09-20</td>
-                <td>$85,600</td>
-            </tr>
-            <tr>
-                <td>Angelica Ramos</td>
-                <td>Chief Executive Officer (CEO)</td>
-                <td>London</td>
-                <td>47</td>
-                <td>2009-10-09</td>
-                <td>$1,200,000</td>
-            </tr>
-            <tr>
-                <td>Gavin Joyce</td>
-                <td>Developer</td>
-                <td>Edinburgh</td>
-                <td>42</td>
-                <td>2010-12-22</td>
-                <td>$92,575</td>
-            </tr>
-            <tr>
-                <td>Jennifer Chang</td>
-                <td>Regional Director</td>
-                <td>Singapore</td>
-                <td>28</td>
-                <td>2010-11-14</td>
-                <td>$357,650</td>
-            </tr>
-            <tr>
-                <td>Brenden Wagner</td>
-                <td>Software Engineer</td>
-                <td>San Francisco</td>
-                <td>28</td>
-                <td>2011-06-07</td>
-                <td>$206,850</td>
-            </tr>
-            <tr>
-                <td>Fiona Green</td>
-                <td>Chief Operating Officer (COO)</td>
-                <td>San Francisco</td>
-                <td>48</td>
-                <td>2010-03-11</td>
-                <td>$850,000</td>
-            </tr>
-            <tr>
-                <td>Shou Itou</td>
-                <td>Regional Marketing</td>
-                <td>Tokyo</td>
-                <td>20</td>
-                <td>2011-08-14</td>
-                <td>$163,000</td>
-            </tr>
-            <tr>
-                <td>Michelle House</td>
-                <td>Integration Specialist</td>
-                <td>Sydney</td>
-                <td>37</td>
-                <td>2011-06-02</td>
-                <td>$95,400</td>
-            </tr>
-            <tr>
-                <td>Suki Burks</td>
-                <td>Developer</td>
-                <td>London</td>
-                <td>53</td>
-                <td>2009-10-22</td>
-                <td>$114,500</td>
-            </tr>
-            <tr>
-                <td>Prescott Bartlett</td>
-                <td>Technical Author</td>
-                <td>London</td>
-                <td>27</td>
-                <td>2011-05-07</td>
-                <td>$145,000</td>
-            </tr>
-            <tr>
-                <td>Gavin Cortez</td>
-                <td>Team Leader</td>
-                <td>San Francisco</td>
-                <td>22</td>
-                <td>2008-10-26</td>
-                <td>$235,500</td>
-            </tr>
-            <tr>
-                <td>Martena Mccray</td>
-                <td>Post-Sales support</td>
-                <td>Edinburgh</td>
-                <td>46</td>
-                <td>2011-03-09</td>
-                <td>$324,050</td>
-            </tr>
-            <tr>
-                <td>Unity Butler</td>
-                <td>Marketing Designer</td>
-                <td>San Francisco</td>
-                <td>47</td>
-                <td>2009-12-09</td>
-                <td>$85,675</td>
-            </tr>
-            <tr>
-                <td>Howard Hatfield</td>
-                <td>Office Manager</td>
-                <td>San Francisco</td>
-                <td>51</td>
-                <td>2008-12-16</td>
-                <td>$164,500</td>
-            </tr>
-            <tr>
-                <td>Hope Fuentes</td>
-                <td>Secretary</td>
-                <td>San Francisco</td>
-                <td>41</td>
-                <td>2010-02-12</td>
-                <td>$109,850</td>
-            </tr>
-            <tr>
-                <td>Vivian Harrell</td>
-                <td>Financial Controller</td>
-                <td>San Francisco</td>
-                <td>62</td>
-                <td>2009-02-14</td>
-                <td>$452,500</td>
-            </tr>
-            <tr>
-                <td>Timothy Mooney</td>
-                <td>Office Manager</td>
-                <td>London</td>
-                <td>37</td>
-                <td>2008-12-11</td>
-                <td>$136,200</td>
-            </tr>
-            <tr>
-                <td>Jackson Bradshaw</td>
-                <td>Director</td>
-                <td>New York</td>
-                <td>65</td>
-                <td>2008-09-26</td>
-                <td>$645,750</td>
-            </tr>
-            <tr>
-                <td>Olivia Liang</td>
-                <td>Support Engineer</td>
-                <td>Singapore</td>
-                <td>64</td>
-                <td>2011-02-03</td>
-                <td>$234,500</td>
-            </tr>
-            <tr>
-                <td>Bruno Nash</td>
-                <td>Software Engineer</td>
-                <td>London</td>
-                <td>38</td>
-                <td>2011-05-03</td>
-                <td>$163,500</td>
-            </tr>
-            <tr>
-                <td>Sakura Yamamoto</td>
-                <td>Support Engineer</td>
-                <td>Tokyo</td>
-                <td>37</td>
-                <td>2009-08-19</td>
-                <td>$139,575</td>
-            </tr>
-            <tr>
-                <td>Thor Walton</td>
-                <td>Developer</td>
-                <td>New York</td>
-                <td>61</td>
-                <td>2013-08-11</td>
-                <td>$98,540</td>
-            </tr>
-            <tr>
-                <td>Finn Camacho</td>
-                <td>Support Engineer</td>
-                <td>San Francisco</td>
-                <td>47</td>
-                <td>2009-07-07</td>
-                <td>$87,500</td>
-            </tr>
-            <tr>
-                <td>Serge Baldwin</td>
-                <td>Data Coordinator</td>
-                <td>Singapore</td>
-                <td>64</td>
-                <td>2012-04-09</td>
-                <td>$138,575</td>
-            </tr>
-            <tr>
-                <td>Zenaida Frank</td>
-                <td>Software Engineer</td>
-                <td>New York</td>
-                <td>63</td>
-                <td>2010-01-04</td>
-                <td>$125,250</td>
-            </tr>
-            <tr>
-                <td>Zorita Serrano</td>
-                <td>Software Engineer</td>
-                <td>San Francisco</td>
-                <td>56</td>
-                <td>2012-06-01</td>
-                <td>$115,000</td>
-            </tr>
-            <tr>
-                <td>Jennifer Acosta</td>
-                <td>Junior Javascript Developer</td>
-                <td>Edinburgh</td>
-                <td>43</td>
-                <td>2013-02-01</td>
-                <td>$75,650</td>
-            </tr>
-            <tr>
-                <td>Cara Stevens</td>
-                <td>Sales Assistant</td>
-                <td>New York</td>
-                <td>46</td>
-                <td>2011-12-06</td>
-                <td>$145,600</td>
-            </tr>
-            <tr>
-                <td>Hermione Butler</td>
-                <td>Regional Director</td>
-                <td>London</td>
-                <td>47</td>
-                <td>2011-03-21</td>
-                <td>$356,250</td>
-            </tr>
-            <tr>
-                <td>Lael Greer</td>
-                <td>Systems Administrator</td>
-                <td>London</td>
-                <td>21</td>
-                <td>2009-02-27</td>
-                <td>$103,500</td>
-            </tr>
-            <tr>
-                <td>Jonas Alexander</td>
-                <td>Developer</td>
-                <td>San Francisco</td>
-                <td>30</td>
-                <td>2010-07-14</td>
-                <td>$86,500</td>
-            </tr>
-            <tr>
-                <td>Shad Decker</td>
-                <td>Regional Director</td>
-                <td>Edinburgh</td>
-                <td>51</td>
-                <td>2008-11-13</td>
-                <td>$183,000</td>
-            </tr>
-            <tr>
-                <td>Michael Bruce</td>
-                <td>Javascript Developer</td>
-                <td>Singapore</td>
-                <td>29</td>
-                <td>2011-06-27</td>
-                <td>$183,000</td>
-            </tr>
-            <tr>
-                <td>Donna Snider</td>
-                <td>Customer Support</td>
-                <td>New York</td>
-                <td>27</td>
-                <td>2011-01-25</td>
-                <td>$112,000</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </tfoot>
-    </table>
-    </div>
+    <!-- <v-col>
+        <v-row> -->
+    <div class="card p-0" data-app>
+        <spinner v-if="showLoader"></spinner>
 
+        <v-col v-else sm="12" md="12" class="p-0">
+            <!-- <v-card flat :dark="isDark"> -->
+            <!-- <v-card elevation="0" data-app> -->
+
+            <!-- Warning Alert Modal -->
+            <div
+                id="warning-alert-modal"
+                class="modal fade"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body p-2">
+                            <div class="text-center">
+                                <i
+                                    class="dripicons-warning h1 text-warning"
+                                ></i>
+                                <h4 class="mt-2 text-gray-500">
+                                    Are you sure you want to delete this data ?
+                                </h4>
+                                <p class="mt-3">
+                                    Do not worry, deleting this can be restored
+                                    in your trash within 30 days.
+                                </p>
+                                <div class="flex justify-around">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-warning my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                        @click="deleteInvoice()"
+                                    >
+                                        Continue
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+            <v-card-title class="px-1 py-0 my-0">
+                REPORT {{ formattedDateRange }}
+                <v-spacer></v-spacer>
+
+                <snack-bar
+                    class="absolute right-0 top-14"
+                    message="Printed successfully"
+                ></snack-bar>
+
+                <v-row class="px-2 pt-1">
+                    <v-menu
+                        ref="datePickerMenu"
+                        :close-on-content-click="false"
+                        v-model="datePickerMenu"
+                        :return-value.sync="dates"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="290px"
+                    >
+                        <template v-slot:activator="{ on }">
+                            <v-text-field
+                                v-model="dateRangeText"
+                                label="Date range"
+                                prepend-icon="mdi-calendar"
+                                class=""
+                                readonly
+                                v-on="on"
+                            ></v-text-field>
+                        </template>
+                        <v-date-picker
+                            color="#52525b"
+                            header-color="#52525b"
+                            v-model="dates"
+                            range
+                        ></v-date-picker>
+                        <v-card-actions>
+                            <v-btn
+                                text
+                                color="primary"
+                                class="w-full bg-gray-600 text-white"
+                                @click="
+                                    datePickerMenu = false;
+                                    filteredStudentsByDate();
+                                "
+                            >
+                                Done
+                            </v-btn>
+                        </v-card-actions>
+                    </v-menu>
+                </v-row>
+
+                <!-- <v-spacer></v-spacer> -->
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+                    class="pr-5 py-0 my-0"
+                ></v-text-field>
+                <!-- <v-spacer></v-spacer> -->
+                <v-icon size="22" @click="resetData"> mdi-restore </v-icon>
+            </v-card-title>
+            <!-- {{ $page.props.posts }} -->
+
+            <v-data-table
+                :headers="headers"
+                :items="students"
+                item-key="name"
+                :search="search"
+                class="elevation-1"
+                :items-per-page="11"
+            >
+                <template v-slot:body="{ items, headers }">
+                    <tbody>
+                        <tr v-for="(item, idx, k) in items" :key="idx">
+                            <td v-for="(header, key) in headers" :key="key">
+                                <v-icon
+                                    v-if="header.value == 'delete'"
+                                    size="22"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#warning-alert-modal"
+                                    @click="setIdForAction(items[idx]['id'])"
+                                >
+                                    mdi-delete
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'view'"
+                                    size="22"
+                                    @click="setInvoiceView(items[idx]['id'])"
+                                >
+                                    mdi-eye
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'edit'"
+                                    size="22"
+                                    @click="setEditStudent(items[idx]['id'])"
+                                >
+                                    mdi-pen
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'starred'"
+                                    size="22"
+                                    :class="
+                                        item[header.value] ? 'text-warning' : ''
+                                    "
+                                    @click="
+                                        starredInvoice(
+                                            items[idx]['id'],
+                                            item[header.value],
+                                            header.value
+                                        )
+                                    "
+                                >
+                                    mdi-star
+                                </v-icon>
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'id'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'created_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'updated_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'first_name'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'middle_name'"
+                                >
+                                    {{ item[header.value] }}
+                                </span>
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'last_name'"
+                                >
+                                    {{ item[header.value] }}
+                                </span>
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'gender'"
+                                >
+                                    {{ item[header.value] }}
+                                </span>
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'from'"
+                                >
+                                    {{ item[header.value] }}
+                                </span>
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'parent'"
+                                >
+                                    {{ item[header.value] }}
+                                </span>
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'parent_contact'"
+                                >
+                                    {{ item[header.value] }}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-data-table>
+        </v-col>
+
+        <v-btn @click="generatePDF">Generate REPORT {{ reportRange }}</v-btn>
+    </div>
+    <!-- </v-row>
+    </v-col> -->
 </template>
 
-<script setup>
-var minDate, maxDate;
- 
- // Custom filtering function which will search data in column four between two values
- $.fn.dataTable.ext.search.push(
-     function( settings, data, dataIndex ) {
-         var min = minDate.val();
-         var max = maxDate.val();
-         var date = new Date( data[4] );
-  
-         if (
-             ( min === null && max === null ) ||
-             ( min === null && date <= max ) ||
-             ( min <= date   && max === null ) ||
-             ( min <= date   && date <= max )
-         ) {
-             return true;
-         }
-         return false;
-     }
- );
-  
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#min'), {
-         format: 'MMMM Do YYYY'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'MMMM Do YYYY'
-     });
-  
-     // DataTables initialisation
-     var table = $('#example').DataTable();
-  
-     // Refilter the table
-     $('#min, #max').on('change', function () {
-         table.draw();
-     });
- });
+<script>
+import moment from "moment";
+import jsPDF from "jspdf";
+import Spinner from "../.././Components/SpinnerLoader.vue";
+import SnackBar from "../.././Components/SnackBar.vue";
+export default {
+    components: {
+        Spinner,
+        SnackBar,
+    },
+
+    mounted() {
+        this.showLoader = true;
+        this.getStudents();
+
+        window.Echo.channel(
+            "student-event." + this.$page.props.user.school_id
+        ).listen("Academic\\StudentEvent", (e) => {
+            this.getStudents();
+        });
+    },
+
+    data() {
+        return {
+            contentFullWidthWhenSideBarHides: 10,
+            storagePath: window.location.origin + "/storage/systemFiles/",
+
+            showLoader: true,
+            search: "",
+            headers: [
+                {
+                    text: "First Name",
+                    align: "start",
+                    sortable: false,
+                    value: "first_name",
+                },
+                {
+                    text: "Middle Name",
+                    value: "middle_name",
+                },
+                {
+                    text: "Last Name",
+                    value: "last_name",
+                },
+                {
+                    text: "Gender",
+                    value: "gender",
+                },
+                { text: "Location", value: "from" },
+                { text: "Date", value: "created_at" },
+                // { text: "Edit", value: "edit" },
+            ],
+            students: [],
+            storeStudents: [],
+
+            idForAction: null,
+
+            dates: [null, null],
+            reportRange: "By search ,No Date Seleted",
+            datePickerMenu: false,
+            dateRangeText: "",
+        };
+    },
+
+    watch: {
+        //Add watchers...
+        // dates() {
+        // },
+    },
+
+    computed: {
+        contentFullWidthWhenSideBarHidesComputed() {
+            return this.contentFullWidthWhenSideBarHides;
+        },
+
+        formattedDateRange() {
+            const startDate = this.dates[0];
+            const endDate = this.dates[1];
+
+            if (startDate && endDate) {
+                const formattedStartDate =
+                    moment(startDate).format("MMM D, YYYY");
+                const formattedEndDate = moment(endDate).format("MMM D, YYYY");
+                this.reportRange = `${formattedStartDate} - ${formattedEndDate}`;
+                // return `${formattedStartDate} - ${formattedEndDate}`;
+            }
+
+            // return "No Date Selected";
+        },
+
+        filteredStudents() {
+            return this.students.filter((student) => {
+                const matchesSearch = this.headers.some((header) => {
+                    const value = student[header.value];
+                    return (
+                        value &&
+                        value
+                            .toString()
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                    );
+                });
+
+                if (!matchesSearch) return false;
+
+                if (!this.selectedDate) return true;
+
+                const startDate = moment(this.selectedDate.start);
+                const endDate = moment(this.selectedDate.end);
+                const studentDate = moment(student.created_at);
+
+                return studentDate.isBetween(startDate, endDate, "day", "[]");
+            });
+        },
+    },
+
+    methods: {
+        async setIdForAction(id) {
+            this.idForAction = id;
+        },
+
+        formattedPrice(amount) {
+            return amount.toLocaleString("sw-TZ", {
+                style: "currency",
+                currency: "Tsh",
+            });
+        },
+
+        formattedDate(date) {
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        },
+
+        setEditStudent(id) {
+            this.$store.dispatch("AcademicStudentModule/setStudentId", id);
+            this.$store.dispatch("AcademicStudentModule/setEditStudent");
+        },
+
+        applyDateFilter() {
+            this.menu = false;
+        },
+
+        resetData() {
+            this.students = this.storeStudents;
+        },
+
+        filteredStudentsByDate() {
+            const startDate = new Date(this.dates[0]);
+            const endDate = new Date(this.dates[1]);
+
+            if (!startDate || !endDate) {
+                return this.students;
+            }
+
+            this.students = this.students.filter((student) => {
+                const date = new Date(student.created_at);
+                return date >= startDate && date <= endDate;
+            });
+
+            // return this.students.filter((student) => {
+            //     const date = new Date(student.created_at);
+            //     return date >= startDate && date <= endDate;
+            // });
+        },
+
+        getStudents() {
+            axios.get("/academic/getStudentsNew").then((response) => {
+                this.students = response.data.data;
+                this.storeStudents = response.data.data;
+                this.showLoader = false;
+            });
+        },
+
+        generatePDF() {
+            const doc = new jsPDF();
+
+            // Set PDF colors
+            const pdfColor = "#d1d5db";
+            const pdfTextColor = "#1f2937";
+
+            // Define table headers and columns
+            const headers = this.headers
+                .filter((header) => header.value !== "edit")
+                .map((header) => header.text);
+            const columns = this.headers
+                .filter((header) => header.value !== "edit")
+                .map((header) => header.value);
+
+            // Extract table data from filteredStudents computed property
+            const data = this.filteredStudents.map((student) =>
+                columns.map((column) => {
+                    if (column === "created_at" || column === "updated_at") {
+                        return this.formattedDate(student[column]);
+                    } else {
+                        return student[column];
+                    }
+                })
+            );
+
+            // Set table styles
+            const tableStyles = {
+                fillColor: pdfColor,
+                textColor: pdfTextColor,
+            };
+
+            // Add header content
+            const headerText = "REPORT: " + this.reportRange;
+            const headerX = doc.internal.pageSize.getWidth() / 2;
+            const headerY = 15;
+            doc.setFontSize(13);
+            doc.setTextColor(pdfTextColor);
+            doc.text(headerText, headerX, headerY, { align: "center" });
+
+            // Add table to the PDF
+            doc.autoTable({
+                head: [headers],
+                body: data,
+                styles: tableStyles,
+                startY: 30, // Adjust the position of the table below the heading
+            });
+
+            // Add "Issued on" information
+            const issuedOnText = "Issued on: " + new Date().toLocaleString();
+            const issuedOnX = doc.internal.pageSize.getWidth() - 15;
+            const issuedOnY = doc.internal.pageSize.getHeight() - 10;
+            doc.setFontSize(10);
+            doc.setTextColor(pdfTextColor);
+            doc.text(issuedOnText, issuedOnX, issuedOnY, { align: "right" });
+
+            // Save the PDF
+            doc.save("REPORT: " + this.reportRange + ".pdf");
+        },
+
+        save(id, column, data) {
+            this.updateTools(id, data, column);
+            // console.log(id + " , " +data);
+        },
+        cancel() {},
+        open() {},
+        close() {},
+    },
+};
 </script>

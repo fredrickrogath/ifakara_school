@@ -15,19 +15,24 @@ class DepartmentController extends Controller
     //
     public function addStaff(Request $request ,DepartmentService $departmentService){
         $this->authorize('authorizeHead', \App\Models\User::class);
-        event(new \App\Events\NewPostPublished('head'));
+        event(new \App\Events\Academic\StaffEvent(auth()->user()->school_id));
+        event(new \App\Events\Api\Secretary\StaffEvent());
         return response()->json(['data' => $departmentService->addStaff($request)]);
     }
 
     public function getStaffs(Request $request, DepartmentService $departmentService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        event(new \App\Events\NewPostPublished('head getStaffs route'));
+        // event(new \App\Events\NewPostPublished('head getStaffs route'));
         return response()->json(['data' => $departmentService->getStaffs($request)]);
+    }
+
+    public function getStaffsNew(Request $request, DepartmentService $departmentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $departmentService->getStaffsNew($request)]);
     }
 
     public function headDashboardGetStaffs(DepartmentService $departmentService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        // event(new \App\Events\NewPostPublished('head headDashboardGetStaffs route'));
         return response()->json(['data' => $departmentService->headDashboardGetStaffs()]);
     }
     

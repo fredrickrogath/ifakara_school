@@ -120,13 +120,13 @@
 
         <!-- End of Right modal content -->
 
-        <div class="row bg-white">
+        <div class="row bg-gray-100">
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="">
-                    <div class="pt-1">
+                    <div class="pt-1 bg-white">
                         <!-- Left sidebar -->
-                        <div class="inbox-leftbar bg-white h-screen">
+                        <div class="inbox-leftbar bg-white px-0 h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
                                     type="button"
@@ -291,7 +291,7 @@
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                        class="mdi mdi-school font-20 align-middle me-2 pb-1"
                                     ></i
                                     >All Students
                                 </a>
@@ -305,7 +305,7 @@
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                        class="mdi mdi-school font-20 align-middle me-2 pb-1"
                                     ></i
                                     >New Students</a
                                 >
@@ -496,7 +496,7 @@ export default {
             return document.title || "No Title";
         },
 
-        getCurrentTab() {console.log('hello')
+        getCurrentTab() {
             return this.$store.getters["AcademicStudentModule/getTab"];
         },
 

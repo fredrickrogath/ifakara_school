@@ -57,10 +57,10 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students {{ getStudentId }}
+                Students
                 <v-spacer></v-spacer>
-
-                <snackbar message="Task completed successfully"></snackbar>
+                
+                <snack-bar class="absolute right-0 top-14" message="Task completed successfully"></snack-bar>
                 
                 <v-text-field
                     v-model="search"
@@ -78,7 +78,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
-                :items-per-page="7"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -151,20 +151,20 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'first_name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'middle_name'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'last_name'"
                                 >
                                     {{ item[header.value] }}
@@ -211,9 +211,11 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SnackBar from "../../.././Components/SnackBar.vue";
 export default {
     components: {
         Spinner,
+        SnackBar,
     },
 
     props: {
@@ -257,7 +259,7 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("academic-trigger-add-student").listen(
+        window.Echo.channel("student-event." + this.$page.props.user.school_id).listen(
             "Academic\\StudentEvent",
             (e) => {
                 this.getStudents();
@@ -321,9 +323,9 @@ export default {
         //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
         // },
 
-        getStudentId() {
-            return this.$store.getters["AcademicStudentModule/getStudentId"];
-        },
+        // getStudentId() {
+        //     return this.$store.getters["AcademicStudentModule/getStudentId"];
+        // },
     },
 
     methods: {

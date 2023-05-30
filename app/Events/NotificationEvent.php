@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Academic\Student;
+namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -10,21 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PermissionEvent implements ShouldBroadcast
+class NotificationEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $schoolId;
-
+    public $notificationId;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($schoolId)
+    public function __construct($notificationId)
     {
         //
-        $this->schoolId = $schoolId;
+        $this->notificationId = $notificationId;
     }
 
     /**
@@ -34,6 +33,6 @@ class PermissionEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('student-permission.' . $this->schoolId);
+        return new Channel('notification-event.' . $this->notificationId);
     }
 }

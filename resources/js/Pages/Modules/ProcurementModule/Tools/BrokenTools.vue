@@ -58,7 +58,7 @@
 
             <!-- Right modal content -->
             <div
-                id="right-modal-broken"
+                id="right-modal-broken-tool"
                 class="modal fade"
                 tabindex="-1"
                 role="dialog"
@@ -173,7 +173,7 @@
                 <v-icon
                     type="button"
                     data-bs-toggle="modal"
-                    data-bs-target="#right-modal-broken"
+                    data-bs-target="#right-modal-broken-tool"
                     class="ml-4 px-1 mt-3 mr-0 py-1"
                     size="22"
                     @click=""

@@ -46,11 +46,11 @@
         </div>
         <!-- /.modal -->
 
-        <div class="card">
+        <div class="mt-3">
 
             <snackbar message="Task completed successfully"></snackbar>
 
-            <div class="card-body">
+            <div class="">
                 <div class="row">
                     <div class="col-8 text-center">
                         <h4>Table for all documents</h4>

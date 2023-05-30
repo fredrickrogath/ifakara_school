@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <!-- <v-col>
         <v-row> -->
     <div>
@@ -406,4 +406,4 @@ export default {
     }
   }
 };
-</script>
+</script> -->

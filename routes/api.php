@@ -63,6 +63,9 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
 
             Route::post('/getToolDashboardData', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getToolDashboardData'])->name('getToolDashboardData');
             Route::post('/getInvoiceDashboardData', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoiceDashboardData'])->name('getInvoiceDashboardData');
+
+            Route::post('/getToolDashboardDataToFinancial', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getToolDashboardDataToFinancial'])->name('getToolDashboardDataToFinancial');
+            Route::post('/getInvoiceDashboardDataToFinancial', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoiceDashboardDataToFinancial'])->name('getInvoiceDashboardDataToFinancial');
         });
 
         Route::group(['prefix' => 'procurement', 'as' => 'procurement.'], function () {

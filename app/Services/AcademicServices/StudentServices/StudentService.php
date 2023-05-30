@@ -42,11 +42,15 @@ class StudentService
     }
 
     public function getStudents(){
+        return \App\Models\Student::orderBy('first_name', 'asc')->get();
+    }
+
+    public function getStudentsNew(){
         return \App\Models\Student::orderBy('created_at', 'desc')->get();
     }
 
     public function getStudent($request){
-        return \App\Models\Student::where('id', $request->studentId)->get()->first();
+        return \App\Models\Student::with('notification')->where('id', $request->studentId)->get()->first();
     }
     
     public function editStudent($request){

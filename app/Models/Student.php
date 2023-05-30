@@ -30,6 +30,10 @@ class Student extends Model
         return \App\Models\Student::where('id', $id)->get()->first();
     }
 
+    public function notification(){
+        return $this->hasOne('App\Models\Notification','object_id','id');
+    }
+    
     // public function user()
     // {
     //     // return $this->belongsTo('Model', 'foreign_key', 'owner_key'); 
