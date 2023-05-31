@@ -146,8 +146,8 @@
 
                         <!-- <div class="clearfix"></div> -->
 
-                        <div class="inbox-rightbar pt-1 px-0">
-                            <div class="bg-white h-screen">
+                        <div class="inbox-rightbar pt-1 px-0 h-screen">
+                            <div class="">
                                 <all-uploads v-show="getCurrentTab == 'all'"></all-uploads>
                                 <new-uploads v-show="getCurrentTab == 'new'"></new-uploads>
                                 <trashed-uploads v-show="getCurrentTab == 'deleted'"></trashed-uploads>

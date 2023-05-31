@@ -147,4 +147,18 @@ class ToolService
             'brokenTools' => $brokenTools,
         ];
     }
+
+    public function getToolDashboardDataToFinancial($request){
+        $totalTools = \App\Models\Tool::where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
+        $newTools = 1;
+        $brokenTools = 0;
+        
+        return [
+            'totalTools' => $totalTools->count(),
+            'newToolTitle' => 'New Tools',
+            'newTools' => $newTools,
+            'brokenToolTitle' => 'Broken Tool',
+            'brokenTools' => $brokenTools,
+        ];
+    }
 }

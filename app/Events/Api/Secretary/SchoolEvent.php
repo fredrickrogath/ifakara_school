@@ -32,6 +32,6 @@ class SchoolEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('school-school-trigger-from-financial-secretary');
+        return new Channel('school-trigger-from-financial-secretary');
     }
 }

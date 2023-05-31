@@ -17,6 +17,8 @@ class NotificationResource extends JsonResource
         if($this->object_type == 7){
             return [
                 'id' => $this->id,
+                'read' => $this->read,
+                'school_id' => $this->school_id,
                 'object' => \App\Models\Student::getStudent($this->object_id),
                 'to_role' => \App\Models\User::getRole($this->to_role),
                 'from_role' => \App\Models\User::getRole($this->from_role),

@@ -59,6 +59,9 @@
             <v-card-title class="px-0 pt-0">
                 Staffs
                 <v-spacer></v-spacer>
+
+                <snack-bar class="absolute right-0 top-14" message="Task completed successfully"></snack-bar>
+
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -75,6 +78,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -139,13 +143,13 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{
@@ -154,7 +158,7 @@
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'role'"
                                 >
                                     {{
@@ -175,9 +179,11 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
 export default {
     components: {
         Spinner,
+        SnackBar,
     },
 
     props: {
@@ -205,10 +211,9 @@ export default {
         this.getStaffs();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        window.Echo.channel("staff-event." + this.$page.props.user.school_id).listen(
+            "Academic\\StaffEvent",
             (e) => {
-                // console.log('abc');
                 this.getStaffs();
             }
         );
@@ -274,14 +279,17 @@ export default {
         // },
 
         department(role){
-            if (role == 3){
-                return 'Academic'
+            if(role == 1){
+                return 'Head Office'
+            }
+            else if (role == 3){
+                return 'Academic Office'
             }
             else if (role == 5){
-                return 'Accountant'
+                return 'Accountant Office'
             }
             else if (role == 6){
-                return 'Procurement'
+                return 'Procurement Office'
             }
         },
 
@@ -293,56 +301,56 @@ export default {
             });
         },
 
-        async updateTools(id, column, data) {
-            axios
-                .post("/accountant/updateTools", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async updateTools(id, column, data) {
+        //     axios
+        //         .post("/accountant/updateTools", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async deleteInvoice() {
-            axios
-                .post("/accountant/deleteInvoice", {
-                    id: this.idForAction,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async deleteInvoice() {
+        //     axios
+        //         .post("/accountant/deleteInvoice", {
+        //             id: this.idForAction,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async starredInvoice(id,data ,column) {
-            axios
-                .post("/accountant/starredInvoice", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async starredInvoice(id,data ,column) {
+        //     axios
+        //         .post("/accountant/starredInvoice", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        setInvoiceView(id) {
-            this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
-        },
+        // setInvoiceView(id) {
+        //     this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
+        // },
 
         save(id, column, data) {
-            this.updateTools(id, data, column);
+            // this.updateTools(id, data, column);
             // console.log(id + " , " +data);
         },
         cancel() {},

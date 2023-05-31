@@ -27,7 +27,11 @@ class DepartmentService
     }
 
     public function getStaffs(){
-        return \App\Models\User::where('role', '!=', 1)->orderBy('created_at', 'desc')->get();
+        return \App\Models\User::where('school_id', auth()->user()->school_id)->orderBy('name', 'asc')->get();
+    }
+
+    public function getStaffsNew(){
+        return \App\Models\User::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function headDashboardGetStaffs(){
@@ -39,12 +43,12 @@ class DepartmentService
     // }
 
     public function getDepartments(){
-        return \App\Models\Department::orderBy('created_at', 'desc')->get();
+        return \App\Models\Department::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
-    public function getStudents(){
-        return \App\Models\Student::orderBy('created_at', 'desc')->get();
-    }
+    // public function getStudents(){
+    //     return \App\Models\Student::orderBy('created_at', 'desc')->get();
+    // }
 
     // public function acceptInvoice($request){
     //     return \App\Models\Invoice::find($request->id)->update([

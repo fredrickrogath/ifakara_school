@@ -7,8 +7,8 @@
         <v-col sm="12" md="12">
             <div class="row">
                 <div class="col-12">
-                    <div class="card h-screen">
-                        <div class="card-body">
+                    <div class="h-screen">
+                        <div class="">
                             <form @submit.prevent="addStaff">
                                 <div class="d-flex justify-content-center">
                                     <div class="col-lg-6">
@@ -21,7 +21,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-am"
                                                 v-model="name"
                                             />
                                         </div>
@@ -35,7 +35,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                             />
                                         </div>
 
@@ -48,7 +48,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                             />
                                         </div>
 
@@ -61,7 +61,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                             />
                                         </div>
 
@@ -71,14 +71,14 @@
                                             >
                                                 <button
                                                     v-if="!showLoader"
-                                                    class="btn btn-primary text-white"
+                                                    class="btn btn-sm btn-primary text-white"
                                                     type="submit"
                                                 >
                                                     Submit
                                                 </button>
                                                 <button
                                                     v-else
-                                                    class="btn btn-primary"
+                                                    class="btn btn-sm btn-primary"
                                                     type="button"
                                                     disabled
                                                 >
@@ -151,13 +151,13 @@ export default {
         this.initialize();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
-            (e) => {
-                // console.log('abc');
-                // this.getTools();
-            }
-        );
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         // console.log('abc');
+        //         // this.getTools();
+        //     }
+        // );
     },
 
     data() {
@@ -307,7 +307,7 @@ export default {
                     // this.name = "";
                     // this.email = "";
                     // this.password = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
         },
         // identifier

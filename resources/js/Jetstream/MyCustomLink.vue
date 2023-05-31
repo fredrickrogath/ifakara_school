@@ -10,7 +10,7 @@ export default {
 
     computed: {
         classes() {
-            return this.active ? "text-info" : "";
+            return this.active ? "text-warning" : "";
         },
     },
 };

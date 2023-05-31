@@ -1,20 +1,22 @@
 <template>
-    <div class="bg-gray-100">
-        <div class="row bg-grey-100 mb-5">
-            <div class="col-md-3 col-xl-3">
+    <div class="pt-0 bg-gray-100" data-app>
+        <div class="d-flex">
+            <div class="my-0 pt-0 flex-grow-1">
                 <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm  rounded">
-                                    <i class=" fas fa-users font-10 text-primary" style="font-size:40px;"></i>
+                                <div class="avatar-sm bg-yellow-400 rounded">
+                                    <i
+                                        class="fe-aperture avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ students ? students : 'please wait ...' }}
+                                            {{ students ? students : 0 }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -29,13 +31,15 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm rounded">
-                                    <i class="fas fa-money-check avatar-title font-22 text-danger" style="font-size:40px"></i>
+                                <div class="avatar-sm bg-yellow-400 rounded">
+                                    <i
+                                        class="fe-shopping-cart avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -54,13 +58,15 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm rounded">
-                                    <i class="fas fa-minus-square  avatar-title  text-warning" style="font-size:40px"></i>
+                                <div class="avatar-sm bg-yellow-400 rounded">
+                                    <i
+                                        class="fe-bar-chart-2 avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -79,22 +85,30 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm bg-info rounded">
-                                    <i class="fe-cpu avatar-title font-22 text-white"></i>
+                                <div class="avatar-sm bg-yellow-400 rounded">
+                                    <i
+                                        class="fe-cpu avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"> {{ totalTool ? totalTool : 'please wait ...'  }} </span>
+                                        <span data-plugin="counterup">
+                                            {{
+                                                totalUploads ? totalUploads : 0
+                                            }}
+                                        </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        Tools
+                                        {{
+                                            uploadTitles ? uploadTitles : "Wait"
+                                        }}
                                     </p>
                                 </div>
                             </div>
@@ -108,33 +122,10 @@
 
         <!-- end row -->
 
-        <div class="row pt-0 mt-0">
-            <div class="col-xl-6 col-md-6 mb-0 pb-0">
+        <div class="d-flex pt-1">
+            <div class="mr-1">
                 <div class="card">
-                    <div class="card-body pb-2">
-                        <div class="float-end d-none d-md-inline-block">
-                            <!-- <div class="btn-group mb-2">
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-light"
-                                >
-                                    Today
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-light"
-                                >
-                                    Weekly
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-secondary"
-                                >
-                                    Monthly
-                                </button>
-                            </div> -->
-                        </div>
-
+                    <div class="card-body">
                         <h4 class="header-title mb-2">Analytics Performance</h4>
 
                         <!-- <div class="d-flex text-center">
@@ -191,22 +182,33 @@
                                 </v-tab-item>
                             </v-tabs>
                         </v-card>
-                        <div class="">
-                        </div>
+                        <div class=""></div>
                     </div>
                 </div>
                 <!-- end card -->
             </div>
             <!-- end col-->
 
-            <div class="col-xl-6 col-md-6 mx-0 px-0 pt-2">
+            <div class="col-xl-6 col-md-6 mx-0 px-0 pt-0">
                 <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title mb-1">School Staffs</h4>
+                    <div class="px-1">
+                        <div
+                            class="d-flex justify-content-start align-content-center"
+                        >
+                            <h4 class="header-title mb-1 pl-3 pt-3">
+                                School Staffs {{ staffs.length }}
+                                in total
+                            </h4>
+                            <a href="departiment" class="ml-5 mt-3">
+                                <v-icon size="21" class="mb-2">
+                                    mdi-eye
+                                </v-icon>
+                            </a>
+                        </div>
 
                         <div class="table-responsive">
                             <table
-                                class="table table-centered table-nowrap table-hover mb-0"
+                                class="table table-centered table-nowrap table-hover mb-0 text-gray-900"
                             >
                                 <thead>
                                     <tr>
@@ -216,22 +218,27 @@
                                             Departiment
                                         </th>
                                         <th class="border-top-0">Email</th>
-                                        <th class="border-top-0">
+                                        <!-- <th class="border-top-0">
                                             Registered On
-                                        </th>
+                                        </th> -->
                                         <!-- <th class="border-top-0">Download</th> -->
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr v-for="staff in staffs" :key="staff.id">
-                                        <td>
+                                <tbody class="text-gray-600">
+                                    <tr
+                                        v-for="(staff, index) in staffs"
+                                        :key="staff.id"
+                                        v-if="index < 8"
+                                    >
+                                        <td class="py-1">
                                             <img
                                                 class="h-8 w-8 rounded-full object-cover"
                                                 :src="
-                                                    $page.props.user
-                                                        .profile_photo_url
+                                                    'https://ui-avatars.com/api/?name=' +
+                                                    formatName(staff.name) +
+                                                    '&color=F8FAFC&background=6b7280'
                                                 "
-                                                :alt="$page.props.user.name"
+                                                :alt="staff.name"
                                             />
                                             <!-- <img
                                                 src="assets/images/users/user-2.jpg"
@@ -239,18 +246,22 @@
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
                                             /> -->
                                         </td>
-                                        <td>
+                                        <td class="italic font-semibold">
                                             <span class="text-center">
                                                 {{ staff.name }}
                                             </span>
                                         </td>
-                                        <td>{{ department(staff.role) }}</td>
-                                        <td>{{ staff.email }}</td>
-                                        <td>
+                                        <td class="italic font-semibold">
+                                            {{ department(staff.role) }}
+                                        </td>
+                                        <td class="italic font-semibold">
+                                            {{ staff.email }}
+                                        </td>
+                                        <!-- <td>
                                             {{
                                                 formattedDate(staff.created_at)
                                             }}
-                                        </td>
+                                        </td> -->
                                         <!-- <td class="text-center">
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
@@ -311,8 +322,8 @@ export default {
             unpaidStudents: null,
             registeredStudents: [],
             totalUploads: null,
-            uploadTitles: '',
-            staffs: null,
+            uploadTitles: "",
+            staffs: [],
             tools: [],
             finances: [],
             invoices: null,
@@ -341,6 +352,16 @@ export default {
                 ["Liabilities", 6700000],
                 ["Assets", 700000],
             ];
+        },
+
+        formatName(name) {
+            const nameArr = name.split(" ");
+            const formattedNameArr = nameArr.map((name) => {
+                return name.charAt(0).toUpperCase() + name.slice(1);
+            });
+            const formattedName = formattedNameArr.join("+");
+            // this.formattedName = formattedName;
+            return formattedName;
         },
 
         async headDashboardGetStudents() {

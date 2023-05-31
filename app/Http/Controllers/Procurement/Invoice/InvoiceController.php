@@ -104,5 +104,9 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoiceDashboardData($request)]);
     }
 
-    
+    public function getInvoiceDashboardDataToFinancial(Request $request ,InvoiceService $invoiceService){
+        // $this->authorize('authorizeProcurement', \App\Models\User::class);
+        // event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->getInvoiceDashboardDataToFinancial($request)]);
+    }
 }

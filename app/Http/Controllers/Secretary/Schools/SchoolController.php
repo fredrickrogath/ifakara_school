@@ -19,13 +19,14 @@ class SchoolController extends Controller
     public function addStaff(Request $request ,SchoolsService $schoolsService){
         // $this->authorize('authorizeHead', \App\Models\User::class);
         // event(new \App\Events\NewPostPublished('head'));
-        event(new \App\Events\Api\Secretary\StaffEvent($request->schoolId));
+        event(new \App\Events\Academic\StaffEvent($request->schoolId));
+        event(new \App\Events\Api\Secretary\StaffEvent());
         return response()->json(['data' => $schoolsService->addStaff($request)]);
     }
     
     public function registerSchool(Request $request ,SchoolsService $schoolsService){
         // $this->authorize('authorizeHead', \App\Models\User::class);
-        // event(new \App\Events\NewPostPublished('head'));
+        event(new \App\Events\Api\Secretary\SchoolEvent());
         return response()->json(['data' => $schoolsService->registerSchool($request)]);
     }
 
@@ -49,9 +50,11 @@ class SchoolController extends Controller
 
     public function alterPermission(Request $request, SchoolsService $schoolsService){
         // $this->authorize('authorizeHead', \App\Models\User::class); 
-        event(new \App\Events\Academic\Student\PermissionEvent());
+        // event(new \App\Events\Academic\Student\PermissionEvent());
+        // event(new \App\Events\Api\Secretary\Student\PermissionEvent());
+        // event(new \App\Events\Head\Academic\Student\PermissionEvent());
         event(new \App\Events\Api\Secretary\Student\PermissionEvent());
-        event(new \App\Events\Head\Academic\Student\PermissionEvent());
+        event(new \App\Events\Academic\Student\PermissionEvent($request->school_id));
         return response()->json(['data' => $schoolsService->alterPermission($request)]);
     }
 
@@ -66,7 +69,8 @@ class SchoolController extends Controller
     public function sendComment(Request $request, SchoolsService $schoolsService){
         // $this->authorize('authorizeHead', \App\Models\User::class); 
         // event(new \App\Events\Academic\Student\PermissionEvent());
-        event(new \App\Events\Api\Secretary\CommentEvent());
+        // event(new \App\Events\Api\Secretary\CommentEvent());
+        event(new \App\Events\NotificationEvent($request->id));
         // event(new \App\Events\Head\Academic\Student\PermissionEvent());
         return response()->json(['data' => $schoolsService->sendComment($request)]);
     }

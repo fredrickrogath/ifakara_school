@@ -363,6 +363,10 @@ export default {
             this.$store.dispatch("AcademicStudentModule/setAddStudent");
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
         async addStudent() {
             this.showLoader = true;
             axios
@@ -390,6 +394,8 @@ export default {
                     this.classLevel = "";
                     this.parent = "";
                     this.contact = "";
+
+                    this.setSnackBarState()
                 });
         },
 
@@ -443,10 +449,6 @@ export default {
         //         });
         //     // handle response here
         // },
-
-        setSnackBarState() {
-            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
-        },
 
         // save(id, column, data) {
         //     this.updateTools(id, data, column);

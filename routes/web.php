@@ -104,6 +104,7 @@ Route::middleware([
         */
 
         Route::get('/getStaffs', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'getStaffs'])->name('getStaffs');
+        Route::get('/getStaffsNew', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'getStaffsNew'])->name('getStaffsNew');
         Route::post('/addStaff', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'addStaff'])->name('addStaff');
         Route::get('/getDepartments', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'getDepartments'])->name('getDepartments');
 
@@ -219,6 +220,7 @@ Route::middleware([
         */
 
         Route::get('/getStudents', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudents'])->name('getStudents');
+        Route::get('/getStudentsNew', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentsNew'])->name('getStudentsNew');
         Route::post('/getStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudent'])->name('getStudent');
         Route::post('/editStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'editStudent'])->name('editStudent');
         Route::post('/permissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
@@ -237,7 +239,8 @@ Route::middleware([
         */
 
         Route::get('/getStaffs', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'getStaffs'])->name('getStaffs');
-        Route::post('/addStaff', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'addStaff'])->name('addStaff');
+        Route::get('/getStaffsNew', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'getStaffsNew'])->name('getStaffsNew');
+        // Route::post('/addStaff', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'addStaff'])->name('addStaff');
         Route::get('/getDepartments', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'getDepartments'])->name('getDepartments');
         Route::get('/headDashboardGetStaffs', [\App\Http\Controllers\Academic\Department\DepartmentController::class, 'headDashboardGetStaffs'])->name('headDashboardGetStaffs');
 

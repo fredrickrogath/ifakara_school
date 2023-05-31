@@ -1,11 +1,25 @@
 <template>
-    <div class="component-wrapper py-1">
-        <GChart
-            type="PieChart"
-            style="width: 500px; height: 320px;"
-            :data="chartData"
-            :options="chartOptions"
-        />
+    <div>
+        <div class="component-wrapper py-1">
+            <GChart
+                type="PieChart"
+                style="width: 500px; height: 215px"
+                :data="chartData"
+                :options="chartOptions"
+            />
+        </div>
+
+        <div>
+            <div class="chart-description">
+                <h4>New Tools vs Total Tools</h4>
+                <p>
+                    This chart shows the percentage of new tools compared to the
+                    total number of tools. The pie chart is divided into two
+                    sections: new tools and total tools. The chart provides a
+                    visual representation of the tool data.
+                </p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -18,17 +32,17 @@ export default {
     },
 
     props: {
-      data: {
-        type: Array,
-        required: true,
-      },
+        data: {
+            type: Array,
+            required: true,
+        },
     },
-  
+
     mounted() {
-      if (this.data) {
-        this.renderChart();
-        // console.log("utuyuytuy" + this.data);
-      }
+        if (this.data) {
+            this.renderChart();
+            // console.log("utuyuytuy" + this.data);
+        }
     },
 
     data() {
@@ -48,24 +62,24 @@ export default {
                 is3D: true,
                 legend: { position: "none" },
                 backgroundColor: "transparent",
-                tooltip: {textStyle: { fontSize: 15} },
+                tooltip: { textStyle: { fontSize: 15 } },
             },
         };
     },
 
     methods: {
-      renderChart() {
-        this.chartData = this.data;
-      },
+        renderChart() {
+            this.chartData = this.data;
+        },
     },
 
     watch: {
-      data(newData) {
-        if (newData) {
-        //   console.log(newData);
-          this.renderChart();
-        }
-      },
+        data(newData) {
+            if (newData) {
+                //   console.log(newData);
+                this.renderChart();
+            }
+        },
     },
 };
 </script>

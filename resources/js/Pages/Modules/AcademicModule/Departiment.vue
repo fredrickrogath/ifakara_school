@@ -1,13 +1,13 @@
 <template>
     <div data-app>
 
-        <div class="row">
+        <div class="row bg-white">
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="card h-screen">
-                    <div class="card-body pt-1">
+                    <div class="card-body px-0 pt-1">
                         <!-- Left sidebar -->
-                        <div class="inbox-leftbar bg-white h-screen">
+                        <div class="inbox-leftbar h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
                                     type="button"
@@ -139,11 +139,11 @@
                                 <div
                                     class="d-flex justify-content-between align-items-center"
                                 >
-                                    <div class="ml-3 font-15">My Office</div>
+                                    <div class="ml-3 mt-1 font-15">My Office</div>
 
                                 </div>
 
-                                <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
+                                <hr class="bg-gray-200 my-2 mx-2" />
 
                                 <a
                                     href="#"
@@ -279,12 +279,12 @@ export default {
 
     mounted() {
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
-            (e) => {
-                // console.log(e);
-            }
-        );
+    //     window.Echo.channel("EventTriggered").listen(
+    //         "NewPostPublished",
+    //         (e) => {
+    //             // console.log(e);
+    //         }
+    //     );
     },
 
     data() {

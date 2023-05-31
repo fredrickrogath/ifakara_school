@@ -40,3 +40,4 @@ class StudentEvent implements ShouldBroadcast
         return new Channel('school-student-trigger-from-financial-secretary.' . $this->schoolId);
 }
 }
+    

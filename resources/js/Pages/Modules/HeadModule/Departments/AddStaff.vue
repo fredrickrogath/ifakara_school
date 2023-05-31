@@ -21,7 +21,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="name"
                                             />
                                         </div>
@@ -52,7 +52,7 @@
                                             <input
                                                 type="email"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="email"
                                             />
                                         </div>
@@ -64,7 +64,7 @@
                                                 >Select Class
                                             </label>
                                             <select
-                                                class="form-select"
+                                                class="form-select form-select-sm"
                                                 v-model="identifier"
                                                 id="gender"
                                             >
@@ -89,14 +89,14 @@
                                             >
                                                 <button
                                                     v-if="!showLoader"
-                                                    class="btn btn-primary text-white"
+                                                    class="btn btn-sm btn-primary text-white"
                                                     type="submit"
                                                 >
                                                     Submit
                                                 </button>
                                                 <button
                                                     v-else
-                                                    class="btn btn-primary"
+                                                    class="btn btn-sm btn-primary"
                                                     type="button"
                                                     disabled
                                                 >
@@ -170,13 +170,13 @@ export default {
         this.initialize();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
-            (e) => {
-                // console.log('abc');
-                // this.getTools();
-            }
-        );
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         // console.log('abc');
+        //         // this.getTools();
+        //     }
+        // );
     },
 
     data() {
@@ -330,7 +330,8 @@ export default {
                     this.name = "";
                     this.email = "";
                     this.password = "";
-                    console.log(response.data.data);
+                    this.setSnackBarState();
+                    // console.log(response.data.data);
                 });
         },
         // identifier
@@ -386,7 +387,7 @@ export default {
         // },
 
         setSnackBarState() {
-            this.$store.dispatch("HeadDepartmentModule/setSnackBarState");
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
         },
 
         // save(id, column, data) {

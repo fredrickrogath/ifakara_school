@@ -30,6 +30,14 @@ export default {
     getCommentView(state){
         return state.commentView;
     },
+
+    getNotificationId(state){
+        return state.notificationId;
+    },
+
+    getSnackBarState(state){
+        return state.snackBarState;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

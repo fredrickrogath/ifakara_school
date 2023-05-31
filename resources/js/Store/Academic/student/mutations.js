@@ -27,5 +27,13 @@ export default {
     setCommentView(state) {
         state.commentView = !state.commentView;
     },
+
+    setNotificationId(state, id){
+        state.notificationId = id;
+    },
+
+    setSnackBarState(state){
+        state.snackBarState = !state.snackBarState;
+    },
     
 };

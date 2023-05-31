@@ -14,16 +14,14 @@ class StaffEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $schoolId;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($schoolId)
+    public function __construct()
     {
         //
-        $this->schoolId = $schoolId;
     }
 
     /**
@@ -34,6 +32,6 @@ class StaffEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         // return new PrivateChannel('channel-name');
-        return new Channel('school-staff-trigger-from-financial-secretary.' . $this->schoolId);
+        return new Channel('school-staff-trigger-from-financial-secretary');
     }
 }

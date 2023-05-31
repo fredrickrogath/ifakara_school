@@ -29,5 +29,13 @@ export default {
         context.commit("setCommentView");
     },
 
+    setNotificationId(context, id){
+        context.commit("setNotificationId", id);
+    },
+
+    setSnackBarState(context){
+        context.commit("setSnackBarState");
+    }
+
     
 };

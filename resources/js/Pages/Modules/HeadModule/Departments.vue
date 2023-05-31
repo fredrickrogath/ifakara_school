@@ -120,11 +120,11 @@
 
         <!-- End of Right modal content -->
 
-        <div class="row">
+        <div class="row bg-white">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="card h-screen">
-                    <div class="card-body pt-1">
+                <div class=" h-screen">
+                    <div class="pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar bg-white h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">

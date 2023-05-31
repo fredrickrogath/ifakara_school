@@ -8,9 +8,12 @@
             <div class="row pt-2">
                 <div class="col-12">
                     <div class="h-screen">
+                        <snack-bar
+                            class="absolute right-0 top-14"
+                            message="Task completed successfully"
+                        ></snack-bar>
+                        <!-- <snackbar message="Task completed successfully"></snackbar> -->
 
-                        <snackbar message="Task completed successfully"></snackbar>
-                        
                         <div class="mt-0 pt-0 mb-1">
                             <v-icon
                                 class="ml-1 pr-0 mr-0"
@@ -35,9 +38,9 @@
                                         "
                                     >
                                         <div class="">
-                                            <h3 class="px-5 text-gray-500 py-2">
-                                                Ask for permission to edit :
-                                            </h3>
+                                            <h4 class="px-5 text-gray-500 py-2">
+                                                Ask for permission to edit
+                                            </h4>
 
                                             <h5
                                                 class="px-5 text-center text-gray-400 py-2"
@@ -85,11 +88,7 @@
                                                 </div>
                                             </div>
 
-                                            <div
-                                                v-if="
-                                                    permissionReceived
-                                                "
-                                            >
+                                            <div v-if="permissionReceived">
                                                 <div
                                                     class="d-flex justify-content-center align-content-center mt-4 ml-5"
                                                 >
@@ -331,7 +330,7 @@
 <script>
 import moment from "moment";
 import Select2 from "v-select2-component";
-// import SnackBar from "../../.././Components/SnackBar.vue";
+import SnackBar from "../../.././Components/SnackBar.vue";
 
 import Spinner from "../../../.././Pages/Components/SpinnerLoader.vue";
 
@@ -339,7 +338,7 @@ export default {
     components: {
         Spinner,
         Select2,
-        // SnackBar,
+        SnackBar,
     },
 
     props: {
@@ -367,12 +366,11 @@ export default {
         this.initialize();
 
         // Receiving broadicasting
-        window.Echo.channel("academic-trigger-student-permission").listen(
-            "Academic\\Student\\PermissionEvent",
-            (e) => {
-                this.initialize();
-            }
-        );
+        window.Echo.channel(
+            "student-permission." + this.$page.props.user.school_id
+        ).listen("Academic\\Student\\PermissionEvent", (e) => {
+            this.initialize();
+        });
     },
 
     data() {
@@ -481,6 +479,10 @@ export default {
             this.$store.dispatch("AcademicStudentModule/setCommentView");
         },
 
+        setNotificationId(id) {
+            this.$store.dispatch("AcademicStudentModule/setNotificationId", id);
+        },
+
         // getStudent() {
         //     axios.get("/academic/getStudent").then((response) => {
         //         // this.students = response.data.data;
@@ -511,6 +513,7 @@ export default {
                 .then((response) => {
                     // this.clearData()
                     this.showLoader = false;
+                    // console.log(response.data)
 
                     if (response.data.data != null) {
                         this.firstName = response.data.data.first_name;
@@ -528,7 +531,12 @@ export default {
                         this.permissionSeen =
                             response.data.data.permission_seen;
                         this.schoolId = response.data.data.school_id;
-
+                        response.data.data.notificatio != null
+                            ? this.setNotificationId(
+                                  response.data.data.notification.id
+                              )
+                            : null;
+                        // console.log('testing id : ' + response.data.data.notification.id)
                         // this.getCommentsForStudentPermission();
                         // console.log(this.schoolId);
                     }
@@ -553,6 +561,7 @@ export default {
                     // this.clearData()
                     this.showLoader = false;
                     this.setEditStudent();
+                    this.setSnackBarState();
                 });
         },
 

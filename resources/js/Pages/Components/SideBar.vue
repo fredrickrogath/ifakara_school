@@ -239,59 +239,15 @@
                     <li class="menu-title mt-2">Apps</li>
 
                     <li>
-                        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
-                            <v-icon size="22">mdi-school</v-icon>
-                            <span> Student </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarEcommerce">
-                            <ul class="nav-second-level">
-                                <li>
-                                    <my-custom-link
-                                        :href="
-                                            route(
-                                                'academic.students_registration'
-                                            )
-                                        "
-                                        :active="
-                                            route().current(
-                                                'academic.students_registration'
-                                            )
-                                        "
-                                    >
-                                        <v-icon size="20">mdi-pen-plus</v-icon>
-                                        <span> Registration </span>
-                                    </my-custom-link>
-                                </li>
-                                <li>
-                                    <my-custom-link
-                                        :href="route('academic.upload_results')"
-                                        :active="
-                                            route().current(
-                                                'academic.upload_results'
-                                            )
-                                        "
-                                    >
-                                        <v-icon size="20">mdi-upload</v-icon>
-                                        <span> Uploads </span>
-                                    </my-custom-link>
-                                </li>
-                                <li>
-                                    <my-custom-link
-                                        :href="route('academic.view')"
-                                        :active="
-                                            route().current('academic.view')
-                                        "
-                                    >
-                                        <v-icon size="20">mdi-eye</v-icon>
-                                        <span> View </span>
-                                    </my-custom-link>
-                                </li>
-                                <li></li>
-                            </ul>
-                        </div>
-                    </li>
-
+                    <my-custom-link
+                        :href="route('academic.students_registration')"
+                        :active="route().current('academic.students_registration')"
+                    >
+                        <v-icon size="22">mdi-school</v-icon>
+                        <span> Students </span>
+                    </my-custom-link>
+                </li>
+                
                     
                     <li>
                         <my-custom-link

@@ -60,7 +60,7 @@
                 Staffs
                 <v-spacer></v-spacer>
 
-                <snackbar message="Task completed successfully"></snackbar>
+                <!-- <snackbar message="Task completed successfully"></snackbar> -->
                 
                 <v-text-field
                     v-model="search"
@@ -78,6 +78,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -142,13 +143,13 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{
@@ -157,7 +158,7 @@
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'role'"
                                 >
                                     {{
@@ -208,10 +209,9 @@ export default {
         this.getStaffs();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        window.Echo.channel("staff-event." + this.$page.props.user.school_id).listen(
+            "Academic\\StaffEvent",
             (e) => {
-                // console.log('abc');
                 this.getStaffs();
             }
         );
@@ -277,14 +277,17 @@ export default {
         // },
 
         department(role){
-            if (role == 3){
-                return 'Academic'
+            if(role == 1){
+                return 'Head Office'
+            }
+            else if (role == 3){
+                return 'Academic Office'
             }
             else if (role == 5){
-                return 'Accountant'
+                return 'Accountant Office'
             }
             else if (role == 6){
-                return 'Procurement'
+                return 'Procurement Office'
             }
         },
 

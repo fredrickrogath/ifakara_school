@@ -14,14 +14,17 @@ class StudentEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $schoolId;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($schoolId)
     {
         //
+        $this->schoolId = $schoolId;
     }
 
     /**
@@ -31,6 +34,6 @@ class StudentEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('academic-trigger-add-student');
+        return new Channel('student-event.' . $this->schoolId);
     }
 }
