@@ -60,7 +60,7 @@
                 Invoices
                 <v-spacer></v-spacer>
 
-                <snackbar message="Task completed successfully"></snackbar>
+                <snackbar message="The Requsition has sent successfully to accountant for futher process"></snackbar>
 
                 <!-- <v-btn color="primary" @click="generatePdfReport"
                     >Generate PDF Report</v-btn

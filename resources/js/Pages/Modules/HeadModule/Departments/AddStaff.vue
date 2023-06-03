@@ -61,7 +61,7 @@
                                             <label
                                                 for="gender"
                                                 class="form-label"
-                                                >Select Class
+                                                >Select Depertiment
                                             </label>
                                             <select
                                                 class="form-select form-select-sm"
@@ -76,23 +76,26 @@
                                                     "
                                                 >
                                                     {{ identifier.department }}
+                                                    
                                                 </option>
+                                                <option>others</option>
                                             </select>
                                         </div>
                                     </div>
                                     <!-- end col -->
 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-2 ">
                                             <div
-                                                class="button-list mb-1 mb-sm-0"
+                                                class="button-list mb-1 mb-sm-0 pe-xl-4 d-grid"
                                             >
                                                 <button
                                                     v-if="!showLoader"
-                                                    class="btn btn-sm btn-primary text-white"
+                                                    class="btn btn-md btn-primary text-white btn-block"
                                                     type="submit"
                                                 >
-                                                    Submit
+                                                    Submit  
                                                 </button>
                                                 <button
                                                     v-else
@@ -109,6 +112,7 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        <div class="col-md-5"></div>
                                         <!-- end col -->
                                     </div>
                                     <!-- end row -->
