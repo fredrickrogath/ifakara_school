@@ -11,13 +11,9 @@
                     <div class="card h-screen">
 
                         <div class="mt-0 pt-2 pl-4">
-                            <v-icon
-                                class="ml-1 pr-0 mr-0"
-                                size="22"
-                                @click="setAddSeller()"
-                            >
+                            <v-icon class="ml-1 pr-0 mr-0" size="22" @click="setAddSeller()">
                                 mdi-keyboard-backspace
-                            </v-icon>   
+                            </v-icon>
                         </div>
 
                         <div class="card-body">
@@ -25,88 +21,62 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label
-                                                for="simpleinput"
-                                                class="form-label"
-                                                >Name</label
-                                            >
-                                            <input
-                                                type="text"
-                                                id="simpleinput"
-                                                class="form-control form-control-sm"
-                                                v-model="name"
-                                            />
+                                            <label for="simpleinput" class="form-label">Name</label>
+                                            <input type="text" id="simpleinput" class="form-control form-control-sm"
+                                                v-model="name" />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label
-                                                for="simpleinput"
-                                                class="form-label"
-                                                >Location</label
-                                            >
-                                            <input
-                                                type="text"
-                                                id="simpleinput"
-                                                class="form-control form-control-sm"
-                                                v-model="location"
-                                            />
+                                            <label for="simpleinput" class="form-label">Location</label>
+                                            <input type="text" id="simpleinput" class="form-control form-control-sm"
+                                                v-model="location" />
                                         </div>
                                     </div>
                                     <!-- end col -->
 
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label
-                                                for="simpleinput"
-                                                class="form-label"
-                                                >Mobile</label
-                                            >
-                                            <input
-                                                type="text"
-                                                id="simpleinput"
-                                                class="form-control form-control-sm"
-                                                v-model="mobile"
-                                            />
+                                            <label for="simpleinput" class="form-label">Mobile</label>
+                                            <input type="text" id="simpleinput" class="form-control form-control-sm"
+                                                v-model="mobile" />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label
-                                                for="simpleinput"
-                                                class="form-label"
-                                                >Email</label
-                                            >
-                                            <input
-                                                type="text"
-                                                id="simpleinput"
-                                                class="form-control form-control-sm"
-                                                v-model="email"
-                                            />
+                                            <label for="simpleinput" class="form-label">Email</label>
+                                            <input type="text" id="simpleinput" class="form-control form-control-sm"
+                                                v-model="email" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="simpleinput" class="form-label">PerFormer Invoice</label>
+                                            <!-- <b-form-file id="file-small" type="file" size="sm"  class="form-control form-control-sm" v-model="file"></b-form-file> -->
+                                            <input type="file" id="simpleinput" class="form-control form-control-sm"
+                                                />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="simpleinput" class="form-label">Description</label>
+                                            <textarea name="" id="simpleinput" cols="10" rows="10"
+                                                class="form-control form-control-sm" v-model="description"></textarea>
+                                      
                                         </div>
                                     </div>
                                     <!-- end col -->
 
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div
-                                                class="button-list mb-1 mb-sm-0"
-                                            >
-                                                <button v-if="!showLoader"
-                                                    class="btn btn-sm btn-primary text-white"
-                                                    type="submit"
-                                                >
+                                        <div class="col-md-12 justify-content-center">
+                                            <div class="button-list mb-1 mb-sm-0">
+                                                <button v-if="!showLoader" class="btn btn-sm btn-primary text-white"
+                                                    type="submit">
                                                     Submit
                                                 </button>
-                                                <button
-                                                v-else
-                                                    class="btn btn-sm btn-primary"
-                                                    type="button"
-                                                    disabled
-                                                >
-                                                    <span
-                                                        class="spinner-border spinner-border-sm me-1"
-                                                        role="status"
-                                                        aria-hidden="true"
-                                                    ></span>
+                                                <button v-else class="btn btn-sm btn-primary" type="button" disabled>
+                                                    <span class="spinner-border spinner-border-sm me-1" role="status"
+                                                        aria-hidden="true"></span>
                                                     Loading...
                                                 </button>
                                             </div>
@@ -219,6 +189,8 @@ export default {
             location: "",
             mobile: "",
             email: "",
+            file: "",
+            description: ""
 
             // totalPrice: 0,
         };

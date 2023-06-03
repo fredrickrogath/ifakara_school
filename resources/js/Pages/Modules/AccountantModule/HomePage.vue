@@ -118,7 +118,7 @@
         <!-- end row -->
 
         <div class="row pt-0 mt-0">
-            <div class="col-xl-8 col-md-6 mb-0 pb-0">
+            <div class="col-xl-6 col-md-6 mb-0 pb-0">
                 <div class="card">
                     <div class="card-body pb-2">
                         <div class="float-end d-none d-md-inline-block">
@@ -411,7 +411,7 @@
             </div> -->
             <!-- end col-->
 
-            <div class="col-xl-8 col-md-6 mb-0 pb-0">
+            <div class="col-xl-6 col-md-6 mb-0 pb-0">
                 <div class="card">
                     <div class="card-body">
                         <!-- <div class="float-end d-none d-md-inline-block"> -->

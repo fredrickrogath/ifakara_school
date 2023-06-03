@@ -45,7 +45,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">12</span>
+                                        <!-- <span data-plugin="counterup">12</span> -->
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         {{ newToolTitle? newToolTitle : 'Please wait' }}
@@ -72,7 +72,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">87</span>
+                                        <!-- <span data-plugin="counterup">87</span> -->
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         {{ brokenToolTitle? brokenToolTitle : 'Please wait' }}
@@ -118,7 +118,7 @@
         <!-- end row -->
 
         <div class="row pt-0 mt-0">
-            <div class="col-xl-8 col-md-6 mb-0 pb-0">
+            <div class="col-xl-6 col-md-6 mb-0 pb-0">
                 <div class="card">
                     <div class="card-body pb-2">
                         <div class="float-end d-none d-md-inline-block">
@@ -401,7 +401,7 @@
             </div> -->
             <!-- end col-->
 
-            <div class="col-xl-8 col-md-6 mb-0 pb-0">
+            <div class="col-xl-6 col-md-6 mb-0 pb-0">
                 <div class="card">
                     <div class="card-body">
                         <!-- <div class="float-end d-none d-md-inline-block"> -->

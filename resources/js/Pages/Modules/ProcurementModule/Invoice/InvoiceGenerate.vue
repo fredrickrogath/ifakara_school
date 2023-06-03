@@ -6,7 +6,7 @@
 
         <v-col v-else sm="12" md="12">
 
-            <snack-bar message="Task completed successfully"></snack-bar>
+            <snack-bar message="The Requsition has sent successfully to accountant for futher process"></snack-bar>
 
             <div class="d-flex justify-content-between">
                 <div class="col-5">
@@ -258,7 +258,7 @@
                             type="submit"
                             class="btn btn-success text-white btn-sm waves-effect waves-light"
                         >
-                            Submit
+                            Submit to Accountant
                         </button>
                     </div>
                 </form>
