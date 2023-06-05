@@ -16,7 +16,7 @@
                     </v-icon>
                 </div>
 
-                Comments on Notification #{{ notificationId }}, Student #{{
+                Comments on Notification # {{ getChatId }}, Student #{{
                     getStudentId
                 }}
             </div>
@@ -59,11 +59,11 @@
                                         >
                                     </div>
                                 </div>
-                                <img
+                                <!-- <img
                                     src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
                                     alt="My profile"
                                     class="w-8 h-8 rounded-full order-2"
-                                />
+                                /> -->
                             </div>
                             <div class="text-xs p-1 float-right">
                                 {{ formattedDate(comment.created_at) }}
@@ -87,11 +87,11 @@
                                         >
                                     </div>
                                 </div>
-                                <img
+                                <!-- <img
                                     src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
                                     alt="My profile"
                                     class="w-8 h-8 rounded-full order-1"
-                                />
+                                /> -->
                             </div>
                             <div class="text-xs p-1">
                                 {{ formattedDate(comment.created_at) }}
@@ -143,10 +143,14 @@ export default {
     mounted() {
         this.showLoader = true;
         // this.getComments();
+        // this.getComments();
+        // this.getComments();
+                
+
 
         // Receiving broadicasting
         window.Echo.channel(
-            "notification-event." + this.getNotificationId
+            "notification-event." + this.getChatId
         ).listen("NotificationEvent", (e) => {
             // console.log(e);
             this.getComments();
@@ -177,11 +181,17 @@ export default {
             return this.$store.getters["AcademicStudentModule/getStudentId"];
         },
 
-        getNotificationId() {
-            this.notificationId =
-                this.$store.getters["AcademicStudentModule/getNotificationId"];
+        // getNotificationId() {
+        //     this.notificationId =
+        //         this.$store.getters["AcademicStudentModule/getNotificationId"];
+        //     return this.$store.getters[
+        //         "AcademicStudentModule/getNotificationId"
+        //     ];
+        // },
+
+        getChatId() {
             return this.$store.getters[
-                "AcademicStudentModule/getNotificationId"
+                "AcademicStudentModule/getChatId"
             ];
         },
     },
@@ -190,6 +200,19 @@ export default {
         studentlId(newVal, oldVal) {
             if (newVal !== null) {
                 this.getComments();
+                // this.setChatId(this.notificationId);
+                // this.setNotificationId(this.notificationId);
+            }
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
+        },
+
+        notificationId(newVal, oldVal) {
+            if (newVal !== null) {
+                // this.getComments();
+                this.setChatId(this.notificationId);
+                // this.setNotificationId(this.notificationId);
             }
             // console.log(
             //     `The message has changed from "${oldVal}" to "${newVal}"`
@@ -200,6 +223,10 @@ export default {
         //Add methods...
         setCommentView() {
             this.$store.dispatch("AcademicStudentModule/setCommentView");
+        },
+
+        setChatId(id) {
+            this.$store.dispatch("AcademicStudentModule/setChatId", id);
         },
 
         formattedDate(date) {

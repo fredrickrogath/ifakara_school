@@ -16,8 +16,7 @@ class StudentController extends Controller
     //
     public function addStudent(Request $request, StudentService $studentService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
-        event(new \App\Events\Academic\StudentEvent('academic student'));
-        event(new \App\Events\Api\Secretary\StudentEvent('head getSchoolStaffs route'));
+        event(new \App\Events\Academic\StudentEvent(auth()->user()->school_id));
         return response()->json(['data' => $studentService->addStudent($request)]);
     }
 
@@ -40,6 +39,11 @@ class StudentController extends Controller
     public function getStudents(StudentService $studentService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $studentService->getStudents()]);
+    }
+
+    public function getStudentsNew(StudentService $studentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getStudentsNew()]);
     }
 
     public function headDashboardGetStudents(StudentService $studentService){
@@ -65,7 +69,8 @@ class StudentController extends Controller
     }
 
     public function sendComment(Request $request, StudentService $studentService){
-        event(new \App\Events\Api\Secretary\CommentEvent());
+        // event(new \App\Events\Api\Secretary\CommentEvent());
+        event(new \App\Events\NotificationEvent($request->id));
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $studentService->sendComment($request)]);
     }

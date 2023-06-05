@@ -28,4 +28,12 @@ export default {
     setEditStudent(context){
         context.commit("setEditStudent");
     },
+
+    setChatId(context, id){
+        context.commit("setChatId", id);
+    },
+
+    setNotificationId(context, id){
+        context.commit("setNotificationId", id);
+    },
 };

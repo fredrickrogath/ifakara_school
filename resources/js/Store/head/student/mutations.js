@@ -32,4 +32,12 @@ export default {
     setStudentId(state, id) {
         state.studentId = id;
     },
+
+    setChatId(state, id){
+        state.chatId = id;
+    },
+
+    setNotificationId(state, id){
+        state.notificationId = id;
+    },
 };

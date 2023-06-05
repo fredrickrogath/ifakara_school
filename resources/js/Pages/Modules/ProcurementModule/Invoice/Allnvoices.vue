@@ -81,6 +81,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -123,7 +124,7 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
                                     >
                                     <!-- {{ item[header.value] }} -->
@@ -132,7 +133,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -140,7 +141,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -148,12 +149,12 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'seller'"
                                     >{{ item[header.value].name }}</span
                                 >
 
-                                <span
+                                <!-- <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tools'"
                                 >
@@ -162,8 +163,8 @@
                                             {{ tool.name }}
                                         </span>
                                     </div>
-                                </span>
-
+                                </span> -->
+<!-- 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tool_sum'"
@@ -171,7 +172,7 @@
                                     {{
                                         formattedPrice(totalPrice(item.invoice_tool))
                                     }}
-                                </span>
+                                </span> -->
                             </td>
                         </tr>
                     </tbody>
@@ -249,14 +250,14 @@ export default {
                     text: "Seller",
                     value: "seller",
                 },
-                {
-                    text: "Tools",
-                    value: "tools",
-                },
-                {
-                    text: "Total",
-                    value: "tool_sum",
-                },
+                // {
+                //     text: "Tools",
+                //     value: "tools",
+                // },
+                // {
+                //     text: "Total",
+                //     value: "tool_sum",
+                // },
                 { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },

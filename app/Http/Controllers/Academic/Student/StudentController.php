@@ -21,7 +21,7 @@ class StudentController extends Controller
     // }
 
     public function addStudent(Request $request, StudentService $studentService){
-        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        $this->authorize('authorizeAcademic', \App\Models\User::class);
         // event(new \App\Events\NewPostPublished('academic student'));
         event(new \App\Events\Academic\StudentEvent(auth()->user()->school_id));
         // event(new \App\Events\Api\Secretary\StudentEvent(auth()->user()->school_id));

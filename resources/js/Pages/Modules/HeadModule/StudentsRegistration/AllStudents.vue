@@ -57,8 +57,11 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students {{ getStudentId }} mm {{ getEditStudent }}
+                Students
                 <v-spacer></v-spacer>
+                
+                <snack-bar class="absolute right-0 top-14" message="Task completed successfully"></snack-bar>
+                
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -75,6 +78,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -94,9 +98,17 @@
                                 <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
-                                    @click=" setInvoiceView(items[idx]['id'])"
+                                    @click="setInvoiceView(items[idx]['id'])"
                                 >
                                     mdi-eye
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'edit'"
+                                    size="22"
+                                    @click="setEditStudent(items[idx]['id'])"
+                                >
+                                    mdi-pen
                                 </v-icon>
 
                                 <v-icon
@@ -114,14 +126,6 @@
                                     "
                                 >
                                     mdi-star
-                                </v-icon>
-
-                                <v-icon
-                                    v-if="header.value == 'edit'"
-                                    size="22"
-                                    @click="setEditStudent(items[idx]['id'])"
-                                >
-                                    mdi-pen
                                 </v-icon>
 
                                 <span
@@ -147,63 +151,51 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'first_name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'middle_name'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'last_name'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'gender'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'from'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'parent'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'parent_contact'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
                             </td>
                         </tr>
@@ -219,9 +211,11 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
 export default {
     components: {
         Spinner,
+        SnackBar,
     },
 
     props: {
@@ -249,7 +243,7 @@ export default {
         this.getStudents();
 
         // Receiving broadicasting
-        window.Echo.channel("academic-trigger-add-student").listen(
+        window.Echo.channel("student-event." + this.$page.props.user.school_id).listen(
             "Academic\\StudentEvent",
             (e) => {
                 this.getStudents();

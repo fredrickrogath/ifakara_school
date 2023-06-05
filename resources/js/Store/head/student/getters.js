@@ -34,6 +34,14 @@ export default {
     getEditStudent(state){
         return state.editStudent;
     },
+
+    getChatId(state){
+        return state.chatId;
+    },
+
+    getNotificationId(state){
+        return state.notificationId;
+    }
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

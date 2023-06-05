@@ -35,6 +35,10 @@ export default {
         return state.notificationId;
     },
 
+    getChatId(state){
+        return state.chatId;
+    },
+
     getSnackBarState(state){
         return state.snackBarState;
     },

@@ -328,7 +328,7 @@
 <script>
 import moment from "moment";
 import Select2 from "v-select2-component";
-// import SnackBar from "../../.././Components/SnackBar.vue";
+import SnackBar from "../../.././Components/SnackBar.vue";
 
 import Spinner from "../../../.././Pages/Components/SpinnerLoader.vue";
 
@@ -336,7 +336,7 @@ export default {
     components: {
         Spinner,
         Select2,
-        // SnackBar,
+        SnackBar,
     },
 
     props: {
@@ -364,7 +364,7 @@ export default {
         this.initialize();
 
         // Receiving broadicasting
-        window.Echo.channel("academic-trigger-student-permission").listen(
+        window.Echo.channel("student-permission." + this.$page.props.user.school_id).listen(
             "Academic\\Student\\PermissionEvent",
             (e) => {
                 this.initialize();

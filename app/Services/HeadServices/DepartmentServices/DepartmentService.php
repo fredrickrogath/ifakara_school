@@ -43,7 +43,7 @@ class DepartmentService
     // }
 
     public function getDepartments(){
-        return \App\Models\Department::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Department::orderBy('created_at', 'desc')->get();
     }
 
     // public function getStudents(){

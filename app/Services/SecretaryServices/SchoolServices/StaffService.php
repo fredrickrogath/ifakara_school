@@ -35,8 +35,12 @@ class StaffService
     // }
 
     public function getDepartments($request){
-        return \App\Models\Department::where('school_id', $request->schoolId)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Department::orderBy('created_at', 'desc')->get();
     }
+
+    // public function getDepartments($request){
+    //     return \App\Models\Department::where('school_id', $request->schoolId)->orderBy('created_at', 'desc')->get();
+    // }
 
     public function getStudents(){
         return \App\Models\Student::orderBy('created_at', 'desc')->get();

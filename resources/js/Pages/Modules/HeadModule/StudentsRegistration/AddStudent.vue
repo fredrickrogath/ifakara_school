@@ -7,8 +7,8 @@
         <v-col sm="12" md="12">
             <div class="row">
                 <div class="col-12">
-                    <div class="card h-screen">
-                        <div class="card-body">
+                    <div class="mt-2 h-screen">
+                        <div class="">
                             <form @submit.prevent="addStudent">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -204,6 +204,8 @@ export default {
         // SnackBar,
     },
 
+    name: "students",
+
     props: {
         // postsData: {
         // type: Number,
@@ -229,13 +231,13 @@ export default {
         this.initialize();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
-            (e) => {
-                // console.log('abc');
-                // this.getTools();
-            }
-        );
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         // console.log('abc');
+        //         // this.getTools();
+        //     }
+        // );
     },
 
     data() {
@@ -363,6 +365,10 @@ export default {
             this.$store.dispatch("HeadStudentModule/setAddStudent");
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
         async addStudent() {
             this.showLoader = true;
             axios
@@ -390,6 +396,8 @@ export default {
                     this.classLevel = "";
                     this.parent = "";
                     this.contact = "";
+
+                    this.setSnackBarState()
                 });
         },
 
