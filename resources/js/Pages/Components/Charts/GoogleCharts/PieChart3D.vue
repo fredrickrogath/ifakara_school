@@ -3,7 +3,7 @@
         <div class="component-wrapper py-1">
             <GChart
                 type="PieChart"
-                style="width: 500px; height: 215px"
+                style="width: 500px; height: 200px"
                 :data="chartData"
                 :options="chartOptions"
             />

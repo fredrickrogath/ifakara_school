@@ -1,7 +1,7 @@
 <template>
     <div class="pt-0 bg-gray-100">
-        <div class="row bg-gray-100">
-            <div class="col-md-3 col-xl-3">
+        <div class="d-flex">
+            <div class="my-0 pt-0 flex-grow-1">
                 <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">
                         <div class="row">
@@ -31,7 +31,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -45,7 +45,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <!-- <span data-plugin="counterup">12</span> -->
+                                        <span data-plugin="counterup">12</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         {{ newToolTitle? newToolTitle : 'Please wait' }}
@@ -58,7 +58,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -72,7 +72,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <!-- <span data-plugin="counterup">87</span> -->
+                                        <span data-plugin="counterup">87</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         {{ brokenToolTitle? brokenToolTitle : 'Please wait' }}
@@ -85,7 +85,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -117,8 +117,8 @@
 
         <!-- end row -->
 
-        <div class="row pt-0 mt-0">
-            <div class="col-xl-6 col-md-6 mb-0 pb-0">
+        <div class="d-flex pt-1">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body pb-2">
                         <div class="float-end d-none d-md-inline-block">
