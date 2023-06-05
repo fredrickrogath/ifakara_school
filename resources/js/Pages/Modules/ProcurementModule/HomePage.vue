@@ -401,7 +401,7 @@
             </div> -->
             <!-- end col-->
 
-            <div class="col-xl-6 col-md-6 mb-0 pb-0">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
                         <!-- <div class="float-end d-none d-md-inline-block"> -->
