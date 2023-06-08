@@ -16,5 +16,8 @@ class Seller extends Model
         'user_id',
         'school_id',
         'email',
+        'description',
+        'path',
+        'file',
     ];
 }

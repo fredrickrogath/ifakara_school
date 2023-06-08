@@ -154,7 +154,7 @@
                                     >{{ item[header.value].name }}</span
                                 >
 
-                                <!-- <span
+                                <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tools'"
                                 >
@@ -163,8 +163,8 @@
                                             {{ tool.name }}
                                         </span>
                                     </div>
-                                </span> -->
-<!-- 
+                                </span>
+
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tool_sum'"
@@ -172,7 +172,7 @@
                                     {{
                                         formattedPrice(totalPrice(item.invoice_tool))
                                     }}
-                                </span> -->
+                                </span>
                             </td>
                         </tr>
                     </tbody>
@@ -250,14 +250,14 @@ export default {
                     text: "Seller",
                     value: "seller",
                 },
-                // {
-                //     text: "Tools",
-                //     value: "tools",
-                // },
-                // {
-                //     text: "Total",
-                //     value: "tool_sum",
-                // },
+                {
+                    text: "Tools",
+                    value: "tools",
+                },
+                {
+                    text: "Total",
+                    value: "tool_sum",
+                },
                 { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
@@ -362,7 +362,7 @@ export default {
             axios.get("/procurement/getInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                console.log(response.data.data)
             });
         },
 
