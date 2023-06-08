@@ -17,7 +17,6 @@
                         v-model="supplier"
                         :items="supplierOptions"
                         chips
-                        label="Select suppliers"
                         multiple
                     ></v-select>
                     <!-- </div> -->
@@ -59,7 +58,7 @@
                 <div class="col-md-6">
                     <div class="mt-3">
                         <p>
-                            <b>Hello, {{ supplier }}</b>
+                            <b>Suppliers : {{ supplier }}</b>
                         </p>
                         <p class="">
                             Thanks a lot because you keep purchasing our
