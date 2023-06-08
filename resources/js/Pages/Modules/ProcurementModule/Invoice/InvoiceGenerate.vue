@@ -11,16 +11,16 @@
 
             <div class="d-flex justify-content-between">
                 <div class="col-5">
-                    <div class="col-5">
-                        <div class="">Select Supplier</div>
-                        <v-select
-                            v-model="supplier"
-                            :items="supplierOptions"
-                            chips
-                            label="suppliers"
-                            multiple
-                        ></v-select>
-                    </div>
+                    <!-- <div class="col-5"> -->
+                    <div class="-mb-6">Select Supplier</div>
+                    <v-select
+                        v-model="supplier"
+                        :items="supplierOptions"
+                        chips
+                        label="Select suppliers"
+                        multiple
+                    ></v-select>
+                    <!-- </div> -->
 
                     <!-- <div class="mb-1">Select Supplier</div>
                     <Select2
@@ -75,7 +75,7 @@
                         <p>
                             <strong>Order Date : </strong>
                             <span class="float-end">
-                                &nbsp;&nbsp;&nbsp;&nbsp; Jan 17, 2016</span
+                                &nbsp;&nbsp;&nbsp;&nbsp;  {{ formattedDate }}</span
                             >
                         </p>
                         <p>
@@ -602,12 +602,18 @@ export default {
             price: "",
 
             totalPrice: 0,
+
+            currentDate: new Date(),
         };
     },
 
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        formattedDate() {
+            return moment(this.currentDate).format("MMM DD, YYYY");
         },
     },
 
