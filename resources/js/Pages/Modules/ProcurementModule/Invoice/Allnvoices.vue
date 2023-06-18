@@ -126,11 +126,10 @@
                                 <span
                                     class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
-                                    >
+                                >
                                     <!-- {{ item[header.value] }} -->
                                     {{ encrypt() }}
-                                    </span
-                                >
+                                </span>
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
@@ -155,6 +154,39 @@
                                 >
 
                                 <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value === 'sellers'"
+                                >
+                                    <span
+                                        v-for="seller in item[header.value]"
+                                        :key="seller.id"
+                                        class="d-block"
+                                    >
+                                        <div class="">
+                                            <v-menu transition="fab-transition">
+                                                <template
+                                                    v-slot:activator="{
+                                                        on,
+                                                        attrs,
+                                                    }"
+                                                >
+                                                    <span
+                                                        class="seller-name"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        @click="getSellerProfile(seller)"
+                                                    >
+                                                        {{ seller.name }}
+                                                    </span>
+                                                </template>
+
+                                                <seller-profile :seller="sellerInfo"></seller-profile>
+                                            </v-menu>
+                                        </div>
+                                    </span>
+                                </span>
+
+                                <!-- <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tools'"
                                 >
@@ -163,16 +195,16 @@
                                             {{ tool.name }}
                                         </span>
                                     </div>
-                                </span>
+                                </span> -->
 
-                                <span
+                                <!-- <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
                                     {{
                                         formattedPrice(totalPrice(item.invoice_tool))
                                     }}
-                                </span>
+                                </span> -->
                             </td>
                         </tr>
                     </tbody>
@@ -191,11 +223,13 @@ import "jspdf-autotable";
 
 import Spinner from "../../.././Components/SpinnerLoader.vue";
 import Snackbar from "../../.././Components/SnackBar.vue";
+import SellerProfile from "../../../Components/SellerProfile.vue";
 
 export default {
     components: {
         Spinner,
         Snackbar,
+        SellerProfile,
     },
 
     props: {
@@ -247,8 +281,8 @@ export default {
                     value: "id",
                 },
                 {
-                    text: "Seller",
-                    value: "seller",
+                    text: "Suppliers",
+                    value: "sellers",
                 },
                 {
                     text: "Tools",
@@ -266,6 +300,8 @@ export default {
             invoices: [],
 
             idForAction: null,
+
+            sellerInfo: [],
         };
     },
 
@@ -311,7 +347,7 @@ export default {
             doc.text(title, 10, 10);
 
             // Add title
-            doc.text('title', 5, 6);
+            doc.text("title", 5, 6);
 
             // Add the table to the PDF
             doc.autoTable({
@@ -358,11 +394,15 @@ export default {
             this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
         },
 
+        getSellerProfile(seller) {
+            this.sellerInfo = seller
+        },
+
         getInvoices() {
             axios.get("/procurement/getInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data)
+                // console.log(response.data.data);
             });
         },
 

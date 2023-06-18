@@ -14,8 +14,9 @@
                     <!-- <div class="col-5"> -->
                     <div class="-mb-6">Select Supplier</div>
                     <v-select
-                        v-model="supplier"
+                        v-model="selectedSuppliers"
                         :items="supplierOptions"
+                        item-value="id"
                         chips
                         multiple
                     ></v-select>
@@ -56,9 +57,10 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="mt-3">
+                    <div class="">
                         <p>
-                            <b>Suppliers : {{ supplier }}</b>
+                            <!-- <b>Suppliers : {{ selectedSuppliers }}</b> -->
+                            <!-- <b class="d-none">Suppliers : {{ selectedSuppliersList }}</b> -->
                         </p>
                         <p class="">
                             Thanks a lot because you keep purchasing our
@@ -70,11 +72,12 @@
                 </div>
                 <!-- end col -->
                 <div class="col-md-4 offset-md-2">
-                    <div class="mt-3 float-end">
+                    <div class="float-end">
                         <p>
                             <strong>Order Date : </strong>
                             <span class="float-end">
-                                &nbsp;&nbsp;&nbsp;&nbsp;  {{ formattedDate }}</span
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                {{ formattedDate }}</span
                             >
                         </p>
                         <p>
@@ -249,13 +252,13 @@
                                 }}</span
                             >
                         </p>
-                        <h3>
+                        <h4>
                             {{
                                 formattedPrice(
                                     totalPrice - (totalPrice * 18) / 100
                                 )
                             }}
-                        </h3>
+                        </h4>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -324,7 +327,7 @@ export default {
                 },
                 { text: "Price", value: "price", align: "center" },
                 { text: "Count", value: "count" },
-                { text: "Action", value: "action" },
+                // { text: "Action", value: "action" },
             ],
 
             tools: [],
@@ -334,6 +337,7 @@ export default {
             supplier: [],
             supplierId: null,
             supplierOptions: [],
+            selectedSuppliers: [],
 
             tool: "",
             toolId: null,
@@ -614,6 +618,15 @@ export default {
         formattedDate() {
             return moment(this.currentDate).format("MMM DD, YYYY");
         },
+
+        // selectedSuppliersList() {console.log(this.selectedSuppliers)
+        //     // return this.selectedSuppliers.map((supplier) => {
+        //     //     return {
+        //     //         id: supplier.id,
+        //     //         text: supplier.text,
+        //     //     };
+        //     // });
+        // },
     },
 
     methods: {
@@ -638,10 +651,10 @@ export default {
             });
         },
 
-        formattedDate(date) {
-            // return moment(date).format("MMMM Do YYYY");
-            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-        },
+        // formattedDate(date) {
+        //     // return moment(date).format("MMMM Do YYYY");
+        //     return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        // },
 
         mySelectEvent(e, action) {
             if (action == "tool") {
@@ -652,9 +665,10 @@ export default {
             } else if (action == "count") {
                 this.countIsSet = true;
             } else if (action == "supplier") {
-                this.supplier = e.text;
-                this.supplierId = e.id;
-                this.supplierIsSet = true;
+                // this.supplier = e.text;
+                // this.supplierId = e.id;
+                // this.supplierIsSet = true;
+                // console.log(e)
             }
 
             if (this.toolIsSet && this.countIsSet) {
@@ -696,11 +710,12 @@ export default {
         async submitInvoice() {
             axios
                 .post("/procurement/submitInvoice", {
-                    sellerId: this.supplierId,
+                    sellers: this.selectedSuppliers,
                     // toolId: this.toolId,
                     tools: this.tools,
                 })
                 .then((response) => {
+                    // console.log(response.data)
                     this.clearData();
                     this.setInvoiceGenerate();
                     this.setSnackBarState();

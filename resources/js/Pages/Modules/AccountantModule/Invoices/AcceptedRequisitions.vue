@@ -244,9 +244,11 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import Snackbar from "../../.././Components/Snackbar";
 export default {
     components: {
         Spinner,
+        Snackbar,
     },
 
     props: {

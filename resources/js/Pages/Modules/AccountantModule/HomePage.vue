@@ -1,7 +1,7 @@
 <template>
     <div class="pt-0 bg-gray-100">
-        <div class="row bg-gray-100">
-            <div class="col-md-3 col-xl-3">
+        <div class="d-flex">
+            <div class="my-0 pt-0 flex-grow-1">
                 <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">
                         <div class="row">
@@ -16,7 +16,7 @@
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ students }}
+                                            {{ students ? students : 0 }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -31,7 +31,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -58,7 +58,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -85,7 +85,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -100,11 +100,11 @@
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup"
-                                            > {{ totalUploads }} </span
+                                            > {{ totalUploads ? totalUploads : 0 }} </span
                                         >
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ uploadTitles }}
+                                        {{ uploadTitles ? uploadTitles : 'Please wait' }}
                                     </p>
                                 </div>
                             </div>
@@ -117,10 +117,10 @@
 
         <!-- end row -->
 
-        <div class="row pt-0 mt-0">
-            <div class="col-xl-6 col-md-6 mb-0 pb-0">
+        <div class="d-flex pt-1">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
-                    <div class="card-body pb-2">
+                    <div class="card-body">
                         <div class="float-end d-none d-md-inline-block">
                             <!-- <div class="btn-group mb-2">
                                 <button
@@ -187,6 +187,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="registeredStudents"
+                                            :head="headDonghurt"
+                                            :content="contentDonghurt"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -195,6 +197,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="finances"
+                                            :head="headDonghurt"
+                                            :content="contentDonghurt"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -411,7 +415,7 @@
             </div> -->
             <!-- end col-->
 
-            <div class="col-xl-6 col-md-6 mb-0 pb-0">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
                         <!-- <div class="float-end d-none d-md-inline-block"> -->
@@ -474,7 +478,8 @@
                             <google-bar
                                 :data="chartData"
                                 YText="Invoice Count"
-                                height="400"
+                                :head="head"
+                                :content="content"
                             ></google-bar>
                         </div>
                     </div>
@@ -601,6 +606,12 @@ export default {
             finances: [],
             invoices: null,
             chartData: [],
+            headDonghurt: "3D New Tools vs Total Tools",
+            contentDonghurt:
+                "3D This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+            head: "Bar New Tools vs Total Tools",
+            content:
+                "Bar This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
         };
     },
     computed: {
