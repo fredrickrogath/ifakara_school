@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students {{ getStudentId }} mm {{ getEditStudent }}
+                Students {{ getStudentId }} List {{ getEditStudent }}
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -205,7 +205,9 @@
                                         item[header.value]
                                     }}
                                 </span>
+                                
                             </td>
+                            <td><span>Fees Installament</span></td>
                         </tr>
                     </tbody>
                 </template>
