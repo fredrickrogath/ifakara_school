@@ -132,7 +132,7 @@
                                                 {{
                                                     formattedPrice(
                                                         data.count *
-                                                            data.tool.price
+                                                               data.tool.price
                                                     )
                                                 }}
                                             </td>
