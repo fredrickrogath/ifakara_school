@@ -61,7 +61,9 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students
+                <div class="pl-2 pt-1">
+                    Students
+                </div>
                 <v-spacer></v-spacer>
 
                 <snack-bar class="absolute right-0 top-14" message="Task completed successfully"></snack-bar>

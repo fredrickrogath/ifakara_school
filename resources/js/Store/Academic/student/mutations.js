@@ -32,6 +32,10 @@ export default {
         state.notificationId = id;
     },
 
+    setChatId(state, id){
+        state.chatId = id;
+    },
+    
     setSnackBarState(state){
         state.snackBarState = !state.snackBarState;
     },

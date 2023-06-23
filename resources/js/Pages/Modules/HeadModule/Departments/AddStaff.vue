@@ -61,7 +61,7 @@
                                             <label
                                                 for="gender"
                                                 class="form-label"
-                                                >Select Depertiment
+                                                >Select Role
                                             </label>
                                             <select
                                                 class="form-select form-select-sm"

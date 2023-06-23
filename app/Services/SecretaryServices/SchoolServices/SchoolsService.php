@@ -122,7 +122,7 @@ class SchoolsService
     }
 
     public function getComments($request){
-        return \App\Models\Comment::where('notification_id', $request->id)->orderBy('created_at', 'asc')->get();
+        return \App\Models\Comment::where('notification_id', $request->id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getSchoolPermissionsNotifications(){

@@ -16,7 +16,7 @@ class DepartmentController extends Controller
     public function addStaff(Request $request ,DepartmentService $departmentService){
         $this->authorize('authorizeHead', \App\Models\User::class);
         event(new \App\Events\Academic\StaffEvent(auth()->user()->school_id));
-        event(new \App\Events\Api\Secretary\StaffEvent());
+        // event(new \App\Events\Api\Secretary\StaffEvent());
         return response()->json(['data' => $departmentService->addStaff($request)]);
     }
 

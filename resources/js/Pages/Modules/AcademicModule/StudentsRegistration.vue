@@ -256,9 +256,9 @@
 
                              <div class="mail-list">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="ml-3 font-15">My Office</div>
+                                    <div class="ml-3 py-1 font-15">My Office</div>
 
-                                    <v-icon
+                                    <!-- <v-icon
                                     v-if="!getAddStudent"
                                         class="ml-4 px-1 mt-1 mr-0 py-1"
                                         size="22"
@@ -274,7 +274,7 @@
                                         @click="setAddStudent()"
                                     >
                                         mdi-check
-                                    </v-icon>
+                                    </v-icon> -->
                                 </div>
 
                                 <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
@@ -367,23 +367,23 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar">
+                        <div class="inbox-rightbar px-0 pt-0">
                         
-                            <div class="bg-white h-screen">
+                            <div class="bg-white h-screen px-0">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
-                                    <div v-show="getAddStudent && !getEditStudent && !getCommentView" key="1">
+                                    <!-- <div v-show="getAddStudent && !getEditStudent && !getCommentView" key="1">
                                         <add-student></add-student>
-                                    </div>
+                                    </div> -->
 
-                                    <div v-show="getCommentView && !getAddStudent && getEditStudent" key="4">
+                                    <div v-show="getCommentView && getEditStudent" key="4">
                                         <comments></comments>
                                     </div>
 
-                                    <div v-show="getEditStudent && !getAddStudent && !getCommentView" key="2">
+                                    <div v-show="getEditStudent && !getCommentView" key="2">
                                         <edit-student></edit-student>
                                     </div>
-                                    <div v-show="!getEditStudent && !getAddStudent && !getCommentView" key="3">
+                                    <div v-show="!getEditStudent && !getCommentView" key="3">
                                         <all-students v-show="getCurrentTab == 'all'"></all-students>
                                         <new-students v-show="getCurrentTab == 'new'"></new-students>
                                         <paid-students v-show="getCurrentTab == 'paid'"></paid-students>
@@ -510,9 +510,9 @@ export default {
             return this.selectedLegerEntry;
         },
 
-        getAddStudent() {
-            return this.$store.getters["AcademicStudentModule/getAddStudent"];
-        },
+        // getAddStudent() {
+        //     return this.$store.getters["AcademicStudentModule/getAddStudent"];
+        // },
 
         getEditStudent() {
             return this.$store.getters["AcademicStudentModule/getEditStudent"];
@@ -553,10 +553,10 @@ export default {
             this.$store.dispatch("AcademicStudentModule/setTab", tab);
         },
 
-        setAddStudent() {
-            // this.setEditStudent();
-            this.$store.dispatch("AcademicStudentModule/setAddStudent");
-        },
+        // setAddStudent() {
+        //     // this.setEditStudent();
+        //     this.$store.dispatch("AcademicStudentModule/setAddStudent");
+        // },
 
         setEditStudent() {
             // this.$store.dispatch("AcademicStudentModule/setStudentId", id);

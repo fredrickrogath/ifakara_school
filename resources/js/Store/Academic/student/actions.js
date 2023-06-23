@@ -33,6 +33,10 @@ export default {
         context.commit("setNotificationId", id);
     },
 
+    setChatId(context, id){
+        context.commit("setChatId", id);
+    },
+
     setSnackBarState(context){
         context.commit("setSnackBarState");
     }

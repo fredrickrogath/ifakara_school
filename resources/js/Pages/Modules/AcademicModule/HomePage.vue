@@ -429,13 +429,13 @@ export default {
 
         department(role) {
             if (role == 3) {
-                return "Academic";
+                return "Academic Office";
             } else if (role == 1) {
-                return "Head Master";
+                return "Head Office";
             } else if (role == 5) {
-                return "Accountant";
+                return "Accountant Office";
             } else if (role == 6) {
-                return "Procurement";
+                return "Procurement Office";
             }
         },
 

@@ -211,6 +211,7 @@ export default {
         onFileChange(event) {
             this.file = event.target.files[0];
         },
+        
         upload() {
             let formData = new FormData();
             formData.append("file", this.file);

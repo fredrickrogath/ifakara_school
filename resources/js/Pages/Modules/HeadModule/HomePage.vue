@@ -1,8 +1,8 @@
 <template>
     
     <div class="pt-0 bg-gray-100">
-        <div class="row bg-grey-100">
-            <div class="col-md-3 col-xl-3">
+        <div class="d-flex">
+            <div class="my-0 pt-0 flex-grow-1">
                 <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">
                         <div class="row">
@@ -15,7 +15,7 @@
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ students ? students : 'please wait ...' }}
+                                            {{ students ? students : 0 }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -30,7 +30,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -55,7 +55,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -80,7 +80,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -92,7 +92,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"> {{ totalTool ? totalTool : 'please wait ...'  }} </span>
+                                        <span data-plugin="counterup"> {{ totalTool ? totalTool : 0  }} </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Tools
@@ -108,8 +108,8 @@
 
         <!-- end row -->
 
-        <div class="row pt-0 mt-0">
-            <div class="col-xl-6 col-md-6">   
+        <div class="d-flex pt-1">
+            <div class="mb-0 pb-0 mr-1">   
                 <div class="card">
                     <div class="card-body">
                         <div class="float-end d-none d-md-inline-block">
@@ -322,7 +322,7 @@
             </div> -->
             <!-- end col-->
 
-            <div class="col-xl-6 col-md-6">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
                         <!-- <div class="float-end d-none d-md-inline-block"> -->
@@ -391,10 +391,10 @@
         </div>
 
         <div>
-            <div class="col-xl-12 col-md-12 mx-0 px-0 mt-0 pt-0">
+            <div class="col-xl-12 col-md-12 mx-0 px-0 -mt-5 pt-0">
                 <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title mb-1">School Staffs</h4>
+                    <div class="">
+                        <h4 class="header-title my-1 px-1">School Staffs</h4>
 
                         <div class="table-responsive">
                             <table class="table table-centered table-nowrap table-hover mb-0">
@@ -412,7 +412,7 @@
                                         <!-- <th class="border-top-0">Download</th> -->
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="italic font-semibold text-gray-900">
                                     <tr v-for="staff in staffs" :key="staff.id">
                                         <td>
                                             <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user

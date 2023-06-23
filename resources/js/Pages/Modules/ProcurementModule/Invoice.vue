@@ -367,7 +367,7 @@
                                         <view-invoices></view-invoices>
                                     </div>
                                     <div v-show="!getInvoiceGenerate && !getInvoiceView" key="2">
-                                        <AllInvoices v-show="getCurrentTab == 'all'"></AllInvoices>
+                                        <all-invoices v-show="getCurrentTab == 'all'"></all-invoices>
                                         <starred-invoices v-show="getCurrentTab == 'starred'"></starred-invoices>
                                         <trashed-invoices v-show="getCurrentTab == 'deleted'"></trashed-invoices>
                                         <!-- <view-invoices v-show="getCurrentTab == 'view'"></view-invoices> -->

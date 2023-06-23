@@ -3,7 +3,7 @@
         <div class="component-wrapper py-1">
             <GChart
                 type="PieChart"
-                style="width: 500px; height: 215px"
+                style="width: 500px; height: 200px"
                 :data="chartData"
                 :options="chartOptions"
             />
@@ -11,12 +11,9 @@
 
         <div>
             <div class="chart-description">
-                <h4>New Tools vs Total Tools</h4>
+                <h4>{{ head }}</h4>
                 <p>
-                    This chart shows the percentage of new tools compared to the
-                    total number of tools. The pie chart is divided into two
-                    sections: new tools and total tools. The chart provides a
-                    visual representation of the tool data.
+                    {{ content }}
                 </p>
             </div>
         </div>
@@ -34,6 +31,14 @@ export default {
     props: {
         data: {
             type: Array,
+            required: true,
+        },
+        head: {
+            type: String,
+            required: true,
+        },
+        content: {
+            type: String,
             required: true,
         },
     },

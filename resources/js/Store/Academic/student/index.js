@@ -13,6 +13,7 @@ export default {
             editStudent: false,
             commentView: false,
             notificationId: null,
+            chatId: null,
 
             // invoiceView: false,
             studentId: null,

@@ -42,6 +42,10 @@ class StudentService
     }
 
     public function getStudents(){
+        return \App\Models\Student::orderBy('first_name', 'asc')->get();
+    }
+
+    public function getStudentsNew(){
         return \App\Models\Student::orderBy('created_at', 'desc')->get();
     }
 
@@ -60,9 +64,19 @@ class StudentService
         return \App\Models\Student::where('id', $request->studentId)->get()->first();
     }
 
+    // public function getComments($request){
+    //     $notification = \App\Models\Notification::with('comments')->where('object_id', $request->id)->get()->first();
+    // return $notification;
+    // }
+
     public function getComments($request){
-        $notification = \App\Models\Notification::with('comments')->where('object_id', $request->id)->get()->first();
-    return $notification;
+        $notification = \App\Models\Notification::with(['comments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])
+        ->where('object_id', $request->id)
+        ->get()
+        ->first();
+        return $notification;
     }
 
     public function editStudent($request){

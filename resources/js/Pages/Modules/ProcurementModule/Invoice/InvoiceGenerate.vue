@@ -5,19 +5,30 @@
         <spinner v-if="showLoader"></spinner>
 
         <v-col v-else sm="12" md="12">
-
-            <snack-bar message="The Requsition has sent successfully to accountant for futher process"></snack-bar>
+            <snack-bar
+                message="The Requsition has sent successfully to accountant for futher process"
+            ></snack-bar>
 
             <div class="d-flex justify-content-between">
                 <div class="col-5">
-                    <div class="mb-1">Select Supplier</div>
+                    <!-- <div class="col-5"> -->
+                    <div class="-mb-6">Select Supplier</div>
+                    <v-select
+                        v-model="supplier"
+                        :items="supplierOptions"
+                        chips
+                        multiple
+                    ></v-select>
+                    <!-- </div> -->
+
+                    <!-- <div class="mb-1">Select Supplier</div>
                     <Select2
                         v-model="supplier"
                         :options="supplierOptions"
                         :settings="{ width: '100%', 'z-index': '1060' }"
                         @change="myChangeEvent($event, 'supplier')"
                         @select="mySelectEvent($event, 'supplier')"
-                    />
+                    /> -->
                 </div>
 
                 <div class="col-5">
@@ -47,7 +58,7 @@
                 <div class="col-md-6">
                     <div class="mt-3">
                         <p>
-                            <b>Hello, {{ supplier }}</b>
+                            <b>Suppliers : {{ supplier }}</b>
                         </p>
                         <p class="">
                             Thanks a lot because you keep purchasing our
@@ -63,7 +74,7 @@
                         <p>
                             <strong>Order Date : </strong>
                             <span class="float-end">
-                                &nbsp;&nbsp;&nbsp;&nbsp; Jan 17, 2016</span
+                                &nbsp;&nbsp;&nbsp;&nbsp;  {{ formattedDate }}</span
                             >
                         </p>
                         <p>
@@ -258,7 +269,7 @@
                             type="submit"
                             class="btn btn-success text-white btn-sm waves-effect waves-light"
                         >
-                            Submit to Accountant
+                            Submit to accountant
                         </button>
                     </div>
                 </form>
@@ -283,26 +294,6 @@ export default {
         Spinner,
         Select2,
         SnackBar,
-    },
-
-    props: {
-        // postsData: {
-        // type: Number,
-        // default: [],
-        // default(rawProps) {
-        //     return { message: "hello" };
-        // },
-        // DATA TYPES
-        // String
-        // Number
-        // Boolean
-        // Array
-        // Object
-        // Date
-        // Function
-        // Symbol
-        // disabled: [Boolean, Number]
-        // },
     },
 
     mounted() {
@@ -340,7 +331,7 @@ export default {
 
             idForAction: null,
 
-            supplier: "",
+            supplier: [],
             supplierId: null,
             supplierOptions: [],
 
@@ -610,12 +601,18 @@ export default {
             price: "",
 
             totalPrice: 0,
+
+            currentDate: new Date(),
         };
     },
 
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        formattedDate() {
+            return moment(this.currentDate).format("MMM DD, YYYY");
         },
     },
 
@@ -704,9 +701,9 @@ export default {
                     tools: this.tools,
                 })
                 .then((response) => {
-                    this.clearData()
-                    this.setInvoiceGenerate()
-                    this.setSnackBarState()
+                    this.clearData();
+                    this.setInvoiceGenerate();
+                    this.setSnackBarState();
                 });
         },
 

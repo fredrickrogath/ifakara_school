@@ -1,7 +1,7 @@
 <template>
     <div class="pt-0 bg-gray-100">
-        <div class="row bg-gray-100">
-            <div class="col-md-3 col-xl-3">
+        <div class="d-flex">
+            <div class="my-0 pt-0 flex-grow-1">
                 <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">
                         <div class="row">
@@ -16,7 +16,7 @@
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ totalTools? totalTools : 0 }}
+                                            {{ totalTools ? totalTools : 0 }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -31,7 +31,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -45,10 +45,14 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <!-- <span data-plugin="counterup">12</span> -->
+                                        <span data-plugin="counterup">12</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ newToolTitle? newToolTitle : 'Please wait' }}
+                                        {{
+                                            newToolTitle
+                                                ? newToolTitle
+                                                : "Please wait"
+                                        }}
                                     </p>
                                 </div>
                             </div>
@@ -58,7 +62,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -72,10 +76,14 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <!-- <span data-plugin="counterup">87</span> -->
+                                        <span data-plugin="counterup">87</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ brokenToolTitle? brokenToolTitle : 'Please wait' }}
+                                        {{
+                                            brokenToolTitle
+                                                ? brokenToolTitle
+                                                : "Please wait"
+                                        }}
                                     </p>
                                 </div>
                             </div>
@@ -85,7 +93,7 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
@@ -99,12 +107,18 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            > {{ totalUploads? totalUploads : 0 }} </span
-                                        >
+                                        <span data-plugin="counterup">
+                                            {{
+                                                totalUploads ? totalUploads : 0
+                                            }}
+                                        </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ uploadTitles? uploadTitles : 'Please wait' }}
+                                        {{
+                                            uploadTitles
+                                                ? uploadTitles
+                                                : "Please wait"
+                                        }}
                                     </p>
                                 </div>
                             </div>
@@ -117,8 +131,8 @@
 
         <!-- end row -->
 
-        <div class="row pt-0 mt-0">
-            <div class="col-xl-6 col-md-6 mb-0 pb-0">
+        <div class="d-flex pt-1">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body pb-2">
                         <div class="float-end d-none d-md-inline-block">
@@ -185,6 +199,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="tools"
+                                            :head="headDonghurt"
+                                            :content="contentDonghurt"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -199,209 +215,7 @@
             </div>
             <!-- end col-->
 
-            <!-- <div class="col-xl-6 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title mb-1">
-                            Recently Finance Reports
-                        </h4>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="border-top-0">Identity</th>
-                                        <th class="border-top-0">
-                                            Departiment
-                                        </th>
-                                        <th class="border-top-0">Title</th>
-                                        <th class="border-top-0">Published</th>
-                                        <th class="border-top-0">View</th>
-                                        <th class="border-top-0">Download</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-2.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>27.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-3.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
-                                        </td>
-
-                                        <td>Finacial report of ...</td>
-
-                                        <td>28.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-1.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>28.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-4.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>29.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-5.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Account</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>31.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-3.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>28.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-1.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>28.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- end col-->
-
-            <div class="col-xl-6 col-md-6 mb-0 pb-0">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
                         <!-- <div class="float-end d-none d-md-inline-block"> -->
@@ -464,13 +278,15 @@
                             <google-bar
                                 :data="chartData"
                                 YText="Invoice Count"
+                                :head="head"
+                                :content="content"
                             ></google-bar>
                         </div>
                     </div>
                 </div>
                 <!-- end card -->
             </div>
-        </div>           
+        </div>
 
         <!-- <div>   
             <pie-chart3-d></pie-chart3-d>
@@ -515,15 +331,20 @@ export default {
             // unpaidStudents: null,
             // registeredStudents: [],
             totalTools: null,
-            toolTitle: '',
-            newToolTitle: '',
-            brokenToolTitle: '',
+            toolTitle: "",
+            newToolTitle: "",
+            brokenToolTitle: "",
             totalUploads: null,
-            uploadTitles: '',
+            uploadTitles: "",
             tools: [],
             // finances: [],
             invoices: null,
             chartData: [],
+            headDonghurt: "3D New Tools vs Total Tools",
+            contentDonghurt: "3D This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+            head: "Bar New Tools vs Total Tools",
+            content:
+                "Bar This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
         };
     },
     computed: {
@@ -587,11 +408,13 @@ export default {
         },
 
         async headDashboardGetUploads() {
-            axios.get("/procurement/headDashboardGetUploads").then((response) => {
-                this.totalUploads = response.data.data.totalUploads;
-                this.uploadTitles = response.data.data.uploadTitles;
-                // console.log(response.data.data)
-            });
+            axios
+                .get("/procurement/headDashboardGetUploads")
+                .then((response) => {
+                    this.totalUploads = response.data.data.totalUploads;
+                    this.uploadTitles = response.data.data.uploadTitles;
+                    // console.log(response.data.data)
+                });
         },
 
         department(role) {

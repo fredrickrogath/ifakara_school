@@ -16,6 +16,8 @@ class CreateSellersTable extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('path');
+            $table->string('description');
             $table->string('location')->nullable();
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
@@ -24,7 +26,6 @@ class CreateSellersTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

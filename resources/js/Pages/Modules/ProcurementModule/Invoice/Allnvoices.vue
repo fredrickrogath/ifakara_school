@@ -81,6 +81,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -123,7 +124,7 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
                                     >
                                     <!-- {{ item[header.value] }} -->
@@ -132,7 +133,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -140,7 +141,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -148,7 +149,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'seller'"
                                     >{{ item[header.value].name }}</span
                                 >
@@ -361,7 +362,7 @@ export default {
             axios.get("/procurement/getInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                console.log(response.data.data)
             });
         },
 

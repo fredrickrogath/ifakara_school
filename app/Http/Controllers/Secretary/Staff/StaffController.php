@@ -20,6 +20,8 @@ class StaffController extends Controller
     public function addStaff(Request $request ,StaffService $staffsService){
         // $this->authorize('authorizeHead', \App\Models\User::class);
         // event(new \App\Events\NewPostPublished('head'));
+        event(new \App\Events\Academic\StaffEvent($request->schoolId));
+        // event(new \App\Events\Api\Secretary\StaffEvent());
         return response()->json(['data' => $staffsService->addStaff($request)]);
     }
 

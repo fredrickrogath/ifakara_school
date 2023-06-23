@@ -90,9 +90,15 @@ class StudentService
     // }
     
     public function getComments($request){
-        $notification = \App\Models\Notification::with('comments')->where('object_id', $request->id)->get()->first();
-    return $notification;
+        $notification = \App\Models\Notification::with(['comments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])
+        ->where('object_id', $request->id)
+        ->get()
+        ->first();
+        return $notification;
     }
+
 
     public function sendComment($request){
         $notification = \App\Models\Notification::where('id', $request->id)->get()->first();

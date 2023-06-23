@@ -139,7 +139,7 @@ Route::middleware([
         Route::post('/addStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
 
-        // Route::get('/getStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudents'])->name('getStudents');
+        Route::get('/getStudentsNew', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentsNew'])->name('getStudentsNew');
         Route::post('/getStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudent'])->name('getStudent');
         Route::post('/editStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'editStudent'])->name('editStudent');
         // Route::post('/permissionToEditStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
