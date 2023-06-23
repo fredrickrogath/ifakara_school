@@ -26,11 +26,11 @@ class ToolService
     }
 
     public function get_tools(){
-        return \App\Models\Tool::orderBy('created_at', 'desc')->get();
+        return \App\Models\Tool::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function headDashboardGetTools(){
-        $totalTools = \App\Models\Tool::orderBy('created_at', 'desc')->get();
+        $totalTools = \App\Models\Tool::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
         $newTools = 1;
         $brokenTools = 0;
         return [
@@ -41,11 +41,11 @@ class ToolService
     }
     
     public function getStarredTools(){
-        return \App\Models\Tool::where('starred', true)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Tool::where('school_id', auth()->user()->school_id)->where('starred', true)->orderBy('created_at', 'desc')->get();
     }
 
     public  function getTrashedTools(){
-        return \App\Models\Tool::onlyTrashed()->orderBy('created_at', 'desc')->get();
+        return \App\Models\Tool::onlyTrashed()->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
     
     public function updateTools($request){
