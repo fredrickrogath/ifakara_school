@@ -30,7 +30,7 @@ class StudentService
     }
 
     public function getInvoices(){
-        return \App\Models\Student::orderBy('created_at', 'desc')->get();
+        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     // public function getInvoiceView($request){
@@ -38,15 +38,15 @@ class StudentService
     // }
 
     public function getStudentClasses(){
-        return \App\Models\ClassLevel::orderBy('created_at', 'desc')->get();
+        return \App\Models\ClassLevel::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getStudents(){
-        return \App\Models\Student::orderBy('first_name', 'asc')->get();
+        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('first_name', 'asc')->get();
     }
 
     public function getStudentsNew(){
-        return \App\Models\Student::orderBy('created_at', 'desc')->get();
+        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function headDashboardGetStudents(){
@@ -73,6 +73,7 @@ class StudentService
         $notification = \App\Models\Notification::with(['comments' => function ($query) {
             $query->orderBy('created_at', 'desc');
         }])
+        ->where('school_id', auth()->user()->school_id)
         ->where('object_id', $request->id)
         ->get()
         ->first();
