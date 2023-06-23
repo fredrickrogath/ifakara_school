@@ -21,6 +21,7 @@ class UploadService
             'path' => $filePath,
             'title' => $request->title,
             'user_id' => auth()->user()->id,
+            'school_id'=>auth()->user()->school_id,
             'description' => $request->description,
 
         ]);
