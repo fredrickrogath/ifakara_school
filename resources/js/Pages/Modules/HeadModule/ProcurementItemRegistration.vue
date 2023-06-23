@@ -242,7 +242,7 @@
                                     >My Office</div
                                 >
 
-                                <v-icon
+                                <!-- <v-icon
                                     type="button"
                                     data-bs-toggle="modal"
                                     data-bs-target="#right-modal"
@@ -251,7 +251,7 @@
                                     @click=""
                                 >
                                     mdi-pen-plus
-                                </v-icon>
+                                </v-icon> -->
                                 </div>
 
                                 <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
