@@ -161,10 +161,10 @@
         <div class="row">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="card h-screen">
-                    <div class="card-body pt-1">
+                <div class="h-screen bg-white">
+                    <div class="pt-1">
                         <!-- Left sidebar -->
-                        <div class="inbox-leftbar">
+                        <div class="inbox-leftbar bg-white">
                             <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
                                     type="button"
@@ -394,7 +394,7 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-1 h-screen">
+                        <div class="inbox-rightbar pt-1 h-screen p-0">
 
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
@@ -572,7 +572,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

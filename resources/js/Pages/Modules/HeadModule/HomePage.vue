@@ -1,5 +1,4 @@
 <template>
-    
     <div class="pt-0 bg-gray-100">
         <div class="d-flex">
             <div class="my-0 pt-0 flex-grow-1">
@@ -7,8 +6,11 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm  rounded">
-                                    <i class=" fas fa-users font-10 text-primary" style="font-size:40px;"></i>
+                                <div class="avatar-sm rounded">
+                                    <i
+                                        class="fas fa-users font-10 text-primary"
+                                        style="font-size: 40px"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -36,7 +38,10 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm rounded">
-                                    <i class="fas fa-money-check avatar-title font-22 text-danger" style="font-size:40px"></i>
+                                    <i
+                                        class="fas fa-money-check avatar-title font-22 text-danger"
+                                        style="font-size: 40px"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -61,7 +66,10 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm rounded">
-                                    <i class="fas fa-minus-square  avatar-title  text-warning" style="font-size:40px"></i>
+                                    <i
+                                        class="fas fa-minus-square avatar-title text-warning"
+                                        style="font-size: 40px"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -86,13 +94,17 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-info rounded">
-                                    <i class="fe-cpu avatar-title font-22 text-white"></i>
+                                    <i
+                                        class="fe-cpu avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"> {{ totalTool ? totalTool : 0  }} </span>
+                                        <span data-plugin="counterup">
+                                            {{ totalTool ? totalTool : 0 }}
+                                        </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Tools
@@ -109,7 +121,7 @@
         <!-- end row -->
 
         <div class="d-flex pt-1">
-            <div class="mb-0 pb-0 mr-1">   
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
                         <div class="float-end d-none d-md-inline-block">
@@ -131,7 +143,6 @@
 
                         <h4 class="header-title mb-2">Analytics Performance</h4>
 
-
                         <!-- <div class="text-center">
                             <pie-chart3-d></pie-chart3-d>
                         </div>
@@ -145,19 +156,31 @@
 
                                 <v-tab-item key="1">
                                     <v-container fluid>
-                                        <pie-chart3-d :data="registeredStudents"></pie-chart3-d>
+                                        <pie-chart3-d
+                                            :data="registeredStudents"
+                                            :head="headDonghurt"
+                                            :content="contentDonghurt"
+                                        ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
 
                                 <v-tab-item key="2">
                                     <v-container fluid>
-                                        <pie-chart3-d :data="tools"></pie-chart3-d>
+                                        <pie-chart3-d
+                                            :data="tools"
+                                            :head="headDonghurt"
+                                            :content="contentDonghurt"
+                                        ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
 
                                 <v-tab-item key="3">
                                     <v-container fluid>
-                                        <pie-chart3-d :data="finances"></pie-chart3-d>
+                                        <pie-chart3-d
+                                            :data="finances"
+                                            :head="headDonghurt"
+                                            :content="contentDonghurt"
+                                        ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
                             </v-tabs>
@@ -382,7 +405,13 @@
                             </div>
                         </div> -->
                         <div class="">
-                            <google-bar :data="chartData" YText="Invoice Count" height="400"></google-bar>
+                            <google-bar
+                                :data="chartData"
+                                YText="Invoice Count"
+                                :head="head"
+                                :content="content"
+                                height="400"
+                            ></google-bar>
                         </div>
                     </div>
                 </div>
@@ -397,7 +426,9 @@
                         <h4 class="header-title my-1 px-1">School Staffs</h4>
 
                         <div class="table-responsive">
-                            <table class="table table-centered table-nowrap table-hover mb-0">
+                            <table
+                                class="table table-centered table-nowrap table-hover mb-0"
+                            >
                                 <thead>
                                     <tr>
                                         <th class="border-top-0">Identity</th>
@@ -412,12 +443,19 @@
                                         <!-- <th class="border-top-0">Download</th> -->
                                     </tr>
                                 </thead>
-                                <tbody class="italic font-semibold text-gray-900">
+                                <tbody
+                                    class="italic font-semibold text-gray-900"
+                                >
                                     <tr v-for="staff in staffs" :key="staff.id">
                                         <td>
-                                            <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user
-                                                    .profile_photo_url
-                                                " :alt="$page.props.user.name" />
+                                            <img
+                                                class="h-8 w-8 rounded-full object-cover"
+                                                :src="
+                                                    $page.props.user
+                                                        .profile_photo_url
+                                                "
+                                                :alt="$page.props.user.name"
+                                            />
                                             <!-- <img
                                                 src="assets/images/users/user-2.jpg"
                                                 alt="user-pic"
@@ -472,7 +510,7 @@ export default {
     mounted() {
         this.initialize();
 
-        // Receiving broadicasting  
+        // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
@@ -494,6 +532,12 @@ export default {
             finances: [],
             invoices: null,
             chartData: [],
+            headDonghurt: "3D New Tools vs Total Tools",
+            contentDonghurt:
+                "3D This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+            head: "Bar New Tools vs Total Tools",
+            content:
+                "Bar This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
         };
     },
     computed: {
@@ -565,7 +609,7 @@ export default {
 
         async headDashboardGetTools() {
             axios.get("/head/headDashboardGetTools").then((response) => {
-                this.totalTool = response.data.data.totalTools
+                this.totalTool = response.data.data.totalTools;
                 this.tools = [
                     ["Language", "Tools"],
                     ["Total tools", response.data.data.totalTools],

@@ -11,14 +11,14 @@ class Invoice extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'invoice_no',
-        'seller_id',
         'narration',
         'school_id',
         'status',
         'starred',
+        'status_from_head',
         'status_from_financial',
         'status_from_financial_bishop',
+        'status_from_financial_internalAuditor',
     ];
 
     public function invoiceTool()
@@ -48,6 +48,18 @@ class Invoice extends Model
         'id',
         'tool_id'
     );
+    }
+
+    public function sellers()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Seller',
+            'App\Models\SellerInvoice',
+            'invoice_id',
+            'id',
+            'id',
+            'seller_id'
+        );
     }
 
     public function seller()
