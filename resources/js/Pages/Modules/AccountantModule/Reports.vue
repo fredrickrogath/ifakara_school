@@ -393,6 +393,12 @@ export default {
             }, 0);
         },
 
+        totalPriceReport(item, count) {
+            return item.reduce((total, item) => {
+                return total + item.price * count;
+            }, 0);
+        },
+
         setEditStudent(id) {
             this.$store.dispatch("AcademicStudentModule/setStudentId", id);
             this.$store.dispatch("AcademicStudentModule/setEditStudent");
@@ -451,13 +457,41 @@ export default {
                         typeof student[column] === "object" &&
                         student[column] !== null
                     ) {
-                        if (Array.isArray(student[column])) {
+                        if (
+                            Array.isArray(student[column]) &&
+                            column === "sellers"
+                        ) {
                             // If the column data is an array of objects (e.g., multiple sellers),
                             // map the array to extract the desired property (e.g., name) and join them into a string
                             return student[column]
                                 .map((item) => item.name)
                                 .join(", ");
-                        } 
+                        } else if (
+                            Array.isArray(student[column]) &&
+                            column === "tools"
+                        ) {
+                            // If the column data is an array of objects (e.g., multiple sellers),
+                            // map the array to extract the desired property (e.g., name) and join them into a string
+                            return student[column]
+                                .map((item) => item.name)
+                                .join(", ");
+                        } else if (
+                            Array.isArray(student[column]) &&
+                            column === "tool_sum"
+                        ) {
+                            // If the column data is an array of objects (e.g., multiple sellers),
+                            // map the array to extract the desired property (e.g., name) and join them into a string
+                            // return student[column]
+                            //     .map((item) => item.name)
+                            //     .join(", ");
+                            console.log(student[column])
+                            // return this.formattedPrice(
+                            //     this.totalPriceReport(
+                            //         student[column],
+                            //         student.invoice_tool.count
+                            //     )
+                            // );
+                        }
                         // else {
                         //     // If the column data is a single object, extract the desired property (e.g., name)
                         //     return student[column].name;
@@ -469,12 +503,12 @@ export default {
                     //     );
                     //     return this.formattedDate(student[column]);
                     // }
-                     else if (
+                    else if (
                         column === "created_at" ||
                         column === "updated_at"
                     ) {
                         return this.formattedDate(student[column]);
-                    } 
+                    }
                     // else {
                     //     return student[column];
                     // }
