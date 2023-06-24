@@ -56,6 +56,7 @@
                             <div class="text-end">
                                 <button
                                     type="submit"
+                                    data-bs-dismiss="modal"
                                     class="btn btn-success waves-effect waves-light"
                                 >
                                     Save
@@ -111,7 +112,7 @@
                                     ></i
                                     >All Documents
                                 </a>
-                                <a
+                                <!-- <a
                                     href="#"
                                     class="list-group-item border-0"
                                     @click="setTab('new')"
@@ -124,7 +125,7 @@
                                         class="mdi mdi-star font-18 align-middle me-2 pb-1"
                                     ></i
                                     >New uploads</a
-                                >
+                                > -->
                                 <a
                                     href="#"
                                     class="list-group-item border-0"
@@ -149,7 +150,7 @@
                         <div class="inbox-rightbar pt-1 px-0">
                             <div class="bg-white h-screen">
                                 <all-uploads v-show="getCurrentTab == 'all'"></all-uploads>
-                                <new-uploads v-show="getCurrentTab == 'new'"></new-uploads>
+                                <!-- <new-uploads v-show="getCurrentTab == 'new'"></new-uploads> -->
                                 <trashed-uploads v-show="getCurrentTab == 'deleted'"></trashed-uploads>
                             </div>
                         </div>
@@ -165,13 +166,13 @@
 
 <script>
 import AllUploads from "./Uploads/AllUploads.vue";
-import NewUploads from "./Uploads/NewUploads.vue";
+// import NewUploads from "./Uploads/NewUploads.vue";
 import TrashedUploads from "./Uploads/TrashedUploads.vue";
 
 export default {
     components: {
         AllUploads,
-        NewUploads,
+        // NewUploads,
         TrashedUploads,
     },
     mounted() {

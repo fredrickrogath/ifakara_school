@@ -137,9 +137,36 @@
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'seller'"
-                                    >{{ item[header.value].name }}</span
+                                    v-else-if="header.value === 'sellers'"
                                 >
+                                    <span
+                                        v-for="seller in item[header.value]"
+                                        :key="seller.id"
+                                        class="d-block"
+                                    >
+                                        <div class="">
+                                            <v-menu transition="fab-transition">
+                                                <template
+                                                    v-slot:activator="{
+                                                        on,
+                                                        attrs,
+                                                    }"
+                                                >
+                                                    <span
+                                                        class="seller-name"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        @click="getSellerProfile(seller)"
+                                                    >
+                                                        {{ seller.name }}
+                                                    </span>
+                                                </template>
+
+                                                <seller-profile :seller="sellerInfo"></seller-profile>
+                                            </v-menu>
+                                        </div>
+                                    </span>
+                                </span>
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
@@ -241,11 +268,13 @@
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
 import Snackbar from "../../.././Components/Snackbar.vue";
+import SellerProfile from "../../../Components/SellerProfile.vue";
 
 export default {
     components: {
         Spinner,
         Snackbar,
+        SellerProfile,
     },
 
     props: {
@@ -298,7 +327,7 @@ export default {
                 // },
                 {
                     text: "Seller",
-                    value: "seller",
+                    value: "sellers",
                 },
                 // {
                 //     text: "Tools",
@@ -316,6 +345,8 @@ export default {
             invoices: [],
 
             idForAction: null,
+
+            sellerInfo: [],
         };
     },
 

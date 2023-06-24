@@ -285,12 +285,12 @@ export default {
             this.objectData.splice(0, this.objectData.length);
         },
 
-        async sellerName(invoice) {
-            if (typeof invoice !== "undefined" && invoice !== null) {
-                this.seller = invoice.seller.name;
-                // this.supplier = invoice.seller;
-            }
-        },
+        // async sellerName(invoice) {
+        //     if (typeof invoice !== "undefined" && invoice !== null) {
+        //         this.seller = invoice.seller.name;
+        //         // this.supplier = invoice.seller;
+        //     }
+        // },
 
         getSellerProfile(seller) {
             this.sellerInfo = seller
@@ -305,7 +305,7 @@ export default {
                     this.showLoader = false;
                     this.totalPrice(response.data.data);
                     this.invoice = response.data.data;
-                    this.sellerName(this.invoice);
+                    // this.sellerName(this.invoice);
                 });
         },
 

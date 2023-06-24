@@ -46,9 +46,9 @@
         </div>
         <!-- /.modal -->
 
-        <div class="card">
+        <div class="">
 
-            <snackbar message="Task completed successfully"></snackbar>
+            <snack-bar message="Task completed successfully"></snack-bar>
             
             <div class="card-body">
                 <div class="row">
@@ -88,9 +88,9 @@
                     <span class="text-gray-600">{{ item.title }}</span>
                 </template>
 
-                <template v-slot:item.name="{ item }">
+                <!-- <template v-slot:item.name="{ item }">
                     <span class="text-gray-600">{{ item.name }}</span>
-                </template>
+                </template> -->
 
                 <template v-slot:item.description="{ item }">
                     <span class="text-gray-600">{{ item.description }}</span>
@@ -142,7 +142,11 @@
 
 <script>
 import moment from "moment";
+import SnackBar from "../../../Components/SnackBar";
 export default {
+    components:{
+        SnackBar
+    }, 
     mounted() {
         // this.showLoader = true;
         this.getNewUploads();
@@ -167,10 +171,10 @@ export default {
                     sortable: false,
                     value: "title",
                 },
-                {
-                    text: "Name of document",
-                    value: "name",
-                },
+                // {
+                //     text: "Name of document",
+                //     value: "name",
+                // },
                 // { text: "Made For", value: "user.name", align: "center" },
                 // { text: "Amount", value: "amount" },
                 { text: "Description", value: "description" },

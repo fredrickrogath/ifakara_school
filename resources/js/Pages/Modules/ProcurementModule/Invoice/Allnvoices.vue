@@ -186,7 +186,7 @@
                                     </span>
                                 </span>
 
-                                <!-- <span
+                                <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tools'"
                                 >
@@ -195,16 +195,16 @@
                                             {{ tool.name }}
                                         </span>
                                     </div>
-                                </span> -->
+                                </span>
 
-                                <!-- <span
+                                <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
                                     {{
                                         formattedPrice(totalPrice(item.invoice_tool))
                                     }}
-                                </span> -->
+                                </span>
                             </td>
                         </tr>
                     </tbody>
@@ -274,12 +274,12 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Invoice #",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
+                // {
+                //     text: "Invoice #",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 {
                     text: "Suppliers",
                     value: "sellers",
@@ -288,10 +288,10 @@ export default {
                     text: "Tools",
                     value: "tools",
                 },
-                {
-                    text: "Total",
-                    value: "tool_sum",
-                },
+                // {
+                //     text: "Total",
+                //     value: "tool_sum",
+                // },
                 { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
