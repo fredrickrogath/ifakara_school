@@ -85,7 +85,7 @@
                 class=""
             >
                 <template v-slot:item.title="{ item }">
-                    <span class="text-gray-600">{{ item.title }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{ item.title }}</span>
                 </template>
 
                 <!-- <template v-slot:item.name="{ item }">{{ item.name }}
@@ -93,11 +93,11 @@
                 </template> -->
 
                 <template v-slot:item.description="{ item }">
-                    <span class="text-gray-600">{{ item.description }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{ item.description }}</span>
                 </template>
 
                 <template v-slot:item.action="{ item }">
-                    <span class="text-gray-600">
+                    <span class="text-gray-600 italic font-semibold">
                         <v-icon
                             size="22"
                             type="button"
@@ -111,27 +111,27 @@
                 </template>
 
                 <template v-slot:item.view="{ item }">
-                    <a class="text-gray-600" :href="storagePath + item.path" target="_blank">
+                    <a class="text-gray-600 italic font-semibold" :href="storagePath + item.path" target="_blank">
                         <v-icon size="22" @click=""> mdi-eye </v-icon>
                     </a>
                 </template>
 
                 <template v-slot:item.user.name="{ item }">
-                    <span class="text-gray-600">{{ item.user.name }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{ item.user.name }}</span>
                 </template>
 
                 <template v-slot:item.amount="{ item }">
-                    <span class="text-gray-600">{{
+                    <span class="text-gray-600 italic font-semibold">{{
                         formattedPrice(item.amount)
                     }}</span>
                 </template>
 
                 <template v-slot:item.narration="{ item }">
-                    <span class="text-gray-600">{{ item.narration }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{ item.narration }}</span>
                 </template>
 
                 <template v-slot:item.created_at="{ item }">
-                    <span class="text-gray-600">{{
+                    <span class="text-gray-600 italic font-semibold">{{
                         formattedDate(item.created_at)
                     }}</span>
                 </template>

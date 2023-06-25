@@ -60,7 +60,7 @@
                 Invoices
                 <v-spacer></v-spacer>
 
-                <snackbar message="Task completed successfully"></snackbar>
+                <snack-bar message="Task completed successfully"></snack-bar>
 
                 <v-text-field
                     v-model="search"
@@ -274,13 +274,13 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
-import Snackbar from "../../.././Components/Snackbar.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
 import SellerProfile from "../../../Components/SellerProfile.vue";
 
 export default {
     components: {
         Spinner,
-        Snackbar,
+        SnackBar,
         SellerProfile,
     },
 

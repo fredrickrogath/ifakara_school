@@ -450,8 +450,8 @@ export default {
                 .map((header) => header.value);
 
             // Extract table data from filteredStudents computed property
-            const data = this.filteredStudents.map((student) =>
-                columns.map((column) => {
+            const data = this.filteredStudents.map((student, studentIndex) =>
+                columns.map((column, columnIndex) => {
                     // If the current column value is an object, create a string representation of it
                     if (
                         typeof student[column] === "object" &&
@@ -484,13 +484,14 @@ export default {
                             // return student[column]
                             //     .map((item) => item.name)
                             //     .join(", ");
-                            console.log(student[column])
-                            // return this.formattedPrice(
-                            //     this.totalPriceReport(
-                            //         student[column],
-                            //         student.invoice_tool.count
-                            //     )
-                            // );
+                            // console.log(student[column])
+                            // console.log(this.filteredStudents[studentIndex].invoice_tool)
+                            return this.formattedPrice(
+                                this.totalPriceReport(
+                                    student[column],
+                                    this.filteredStudents[studentIndex].invoice_tool[columnIndex].count
+                                )
+                            );
                         }
                         // else {
                         //     // If the column data is a single object, extract the desired property (e.g., name)

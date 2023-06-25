@@ -30,9 +30,8 @@
 
         <div class="col-12">
             <div class="">
-
                 <snackbar message="Task completed successfully"></snackbar>
-                
+
                 <div class="">
                     <div class="row">
                         <div class="col-md-6">
@@ -43,33 +42,36 @@
                                 <small>Procumerement</small> -->
 
                                 <span
-                                        v-for="(seller, index) in invoice.sellers"
-                                        :key="seller.id"
-                                        class="d-block"
-                                    >
-                                        <div class="">
-                                            <v-menu transition="fab-transition">
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
+                                    v-for="(seller, index) in invoice.sellers"
+                                    :key="seller.id"
+                                    class="d-block"
+                                >
+                                    <div class="">
+                                        <v-menu transition="fab-transition">
+                                            <template
+                                                v-slot:activator="{ on, attrs }"
+                                            >
+                                                <strong
+                                                    >Supplier {{ index + 1 }} :
+                                                </strong>
+                                                <span
+                                                    class="seller-name uppercase"
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                    @click="
+                                                        getSellerProfile(seller)
+                                                    "
                                                 >
-                                                <strong>Supplier {{ index + 1 }} : </strong>
-                                                    <span
-                                                        class="seller-name uppercase"
-                                                        v-bind="attrs"
-                                                        v-on="on"
-                                                        @click="getSellerProfile(seller)"
-                                                    >
-                                                        {{ seller.name }}
-                                                    </span>
-                                                </template>
+                                                    {{ seller.name }}
+                                                </span>
+                                            </template>
 
-                                                <seller-profile :seller="sellerInfo"></seller-profile>
-                                            </v-menu>
-                                        </div>
-                                    </span>
+                                            <seller-profile
+                                                :seller="sellerInfo"
+                                            ></seller-profile>
+                                        </v-menu>
+                                    </div>
+                                </span>
                             </div>
                         </div>
                         <!-- end col -->
@@ -82,22 +84,30 @@
                                 <span>
                                     <strong>Invoice Date : </strong>
                                     <span class="float-end">
-                                        &nbsp;&nbsp;&nbsp;&nbsp; {{ formattedDate(this.invoice.created_at) }}</span
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{
+                                            formattedDate(
+                                                this.invoice.created_at
+                                            )
+                                        }}</span
                                     >
                                 </span>
                                 <span>
                                     <strong>Invoice Status : </strong>
-                                    <span class="float-end"
-                                        >
-                                        <span v-if="!this.invoice.status_from_financial" class="badge bg-danger"
+                                    <span class="float-end">
+                                        <span
+                                            v-if="
+                                                !this.invoice
+                                                    .status_from_financial
+                                            "
+                                            class="badge bg-danger"
                                             >Unpaid</span
                                         >
 
                                         <span v-else class="badge bg-success"
                                             >Paid</span
                                         >
-                                        </span
-                                    >
+                                    </span>
                                 </span>
                             </div>
                         </div>
@@ -228,9 +238,9 @@ import moment from "moment";
 import Snackbar from "../../.././Components/Snackbar";
 import SellerProfile from "../../.././Components/SellerProfile.vue";
 export default {
-    components:{
+    components: {
         Snackbar,
-        SellerProfile
+        SellerProfile,
     },
     mounted() {
         this.showLoader = true;
@@ -293,7 +303,7 @@ export default {
         // },
 
         getSellerProfile(seller) {
-            this.sellerInfo = seller
+            this.sellerInfo = seller;
         },
 
         async getInvoiceView() {
@@ -302,9 +312,11 @@ export default {
                     id: this.getInvoiceId,
                 })
                 .then((response) => {
-                    this.showLoader = false;
-                    this.totalPrice(response.data.data);
-                    this.invoice = response.data.data;
+                    if (response.data.data != null) {
+                        this.showLoader = false;
+                        this.totalPrice(response.data.data);
+                        this.invoice = response.data.data;
+                    }
                     // this.sellerName(this.invoice);
                 });
         },

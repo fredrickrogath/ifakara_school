@@ -60,7 +60,7 @@
                 Starred Tools
                 <v-spacer></v-spacer>
 
-                <snackbar message="Task completed successfully"></snackbar>
+                <snack-bar message="Task completed successfully"></snack-bar>
 
                 <v-text-field
                     v-model="search"
@@ -249,12 +249,12 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
-import Snackbar from "../../.././Components/Snackbar.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
 
 export default {
     components: {
         Spinner,
-        Snackbar,
+        SnackBar,
     },
 
     props: {
@@ -374,6 +374,10 @@ export default {
             // handle response here
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
         async starredTools(id,data ,column) {
             axios
                 .post("/procurement/starredTools", {
@@ -382,10 +386,11 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
