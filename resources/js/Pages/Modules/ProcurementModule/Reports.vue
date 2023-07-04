@@ -1,8 +1,8 @@
 <template>
     <div class="card p-0" data-app>
-        <spinner v-if="showLoader"></spinner>
+        <!-- <spinner v-if="showLoader"></spinner> -->
 
-        <v-col v-else sm="12" md="12" class="p-0">
+        <v-col sm="12" md="12" class="p-0">
             <!-- <v-card flat :dark="isDark"> -->
             <!-- <v-card elevation="0" data-app> -->
 
@@ -54,221 +54,92 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="px-1 py-0 my-0">
-                REPORT {{ formattedDateRange }}
-                <v-spacer></v-spacer>
+            <div>
+                <div class="mail-list">
+                    <div class="flex justify-end">
+                        <a
+                            href="#"
+                            class="list-group-item font-semibold border-0"
+                            @click="setTab('invoices')"
+                            :class="[
+                                getCurrentTab == 'invoices'
+                                    ? 'text-warning'
+                                    : '',
+                            ]"
+                            ><i
+                                class="mdi mdi-form-select font-18 align-middle me-1 pb-1"
+                            ></i
+                            >Invoices
+                        </a>
+                        <a
+                            href="#"
+                            class="list-group-item font-semibold border-0 pb-1"
+                            @click="setTab('tools')"
+                            :class="[
+                                getCurrentTab == 'tools' ? 'text-warning' : '',
+                            ]"
+                            ><i
+                                class="mdi mdi-tools font-18 align-middle me-1 pb-2"
+                            ></i
+                            >Tools & Items</a
+                        >
+                        <a
+                            href="#"
+                            class="list-group-item font-semibold border-0"
+                            @click="setTab('sellers')"
+                            :class="[
+                                getCurrentTab == 'sellers'
+                                    ? 'text-warning'
+                                    : '',
+                            ]"
+                            ><i
+                                class="mdi mdi-store font-18 align-middle me-2 pb-1"
+                            ></i
+                            >Sellers</a
+                        >
+                    </div>
+                    <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
+                </div>
+            </div>
 
-                <snack-bar
-                    class="absolute right-0 top-14"
-                    message="Printed successfully"
-                ></snack-bar>
+            <div v-show="getCurrentTab == 'invoices'">
+                <invoice-report></invoice-report>
+            </div>
 
-                <v-row class="px-2 pt-1">
-                    <v-menu
-                        ref="datePickerMenu"
-                        :close-on-content-click="false"
-                        v-model="datePickerMenu"
-                        :return-value.sync="dates"
-                        transition="scale-transition"
-                        offset-y
-                        max-width="290px"
-                    >
-                        <template v-slot:activator="{ on }">
-                            <v-text-field
-                                v-model="dateRangeText"
-                                label="Date range"
-                                prepend-icon="mdi-calendar"
-                                class=""
-                                readonly
-                                v-on="on"
-                            ></v-text-field>
-                        </template>
-                        <v-date-picker
-                            color="#52525b"
-                            header-color="#52525b"
-                            v-model="dates"
-                            range
-                        ></v-date-picker>
-                        <v-card-actions>
-                            <v-btn
-                                text
-                                color="primary"
-                                class="w-full bg-gray-600 text-white"
-                                @click="
-                                    datePickerMenu = false;
-                                    filteredStudentsByDate();
-                                "
-                            >
-                                Done
-                            </v-btn>
-                        </v-card-actions>
-                    </v-menu>
-                </v-row>
+            <div v-show="getCurrentTab == 'tools'">
+                <tool-report></tool-report>
+            </div>
 
-                <!-- <v-spacer></v-spacer> -->
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                    class="pr-5 py-0 my-0"
-                ></v-text-field>
-                <!-- <v-spacer></v-spacer> -->
-                <v-icon size="22" @click="resetData"> mdi-restore </v-icon>
-            </v-card-title>
-            <!-- {{ $page.props.posts }} -->
-
-            <v-data-table
-                :headers="headers"
-                :items="students"
-                item-key="name"
-                :search="search"
-                class="elevation-1"
-                :items-per-page="11"
-            >
-                <template v-slot:body="{ items, headers }">
-                    <tbody>
-                        <tr v-for="(item, idx, k) in items" :key="idx">
-                            <td v-for="(header, key) in headers" :key="key">
-                                <v-icon
-                                    v-if="header.value == 'delete'"
-                                    size="22"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
-                                >
-                                    mdi-delete
-                                </v-icon>
-
-                                <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    @click="setInvoiceView(items[idx]['id'])"
-                                >
-                                    mdi-eye
-                                </v-icon>
-
-                                <v-icon
-                                    v-if="header.value == 'edit'"
-                                    size="22"
-                                    @click="setEditStudent(items[idx]['id'])"
-                                >
-                                    mdi-pen
-                                </v-icon>
-
-                                <v-icon
-                                    v-if="header.value == 'starred'"
-                                    size="22"
-                                    :class="
-                                        item[header.value] ? 'text-warning' : ''
-                                    "
-                                    @click="
-                                        starredInvoice(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                >
-                                    mdi-star
-                                </v-icon>
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'id'"
-                                    >{{ item[header.value] }}</span
-                                >
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'created_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'updated_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
-
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'first_name'"
-                                    >{{ item[header.value] }}</span
-                                >
-
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'middle_name'"
-                                >
-                                    {{ item[header.value] }}
-                                </span>
-
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'last_name'"
-                                >
-                                    {{ item[header.value] }}
-                                </span>
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'gender'"
-                                >
-                                    {{ item[header.value] }}
-                                </span>
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'from'"
-                                >
-                                    {{ item[header.value] }}
-                                </span>
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'parent'"
-                                >
-                                    {{ item[header.value] }}
-                                </span>
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'parent_contact'"
-                                >
-                                    {{ item[header.value] }}
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-data-table>
+            <div v-show="getCurrentTab == 'sellers'">
+                <seller-report></seller-report>
+            </div>
         </v-col>
-
-        <v-btn @click="generatePDF">Generate REPORT {{ reportRange }}</v-btn>
     </div>
 </template>
 
 <script>
 import moment from "moment";
-import jsPDF from "jspdf";
-import Spinner from "../.././Components/SpinnerLoader.vue";
-import SnackBar from "../.././Components/SnackBar.vue";
+// import jsPDF from "jspdf";
+// import Spinner from "../.././Components/SpinnerLoader.vue";
+// import SnackBar from "../.././Components/SnackBar.vue";
+// import SellerProfile from "../../Components/SellerProfile.vue";
+import InvoiceReport from "./Reports/InvoiceReport.vue";
+import ToolReport from "./Reports/ToolReport.vue";
+import SellerReport from "./Reports/SellerReport.vue";
 export default {
     components: {
-        Spinner,
-        SnackBar,
+        // Spinner,
+        // SnackBar,
+        // SellerProfile,
+        ToolReport,
+        SellerReport,
+        InvoiceReport,
     },
 
     mounted() {
         this.showLoader = true;
-        this.getStudents();
+        // this.getStudents();
+        // this.getTools();
 
         // window.Echo.channel(
         //     "student-event." + this.$page.props.user.school_id
@@ -284,31 +155,49 @@ export default {
 
             showLoader: true,
             search: "",
+            searchTools: "",
             headers: [
                 {
-                    text: "First Name",
-                    align: "start",
-                    sortable: false,
-                    value: "first_name",
+                    text: "Suppliers",
+                    value: "sellers",
                 },
                 {
-                    text: "Middle Name",
-                    value: "middle_name",
+                    text: "Tools",
+                    value: "tools",
                 },
                 {
-                    text: "Last Name",
-                    value: "last_name",
+                    text: "Total",
+                    value: "tool_sum",
                 },
-                {
-                    text: "Gender",
-                    value: "gender",
-                },
-                { text: "Location", value: "from" },
                 { text: "Date", value: "created_at" },
                 // { text: "Edit", value: "edit" },
             ],
             students: [],
             storeStudents: [],
+
+            headersTools: [
+                // {
+                //     text: "Code",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
+                {
+                    text: "Name",
+                    value: "name",
+                },
+                { text: "Price", value: "price", align: "center" },
+                { text: "Count", value: "count" },
+                { text: "Date", value: "created_at" },
+                // { text: "Update", value: "updated_at" },
+                // { text: "Starred", value: "starred" },
+                // { text: "Action", value: "action" },
+
+                // { text: "Iron (%)", value: "iron" },
+            ],
+            // posts: this.$store.getters["getPosts"],
+            // posts: null,
+            tools: [],
 
             idForAction: null,
 
@@ -316,6 +205,7 @@ export default {
             reportRange: "By search ,No Date Seleted",
             datePickerMenu: false,
             dateRangeText: "",
+            sellerInfo: [],
         };
     },
 
@@ -328,6 +218,10 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        getCurrentTab() {
+            return this.$store.getters["ProcurementReportModule/getTab"];
         },
 
         formattedDateRange() {
@@ -369,132 +263,219 @@ export default {
                 return studentDate.isBetween(startDate, endDate, "day", "[]");
             });
         },
+
+        filteredTools() {
+            return this.students.filter((tool) => {
+                const matchesSearch = this.headers.some((header) => {
+                    const value = tool[header.value];
+                    return (
+                        value &&
+                        value
+                            .toString()
+                            .toLowerCase()
+                            .includes(this.searchTools.toLowerCase())
+                    );
+                });
+
+                if (!matchesSearch) return false;
+
+                if (!this.selectedDate) return true;
+
+                const startDate = moment(this.selectedDate.start);
+                const endDate = moment(this.selectedDate.end);
+                const studentDate = moment(student.created_at);
+
+                return studentDate.isBetween(startDate, endDate, "day", "[]");
+            });
+        },
     },
 
     methods: {
-        async setIdForAction(id) {
-            this.idForAction = id;
+        // async setIdForAction(id) {
+        //     this.idForAction = id;
+        // },
+
+        // formattedPrice(amount) {
+        //     return amount.toLocaleString("sw-TZ", {
+        //         style: "currency",
+        //         currency: "Tsh",
+        //     });
+        // },
+
+        // formattedDate(date) {
+        //     // return moment(date).format("MMMM Do YYYY");
+        //     return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        // },
+
+        // totalPrice(item) {
+        //     return item.reduce((total, item) => {
+        //         return total + item.tool.price * item.count;
+        //     }, 0);
+        // },
+
+        // setEditStudent(id) {
+        //     this.$store.dispatch("AcademicStudentModule/setStudentId", id);
+        //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
+        // },
+
+        // applyDateFilter() {
+        //     this.menu = false;
+        // },
+
+        // resetData() {
+        //     this.students = this.storeStudents;
+        // },
+
+        // filteredStudentsByDate() {
+        //     const startDate = new Date(this.dates[0]);
+        //     const endDate = new Date(this.dates[1]);
+
+        //     if (!startDate || !endDate) {
+        //         return this.students;
+        //     }
+
+        //     this.students = this.students.filter((student) => {
+        //         const date = new Date(student.created_at);
+        //         return date >= startDate && date <= endDate;
+        //     });
+
+        //     // return this.students.filter((student) => {
+        //     //     const date = new Date(student.created_at);
+        //     //     return date >= startDate && date <= endDate;
+        //     // });
+        // },
+
+        setTab(tab) {
+            this.$store.dispatch("ProcurementReportModule/setTab", tab);
         },
 
-        formattedPrice(amount) {
-            return amount.toLocaleString("sw-TZ", {
-                style: "currency",
-                currency: "Tsh",
-            });
-        },
+        // getSellerProfile(seller) {
+        //     this.sellerInfo = seller
+        // },
 
-        formattedDate(date) {
-            // return moment(date).format("MMMM Do YYYY");
-            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-        },
+        // getTools() {
+        //     axios.get("/procurement/get_tools").then((response) => {
+        //         this.tools = response.data.data;
+        //         this.showLoader = false;
+        //         // console.log(response.data.data);
+        //     });
+        // },
 
-        setEditStudent(id) {
-            this.$store.dispatch("AcademicStudentModule/setStudentId", id);
-            this.$store.dispatch("AcademicStudentModule/setEditStudent");
-        },
+        // getStudents() {
+        //     axios.get("/procurement/getInvoices").then((response) => {
+        //         this.students = response.data.data;
+        //         this.storeStudents = response.data.data;
+        //         this.showLoader = false;
+        //     });
+        // },
 
-        applyDateFilter() {
-            this.menu = false;
-        },
+        // generatePDF() {
+        //     const doc = new jsPDF();
 
-        resetData() {
-            this.students = this.storeStudents;
-        },
+        //     // Set PDF colors
+        //     const pdfColor = "#d1d5db";
+        //     const pdfTextColor = "#1f2937";
 
-        filteredStudentsByDate() {
-            const startDate = new Date(this.dates[0]);
-            const endDate = new Date(this.dates[1]);
+        //     // Define table headers and columns
+        //     const headers = this.headers
+        //         .filter((header) => header.value !== "edit")
+        //         .map((header) => header.text);
+        //     const columns = this.headers
+        //         .filter((header) => header.value !== "edit")
+        //         .map((header) => header.value);
+        //     // console.log(this.filteredStudents);
+        //     // Extract table data from filteredStudents computed property
+        //     const data = this.filteredStudents.map((student, studentIndex) =>
+        //         columns.map((column, columnIndex) => {
+        //             // If the current column value is an object, create a string representation of it
+        //             if (
+        //                 typeof student[column] === "object" &&
+        //                 student[column] !== null
+        //             ) {
+        //                 if (
+        //                     Array.isArray(student[column]) &&
+        //                     column === "sellers"
+        //                 ) {
+        //                     // If the column data is an array of objects (e.g., multiple sellers),
+        //                     // map the array to extract the desired property (e.g., name) and join them into a string
+        //                     return student[column]
+        //                         .map((item) => item.name)
+        //                         .join(", ");
+        //                 } else if (
+        //                     Array.isArray(student[column]) &&
+        //                     column === "tools"
+        //                 ) {
+        //                     // If the column data is an array of objects (e.g., multiple sellers),
+        //                     // map the array to extract the desired property (e.g., name) and join them into a string
+        //                     return student[column]
+        //                         .map((item) => item.name)
+        //                         .join(", ");
+        //                 } else if (
+        //                     Array.isArray(student[column]) &&
+        //                     column === "tool_sum"
+        //                 ) {
+        //                     return this.formattedPrice(student['total'])
+        //                 }
+        //             }
+        //             //  else if (column === "tool_sum") {
+        //             //     return this.formattedPrice(
+        //             //         this.totalPrice(student[column])
+        //             //     );
+        //             //     return this.formattedDate(student[column]);
+        //             // }
+        //             else if (
+        //                 column === "created_at" ||
+        //                 column === "updated_at"
+        //             ) {
+        //                 return this.formattedDate(student[column]);
+        //             }
+        //             // else {
+        //             //     return student[column];
+        //             // }
+        //         })
+        //     );
 
-            if (!startDate || !endDate) {
-                return this.students;
-            }
+        //     // Set table styles
+        //     const tableStyles = {
+        //         fillColor: pdfColor,
+        //         textColor: pdfTextColor,
+        //     };
 
-            this.students = this.students.filter((student) => {
-                const date = new Date(student.created_at);
-                return date >= startDate && date <= endDate;
-            });
+        //     // Add header content
+        //     const headerText = "REPORT: " + this.reportRange;
+        //     const headerX = doc.internal.pageSize.getWidth() / 2;
+        //     const headerY = 15;
+        //     doc.setFontSize(13);
+        //     doc.setTextColor(pdfTextColor);
+        //     doc.text(headerText, headerX, headerY, { align: "center" });
 
-            // return this.students.filter((student) => {
-            //     const date = new Date(student.created_at);
-            //     return date >= startDate && date <= endDate;
-            // });
-        },
+        //     // Add table to the PDF
+        //     doc.autoTable({
+        //         head: [headers],
+        //         body: data,
+        //         styles: tableStyles,
+        //         startY: 30, // Adjust the position of the table below the heading
+        //     });
 
-        getStudents() {
-            axios.get("/procurement/getInvoices").then((response) => {
-                this.students = response.data.data;
-                this.storeStudents = response.data.data;
-                this.showLoader = false;
-            });
-        },
+        //     // Add "Issued on" information
+        //     const issuedOnText = "Issued on: " + new Date().toLocaleString();
+        //     const issuedOnX = doc.internal.pageSize.getWidth() - 15;
+        //     const issuedOnY = doc.internal.pageSize.getHeight() - 10;
+        //     doc.setFontSize(10);
+        //     doc.setTextColor(pdfTextColor);
+        //     doc.text(issuedOnText, issuedOnX, issuedOnY, { align: "right" });
 
-        generatePDF() {
-            const doc = new jsPDF();
+        //     // Save the PDF
+        //     doc.save("REPORT: " + this.reportRange + ".pdf");
+        // },
 
-            // Set PDF colors
-            const pdfColor = "#d1d5db";
-            const pdfTextColor = "#1f2937";
-
-            // Define table headers and columns
-            const headers = this.headers
-                .filter((header) => header.value !== "edit")
-                .map((header) => header.text);
-            const columns = this.headers
-                .filter((header) => header.value !== "edit")
-                .map((header) => header.value);
-
-            // Extract table data from filteredStudents computed property
-            const data = this.filteredStudents.map((student) =>
-                columns.map((column) => {
-                    if (column === "created_at" || column === "updated_at") {
-                        return this.formattedDate(student[column]);
-                    } else {
-                        return student[column];
-                    }
-                })
-            );
-
-            // Set table styles
-            const tableStyles = {
-                fillColor: pdfColor,
-                textColor: pdfTextColor,
-            };
-
-            // Add header content
-            const headerText = "REPORT: " + this.reportRange;
-            const headerX = doc.internal.pageSize.getWidth() / 2;
-            const headerY = 15;
-            doc.setFontSize(13);
-            doc.setTextColor(pdfTextColor);
-            doc.text(headerText, headerX, headerY, { align: "center" });
-
-            // Add table to the PDF
-            doc.autoTable({
-                head: [headers],
-                body: data,
-                styles: tableStyles,
-                startY: 30, // Adjust the position of the table below the heading
-            });
-
-            // Add "Issued on" information
-            const issuedOnText = "Issued on: " + new Date().toLocaleString();
-            const issuedOnX = doc.internal.pageSize.getWidth() - 15;
-            const issuedOnY = doc.internal.pageSize.getHeight() - 10;
-            doc.setFontSize(10);
-            doc.setTextColor(pdfTextColor);
-            doc.text(issuedOnText, issuedOnX, issuedOnY, { align: "right" });
-
-            // Save the PDF
-            doc.save("REPORT: " + this.reportRange + ".pdf");
-        },
-
-        save(id, column, data) {
-            this.updateTools(id, data, column);
-            // console.log(id + " , " +data);
-        },
-        cancel() {},
-        open() {},
-        close() {},
+        // save(id, column, data) {
+        //     this.updateTools(id, data, column);
+        //     // console.log(id + " , " +data);
+        // },
+        // cancel() {},
+        // open() {},
+        // close() {},
     },
 };
 </script>

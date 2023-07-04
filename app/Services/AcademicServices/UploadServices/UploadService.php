@@ -20,6 +20,7 @@ class UploadService
             'name' => $fileName,
             'path' => $filePath,
             'title' => $request->title,
+            'school_id' => auth()->user()->school_id,
             'user_id' => auth()->user()->id,
             'description' => $request->description,
 

@@ -9,6 +9,7 @@ export default {
     state() {
         return {
             tabInvoice: 'entries',
+            chartOfAcountForm: '',
             invoiceGenerate: false,
 
             invoiceView: false,

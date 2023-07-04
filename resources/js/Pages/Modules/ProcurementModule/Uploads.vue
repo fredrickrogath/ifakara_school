@@ -56,6 +56,7 @@
                             <div class="text-end">
                                 <button
                                     type="submit"
+                                    data-bs-dismiss="modal"
                                     class="btn btn-success waves-effect waves-light"
                                 >
                                     Save

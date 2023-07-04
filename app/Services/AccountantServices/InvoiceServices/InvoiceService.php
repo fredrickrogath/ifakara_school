@@ -33,16 +33,16 @@ class InvoiceService
     }
 
     public function acceptedInvoice(){
-        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status', true)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status_from_accountant', true)->orderBy('created_at', 'desc')->get();
     }
 
     public function rejectedInvoice(){
-        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status', false)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status_from_accountant', false)->orderBy('created_at', 'desc')->get();
     }
 
     public function acceptInvoice($request){
         return \App\Models\Invoice::find($request->id)->update([
-            'status' => !$request->status,
+            'status_from_accountant' => !$request->status_from_accountant,
         ]);
     }
 
@@ -79,9 +79,9 @@ class InvoiceService
     }
 
     public function headDashboardGetInvoices(){
-        $procurement = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', false)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
-        $accountantSchool = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
-        $accountantFinancial = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('status_from_financial', true)->orderBy('created_at', 'desc')->get();
+        $procurement = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status_from_accountant', false)->where('status_from_financial_accountant', false)->orderBy('created_at', 'desc')->get();
+        $accountantSchool = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status_from_accountant', true)->where('status_from_financial_accountant', false)->orderBy('created_at', 'desc')->get();
+        $accountantFinancial = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status_from_accountant', true)->where('status_from_financial_accountant', true)->orderBy('created_at', 'desc')->get();
         return [
             'procurement' => $procurement,
             'procurementCount' => $procurement->count(),

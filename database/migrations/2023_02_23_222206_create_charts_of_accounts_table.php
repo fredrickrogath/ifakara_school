@@ -20,10 +20,11 @@ class CreateChartsOfAccountsTable extends Migration
             $table->float('level2', 20, 2)->nullable();
             $table->float('level3', 20, 2)->nullable();
             $table->string('name');
+            $table->boolean('isSchoolFee')->default(false);
             $table->string('description')->nullable();
             $table->string('notes')->nullable();
             $table->integer('school_id');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

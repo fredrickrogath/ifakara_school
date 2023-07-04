@@ -15,4 +15,8 @@ export default {
         state.invoiceView = !state.invoiceView;
         state.invoiceId = id;
     },
+
+    setChartOfAcountForm(state , tab){
+        state.chartOfAcountForm = tab;
+    },
 };

@@ -15,6 +15,8 @@ class ChartsOfAccount extends Model
         'level2',
         'level3',
         'name',
+        'user_id',
+        'isSchoolFee',
         'description',
         'school_id',
         'notes',

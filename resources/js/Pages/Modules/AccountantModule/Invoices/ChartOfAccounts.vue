@@ -73,7 +73,9 @@
                         <div class="modal-body">
                             <div class="">
                                 <form @submit.prevent="addChartOfAccounts">
-                                    <div class="mb-1 font-sm text-gray-600">
+                                    <div
+                                        class="mb-1 font-sm text-gray-600 italic font-semibold"
+                                    >
                                         <label
                                             for="example-email"
                                             class="form-label text-gray-500"
@@ -95,7 +97,9 @@
                                         </select>
                                     </div>
 
-                                    <div class="text-sm mb-1 text-gray-600">
+                                    <div
+                                        class="text-sm mb-1 text-gray-600 italic font-semibold"
+                                    >
                                         <label
                                             for="example-email"
                                             class="form-label text-gray-500 font-normal"
@@ -110,7 +114,9 @@
                                         />
                                     </div>
 
-                                    <div class="text-sm mb-1 text-gray-600">
+                                    <div
+                                        class="text-sm mb-1 text-gray-600 italic font-semibold"
+                                    >
                                         <label
                                             for="example-email"
                                             class="form-label text-gray-500 font-normal"
@@ -125,7 +131,9 @@
                                         />
                                     </div>
 
-                                    <div class="text-sm mb-1 text-gray-600">
+                                    <div
+                                        class="text-sm mb-1 text-gray-600 italic font-semibold"
+                                    >
                                         <label
                                             for="example-email"
                                             class="form-label text-gray-500 font-normal"
@@ -140,7 +148,9 @@
                                         />
                                     </div>
 
-                                    <div class="text-sm mb-1 text-gray-600">
+                                    <div
+                                        class="text-sm mb-1 text-gray-600 italic font-semibold"
+                                    >
                                         <label
                                             for="example-email"
                                             class="form-label text-gray-500 font-normal"
@@ -155,7 +165,46 @@
                                         />
                                     </div>
 
-                                    <div class="text-sm mb-1 text-gray-600">
+                                    <div class="flex py-1" v-if="account_type == 'Income'">
+                                        <div
+                                        class="mr-2 form-check mb-2 form-check-warning"
+                                    >
+                                        <input
+                                            class="form-check-input"
+                                            type="radio"
+                                            v-model="isSchoolFee"
+                                            :value="true"
+                                            id="customckeck1"
+                                            checked
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="customckeck1"
+                                            >School Fee</label
+                                        >
+                                    </div>
+
+                                    <div
+                                        class="form-check mb-2 form-check-warning"
+                                    >
+                                        <input
+                                            class="form-check-input"
+                                            type="radio"
+                                            v-model="isSchoolFee"
+                                            :value="false"
+                                            id="customckeck2"
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="customckeck2"
+                                            >Others</label
+                                        >
+                                    </div>
+                                    </div>
+
+                                    <div
+                                        class="text-sm mb-1 text-gray-600 italic font-semibold"
+                                    >
                                         <label
                                             for="example-textarea"
                                             class="form-label text-gray-500 font-normal"
@@ -169,7 +218,9 @@
                                         ></textarea>
                                     </div>
 
-                                    <div class="text-sm text-gray-600">
+                                    <div
+                                        class="text-sm text-gray-600 italic font-semibold"
+                                    >
                                         <label
                                             for="example-textarea"
                                             class="form-label text-gray-500 font-normal"
@@ -216,8 +267,6 @@
                 Chart Of Accounts
                 <v-spacer></v-spacer>
 
-                <snackbar message="Task completed successfully"></snackbar>
-                
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -244,6 +293,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -259,6 +309,20 @@
                                 >
                                     mdi-delete
                                 </v-icon>
+                                <!-- && header.value !== 'account_type' -->
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-if="header.value == 'created_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'account_type'"
+                                    >{{ item[header.value] }}</span
+                                >
 
                                 <v-edit-dialog
                                     v-else
@@ -276,22 +340,13 @@
                                     large
                                 >
                                     <span
-                                        class="text-gray-600"
-                                        v-if="header.value == 'created_at'"
-                                        >{{
-                                            formattedDate(item[header.value])
-                                        }}</span
-                                    >
-
-                                    <span
-                                        class="text-gray-600"
+                                        class="text-gray-600 italic font-semibold"
                                         :class="
                                             item[header.value] == null &&
                                             header.value !== 'action' // header.value == 'level1'
                                                 ? 'bg-gray-100 italic rounded px-1'
                                                 : ''
                                         "
-                                        v-else
                                         >{{
                                             item[header.value] !== null
                                                 ? header.value == "level1" ||
@@ -356,16 +411,16 @@ export default {
             search: "",
             chartOfAccounts: [],
             headers: [
-                {
-                    text: "Code",
-                    align: "left",
-                    sortable: false,
-                    value: "id",
-                },
+                // {
+                //     text: "Code",
+                //     align: "left",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 { text: "Type", value: "account_type" },
-                { text: "Lev 1", value: "level1" },
-                { text: "Lev 2", value: "level2" },
-                { text: "Lev 3", value: "level3" },
+                { text: "Level 1", value: "level1" },
+                { text: "Level 2", value: "level2" },
+                { text: "Level 3", value: "level3" },
                 { text: "Name", value: "name" },
                 { text: "Description", value: "description" },
                 { text: "Notes", value: "notes" },
@@ -374,14 +429,18 @@ export default {
             ],
 
             account_type: "Income",
-            level1: '',
-            level2: '',
-            level3: '',
+            level1: "",
+            level2: "",
+            level3: "",
             name: "",
-            description: '',
-            notes: '',
+            description: "",
+            notes: "",
+            column: null,
+            inline: null,
 
             idForAction: null,
+
+            isSchoolFee: false,
         };
     },
     methods: {
@@ -416,6 +475,7 @@ export default {
                     level2: this.level2,
                     level3: this.level3,
                     name: this.name,
+                    isSchoolFee: this.isSchoolFee,
                     description: this.description,
                     notes: this.notes,
                 })
@@ -427,6 +487,8 @@ export default {
                     this.name = "";
                     this.description = null;
                     this.notes = null;
+                    this.isSchoolFee = false;
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -442,7 +504,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -454,7 +516,7 @@ export default {
                 })
                 .then((response) => {
                     // this.students = response.data.data;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

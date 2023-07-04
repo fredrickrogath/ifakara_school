@@ -418,62 +418,9 @@
             <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
-                        <!-- <div class="float-end d-none d-md-inline-block"> -->
-                        <!-- <div class="btn-group mb-2">
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-light"
-                                >
-                                    Today
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-light"
-                                >
-                                    Weekly
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-secondary"
-                                >
-                                    Monthly
-                                </button>
-                            </div> -->
-                        <!-- </div> -->
 
                         <h4 class="header-title">Invoices Status</h4>
 
-                        <!-- <div class="d-flex text-center">
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">Current Week</p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-primary align-middle me-1"
-                                    ></small>
-                                    <span>$58,254</span>
-                                </h4>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">
-                                    Previous Week
-                                </p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
-                                    ></small>
-                                    <span>$69,524</span>
-                                </h4>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">Targets</p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
-                                    ></small>
-                                    <span>$95,025</span>
-                                </h4>
-                            </div>
-                        </div> -->
                         <div class="">
                             <google-bar
                                 :data="chartData"
@@ -488,82 +435,6 @@
             </div>
         </div>
 
-        <!-- <div>
-            <div class="col-xl-12 col-md-12 mx-0 px-0 mt-0 pt-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title mb-1">School Staffs</h4>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="border-top-0">Identity</th>
-                                        <th class="border-top-0">Name</th>
-                                        <th class="border-top-0">
-                                            Departiment
-                                        </th>
-                                        <th class="border-top-0">Email</th>
-                                        <th class="border-top-0">
-                                            Registered On
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="staff in staffs" :key="staff.id">
-                                        <td>
-                                            <img
-                                                class="h-8 w-8 rounded-full object-cover"
-                                                :src="
-                                                    $page.props.user
-                                                        .profile_photo_url
-                                                "
-                                                :alt="$page.props.user.name"
-                                            />
-                                            <img
-                                                src="assets/images/users/user-2.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            /> 
-                                        </td>
-                                        <td>
-                                            <span class="text-center">
-                                                {{ staff.name }}
-                                            </span>
-                                        </td>
-                                        <td>{{ department(staff.role) }}</td>
-                                        <td>{{ staff.email }}</td>
-                                        <td>
-                                            {{
-                                                formattedDate(staff.created_at)
-                                            }}
-                                        </td>
-                                         <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div>   
-            <pie-chart3-d></pie-chart3-d>
-            <google-donut></google-donut>
-            <google-bar></google-bar>
-            <google-grouped-bar></google-grouped-bar>
-        </div> -->
-        <!-- end row -->
     </div>
 </template>
 
@@ -648,7 +519,7 @@ export default {
                     ["Unpaid Students", response.data.data.unpaidStudents],
                 ];
 
-                console.log(response.data.data);
+                // console.log(response.data.data);
             });
         },
 

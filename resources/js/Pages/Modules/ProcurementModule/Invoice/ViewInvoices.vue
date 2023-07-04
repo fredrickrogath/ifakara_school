@@ -63,11 +63,34 @@
 
                                 <span>
                                     <strong>Invoice Status : </strong>
-                                    <span class="float-end"
-                                        ><span class="badge bg-danger"
-                                            >Unpaid</span
-                                        ></span
+
+                                    <span
+                                        v-if="
+                                            !this.invoice.status_from_accountant
+                                        "
+                                        class="badge bg-danger"
+                                        >Unforwarded</span 
                                     >
+
+                                    <div v-else class="badge bg-success">
+                                        Forwarded
+                                    </div>
+                                </span>
+
+                                <span>
+                                    <strong>Invoice Status : </strong>
+
+                                    <span
+                                        v-if="
+                                            !this.invoice.status_from_financial_accountant
+                                        "
+                                        class="badge bg-danger"
+                                        >Unpaid</span 
+                                    >
+
+                                    <div v-else class="badge bg-success">
+                                        Paid
+                                    </div>
                                 </span>
                             </div>
                         </div>

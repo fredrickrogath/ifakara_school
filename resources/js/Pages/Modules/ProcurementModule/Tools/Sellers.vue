@@ -262,7 +262,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'location'"
                                     >{{ item[header.value] }}</span
                                 >

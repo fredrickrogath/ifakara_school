@@ -180,7 +180,7 @@
                                     ></i
                                     >Starred Tools</a
                                 >
-                                <a
+                                <!-- <a
                                     href="#"
                                     class="list-group-item border-0"
                                     @click="setTab('lost')"
@@ -193,7 +193,7 @@
                                         class="mdi mdi-close-thick font-18 align-middle me-2 pb-1"
                                     ></i
                                     >Broken & Lost Tools</a
-                                >
+                                > -->
                                 <a
                                     href="#"
                                     class="list-group-item border-0"
@@ -256,9 +256,9 @@
                                         <starred-tools
                                             v-show="getCurrentTab == 'starred'"
                                         ></starred-tools>
-                                        <broken-tools
+                                        <!-- <broken-tools
                                             v-show="getCurrentTab == 'lost'"
-                                        ></broken-tools>
+                                        ></broken-tools> -->
                                         <trashed-tools
                                             v-show="getCurrentTab == 'deleted'"
                                         ></trashed-tools>
@@ -283,7 +283,7 @@
 <script>
 import AllTools from "./Tools/AllTools.vue";
 import StarredTools from "./Tools/StarredTools.vue";
-import BrokenTools from "./Tools/BrokenTools.vue";
+// import BrokenTools from "./Tools/BrokenTools.vue";
 import TrashedTools from "./Tools/TrashedTools.vue";
 import Sellers from "./Tools/Sellers.vue";
 
@@ -297,7 +297,7 @@ export default {
     components: {
         AllTools,
         StarredTools,
-        BrokenTools,
+        // BrokenTools,
         TrashedTools,
         Sellers,
         AddSeller,

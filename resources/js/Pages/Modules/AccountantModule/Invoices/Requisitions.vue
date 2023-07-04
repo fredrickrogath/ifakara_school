@@ -214,7 +214,7 @@
                                     class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
-                                    {{
+                                    {{ 
                                         formattedPrice(totalPrice(item.invoice_tool))
                                     }}
                                 </span>

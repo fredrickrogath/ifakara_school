@@ -1,305 +1,85 @@
 <template>
+    <!-- <v-col>
+        <v-row> -->
     <div>
-        <v-dialog v-model="dialog" width="auto">
-            <div class="">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
+        <spinner-loader v-if="showLoader"></spinner-loader>
 
-                            <snackbar message="Task completed successfully"></snackbar>
-                            
-                            <div class="card-body">
-                                <!-- Logo & title -->
-                                <div class="clearfix">
-                                    <div class="float-start">
-                                        <div class="auth-logo">
-                                            <div class="logo logo-dark">
-                                                <span class="logo-lg">
-                                                    <img
-                                                        src="assets/images/logo-dark.png"
-                                                        alt=""
-                                                        height="22"
-                                                    />
-                                                </span>
-                                            </div>
+        <v-col v-else sm="12" md="12">
+            <!-- <v-card flat :dark="isDark"> -->
+            <!-- <v-card elevation="0" data-app> -->
+            <v-card-title class="px-1 pt-0">
+                Transaction Entries
+                <v-spacer></v-spacer>
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+                ></v-text-field>
+            </v-card-title>
+            <!-- {{ $page.props.posts }} -->
+            <v-data-table
+                mobile-breakpoint="0"
+                :headers="headers"
+                :items="legerEntries"
+                :search="search"
+                class="bg-red-900"
+            >
+                <template v-slot:item.id="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{ item.id }}</span>
+                </template>
 
-                                            <div class="logo logo-light">
-                                                <span class="logo-lg">
-                                                    <img
-                                                        src="assets/images/logo-light.png"
-                                                        alt=""
-                                                        height="22"
-                                                    />
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="float-end">
-                                        <h4 class="m-0 d-print-none">
-                                            Invoice
-                                        </h4>
-                                    </div>
-                                </div>
+                <template v-slot:item.chart_of_account.account_type="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.chart_of_account.account_type
+                    }}</span>
+                </template>
 
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-md-6">
-                                        <div class="mt-3">
-                                            <p><b>Hello, Stanley Jones</b></p>
-                                            <p class="text-muted">
-                                                Thanks a lot because you keep
-                                                purchasing our products. Our
-                                                company promises to provide high
-                                                quality products for you as well
-                                                as outstanding customer service
-                                                for every transaction.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                    <div class="col-md-4 offset-md-2">
-                                        <div class="mt-3 float-end">
-                                            <p>
-                                                <strong>Order Date : </strong>
-                                                <span class="float-end">
-                                                    &nbsp;&nbsp;&nbsp;&nbsp; Jan
-                                                    17, 2016</span
-                                                >
-                                            </p>
-                                            <p>
-                                                <strong>Order Status : </strong>
-                                                <span class="float-end"
-                                                    ><span
-                                                        class="badge bg-danger"
-                                                        >Unpaid</span
-                                                    ></span
-                                                >
-                                            </p>
-                                            <p>
-                                                <strong>Order No. : </strong>
-                                                <span class="float-end"
-                                                    >000028
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
+                <template v-slot:item.chart_of_account.name="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{ item.chart_of_account.name }}</span>
+                </template>
 
-                                <div class="row mt-3">
-                                    <div class="col-sm-6">
-                                        <h6>Billing Address</h6>
-                                        <address>
-                                            Stanley Jones<br />
-                                            795 Folsom Ave, Suite 600<br />
-                                            San Francisco, CA 94107<br />
-                                            <abbr title="Phone">P:</abbr> (123)
-                                            456-7890
-                                        </address>
-                                    </div>
-                                    <!-- end col -->
+                <template v-slot:item.level_1="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{ formattedPrice(item.level_1) }}</span>
+                </template>
 
-                                    <div class="col-sm-6">
-                                        <h6>Shipping Address</h6>
-                                        <address>
-                                            Stanley Jones<br />
-                                            795 Folsom Ave, Suite 600<br />
-                                            San Francisco, CA 94107<br />
-                                            <abbr title="Phone">P:</abbr> (123)
-                                            456-7890
-                                        </address>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
+                <template v-slot:item.level_2="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{ formattedPrice(item.level_2) }}</span>
+                </template>
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table
-                                                class="table mt-4 table-centered"
-                                            >
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Item</th>
-                                                        <th style="width: 10%">
-                                                            Hours
-                                                        </th>
-                                                        <th style="width: 10%">
-                                                            Hours Rate
-                                                        </th>
-                                                        <th
-                                                            style="width: 10%"
-                                                            class="text-end"
-                                                        >
-                                                            Total
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <b>Web Design</b>
-                                                            <br />
-                                                            2 Pages static
-                                                            website - my website
-                                                        </td>
-                                                        <td>22</td>
-                                                        <td>$30</td>
-                                                        <td class="text-end">
-                                                            $660.00
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>
-                                                            <b
-                                                                >Software
-                                                                Development</b
-                                                            >
-                                                            <br />
-                                                            Invoice editor
-                                                            software - AB'c
-                                                            Software
-                                                        </td>
-                                                        <td>112.5</td>
-                                                        <td>$35</td>
-                                                        <td class="text-end">
-                                                            $3937.50
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- end table-responsive -->
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
+                <template v-slot:item.level_3="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{ formattedPrice(item.level_3) }}</span>
+                </template>
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="clearfix pt-5">
-                                            <h6 class="text-muted">Notes:</h6>
 
-                                            <small class="text-muted">
-                                                All accounts are to be paid
-                                                within 7 days from receipt of
-                                                invoice. To be paid by cheque or
-                                                credit card or direct payment
-                                                online. If account is not paid
-                                                within 7 days the credits
-                                                details supplied as confirmation
-                                                of work undertaken will be
-                                                charged the agreed quoted fee
-                                                noted above.
-                                            </small>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                    <div class="col-sm-6">
-                                        <div class="float-end">
-                                            <p>
-                                                <b>Sub-total:</b>
-                                                <span class="float-end"
-                                                    >$4597.50</span
-                                                >
-                                            </p>
-                                            <p>
-                                                <b>Discount (10%):</b>
-                                                <span class="float-end">
-                                                    &nbsp;&nbsp;&nbsp;
-                                                    $459.75</span
-                                                >
-                                            </p>
-                                            <h3>$4137.75 USD</h3>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
+                <template v-slot:item.narration="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{ item.narration }}</span>
+                </template>
 
-                                <div class="mt-4 mb-1">
-                                    <div class="text-end d-print-none">
-                                        <a
-                                            href="javascript:window.print()"
-                                            class="btn btn-primary waves-effect waves-light"
-                                            ><i
-                                                class="mdi mdi-printer me-1"
-                                            ></i>
-                                            Print</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="btn btn-info waves-effect waves-light"
-                                            >Submit</a
-                                        >
-                                        <a
-                                            href="#"
-                                            @click="dialog = false"
-                                            class="btn btn-danger waves-effect waves-light"
-                                            >Cancel</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end col -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- container -->
-        </v-dialog>
-
-        <!-- <div class="table-responsive">
-            <table class="table table-centered table-nowrap mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th class="border-0">Transaction Type</th>
-                        <th class="border-0">Made For</th>
-                        <th class="border-0">Amount</th>
-                        <th class="border-0">Narration</th>
-                        <th class="border-0">Date</th>
-                         <th class="border-0" style="width: 80px">Action</th> -->
-                    <!-- </tr>
-                </thead> -->
-                <!-- <tbody> 
-                    <tr v-for="legerEntry in legerEntries" :key="legerEntry.id">
-                        <td>
-                            <i data-feather="folder" class="icon-dual"></i>
-                            <span class="ms-2 fw-semibold"
-                                ><a
-                                    href="javascript: void(0);"
-                                    class="text-reset"
-                                    >{{ legerEntry.chart_of_account.account_type }}</a
-                                ></span
-                            >
-                        </td>
-                        <td> -->
-                            <!-- <p class="mb-0">{{ legerEntry.user.name }}</p>
-                             <span class="font-12">by Andrew</span> -->
-                        <!-- </td> -->
-                        <!-- <td>{{ legerEntry.amount | currency("Tsh ", 0) }}</td>
-                        <td>{{ legerEntry.narration }}</td>
-                        <td>{{ legerEntry.created_at }} -->
-                        <!-- </td> -->
-                    <!-- </tr>
-                </tbody>
-            </table> -->
-        <!-- </div> -->
-
-        <data-table></data-table>
+                <template v-slot:item.created_at="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{
+                        formattedDate(item.created_at)
+                    }}</span>
+                </template>
+            </v-data-table>
+            <!-- </v-card> -->
+            <!-- </v-card> -->
+        </v-col>
     </div>
+    <!-- </v-row>
+    </v-col> -->
 </template>
 
 <script>
-import DataTable from './../../../Components/Tables.vue';
+import moment from "moment";
+import SnackBar from '../../../Components/SnackBar.vue';
+import SpinnerLoader from '../../../Components/SpinnerLoader.vue';
 export default {
+    components:{
+        SnackBar,
+        SpinnerLoader,
+    },
     mounted() {
         this.getLegerEntries()
 
@@ -313,25 +93,60 @@ export default {
         );
     },
 
-    components: {
-        DataTable,
-    },
-
     data() {
         return {
-            dialog: false,
-            legerEntries: null,
+            contentFullWidthWhenSideBarHides: 10,
+            storagePath: window.location.origin + "/storage/systemFiles/",
+
+            showLoader: true,
+            search: "",
+            headers: [
+                // {
+                //     text: "Code",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
+                {
+                    text: "Type",
+                    value: "chart_of_account.account_type",
+                },
+                { text: "Name", value: "chart_of_account.name", align: "center" },
+                { text: "Level 1", value: "level_1" },
+                { text: "Level 2", value: "level_2" },
+                { text: "Level 3", value: "level_3" },
+                { text: "Narration", value: "narration" },
+                { text: "Date", value: "created_at" },
+
+                // { text: "Iron (%)", value: "iron" },
+            ],
+            // posts: this.$store.getters["getPosts"],
+            // posts: null,
+            legerEntries: [],
         };
     },
 
     methods: {
+        formattedPrice(amount) {
+            return amount.toLocaleString("sw-TZ", {
+                style: "currency",
+                currency: "Tsh",
+            });
+        },
+
+        formattedDate(date) {
+            return moment(date).format("MMMM Do YYYY");
+            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        },
+
         getLegerEntries() {
             // console.log("Loading next page");
             axios
                 .get("/accountant/getLegerEntries")
                 .then((response) => {
                     this.legerEntries = response.data.data;
-                    // console.log(this.legerEntries)
+                    this.showLoader = false
+                    // console.log(th   is.legerEntries)
                 });
         },
     }

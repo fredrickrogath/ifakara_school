@@ -15,5 +15,9 @@ export default {
 
     setInvoiceView(context, id){
         context.commit("setInvoiceView", id);
+    },
+
+    setChartOfAcountForm(context, tab){
+        context.commit("setChartOfAcountForm", tab);
     }
 };

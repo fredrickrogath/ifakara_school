@@ -173,28 +173,28 @@
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'gender'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'from'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'parent'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'parent_contact'"
                                 >
                                     {{ item[header.value] }}
@@ -306,7 +306,7 @@ export default {
                 },
                 { text: "Location", value: "from" },
                 // { text: "Parent", value: "parent" },
-                // { text: "Contact", value: "parent_contact" },
+                { text: "Contact", value: "parent_contact" },
                 { text: "Edit", value: "edit" },
             ],
             students: [],

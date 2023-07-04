@@ -21,7 +21,11 @@ export default {
 
     getInvoiceId(state){
         return state.invoiceId;
-    }
+    },
+
+    getChartOfAcountForm(state){
+        return state.chartOfAcountForm;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

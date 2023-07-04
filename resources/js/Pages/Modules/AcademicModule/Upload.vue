@@ -56,6 +56,7 @@
                             <div class="text-end">
                                 <button
                                     type="submit"
+                                    data-bs-dismiss="modal"
                                     class="btn btn-success waves-effect waves-light"
                                 >
                                     Save
@@ -74,8 +75,6 @@
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="card h-screen">
-
-                    <snackbar message="Task completed successfully"></snackbar>
                     
                     <div class="card-body pt-1">
                         <!-- Left sidebar -->

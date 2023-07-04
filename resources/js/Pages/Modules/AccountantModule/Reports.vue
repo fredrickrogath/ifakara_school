@@ -1,5 +1,5 @@
 <template>
-    <div class="card p-0" data-app>
+    <div class="card p-0 h-screen" data-app>
         <spinner v-if="showLoader"></spinner>
 
         <v-col v-else sm="12" md="12" class="p-0">
@@ -54,231 +54,66 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="px-1 py-0 my-0">
-                REPORT {{ formattedDateRange }}
-                <v-spacer></v-spacer>
+            <div>
+                <div class="mail-list">
+                    <div class="flex justify-end">
+                        <a
+                            href="#"
+                            class="list-group-item font-semibold border-0"
+                            @click="setTab('invoices')"
+                            :class="[
+                                getCurrentTab == 'invoices'
+                                    ? 'text-warning'
+                                    : '',
+                            ]"
+                            ><i
+                                class="mdi mdi-form-select font-18 align-middle me-1 pb-1"
+                            ></i
+                            >Invoices
+                        </a>
+                        <a
+                            href="#"
+                            class="list-group-item font-semibold border-0 pb-1"
+                            @click="setTab('studentPayment')"
+                            :class="[
+                                getCurrentTab == 'studentPayment' ? 'text-warning' : '',
+                            ]"
+                            ><i
+                                class="mdi mdi-cash-multiple font-18 align-middle me-1 pb-2"
+                            ></i
+                            >Student Payments</a
+                        >
+                    </div>
+                    <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
+                </div>
+            </div>
 
-                <snack-bar
-                    class="absolute right-0 top-14"
-                    message="Printed successfully"
-                ></snack-bar>
+            <div v-show="getCurrentTab == 'invoices'">
+                <invoice-report></invoice-report>
+            </div>
 
-                <v-row class="px-2 pt-1">
-                    <v-menu
-                        ref="datePickerMenu"
-                        :close-on-content-click="false"
-                        v-model="datePickerMenu"
-                        :return-value.sync="dates"
-                        transition="scale-transition"
-                        offset-y
-                        max-width="290px"
-                    >
-                        <template v-slot:activator="{ on }">
-                            <v-text-field
-                                v-model="dateRangeText"
-                                label="Date range"
-                                prepend-icon="mdi-calendar"
-                                class=""
-                                readonly
-                                v-on="on"
-                            ></v-text-field>
-                        </template>
-                        <v-date-picker
-                            color="#52525b"
-                            header-color="#52525b"
-                            v-model="dates"
-                            range
-                        ></v-date-picker>
-                        <v-card-actions>
-                            <v-btn
-                                text
-                                color="primary"
-                                class="w-full bg-gray-600 text-white"
-                                @click="
-                                    datePickerMenu = false;
-                                    filteredStudentsByDate();
-                                "
-                            >
-                                Done
-                            </v-btn>
-                        </v-card-actions>
-                    </v-menu>
-                </v-row>
-
-                <!-- <v-spacer></v-spacer> -->
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                    class="pr-5 py-0 my-0"
-                ></v-text-field>
-                <!-- <v-spacer></v-spacer> -->
-                <v-icon size="22" @click="resetData"> mdi-restore </v-icon>
-            </v-card-title>
-            <!-- {{ $page.props.posts }} -->
-
-            <v-data-table
-                :headers="headers"
-                :items="students"
-                item-key="name"
-                :search="search"
-                class="elevation-1"
-                :items-per-page="11"
-            >
-                <template v-slot:body="{ items, headers }">
-                    <tbody>
-                        <tr v-for="(item, idx, k) in items" :key="idx">
-                            <td v-for="(header, key) in headers" :key="key">
-                                <v-icon
-                                    v-if="header.value == 'delete'"
-                                    size="22"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
-                                >
-                                    mdi-delete
-                                </v-icon>
-
-                                <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    @click="setInvoiceView(items[idx]['id'])"
-                                >
-                                    mdi-eye
-                                </v-icon>
-
-                                <v-icon
-                                    v-if="header.value == 'edit'"
-                                    size="22"
-                                    @click="setEditStudent(items[idx]['id'])"
-                                >
-                                    mdi-pen
-                                </v-icon>
-
-                                <v-icon
-                                    v-if="header.value == 'starred'"
-                                    size="22"
-                                    :class="
-                                        item[header.value] ? 'text-warning' : ''
-                                    "
-                                    @click="
-                                        starredInvoice(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                >
-                                    mdi-star
-                                </v-icon>
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'id'"
-                                    >{{ item[header.value] }}</span
-                                >
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'created_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
-
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'updated_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
-
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'sellers'"
-                                >
-                                    <span
-                                        v-for="seller in item[header.value]"
-                                        :key="seller.id"
-                                        class="d-block"
-                                    >
-                                        <div class="">
-                                            <v-menu transition="fab-transition">
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
-                                                >
-                                                    <span
-                                                        class="seller-name"
-                                                        v-bind="attrs"
-                                                        v-on="on"
-                                                        @click="
-                                                            getSellerProfile(
-                                                                seller
-                                                            )
-                                                        "
-                                                    >
-                                                        {{ seller.name }}
-                                                    </span>
-                                                </template>
-
-                                                <seller-profile
-                                                    :seller="sellerInfo"
-                                                ></seller-profile>
-                                            </v-menu>
-                                        </div>
-                                    </span>
-                                </span>
-
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'tools'"
-                                >
-                                    <div v-for="tool in item[header.value]">
-                                        <span>
-                                            {{ tool.name }}
-                                        </span>
-                                    </div>
-                                </span>
-
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'tool_sum'"
-                                >
-                                    {{
-                                        formattedPrice(
-                                            totalPrice(item.invoice_tool)
-                                        )
-                                    }}
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-data-table>
+            <div v-show="getCurrentTab == 'studentPayment'">
+                <student-payment-report></student-payment-report>
+            </div>
         </v-col>
-
-        <v-btn @click="generatePDF">Generate REPORT {{ reportRange }}</v-btn>
     </div>
 </template>
 
 <script>
-import moment from "moment";
-import jsPDF from "jspdf";
+// import moment from "moment";
+// import jsPDF from "jspdf";
 import Spinner from "../.././Components/SpinnerLoader.vue";
-import SnackBar from "../.././Components/SnackBar.vue";
-import SellerProfile from "../../Components/SellerProfile.vue";
+// import SnackBar from "../.././Components/SnackBar.vue";
+// import SellerProfile from "../../Components/SellerProfile.vue";
+import InvoiceReport from "./Reports/InvoiceReport.vue";
+import StudentPaymentReport from "./Reports/StudentPaymentReport.vue";
 export default {
     components: {
         Spinner,
-        SnackBar,
-        SellerProfile,
+        // SnackBar,
+        // SellerProfile,
+        InvoiceReport,
+        StudentPaymentReport,
     },
 
     mounted() {
@@ -327,6 +162,10 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        getCurrentTab() {
+            return this.$store.getters["AccountantReportModule/getTab"];
         },
 
         formattedDateRange() {
@@ -393,21 +232,22 @@ export default {
             }, 0);
         },
 
-        totalPriceReport(item, count) {
-            return item.reduce((total, item) => {
-                return total + item.price * count;
-            }, 0);
-        },
+        // totalPriceReport(item, count) {
+        //     return item.reduce((total, item) => {
+        //         console.log(total + " " + item.price + " " + count);
+        //         return total + item.price * count;
+        //     }, 0);
+        // },
 
-        setEditStudent(id) {
-            this.$store.dispatch("AcademicStudentModule/setStudentId", id);
-            this.$store.dispatch("AcademicStudentModule/setEditStudent");
-        },
+        // setEditStudent(id) {
+        //     this.$store.dispatch("AcademicStudentModule/setStudentId", id);
+        //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
+        // },
 
         applyDateFilter() {
             this.menu = false;
         },
-
+        
         resetData() {
             this.students = this.storeStudents;
         },
@@ -424,6 +264,10 @@ export default {
                 const date = new Date(student.created_at);
                 return date >= startDate && date <= endDate;
             });
+        },
+
+        setTab(tab) {
+            this.$store.dispatch("AccountantReportModule/setTab", tab);
         },
 
         getStudents() {
@@ -448,7 +292,7 @@ export default {
             const columns = this.headers
                 .filter((header) => header.value !== "edit")
                 .map((header) => header.value);
-
+            // console.log(this.filteredStudents);
             // Extract table data from filteredStudents computed property
             const data = this.filteredStudents.map((student, studentIndex) =>
                 columns.map((column, columnIndex) => {
@@ -479,24 +323,8 @@ export default {
                             Array.isArray(student[column]) &&
                             column === "tool_sum"
                         ) {
-                            // If the column data is an array of objects (e.g., multiple sellers),
-                            // map the array to extract the desired property (e.g., name) and join them into a string
-                            // return student[column]
-                            //     .map((item) => item.name)
-                            //     .join(", ");
-                            // console.log(student[column])
-                            // console.log(this.filteredStudents[studentIndex].invoice_tool)
-                            return this.formattedPrice(
-                                this.totalPriceReport(
-                                    student[column],
-                                    this.filteredStudents[studentIndex].invoice_tool[columnIndex].count
-                                )
-                            );
+                            return this.formattedPrice(student['total'])
                         }
-                        // else {
-                        //     // If the column data is a single object, extract the desired property (e.g., name)
-                        //     return student[column].name;
-                        // }
                     }
                     //  else if (column === "tool_sum") {
                     //     return this.formattedPrice(

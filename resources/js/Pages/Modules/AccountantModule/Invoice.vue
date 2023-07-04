@@ -1,160 +1,5 @@
 <template>
     <div data-app>
-        <v-row justify="center">
-            <v-dialog v-model="dialog" scrollable width="300px">
-                <v-card>
-                    <h5 class="text-center text-gray-600">{{ dialogForm }}</h5>
-                    <!-- <v-divider></v-divider> -->
-                    <div class="px-2">
-                        <form @submit.prevent="submitForm">
-                            <!-- <div class="mb-3 text-gray-600">
-                                <label class="form-label">Student</label> <br />
-                                <input
-                                    value="1"
-                                    type="text"
-                                    class="form-control form-control-sm"
-                                />
-                                <select
-                                    id="topic"
-                                    class="form-control form-control-md"
-                                    v-model="amount"
-                                >
-                                    {{-- <option value='0'>Select topic</option> --}}
-
-                                    Read Departments
-                                    <option
-                                        v-for="student in students"
-                                        :key="student.id"
-                                    >
-                                        {{ student.user.name }}
-                                    </option> -->
-                            <!-- @endforeach -->
-                            <!-- </select>
-                            </div> -->
-
-                            <div class="mb-1 text-gray-600">
-                                <label for="simpleinput" class="form-label"
-                                    >Identity</label
-                                >
-
-                                <!-- <Select2
-                                    class="form-control form-control-sm"
-                                    style="width: 300px"
-                                    v-model="myValue"
-                                    :options="myOptions"
-                                    :settings="{
-                                        width: '100%',
-                                    }"
-                                    @change="myChangeEvent($event)"
-                                    @select="mySelectEvent($event)"
-                                /> -->
-                                <!-- <input
-                                    type="text"
-                                    id="simpleinput"
-                                    class="form-control form-control-sm"
-                                    placeholder="Identity"
-                                /> -->
-                            </div>
-
-                            <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label"
-                                    >Amount</label
-                                >
-                                <input
-                                    type="number"
-                                    id="example-email"
-                                    v-model="amount"
-                                    class="form-control form-control-sm"
-                                    placeholder="Amount"
-                                />
-                            </div>
-
-                            <!-- <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label"
-                                    >Amount</label
-                                >
-                                <input
-                                    type="email"
-                                    id="example-email"
-                                    name="amount"
-                                    class="form-control form-control-sm"
-                                    placeholder="Amount"
-                                />
-                            </div> -->
-
-                            <!-- <div class="mb-1 text-gray-600">
-                                <label for="example-email" class="form-label"
-                                    >Amount</label
-                                >
-                                <input
-                                    type="email"
-                                    id="example-email"
-                                    name="amount"
-                                    class="form-control form-control-sm"
-                                    placeholder="Amount"
-                                />
-                            </div> -->
-
-                            <!-- <div class="mb-1 text-gray-600">
-                            <label for="example-palaceholder" class="form-label"
-                                >Placeholder</label
-                            >
-                            <input
-                                type="text"
-                                id="example-palaceholder"
-                                class="form-control form-control-sm"
-                                placeholder="placeholder"
-                            />
-                        </div> -->
-
-                            <div class="mb-1 text-gray-600">
-                                <label for="example-textarea" class="form-label"
-                                    >Naration</label
-                                >
-                                <textarea
-                                    class="form-control form-control-sm"
-                                    id="example-textarea"
-                                    rows="5"
-                                    v-model="narration"
-                                ></textarea>
-                            </div>
-
-                            <!-- <div class="mb-1">
-                            <label for="example-readonly" class="form-label"
-                                >Readonly</label
-                            >
-                            <input
-                                type="text"
-                                id="example-readonly"
-                                class="form-control form-control-sm"
-                                readonly=""
-                                value="Readonly value"
-                            />
-                        </div> -->
-
-                            <div
-                                class="d-flex justify-content-between my-1 mt-2"
-                            >
-                                <button
-                                    @click="dialog = false"
-                                    type="submit"
-                                    class="btn btn-success waves-effect waves-light"
-                                >
-                                    Submit
-                                </button>
-                                <button
-                                    @click="dialog = false"
-                                    type="button"
-                                    class="btn btn-danger waves-effect waves-light"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </v-card>
-            </v-dialog>
-        </v-row>
 
         <!-- End of Right modal content -->
 
@@ -180,10 +25,6 @@
                                     <a
                                         class="dropdown-item"
                                         href="#"
-                                        @click="
-                                            (dialog = true),
-                                                (dialogForm = 'Sales')
-                                        "
                                     >
                                         <v-icon size="18" class="me-1"
                                             >mdi-cart</v-icon
@@ -194,7 +35,7 @@
                                         class="dropdown-item"
                                         href="#"
                                         @click="
-                                            getSpecificLegerEntries();
+                                            getSpecificLegerEntries('Income');
                                             setLegerEntry(
                                                 'Income Entry Selected'
                                             );
@@ -204,6 +45,22 @@
                                         >
                                         Income</a
                                     >
+
+                                    <a
+                                        class="dropdown-item"
+                                        href="#"
+                                        @click="
+                                            getSpecificLegerEntries('Expense');
+                                            setLegerEntry(
+                                                'Expense Entry Selected',
+                                            );
+                                        "
+                                        ><v-icon size="16" class="me-1"
+                                            >mdi-cash-multiple</v-icon
+                                        >
+                                        Expense</a
+                                    >
+
                                     <a
                                         class="dropdown-item"
                                         href="#"
@@ -237,10 +94,7 @@
                                         :key="item.id"
                                         class="dropdown-item"
                                         href="#"
-                                        @click="
-                                            (dialog = true),
-                                                (dialogForm = item.name)
-                                        "
+                                        @click="setChartOfAcountForm(item)"
                                         ><i class="mdi mdi-cart me-1"></i>
                                         {{ item.name }}</a
                                     >
@@ -395,7 +249,6 @@
                         <!-- End Left sidebar -->
 
                         <div class="inbox-rightbar pt-1 h-screen p-0">
-
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
@@ -405,23 +258,35 @@
 
                                 <div v-show="!getInvoiceView">
                                     <entries
-                                    v-show="getCurrentTab == 'entries'"
-                                ></entries>
-                                <requisitions
-                                    v-show="getCurrentTab == 'home'"
-                                ></requisitions>
-                                <accepted-requisitions
-                                    v-show="getCurrentTab == 'accepted'"
-                                ></accepted-requisitions>
-                                <deleted-requisitions
-                                    v-show="getCurrentTab == 'deleted'"
-                                ></deleted-requisitions>
-                                <starred-requisitions
-                                    v-show="getCurrentTab == 'starred'"
-                                ></starred-requisitions>
-                                <rejected-requisitions
-                                    v-show="getCurrentTab == 'rejected'"
-                                ></rejected-requisitions>
+                                        v-show="
+                                            getCurrentTab == 'entries' &&
+                                            getChartOfAcountForm == ''
+                                        "
+                                    ></entries>
+
+                                    <school-fee
+                                        v-show="
+                                            getCurrentTab == 'entries' &&
+                                            getChartOfAcountForm !== ''
+                                        "
+                                    ></school-fee>
+
+                                    <div></div>
+                                    <requisitions
+                                        v-show="getCurrentTab == 'home'"
+                                    ></requisitions>
+                                    <accepted-requisitions
+                                        v-show="getCurrentTab == 'accepted'"
+                                    ></accepted-requisitions>
+                                    <deleted-requisitions
+                                        v-show="getCurrentTab == 'deleted'"
+                                    ></deleted-requisitions>
+                                    <starred-requisitions
+                                        v-show="getCurrentTab == 'starred'"
+                                    ></starred-requisitions>
+                                    <rejected-requisitions
+                                        v-show="getCurrentTab == 'rejected'"
+                                    ></rejected-requisitions>
                                 </div>
                                 <!-- </transition> -->
                             </div>
@@ -447,6 +312,7 @@ import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
+import SchoolFee from "./Invoices/Forms/SchoolFee.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -464,6 +330,8 @@ export default {
         Entries,
 
         Select2,
+
+        SchoolFee,
     },
 
     mounted() {
@@ -487,12 +355,8 @@ export default {
             selectedLegerEntry: "Nothing Selected",
             student: null,
             students: null,
-            name: "",
-            amount: "",
-            narration: "",
 
-            myValue: "",
-            myOptions: ["op1", "op2", "op3"],
+            formType: "",
         };
     },
     computed: {
@@ -501,8 +365,16 @@ export default {
             return this.$store.getters["AccountantInvoiceModule/getTab"];
         },
 
+        getChartOfAcountForm() {
+            return this.$store.getters[
+                "AccountantInvoiceModule/getChartOfAcountForm"
+            ];
+        },
+
         getInvoiceView() {
-            return this.$store.getters["AccountantInvoiceModule/getInvoiceView"];
+            return this.$store.getters[
+                "AccountantInvoiceModule/getInvoiceView"
+            ];
         },
 
         legerEntriesListener() {
@@ -525,10 +397,19 @@ export default {
             this.$store.dispatch("AccountantInvoiceModule/setTab", tab);
         },
 
-        getSpecificLegerEntries() {
+        setChartOfAcountForm(tab) {
+            this.$store.dispatch(
+                "AccountantInvoiceModule/setChartOfAcountForm",
+                tab
+            );
+        },
+
+        getSpecificLegerEntries(type) {
             // console.log("Loading next page");
             axios
-                .get("/accountant/getSpecificLegerEntries")
+                .post("/accountant/getSpecificLegerEntries", {
+                    type: type,
+                })
                 .then((response) => {
                     this.legerEntries = response.data;
                     // console.log(response.data)
@@ -546,46 +427,46 @@ export default {
             });
         },
 
-        async submitForm() {
-            axios
-                .post("/accountant/submitTuitionFee", {
-                    amount: this.amount,
-                    narration: this.narration,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    this.submitFormToMain();
-                    this.amount = "";
-                    this.narration = "";
-                    console.log(response.data);
-                });
-            // handle response here
-        },
+        // async submitForm() {
+        //     axios
+        //         .post("/accountant/submitTuitionFee", {
+        //             amount: this.amount,
+        //             narration: this.narration,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             this.submitFormToMain();
+        //             this.amount = "";
+        //             this.narration = "";
+        //             // console.log(response.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async submitFormToMain() {
-            axios
-                .post("http://127.0.0.1:8001/api/accountant/getLegerEntries", {
-                    amount: this.amount,
-                    narration: this.narration,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async submitFormToMain() {
+        //     axios
+        //         .post("http://127.0.0.1:8001/api/accountant/getLegerEntries", {
+        //             amount: this.amount,
+        //             narration: this.narration,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
         setInvoiceView(id) {
             this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
         },
 
         myChangeEvent(val) {
-            console.log(val);
+            // console.log(val);
         },
         mySelectEvent({ id, text }) {
-            console.log({ id, text });
+            // console.log({ id, text });
         },
     },
 };

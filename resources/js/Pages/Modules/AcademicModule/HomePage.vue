@@ -169,6 +169,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="registeredStudents"
+                                            :head="head"
+                                            :content="content"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -177,6 +179,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="finances"
+                                            :head="head"
+                                            :content="content"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -224,7 +228,7 @@
                                         <!-- <th class="border-top-0">Download</th> -->
                                     </tr>
                                 </thead>
-                                <tbody class="text-gray-600">
+                                <tbody class="text-gray-600 italic font-semibold">
                                     <tr
                                         v-for="(staff, index) in staffs"
                                         :key="staff.id"
@@ -309,7 +313,7 @@ export default {
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                console.log(e);
+                // console.log(e);
             }
         );
     },
@@ -328,6 +332,12 @@ export default {
             finances: [],
             invoices: null,
             chartData: [],
+            headDonghurt: "3D New Tools vs Total Tools",
+            contentDonghurt:
+                "3D This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+            head: "Bar New Tools vs Total Tools",
+            content:
+                "Bar This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
         };
     },
     computed: {

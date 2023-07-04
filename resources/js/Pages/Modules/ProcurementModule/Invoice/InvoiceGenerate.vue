@@ -677,7 +677,7 @@ export default {
         },
 
         myChangeEvent(e) {
-            console.log(e);
+            // console.log(e);
         },
 
         setSnackBarState() {
@@ -712,6 +712,7 @@ export default {
                 .post("/procurement/submitInvoice", {
                     sellers: this.selectedSuppliers,
                     // toolId: this.toolId,
+                    total: this.totalPrice,
                     tools: this.tools,
                 })
                 .then((response) => {
