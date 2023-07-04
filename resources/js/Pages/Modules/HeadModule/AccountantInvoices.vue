@@ -321,10 +321,10 @@ export default {
         },
 
         myChangeEvent(val) {
-            console.log(val);
+            // console.log(val);
         },
         mySelectEvent({ id, text }) {
-            console.log({ id, text });
+            // console.log({ id, text });
         },
     },
 };

@@ -312,7 +312,7 @@ export default {
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                console.log(e);
+                // console.log(e);
             }
         );
     },
@@ -380,7 +380,7 @@ export default {
                     this.price = "";
                     this.count = "";
                     this.narration = "";
-                    console.log(response.data);
+                    // console.log(response.data);
                 });
             // handle response here
         },

@@ -527,7 +527,7 @@ export default {
                         this.schoolId = response.data.data.school_id;
 
                         // this.getCommentsForStudentPermission();
-                        console.log(this.permissionReceived);
+                        // console.log(this.permissionReceived);
                     }
                 });
         },

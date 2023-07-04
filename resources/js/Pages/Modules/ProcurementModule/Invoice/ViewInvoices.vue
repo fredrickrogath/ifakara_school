@@ -300,9 +300,9 @@ export default {
             if (newVal !== null) {
                 this.getInvoiceView();
             }
-            console.log(
-                `The message has changed from "${oldVal}" to "${newVal}"`
-            );
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
         },
     },
 

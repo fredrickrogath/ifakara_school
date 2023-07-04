@@ -1,45 +1,48 @@
 <template>
     <!-- <v-col>
         <v-row> -->
-    <div class="card h-screen">
-        <spinner v-if="showLoader"></spinner>
+    <div class="">
+        <!-- Right Sidebar -->
+        <div class="col-12 card">
+            <div class="h-screen bg-white">
+                <spinner v-if="showLoader"></spinner>
 
-        <!-- <v-col v-else sm="12" md="12"> -->
-        <!-- <v-card flat :dark="isDark"> -->
-        <!-- <v-card elevation="0" data-app> -->
+                <!-- <v-col v-else sm="12" md="12"> -->
+                <!-- <v-card flat :dark="isDark"> -->
+                <!-- <v-card elevation="0" data-app> -->
 
-        <v-card-title class="px-0 pt-0">
-            <div class="pl-2 pt-1">Students</div>
-            <v-spacer></v-spacer>
+                <v-card-title class="px-0 pt-0">
+                    <div class="pl-2 pt-1">Students</div>
+                    <v-spacer></v-spacer>
 
-            <snack-bar
-                class="absolute right-0 top-14"
-                message="Task completed successfully"
-            ></snack-bar>
+                    <snack-bar
+                        class="absolute right-0 top-14"
+                        message="Task completed successfully"
+                    ></snack-bar>
 
-            <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="Search"
-                single-line
-                hide-details
-            ></v-text-field>
-        </v-card-title>
-        <!-- {{ $page.props.posts }} -->
+                    <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Search"
+                        single-line
+                        hide-details
+                    ></v-text-field>
+                </v-card-title>
+                <!-- {{ $page.props.posts }} -->
 
-        <v-data-table
-            :headers="headers"
-            :items="students"
-            item-key="name"
-            :search="search"
-            class="elevation-1"
-            :items-per-page="11"
-        >
-            <template v-slot:body="{ items, headers }">
-                <tbody>
-                    <tr v-for="(item, idx, k) in items" :key="idx">
-                        <td v-for="(header, key) in headers" :key="key">
-                            <!-- <v-icon
+                <v-data-table
+                    :headers="headers"
+                    :items="students"
+                    item-key="name"
+                    :search="search"
+                    class="elevation-1"
+                    :items-per-page="11"
+                >
+                    <template v-slot:body="{ items, headers }">
+                        <tbody>
+                            <tr v-for="(item, idx, k) in items" :key="idx">
+                                <td v-for="(header, key) in headers" :key="key">
+                                    <!-- <v-icon
                                 v-if="header.value == 'delete'"
                                 size="22"
                                 type="button"
@@ -66,114 +69,135 @@
                                 mdi-pen
                             </v-icon> -->
 
-                            <v-icon
-                                v-if="header.value == 'starred'"
-                                size="22"
-                                :class="
-                                    item[header.value] ? 'text-warning' : ''
-                                "
-                                @click="
-                                    starredInvoice(
-                                        items[idx]['id'],
-                                        item[header.value],
-                                        header.value
-                                    )
-                                "
-                            >
-                                mdi-star
-                            </v-icon>
+                                    <v-icon
+                                        v-if="header.value == 'starred'"
+                                        size="22"
+                                        :class="
+                                            item[header.value]
+                                                ? 'text-warning'
+                                                : ''
+                                        "
+                                        @click="
+                                            starredInvoice(
+                                                items[idx]['id'],
+                                                item[header.value],
+                                                header.value
+                                            )
+                                        "
+                                    >
+                                        mdi-star
+                                    </v-icon>
 
-                            <!-- <span
+                                    <!-- <span
                                 class="text-gray-600"
                                 v-else-if="header.value == 'id'"
                                 >{{ item[header.value] }}</span
                             > -->
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'created_at'"
-                                >{{ formattedDate(item[header.value]) }}</span
-                            >
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.value == 'created_at'"
+                                        >{{
+                                            formattedDate(item[header.value])
+                                        }}</span
+                                    >
 
-                            <span
-                                class="text-gray-600"
-                                v-else-if="header.value == 'updated_at'"
-                                >{{ formattedDate(item[header.value]) }}</span
-                            >
+                                    <span
+                                        class="text-gray-600"
+                                        v-else-if="header.value == 'updated_at'"
+                                        >{{
+                                            formattedDate(item[header.value])
+                                        }}</span
+                                    >
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'first_name'"
-                                >{{ item[header.value] }}</span
-                            >
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.value == 'first_name'"
+                                        >{{ item[header.value] }}</span
+                                    >
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'middle_name'"
-                            >
-                                {{ item[header.value] }}
-                            </span>
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="
+                                            header.value == 'middle_name'
+                                        "
+                                    >
+                                        {{ item[header.value] }}
+                                    </span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'last_name'"
-                            >
-                                {{ item[header.value] }}
-                            </span>
-                            <!-- chart_of_account -->
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.text === 'Level 1'"
-                            >
-                                {{
-                                    item[header.value] &&
-                                    item[header.value].level_1 !== null
-                                        ? formattedPrice(item[header.value].level_1)
-                                        : 0
-                                }}
-                            </span>
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.value == 'last_name'"
+                                    >
+                                        {{ item[header.value] }}
+                                    </span>
+                                    <!-- chart_of_account -->
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.text === 'Level 1'"
+                                    >
+                                        {{
+                                            item[header.value] &&
+                                            item[header.value].level_1 !== null
+                                                ? formattedPrice(
+                                                      item[header.value].level_1
+                                                  )
+                                                : 0
+                                        }}
+                                    </span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.text === 'Level 2'"
-                            >
-                                {{
-                                    item[header.value] &&
-                                    item[header.value].level_2 !== null
-                                        ? formattedPrice(item[header.value].level_2)
-                                        : 0
-                                }}
-                            </span>
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.text === 'Level 2'"
+                                    >
+                                        {{
+                                            item[header.value] &&
+                                            item[header.value].level_2 !== null
+                                                ? formattedPrice(
+                                                      item[header.value].level_2
+                                                  )
+                                                : 0
+                                        }}
+                                    </span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.text === 'Level 3'"
-                            >
-                                {{
-                                    item[header.value] &&
-                                    item[header.value].level_3 !== null
-                                        ? formattedPrice(item[header.value].level_3)
-                                        : 0
-                                }}
-                            </span>
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.text === 'Level 3'"
+                                    >
+                                        {{
+                                            item[header.value] &&
+                                            item[header.value].level_3 !== null
+                                                ? formattedPrice(
+                                                      item[header.value].level_3
+                                                  )
+                                                : 0
+                                        }}
+                                    </span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.text === 'Last Pay On'"
-                            >
-                                {{
-                                    item[header.value] &&
-                                    item[header.value].level_3 !== null
-                                        ? formattedDate(item[header.value].updated_at)
-                                        : 0
-                                }}
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </template>
-        </v-data-table>
-        <!-- </v-col> -->
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="
+                                            header.text === 'Last Pay On'
+                                        "
+                                    >
+                                        {{
+                                            item[header.value] &&
+                                            item[header.value].level_3 !== null
+                                                ? formattedDate(
+                                                      item[header.value]
+                                                          .updated_at
+                                                  )
+                                                : 0
+                                        }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </template>
+                </v-data-table>
+                <!-- </v-col> -->
+            </div>
+        </div>
     </div>
     <!-- </v-row>
     </v-col> -->

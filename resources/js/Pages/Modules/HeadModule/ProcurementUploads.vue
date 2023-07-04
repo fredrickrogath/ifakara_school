@@ -198,7 +198,7 @@ export default {
             axios.get("/head/getProcurementUploads").then((response) => {
                 this.uploads = response.data.data;
                 // this.showLoader = false;
-                console.log(response.data.data);
+                // console.log(response.data.data);
             });
         },
 
