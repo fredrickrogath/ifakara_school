@@ -19,4 +19,9 @@ export default {
     setChartOfAcountForm(state , tab){
         state.chartOfAcountForm = tab;
     },
+
+    setPaymentView(state , id){
+        state.paymentView = !state.paymentView;
+        state.paymentId = id;
+    },
 };

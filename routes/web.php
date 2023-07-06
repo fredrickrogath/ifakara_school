@@ -317,7 +317,8 @@ Route::middleware([
         Route::post('/getSpecificLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSpecificLegerEntries'])->name('getSpecificLegerEntries');
         Route::get('/searchStudent', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'searchStudent'])->name('searchStudent');
         Route::post('/entry', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'entry'])->name('entry');
-
+        Route::post('/getSpecificStudent', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSpecificStudent'])->name('getSpecificStudent');
+        
         /*
         |--------------------------------------------------------------------------
         | CHART OF ACCOUNTS

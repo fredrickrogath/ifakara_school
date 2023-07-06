@@ -5,7 +5,13 @@ namespace App\Services\AccountantServices\InvoiceServices;
 class ChatOfAccountService
 {
     public function getStudentPayments(){
-        return \App\Models\Student::with('entries')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+        $currentYear = date('Y');
+        return \App\Models\Student::with(['entries'])->where('school_id', auth()->user()->school_id)->whereYear('created_at', $currentYear)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getSpecificStudent($request){
+        // $currentYear = date('Y');
+        return \App\Models\Student::with(['entries'])->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }
 
     public function getStudentsNew(){

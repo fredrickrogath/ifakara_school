@@ -36,7 +36,7 @@ class Student extends Model
 
     public function entries()
     {
-        return $this->hasOneThrough(
+        return $this->hasManyThrough(
             'App\Models\Entry',
             'App\Models\EntryStudent',
             'student_id',

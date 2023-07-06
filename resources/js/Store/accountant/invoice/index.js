@@ -12,6 +12,9 @@ export default {
             chartOfAcountForm: '',
             invoiceGenerate: false,
 
+            paymentView: false,
+            paymentId: null,
+
             invoiceView: false,
             invoiceId: null,
 

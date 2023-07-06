@@ -72,6 +72,12 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\Post::class, 'user_id');
     }
 
+    public function school()
+{
+    return $this->belongsTo(\App\Models\School::class);
+}
+
+
     public function getRole($id)
     {
         if($id == \App\Models\User::is_head)
