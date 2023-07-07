@@ -201,24 +201,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- component -->
-                        <!-- <div class="mx-auto w-52">
-          <div class="m-4">
-            <div class="flex w-full items-center justify-center">
-              <label class="flex h-14 w-full cursor-pointer flex-col border-4 border-dashed border-gray-200 hover:border-gray-300 hover:bg-gray-100">
-                <div class="mt-4 flex items-center justify-center space-x-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-gray-400">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-                  </svg>
-
-                  <p class="font-laonoto text-sm tracking-wider text-gray-400 group-hover:text-gray-600">ອັບໂຫຼດຮູບບິນ</p>
-                </div>
-                <input type="file" class="opacity-0" />
-              </label>
-            </div>
-          </div>
-        </div> -->
-                        <!-- <button class="mx-auto block rounded-md border bg-blue-500 px-6 py-2 text-white outline-none">ສົ່ງຫຼັກຖານການໂອນ</button> -->
                     </div>
                     <!-- Step Checkout -->
                     <div class="mt-8 md:mt-0 md:w-2/3">
@@ -227,7 +209,7 @@
                                 <div
                                     v-for="(entry, index) in student.entries"
                                     :key="index"
-                                    class="relative flex pb-6"
+                                    class="relative flex pb-2"
                                 >
                                     <div
                                         class="absolute inset-0 flex h-full w-10 items-center justify-center"
@@ -288,7 +270,7 @@
                                                 >
 
                                                 <v-icon
-                                                    size="20"
+                                                    size="18"
                                                     class="mb-1 px-1"
                                                     >mdi-wall</v-icon
                                                 >
@@ -315,7 +297,7 @@
                                                     }}</span
                                                 >
                                                 <v-icon
-                                                    size="20"
+                                                    size="18"
                                                     class="mb-1 px-1"
                                                     >mdi-wall</v-icon
                                                 >
@@ -342,7 +324,7 @@
                                                     }}</span
                                                 >
                                                 <v-icon
-                                                    size="20"
+                                                    size="18"
                                                     class="mb-1 px-1"
                                                     >mdi-wall</v-icon
                                                 >
