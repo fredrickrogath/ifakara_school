@@ -7,7 +7,7 @@
             >
                 <!-- QR Code Number Account & Uploadfile -->
                 <div class="flex-wrap md:flex flex">
-                    <div class="mx-auto">
+                    <div class="mx-auto w-1/3 text-center">
                         <v-icon
                             size="92"
                             class="mx-auto h-52 w-52 rounded-lg border p-2 md:mt-0"
@@ -25,15 +25,181 @@
                             </h1>
 
                             <p
+                            v-if="
+                                    student.entries &&
+                                    student.entries.length > 0
+                                "
                                 class="mt-2 text-center italic font-semibold text-gray-600"
                             >
-                                NOT FULL PAID
+                                <span class="text-red-500">STATUS</span> <span class="text-xl text-red-700 font-bold">:</span>
+                                <span>  {{calculateFormattedTotal() > 0.00 ? (calculateFormattedFeeTotal() <= calculateFormattedTotal() ? ' FULL PAID' : ' NOT FULL PAID') : ' UNPAID'}}</span>
+
+                                <div v-if="
+                                    student.entries &&
+                                    student.entries.length > 0
+                                " class="mt-2 text-center italic font-semibold">
+            <span>PAID</span>
+            <span class="text-gray-700 font-bold">{{
+                formattedPrice(
+                    calculateFormattedTotal()
+                )
+            }}</span>
+
+            <span>OUT OF</span>
+
+            <span class="text-gray-700 font-bold">{{ formattedPrice(calculateFormattedFeeTotal()) }}</span>
+        </div>
                             </p>
-                            <h4
-                                class="mt-1 text-center italic font-medium text-red-500"
+
+                            <div
+                                class="bg-warning text-white italic font-semibold"
                             >
-                                TSH 123,400 /=
-                            </h4>
+                                EXPECTED
+                            </div>
+
+                            <div
+                                v-if="
+                                    student.entries &&
+                                    student.entries.length > 0
+                                "
+                                class="d-flex justify-content-between py-1"
+                            >
+                                <div class="italic font-semibold">
+                                    <div>Level 1</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(student.entries[0].chart_of_account
+                                                .level1)
+                                        }}
+                                    </div>
+                                </div>
+
+                                <div class="italic font-semibold">
+                                    <div>Level 2</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(student.entries[0].chart_of_account
+                                                .level2)
+                                        }}
+                                    </div>
+                                </div>
+
+                                <div class="italic font-semibold">
+                                    <div>Level 3</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(student.entries[0].chart_of_account
+                                                .level3)
+                                        }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-green-500 text-white italic font-semibold"
+                            >
+                                TOTAL PAYMENTS
+                            </div>
+
+                            <div
+                                v-if="
+                                    student.entries &&
+                                    student.entries.length > 0
+                                "
+                                class="d-flex justify-content-between py-1"
+                            >
+                                <div class="italic font-semibold">
+                                    <div>Level 1</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(calculateTotalLevel(
+                                                student.entries,
+                                                "level_1"
+                                            ))
+                                        }}
+                                    </div>
+                                </div>
+
+                                <div class="italic font-semibold">
+                                    <div>Level 2</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(calculateTotalLevel(
+                                                student.entries,
+                                                "level_2"
+                                            ))
+                                        }}
+                                    </div>
+                                </div>
+
+                                <div class="italic font-semibold">
+                                    <div>Level 3</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(calculateTotalLevel(
+                                                student.entries,
+                                                "level_3"
+                                            ))
+                                        }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-red-500 text-white italic font-semibold"
+                            >
+                                REMAINED
+                            </div>
+
+                            <div
+                                v-if="
+                                    student.entries &&
+                                    student.entries.length > 0
+                                "
+                                class="d-flex justify-content-between py-1"
+                            >
+                                <div class="italic font-semibold">
+                                    <div>Level 1</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(student.entries[0].chart_of_account
+                                                .level1 -
+                                            calculateTotalLevel(
+                                                student.entries,
+                                                "level_1"
+                                            ))
+                                        }}
+                                    </div>
+                                </div>
+
+                                <div class="italic font-semibold">
+                                    <div>Level 2</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(student.entries[0].chart_of_account
+                                                .level2 -
+                                            calculateTotalLevel(
+                                                student.entries,
+                                                "level_2"
+                                            ))
+                                        }}
+                                    </div>
+                                </div>
+
+                                <div class="italic font-semibold">
+                                    <div>Level 3</div>
+                                    <div>
+                                        {{
+                                            formattedPrice(student.entries[0].chart_of_account
+                                                .level3 -
+                                            calculateTotalLevel(
+                                                student.entries,
+                                                "level_3"
+                                            ))
+                                        }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- component -->
                         <!-- <div class="mx-auto w-52">
@@ -57,7 +223,7 @@
                     <!-- Step Checkout -->
                     <div class="mt-8 md:mt-0 md:w-2/3">
                         <template>
-                            <div class="scroll-container">
+                            <div class="scroll-container pl-6">
                                 <div
                                     v-for="(entry, index) in student.entries"
                                     :key="index"
@@ -120,6 +286,12 @@
                                                         )
                                                     }}</span
                                                 >
+
+                                                <v-icon
+                                                    size="20"
+                                                    class="mb-1 px-1"
+                                                    >mdi-wall</v-icon
+                                                >
                                             </span>
                                             <span
                                                 class="text-gray-600 italic font-semibold"
@@ -141,6 +313,11 @@
                                                             entry.level_2
                                                         )
                                                     }}</span
+                                                >
+                                                <v-icon
+                                                    size="20"
+                                                    class="mb-1 px-1"
+                                                    >mdi-wall</v-icon
                                                 >
                                             </span>
                                             <span
@@ -164,6 +341,11 @@
                                                         )
                                                     }}</span
                                                 >
+                                                <v-icon
+                                                    size="20"
+                                                    class="mb-1 px-1"
+                                                    >mdi-wall</v-icon
+                                                >
                                             </span>
                                         </p>
                                     </div>
@@ -171,7 +353,7 @@
                             </div>
                         </template>
 
-                        <div class="relative flex pb-12">
+                        <div class="relative flex pb-12 pl-6">
                             <div
                                 class="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-warning text-white"
                             >
@@ -303,6 +485,38 @@ export default {
         //     this.$store.dispatch("AccountantInvoiceModule/setPaymentView", id);
         // },
 
+        calculateTotalLevel(entries, level) {
+            if (!entries || entries.length === 0) {
+                return 0;
+            }
+
+            return entries.reduce((total, entry) => {
+                return total + (entry[level] || 0);
+            }, 0);
+        },
+
+        calculateFormattedFeeTotal() {
+    const level1 = parseFloat(this.student.entries[0].chart_of_account.level1);
+    const level2 = parseFloat(this.student.entries[0].chart_of_account.level2);
+    const level3 = parseFloat(this.student.entries[0].chart_of_account.level3);
+    const total = level1 + level2 + level3;
+    return parseFloat(total);
+  },
+
+        calculateFormattedTotal() {
+    const level1Difference =
+      this.student.entries[0].chart_of_account.level1 -
+      this.calculateTotalLevel(this.student.entries, "level_1");
+    const level2Difference =
+      this.student.entries[0].chart_of_account.level2 -
+      this.calculateTotalLevel(this.student.entries, "level_2");
+    const level3Difference =
+      this.student.entries[0].chart_of_account.level3 -
+      this.calculateTotalLevel(this.student.entries, "level_3");
+    const total = level1Difference + level2Difference + level3Difference;
+    return parseFloat(total);
+  },
+
         getStudents() {
             axios
                 .post("/accountant/getSpecificStudent", {
@@ -311,7 +525,7 @@ export default {
                 .then((response) => {
                     this.student = response.data.data;
                     this.showLoader = false;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
         },
 

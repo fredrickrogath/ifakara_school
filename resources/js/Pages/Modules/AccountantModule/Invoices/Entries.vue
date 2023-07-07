@@ -28,7 +28,9 @@
                 :items-per-page="11"
             >
                 <template v-slot:item.id="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{ item.id }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.id
+                    }}</span>
                 </template>
 
                 <template v-slot:item.chart_of_account.account_type="{ item }">
@@ -38,24 +40,51 @@
                 </template>
 
                 <template v-slot:item.chart_of_account.name="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{ item.chart_of_account.name }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.chart_of_account.name
+                    }}</span>
                 </template>
 
                 <template v-slot:item.level_1="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{ formattedPrice(item.level_1) }}</span>
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_1 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_1) }}</span
+                    >
                 </template>
 
                 <template v-slot:item.level_2="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{ formattedPrice(item.level_2) }}</span>
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_2 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_2) }}</span
+                    >
                 </template>
 
                 <template v-slot:item.level_3="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{ formattedPrice(item.level_3) }}</span>
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_3 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_3) }}</span
+                    >
                 </template>
 
-
                 <template v-slot:item.narration="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{ item.narration }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.narration
+                    }}</span>
                 </template>
 
                 <template v-slot:item.created_at="{ item }">
@@ -74,22 +103,22 @@
 
 <script>
 import moment from "moment";
-import SnackBar from '../../../Components/SnackBar.vue';
-import SpinnerLoader from '../../../Components/SpinnerLoader.vue';
+import SnackBar from "../../../Components/SnackBar.vue";
+import SpinnerLoader from "../../../Components/SpinnerLoader.vue";
 export default {
-    components:{
+    components: {
         SnackBar,
         SpinnerLoader,
     },
     mounted() {
-        this.getLegerEntries()
+        this.getLegerEntries();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
                 // console.log('abc');
-                this.getLegerEntries()
+                this.getLegerEntries();
             }
         );
     },
@@ -112,7 +141,11 @@ export default {
                     text: "Type",
                     value: "chart_of_account.account_type",
                 },
-                { text: "Name", value: "chart_of_account.name", align: "center" },
+                {
+                    text: "Name",
+                    value: "chart_of_account.name",
+                    align: "center",
+                },
                 { text: "Level 1", value: "level_1" },
                 { text: "Level 2", value: "level_2" },
                 { text: "Level 3", value: "level_3" },
@@ -142,14 +175,12 @@ export default {
 
         getLegerEntries() {
             // console.log("Loading next page");
-            axios
-                .get("/accountant/getLegerEntries")
-                .then((response) => {
-                    this.legerEntries = response.data.data;
-                    this.showLoader = false
-                    // console.log(th   is.legerEntries)
-                });
+            axios.get("/accountant/getLegerEntries").then((response) => {
+                this.legerEntries = response.data.data;
+                this.showLoader = false;
+                // console.log(th   is.legerEntries)
+            });
         },
-    }
+    },
 };
 </script>
