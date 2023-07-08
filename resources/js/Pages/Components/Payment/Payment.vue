@@ -32,7 +32,7 @@
                                 class="mt-2 text-center italic font-semibold text-gray-600"
                             >
                                 <span class="text-red-500">STATUS</span> <span class="text-xl text-red-700 font-bold">:</span>
-                                <span>  {{calculateFormattedTotal() > 0.00 ? (calculateFormattedFeeTotal() <= calculateFormattedTotal() ? ' FULL PAID' : ' NOT FULL PAID') : ' UNPAID'}}</span>
+                                <span>  {{calculateFormattedTotal() > 0.00 ? (calculateFormattedFeeTotal() <= calculateFormattedTotal() ? ' FULL PAID AND COMPLETE' : ' PARTIAL PAID AND INCOMPLETE') : ' UNPAID'}}</span>
 
                                 <div v-if="
                                     student.entries &&
@@ -487,13 +487,13 @@ export default {
 
         calculateFormattedTotal() {
     const level1Difference =
-      this.student.entries[0].chart_of_account.level1 -
+    //   this.student.entries[0].chart_of_account.level1 -
       this.calculateTotalLevel(this.student.entries, "level_1");
     const level2Difference =
-      this.student.entries[0].chart_of_account.level2 -
+    //   this.student.entries[0].chart_of_account.level2 -
       this.calculateTotalLevel(this.student.entries, "level_2");
     const level3Difference =
-      this.student.entries[0].chart_of_account.level3 -
+    //   this.student.entries[0].chart_of_account.level3 -
       this.calculateTotalLevel(this.student.entries, "level_3");
     const total = level1Difference + level2Difference + level3Difference;
     return parseFloat(total);
