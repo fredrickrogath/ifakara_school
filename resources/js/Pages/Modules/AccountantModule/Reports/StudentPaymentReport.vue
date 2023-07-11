@@ -1,5 +1,7 @@
 <template>
     <div>
+        <spinner v-if="showLoader"></spinner>
+
         <v-card-title class="px-1 py-0 my-0">
             STUDENT PAYMENTS REPORT {{ formattedDateRange }}
             <v-spacer></v-spacer>
@@ -66,13 +68,13 @@
             item-key="name"
             :search="search"
             class="elevation-1"
-            :items-per-page="11"
+            :items-per-page="20"
         >
             <template v-slot:body="{ items, headers }">
                 <tbody>
                     <tr v-for="(item, idx, k) in items" :key="idx">
                         <td v-for="(header, key) in headers" :key="key">
-                            <v-icon
+                            <!-- <v-icon
                                 v-if="header.value == 'delete'"
                                 size="22"
                                 type="button"
@@ -97,96 +99,374 @@
                                 @click="setEditStudent(items[idx]['id'])"
                             >
                                 mdi-pen
-                            </v-icon>
+                            </v-icon> -->
+
+                            <!-- <v-icon
+                                        v-if="header.value == 'starred'"
+                                        size="22"
+                                        :class="
+                                            item[header.value]
+                                                ? 'text-warning'
+                                                : ''
+                                        "
+                                        @click="
+                                            starredInvoice(
+                                                items[idx]['id'],
+                                                item[header.value],
+                                                header.value
+                                            )
+                                        "
+                                    >
+                                        mdi-star
+                                    </v-icon> -->
 
                             <v-icon
-                                v-if="header.value == 'starred'"
+                                v-if="header.value == 'view'"
                                 size="22"
-                                :class="
-                                    item[header.value] ? 'text-warning' : ''
-                                "
-                                @click="
-                                    starredInvoice(
-                                        items[idx]['id'],
-                                        item[header.value],
-                                        header.value
-                                    )
-                                "
+                                @click="studentDetails(items[idx]['id'])"
                             >
-                                mdi-star
+                                mdi-eye
                             </v-icon>
 
-                            <span
+                            <!-- <span
                                 class="text-gray-600"
                                 v-else-if="header.value == 'id'"
                                 >{{ item[header.value] }}</span
-                            >
+                            > -->
 
-                            <span
+                            <!-- <span
                                 class="text-gray-600 italic font-semibold"
                                 v-else-if="header.value == 'created_at'"
                                 >{{ formattedDate(item[header.value]) }}</span
                             >
 
                             <span
-                                class="text-gray-600 italic font-semibold"
+                                class="text-gray-600"
                                 v-else-if="header.value == 'updated_at'"
                                 >{{ formattedDate(item[header.value]) }}</span
+                            > -->
+
+                            <span
+                                class="text-gray-600 italic font-semibold"
+                                v-else-if="header.value == 'first_name'"
+                                >{{ item[header.value] }}</span
                             >
 
                             <span
                                 class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'sellers'"
+                                v-else-if="header.value == 'middle_name'"
                             >
-                                <span
-                                    v-for="seller in item[header.value]"
-                                    :key="seller.id"
-                                    class="d-block"
+                                {{ item[header.value] }}
+                            </span>
+
+                            <span
+                                class="text-gray-600 italic font-semibold"
+                                v-else-if="header.value == 'last_name'"
+                            >
+                                {{ item[header.value] }}
+                            </span>
+
+                            <span
+                                class="text-gray-600 italic font-semibold"
+                                v-else-if="header.text === 'Level 1'"
+                            >
+                                <template
+                                    v-if="
+                                        item[header.value] &&
+                                        item[header.value].length > 0
+                                    "
                                 >
-                                    <div class="">
-                                        <v-menu transition="fab-transition">
-                                            <template
-                                                v-slot:activator="{ on, attrs }"
+                                    <div class="d-flex flex-col">
+                                        <span>
+                                            EXPECTED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
                                             >
-                                                <span
-                                                    class="seller-name"
-                                                    v-bind="attrs"
-                                                    v-on="on"
-                                                    @click="
-                                                        getSellerProfile(seller)
-                                                    "
-                                                >
-                                                    {{ seller.name }}
-                                                </span>
-                                            </template>
-
-                                            <seller-profile
-                                                :seller="sellerInfo"
-                                            ></seller-profile>
-                                        </v-menu>
+                                            <span class="text-yellow-500">{{
+                                                formattedPrice(
+                                                    item[header.value][0]
+                                                        .chart_of_account.level1
+                                                )
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            TOTAL PAYMENTS
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-green-500">{{
+                                                formattedPrice(
+                                                    item[header.value].reduce(
+                                                        (total, entry) =>
+                                                            total +
+                                                            entry.level_1,
+                                                        0
+                                                    )
+                                                )
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            REMAINED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-red-500">{{
+                                                formattedPrice(
+                                                    item[header.value][0]
+                                                        .chart_of_account
+                                                        .level1 -
+                                                        item[
+                                                            header.value
+                                                        ].reduce(
+                                                            (total, entry) =>
+                                                                total +
+                                                                entry.level_1,
+                                                            0
+                                                        )
+                                                )
+                                            }}</span>
+                                        </span>
                                     </div>
-                                </span>
+                                </template>
+                                <template v-else>
+                                    <!-- {{ formattedPrice(0) }} -->
+                                    <div class="d-flex flex-col">
+                                        <span>
+                                            EXPECTED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-yellow-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            TOTAL PAYMENTS
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-green-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            REMAINED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-red-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                    </div>
+                                </template>
                             </span>
 
                             <span
                                 class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'tools'"
+                                v-else-if="header.text === 'Level 2'"
                             >
-                                <div v-for="tool in item[header.value]">
-                                    <span>
-                                        {{ tool.name }}
-                                    </span>
-                                </div>
+                                <template
+                                    v-if="
+                                        item[header.value] &&
+                                        item[header.value].length > 0
+                                    "
+                                >
+                                    <div class="d-flex flex-col">
+                                        <span>
+                                            EXPECTED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-yellow-500">{{
+                                                formattedPrice(
+                                                    item[header.value][0]
+                                                        .chart_of_account.level2
+                                                )
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            TOTAL PAYMENTS
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-green-500">{{
+                                                formattedPrice(
+                                                    item[header.value].reduce(
+                                                        (total, entry) =>
+                                                            total +
+                                                            entry.level_2,
+                                                        0
+                                                    )
+                                                )
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            REMAINED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-red-500">{{
+                                                formattedPrice(
+                                                    item[header.value][0]
+                                                        .chart_of_account
+                                                        .level2 -
+                                                        item[
+                                                            header.value
+                                                        ].reduce(
+                                                            (total, entry) =>
+                                                                total +
+                                                                entry.level_2,
+                                                            0
+                                                        )
+                                                )
+                                            }}</span>
+                                        </span>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <!-- {{ formattedPrice(0) }} -->
+                                    <div class="d-flex flex-col">
+                                        <span>
+                                            EXPECTED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-yellow-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            TOTAL PAYMENTS
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-green-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            REMAINED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-red-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                    </div>
+                                </template>
                             </span>
 
                             <span
                                 class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'tool_sum'"
+                                v-else-if="header.text === 'Level 3'"
+                            >
+                                <template
+                                    v-if="
+                                        item[header.value] &&
+                                        item[header.value].length > 0
+                                    "
+                                >
+                                    <div class="d-flex flex-col">
+                                        <span>
+                                            EXPECTED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-yellow-500">{{
+                                                formattedPrice(
+                                                    item[header.value][0]
+                                                        .chart_of_account.level3
+                                                )
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            TOTAL PAYMENTS
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-green-500">{{
+                                                formattedPrice(
+                                                    item[header.value].reduce(
+                                                        (total, entry) =>
+                                                            total +
+                                                            entry.level_3,
+                                                        0
+                                                    )
+                                                )
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            REMAINED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-red-500">{{
+                                                formattedPrice(
+                                                    item[header.value][0]
+                                                        .chart_of_account
+                                                        .level3 -
+                                                        item[
+                                                            header.value
+                                                        ].reduce(
+                                                            (total, entry) =>
+                                                                total +
+                                                                entry.level_3,
+                                                            0
+                                                        )
+                                                )
+                                            }}</span>
+                                        </span>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <!-- {{ formattedPrice(0) }} -->
+                                    <div class="d-flex flex-col">
+                                        <span>
+                                            EXPECTED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-yellow-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            TOTAL PAYMENTS
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-green-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                        <span>
+                                            REMAINED
+                                            <v-icon size="20" class="mb-1 px-1"
+                                                >mdi-hand-pointing-right</v-icon
+                                            >
+                                            <span class="text-red-500">{{
+                                                formattedPrice(0)
+                                            }}</span>
+                                        </span>
+                                    </div>
+                                </template>
+                            </span>
+
+                            <span
+                                class="text-gray-600 italic font-semibold"
+                                v-else-if="header.text === 'Last Pay On'"
                             >
                                 {{
-                                    formattedPrice(
-                                        totalPrice(item.invoice_tool)
-                                    )
+                                    item[header.value] &&
+                                    item[header.value].length > 0
+                                        ? formattedDate(
+                                              item[header.value][
+                                                  item[header.value].length - 1
+                                              ].updated_at
+                                          )
+                                        : "No Payment Done"
                                 }}
                             </span>
                         </td>
@@ -235,20 +515,41 @@ export default {
             searchTools: "",
             headers: [
                 {
-                    text: "Suppliers",
-                    value: "sellers",
+                    text: "First Name",
+                    align: "start",
+                    sortable: false,
+                    value: "first_name",
                 },
                 {
-                    text: "Tools",
-                    value: "tools",
+                    text: "Middle Name",
+                    value: "middle_name",
                 },
                 {
-                    text: "Total",
-                    value: "tool_sum",
+                    text: "Last Name",
+                    value: "last_name",
                 },
-                { text: "Date", value: "created_at" },
+                {
+                    text: "Level 1",
+                    value: "entries",
+                },
+
+                {
+                    text: "Level 2",
+                    value: "entries",
+                },
+
+                {
+                    text: "Level 3",
+                    value: "entries",
+                },
+                { text: "Last Pay On", value: "entries" },
+                // { text: "Details", value: "view" },
+                // { text: "Parent", value: "parent" },
+                // { text: "Contact", value: "parent_contact" },
                 // { text: "Edit", value: "edit" },
             ],
+
+            showLoader: true,
             students: [],
             storeStudents: [],
 
@@ -363,7 +664,14 @@ export default {
             }
 
             this.students = this.students.filter((student) => {
-                const date = new Date(student.created_at);
+                const date =
+                    student.entries.length > 0
+                        ? new Date(
+                              student.entries[
+                                  student.entries.length - 1
+                              ].updated_at
+                          )
+                        : null;
                 return date >= startDate && date <= endDate;
             });
 
@@ -382,10 +690,11 @@ export default {
         },
 
         getStudents() {
-            axios.get("/accountant/getInvoices").then((response) => {
+            axios.get("/accountant/getStudentPayments").then((response) => {
                 this.students = response.data.data;
                 this.storeStudents = response.data.data;
                 this.showLoader = false;
+                // console.log(this.students)
             });
         },
 
@@ -400,54 +709,149 @@ export default {
             const headers = this.headers
                 .filter((header) => header.value !== "edit")
                 .map((header) => header.text);
+
             const columns = this.headers
                 .filter((header) => header.value !== "edit")
-                .map((header) => header.value);
+                .map((header) => ({
+                    value: header.value,
+                    text: header.text,
+                }));
             // console.log(this.filteredStudents);
             // Extract table data from filteredStudents computed property
             const data = this.filteredStudents.map((student, studentIndex) =>
                 columns.map((column, columnIndex) => {
                     // If the current column value is an object, create a string representation of it
                     if (
-                        typeof student[column] === "object" &&
-                        student[column] !== null
+                        typeof student[column.value] === "object" &&
+                        student[column.value] !== null
                     ) {
                         if (
-                            Array.isArray(student[column]) &&
-                            column === "sellers"
+                            Array.isArray(student[column.value]) &&
+                            column.text === "Level 1"
                         ) {
-                            // If the column data is an array of objects (e.g., multiple sellers),
-                            // map the array to extract the desired property (e.g., name) and join them into a string
-                            return student[column]
-                                .map((item) => item.name)
-                                .join(", ");
+                            if (student[column.value].length > 0) {
+                                return (
+                                    "Expected: " +
+                                    this.formattedPrice(
+                                        student[column.value][0]
+                                            .chart_of_account.level1
+                                    ) +
+                                    ", " +
+                                    "Total Payment: " +
+                                    this.formattedPrice(
+                                        student[column.value].reduce(
+                                            (total, entry) =>
+                                                total + entry.level_1,
+                                            0
+                                        )
+                                    ) +
+                                    ", " +
+                                    "Remained: " +
+                                    this.formattedPrice(
+                                        student[column.value][0]
+                                            .chart_of_account.level1 -
+                                            student[column.value].reduce(
+                                                (total, entry) =>
+                                                    total + entry.level_1,
+                                                0
+                                            )
+                                    )
+                                );
+                            }
+
+                            return "No Payment";
+                        } if (
+                            Array.isArray(student[column.value]) &&
+                            column.text === "Level 2"
+                        ) {
+                            if (student[column.value].length > 0) {
+                                return (
+                                    "Expected: " +
+                                    this.formattedPrice(
+                                        student[column.value][0]
+                                            .chart_of_account.level2
+                                    ) +
+                                    ", " +
+                                    "Total Payment: " +
+                                    this.formattedPrice(
+                                        student[column.value].reduce(
+                                            (total, entry) =>
+                                                total + entry.level_2,
+                                            0
+                                        )
+                                    ) +
+                                    ", " +
+                                    "Remained: " +
+                                    this.formattedPrice(
+                                        student[column.value][0]
+                                            .chart_of_account.level2 -
+                                            student[column.value].reduce(
+                                                (total, entry) =>
+                                                    total + entry.level_2,
+                                                0
+                                            )
+                                    )
+                                );
+                            }
+
+                            return "No Payment";
+                        }if (
+                            Array.isArray(student[column.value]) &&
+                            column.text === "Level 3"
+                        ) {
+                            if (student[column.value].length > 0) {
+                                return (
+                                    "Expected: " +
+                                    this.formattedPrice(
+                                        student[column.value][0]
+                                            .chart_of_account.level3
+                                    ) +
+                                    ", " +
+                                    "Total Payment: " +
+                                    this.formattedPrice(
+                                        student[column.value].reduce(
+                                            (total, entry) =>
+                                                total + entry.level_3,
+                                            0
+                                        )
+                                    ) +
+                                    ", " +
+                                    "Remained: " +
+                                    this.formattedPrice(
+                                        student[column.value][0]
+                                            .chart_of_account.level3 -
+                                            student[column.value].reduce(
+                                                (total, entry) =>
+                                                    total + entry.level_3,
+                                                0
+                                            )
+                                    )
+                                );
+                            }
+
+                            return "No Payment";
                         } else if (
-                            Array.isArray(student[column]) &&
-                            column === "tools"
+                            Array.isArray(student[column.value]) &&
+                            column.text === "Last Pay On"
                         ) {
-                            // If the column data is an array of objects (e.g., multiple sellers),
-                            // map the array to extract the desired property (e.g., name) and join them into a string
-                            return student[column]
-                                .map((item) => item.name)
-                                .join(", ");
-                        } else if (
-                            Array.isArray(student[column]) &&
-                            column === "tool_sum"
-                        ) {
-                            return this.formattedPrice(student["total"]);
+                            return student[column.value] &&
+                                student[column.value].length > 0
+                                ? this.formattedDate(
+                                      student[column.value][
+                                          student[column.value].length - 1
+                                      ].updated_at
+                                  )
+                                : "No Payment";
                         }
-                    }
-                    //  else if (column === "tool_sum") {
-                    //     return this.formattedPrice(
-                    //         this.totalPrice(student[column])
-                    //     );
-                    //     return this.formattedDate(student[column]);
-                    // }
-                    else if (
-                        column === "created_at" ||
-                        column === "updated_at"
-                    ) {
-                        return this.formattedDate(student[column]);
+                    } else if (column.text === "First Name") {
+                        return student[column.value];
+                    } else if (column.text === "Middle Name") {
+                        return student[column.value];
+                    } else if (column.text === "Last Name") {
+                        return student[column.value];
+                    } else if (column.text === "Last Pay On") {
+                        // console.log('testing' + student[column.value])
+                        // return this.formattedDate(student[column]);
                     }
                     // else {
                     //     return student[column];
@@ -481,7 +885,7 @@ export default {
             const issuedOnText = "Issued on: " + new Date().toLocaleString();
             const issuedOnX = doc.internal.pageSize.getWidth() - 15;
             const issuedOnY = doc.internal.pageSize.getHeight() - 10;
-            doc.setFontSize(10);
+            doc.setFontSize(8);
             doc.setTextColor(pdfTextColor);
             doc.text(issuedOnText, issuedOnX, issuedOnY, { align: "right" });
 
