@@ -60,7 +60,7 @@
                 Invoices
                 <v-spacer></v-spacer>
 
-                <snackbar message="Task completed successfully"></snackbar>
+                <snack-bar message="Task completed successfully"></snack-bar>
 
                 <v-text-field
                     v-model="search"
@@ -144,9 +144,36 @@
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'seller'"
-                                    >{{ item[header.value].name }}</span
+                                    v-else-if="header.value === 'sellers'"
                                 >
+                                    <span
+                                        v-for="seller in item[header.value]"
+                                        :key="seller.id"
+                                        class="d-block"
+                                    >
+                                        <div class="">
+                                            <v-menu transition="fab-transition">
+                                                <template
+                                                    v-slot:activator="{
+                                                        on,
+                                                        attrs,
+                                                    }"
+                                                >
+                                                    <span
+                                                        class="seller-name"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        @click="getSellerProfile(seller)"
+                                                    >
+                                                        {{ seller.name }}
+                                                    </span>
+                                                </template>
+
+                                                <seller-profile :seller="sellerInfo"></seller-profile>
+                                            </v-menu>
+                                        </div>
+                                    </span>
+                                </span>
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
@@ -247,12 +274,14 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
-import Snackbar from "../../.././Components/Snackbar.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
+import SellerProfile from "../../../Components/SellerProfile.vue";
 
 export default {
     components: {
         Spinner,
-        Snackbar,
+        SnackBar,
+        SellerProfile,
     },
 
     props: {
@@ -305,12 +334,12 @@ export default {
                 // },
                 {
                     text: "Seller",
-                    value: "seller",
+                    value: "sellers",
                 },
-                // {
-                //     text: "Tools",
-                //     value: "tools",
-                // },
+                {
+                    text: "Tools",
+                    value: "tools",
+                },
                 // {
                 //     text: "Total",
                 //     value: "tool_sum",
@@ -323,6 +352,8 @@ export default {
             invoices: [],
 
             idForAction: null,
+
+            sellerInfo: [],
         };
     },
 
@@ -359,11 +390,15 @@ export default {
             this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
         },
 
+        getSellerProfile(seller) {
+            this.sellerInfo = seller
+        },
+
         getStarredInvoices() {
             axios.get("/procurement/getStarredInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                console.log(response.data.data)
             });
         },
 

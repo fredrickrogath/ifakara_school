@@ -299,11 +299,11 @@ export default {
         this.showLoader = true;
         this.getStudents();
 
-        window.Echo.channel(
-            "student-event." + this.$page.props.user.school_id
-        ).listen("Academic\\StudentEvent", (e) => {
-            this.getStudents();
-        });
+        // window.Echo.channel(
+        //     "student-event." + this.$page.props.user.school_id
+        // ).listen("Academic\\StudentEvent", (e) => {
+        //     this.getStudents();
+        // });
     },
 
     data() {
