@@ -10,7 +10,7 @@
 
             <!-- Warning Alert Modal -->
             <div
-                id="warning-alert-modal"
+                id="warning-alert-modal-p1"
                 class="modal fade"
                 tabindex="-1"
                 role="dialog"
@@ -95,7 +95,7 @@
                                         size="22"
                                         type="button"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#warning-alert-modal"
+                                        data-bs-target="#warning-alert-modal-p1"
                                         @click="
                                             setIdForAction(items[idx]['id'])
                                         "

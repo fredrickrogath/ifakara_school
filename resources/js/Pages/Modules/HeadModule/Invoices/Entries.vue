@@ -1,47 +1,8 @@
 <template>
-    <div>   
-
-        <!-- <div class="table-responsive">
-            <table class="table table-centered table-nowrap mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th class="border-0">Transaction Type</th>
-                        <th class="border-0">Made For</th>
-                        <th class="border-0">Amount</th>
-                        <th class="border-0">Narration</th>
-                        <th class="border-0">Date</th>
-                         <th class="border-0" style="width: 80px">Action</th> -->
-                    <!-- </tr>
-                </thead> -->
-                <!-- <tbody> 
-                    <tr v-for="legerEntry in legerEntries" :key="legerEntry.id">
-                        <td>
-                            <i data-feather="folder" class="icon-dual"></i>
-                            <span class="ms-2 fw-semibold"
-                                ><a
-                                    href="javascript: void(0);"
-                                    class="text-reset"
-                                    >{{ legerEntry.chart_of_account.account_type }}</a
-                                ></span
-                            >
-                        </td>
-                        <td> -->
-                            <!-- <p class="mb-0">{{ legerEntry.user.name }}</p>
-                             <span class="font-12">by Andrew</span> -->
-                        <!-- </td> -->
-                        <!-- <td>{{ legerEntry.amount | currency("Tsh ", 0) }}</td>
-                        <td>{{ legerEntry.narration }}</td>
-                        <td>{{ legerEntry.created_at }} -->
-                        <!-- </td> -->
-                    <!-- </tr>
-                </tbody>
-            </table> -->
-        <!-- </div> -->
-
-        <!-- <data-table></data-table> -->
-
-        <div>
-        <spinner v-if="showLoader"></spinner>
+    <!-- <v-col>
+        <v-row> -->
+    <div>
+        <spinner-loader v-if="showLoader"></spinner-loader>
 
         <v-col v-else sm="12" md="12">
             <!-- <v-card flat :dark="isDark"> -->
@@ -64,31 +25,70 @@
                 :items="legerEntries"
                 :search="search"
                 class="bg-red-900"
+                :items-per-page="11"
             >
                 <template v-slot:item.id="{ item }">
-                    <span class="text-gray-600">{{ item.id }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.id
+                    }}</span>
                 </template>
 
                 <template v-slot:item.chart_of_account.account_type="{ item }">
-                    <span class="text-gray-600">{{
+                    <span class="text-gray-600 italic font-semibold">{{
                         item.chart_of_account.account_type
                     }}</span>
                 </template>
 
-                <template v-slot:item.user.name="{ item }">
-                    <span class="text-gray-600">{{ item.user.name }}</span>
+                <template v-slot:item.chart_of_account.name="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.chart_of_account.name
+                    }}</span>
                 </template>
 
-                <template v-slot:item.amount="{ item }">
-                    <span class="text-gray-600">{{ formattedPrice(item.amount) }}</span>
+                <template v-slot:item.level_1="{ item }">
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_1 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_1) }}</span
+                    >
+                </template>
+
+                <template v-slot:item.level_2="{ item }">
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_2 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_2) }}</span
+                    >
+                </template>
+
+                <template v-slot:item.level_3="{ item }">
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_3 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_3) }}</span
+                    >
                 </template>
 
                 <template v-slot:item.narration="{ item }">
-                    <span class="text-gray-600">{{ item.narration }}</span>
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.narration
+                    }}</span>
                 </template>
 
                 <template v-slot:item.created_at="{ item }">
-                    <span class="text-gray-600">{{
+                    <span class="text-gray-600 italic font-semibold">{{
                         formattedDate(item.created_at)
                     }}</span>
                 </template>
@@ -97,12 +97,13 @@
             <!-- </v-card> -->
         </v-col>
     </div>
-    </div>
+    <!-- </v-row>
+    </v-col> -->
 </template>
 
 <script>
 import moment from "moment";
-import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SpinnerLoader from "../../.././Components/SpinnerLoader.vue";
 
 export default {
     mounted() {
@@ -120,7 +121,7 @@ export default {
     },
 
     components: {
-        Spinner,
+        SpinnerLoader,
     },
 
     data() {
@@ -131,18 +132,18 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Code",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
-                {
-                    text: "Transaction Type",
+            {
+                    text: "Type",
                     value: "chart_of_account.account_type",
                 },
-                { text: "Made For", value: "user.name", align: "center" },
-                { text: "Amount", value: "amount" },
+                {
+                    text: "Name",
+                    value: "chart_of_account.name",
+                    align: "center",
+                },
+                { text: "Level 1", value: "level_1" },
+                { text: "Level 2", value: "level_2" },
+                { text: "Level 3", value: "level_3" },
                 { text: "Narration", value: "narration" },
                 { text: "Date", value: "created_at" },
 

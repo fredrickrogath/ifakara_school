@@ -138,6 +138,7 @@ Route::middleware([
         Route::get('/getStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudents'])->name('getStudents');
         Route::post('/addStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
+        Route::get('/getStudentPayments', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentPayments'])->name('getStudentPayments');
 
         Route::get('/getStudentsNew', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentsNew'])->name('getStudentsNew');
         Route::post('/getStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudent'])->name('getStudent');
@@ -170,6 +171,7 @@ Route::middleware([
         Route::get('/getStarredTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'getStarredTools'])->name('getStarredTools');
         Route::get('/getTrashedTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'getTrashedTools'])->name('getTrashedTools');
         Route::post('/starredTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'starredTools'])->name('starredTools');
+        Route::get('/getSellersList', [\App\Http\Controllers\Head\Tool\ToolController::class, 'getSellersList'])->name('getSellersList');
 
         /*
         |--------------------------------------------------------------------------

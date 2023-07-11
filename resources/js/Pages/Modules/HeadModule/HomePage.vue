@@ -47,7 +47,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">12</span>
+                                        <span data-plugin="counterup">{{ paidStudents ? paidStudents : 0 }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Paid Fees
@@ -75,7 +75,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">87</span>
+                                        <span data-plugin="counterup">{{ unpaidStudents ? unpaidStudents : 0 }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Unpaid Fees
@@ -565,14 +565,29 @@ export default {
 
         async headDashboardGetStudents() {
             axios.get("/head/headDashboardGetStudents").then((response) => {
-                this.students = response.data.data.totalStudents;
-                // this.showLoader = false;
-                this.registeredStudents = [
-                    ["Language", "Students"],
-                    ["Total Students", response.data.data.totalStudents],
-                    ["Paid Students", response.data.data.paidStudents],
-                    ["Unpaid Students", response.data.data.unpaidStudents],
-                ];
+                if (response.data.data != null) {
+                        this.students = response.data.data.totalStudents;
+                        // Filter the students with entries.length > 0
+                        const studentsWithEntries =
+                            response.data.data.paidStudents.filter(
+                                (student) => student.entries.length > 0
+                            );
+                        // Get the count of students with entries
+                        const count = studentsWithEntries.length;
+                        this.unpaidStudents = response.data.data.totalStudents - count
+                        this.paidStudents = count
+                        this.registeredStudents = [
+                            ["Language", "Students"],
+                            // ["Total Students", response.data.data.totalStudents],
+                            ["Paid Students", this.paidStudents],
+                            [
+                                "Unpaid Students",
+                                this.unpaidStudents,
+                            ],
+                        ];
+
+                        this.showLoader = false;
+                    }
 
                 // console.log(response.data.data);
             });

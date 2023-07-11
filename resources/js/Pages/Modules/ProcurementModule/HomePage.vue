@@ -131,7 +131,7 @@
 
         <!-- end row -->
 
-        <div class="d-flex pt-1">
+        <div class="d-flex pt-1 bg-white h-screen">
             <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body pb-2">

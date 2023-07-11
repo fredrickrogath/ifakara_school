@@ -56,8 +56,11 @@
             </div>
             <!-- /.modal -->
 
+            <!-- <snack-bar></snack-bar> -->
+
             <v-card-title class="px-0 pt-0">
                 Tools & Equipments
+                <snack-bar message="Task completed successfully"></snack-bar>
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -75,6 +78,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -86,7 +90,7 @@
                                         header.value == 'starred'
                                     "
                                 >
-                                    <v-icon
+                                    <!-- <v-icon
                                         v-if="header.value == 'action'"
                                         size="22"
                                         type="button"
@@ -97,7 +101,7 @@
                                         "
                                     >
                                         mdi-delete
-                                    </v-icon>
+                                    </v-icon> -->
 
                                     <v-icon
                                         v-if="header.value == 'starred'"
@@ -107,20 +111,13 @@
                                                 ? 'text-warning'
                                                 : ''
                                         "
-                                        @click="
-                                            starredTools(
-                                                items[idx]['id'],
-                                                item[header.value],
-                                                header.value
-                                            )
-                                        "
                                     >
                                         mdi-star
                                     </v-icon>
                                 </div>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -128,7 +125,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -136,12 +133,12 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
-                                    >{{
-                                        item[header.value]
-                                    }}</span
                                 >
+                                    {{ encrypt() }}
+                                    <!-- {{ item[header.value] }} -->
+                                </span>
 
                                 <v-edit-dialog
                                     v-else
@@ -159,7 +156,7 @@
                                     large
                                 >
                                     <span
-                                        class="text-gray-600"
+                                        class="text-gray-600 italic font-semibold"
                                         :class="
                                             item[header.value] == null &&
                                             header.value !== 'action' // header.value == 'level1'
@@ -245,9 +242,11 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
 export default {
     components: {
         Spinner,
+        SnackBar,
     },
 
     props: {
@@ -271,7 +270,7 @@ export default {
     },
 
     mounted() {
-        this.showLoader = true;
+        this.showLoader = false;
         // this.getLegerEntries();
         this.getTools();
 
@@ -293,22 +292,22 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Code",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
+                // {
+                //     text: "Code",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 {
                     text: "Name",
                     value: "name",
                 },
                 { text: "Price", value: "price", align: "center" },
                 { text: "Count", value: "count" },
-                { text: "Date", value: "created_at" },
                 // { text: "Update", value: "updated_at" },
                 { text: "Starred", value: "starred" },
-                { text: "Action", value: "action" },
+                { text: "Date", value: "created_at" },
+                // { text: "Action", value: "action" },
 
                 // { text: "Iron (%)", value: "iron" },
             ],
@@ -324,6 +323,12 @@ export default {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
         },
+
+        // getSnackBarState() {
+        //     return this.$store.getters[
+        //         "ProcurementInvoiceModule/getSnackBarState"
+        //     ];
+        // },
     },
 
     methods: {
@@ -343,11 +348,27 @@ export default {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+        
+        encrypt() {
+            let result = "";
+            const characters =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (let i = 0; i < 4; i++) {
+                result += characters.charAt(
+                    Math.floor(Math.random() * characters.length)
+                );
+            }
+            return "wU" + result.slice(2);
+        },
+
         getTools() {
             axios.get("/head/get_tools").then((response) => {
                 this.tools = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                // console.log(response.data.data);
             });
         },
 
@@ -359,6 +380,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
@@ -367,7 +389,7 @@ export default {
             // handle response here
         },
 
-        async starredTools(id,data ,column) {
+        async starredTools(id, data, column) {
             axios
                 .post("/head/starredTools", {
                     id: id,
@@ -375,6 +397,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
@@ -391,6 +414,7 @@ export default {
                 .then((response) => {
                     // this.students = response.data.data;
                     // console.log(response.data.data);
+                    this.setSnackBarState()
                 });
             // handle response here
         },

@@ -127,7 +127,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -268,8 +268,8 @@ export default {
         },
 
         formattedDate(date) {
-            return moment(date).format("MMMM Do YYYY");
-            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         // totalPrice(item) {

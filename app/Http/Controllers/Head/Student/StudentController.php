@@ -74,5 +74,10 @@ class StudentController extends Controller
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $studentService->sendComment($request)]);
     }
+
+    public function getStudentPayments(StudentService $studentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getStudentPayments()]);
+    }
     
 }
