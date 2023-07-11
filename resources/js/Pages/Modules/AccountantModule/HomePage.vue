@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-0 bg-gray-100">
+    <div class="pt-0 bg-white h-screen">
         <div class="d-flex">
             <div class="my-0 pt-0 flex-grow-1">
                 <div class="card bg-pattern py-0 my-0 shadow">
@@ -45,7 +45,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">12</span>
+                                        <span data-plugin="counterup">{{ paidStudents ? paidStudents : 0}}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Paid Fees
@@ -72,7 +72,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">87</span>
+                                        <span data-plugin="counterup">{{ unpaidStudents ? unpaidStudents : 0 }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Unpaid Fees
@@ -99,12 +99,18 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            > {{ totalUploads ? totalUploads : 0 }} </span
-                                        >
+                                        <span data-plugin="counterup">
+                                            {{
+                                                totalUploads ? totalUploads : 0
+                                            }}
+                                        </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ uploadTitles ? uploadTitles : 'Please wait' }}
+                                        {{
+                                            uploadTitles
+                                                ? uploadTitles
+                                                : "Please wait"
+                                        }}
                                     </p>
                                 </div>
                             </div>
@@ -418,62 +424,8 @@
             <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
-                        <!-- <div class="float-end d-none d-md-inline-block"> -->
-                        <!-- <div class="btn-group mb-2">
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-light"
-                                >
-                                    Today
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-light"
-                                >
-                                    Weekly
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-xs btn-secondary"
-                                >
-                                    Monthly
-                                </button>
-                            </div> -->
-                        <!-- </div> -->
-
                         <h4 class="header-title">Invoices Status</h4>
 
-                        <!-- <div class="d-flex text-center">
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">Current Week</p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-primary align-middle me-1"
-                                    ></small>
-                                    <span>$58,254</span>
-                                </h4>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">
-                                    Previous Week
-                                </p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
-                                    ></small>
-                                    <span>$69,524</span>
-                                </h4>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="text-muted mb-0 mt-0">Targets</p>
-                                <h4 class="fw-normal mb-0">
-                                    <small
-                                        class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"
-                                    ></small>
-                                    <span>$95,025</span>
-                                </h4>
-                            </div>
-                        </div> -->
                         <div class="">
                             <google-bar
                                 :data="chartData"
@@ -487,83 +439,6 @@
                 <!-- end card -->
             </div>
         </div>
-
-        <!-- <div>
-            <div class="col-xl-12 col-md-12 mx-0 px-0 mt-0 pt-0">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title mb-1">School Staffs</h4>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="border-top-0">Identity</th>
-                                        <th class="border-top-0">Name</th>
-                                        <th class="border-top-0">
-                                            Departiment
-                                        </th>
-                                        <th class="border-top-0">Email</th>
-                                        <th class="border-top-0">
-                                            Registered On
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="staff in staffs" :key="staff.id">
-                                        <td>
-                                            <img
-                                                class="h-8 w-8 rounded-full object-cover"
-                                                :src="
-                                                    $page.props.user
-                                                        .profile_photo_url
-                                                "
-                                                :alt="$page.props.user.name"
-                                            />
-                                            <img
-                                                src="assets/images/users/user-2.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            /> 
-                                        </td>
-                                        <td>
-                                            <span class="text-center">
-                                                {{ staff.name }}
-                                            </span>
-                                        </td>
-                                        <td>{{ department(staff.role) }}</td>
-                                        <td>{{ staff.email }}</td>
-                                        <td>
-                                            {{
-                                                formattedDate(staff.created_at)
-                                            }}
-                                        </td>
-                                         <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div>   
-            <pie-chart3-d></pie-chart3-d>
-            <google-donut></google-donut>
-            <google-bar></google-bar>
-            <google-grouped-bar></google-grouped-bar>
-        </div> -->
-        <!-- end row -->
     </div>
 </template>
 
@@ -587,7 +462,7 @@ export default {
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                console.log(e);
+                // console.log(e);
             }
         );
     },
@@ -600,7 +475,7 @@ export default {
             unpaidStudents: null,
             registeredStudents: [],
             totalUploads: null,
-            uploadTitles: '',
+            uploadTitles: "",
             staffs: null,
             tools: [],
             finances: [],
@@ -637,48 +512,69 @@ export default {
             ];
         },
 
-        async headDashboardGetStudents() {console.log('hello')
-            axios.get("/accountant/headDashboardGetStudents").then((response) => {
-                this.students = response.data.data.totalStudents;
-                // this.showLoader = false;
-                this.registeredStudents = [
-                    ["Language", "Students"],
-                    // ["Total Students", response.data.data.totalStudents],
-                    ["Paid Students", response.data.data.paidStudents],
-                    ["Unpaid Students", response.data.data.unpaidStudents],
-                ];
+        async headDashboardGetStudents() {
+            axios
+                .get("/accountant/headDashboardGetStudents")
+                .then((response) => {
+                    if (response.data.data != null) {
+                        this.students = response.data.data.totalStudents;
+                        // Filter the students with entries.length > 0
+                        const studentsWithEntries =
+                            response.data.data.paidStudents.filter(
+                                (student) => student.entries.length > 0
+                            );
+                        // Get the count of students with entries
+                        const count = studentsWithEntries.length;
+                        this.unpaidStudents = response.data.data.totalStudents - count
+                        this.paidStudents = count
+                        this.registeredStudents = [
+                            ["Language", "Students"],
+                            // ["Total Students", response.data.data.totalStudents],
+                            ["Paid Students", this.paidStudents],
+                            [
+                                "Unpaid Students",
+                                this.unpaidStudents,
+                            ],
+                        ];
 
-                console.log(response.data.data);
-            });
+                        this.showLoader = false;
+                    }
+
+                    // console.log(response.data.data);
+                });
         },
 
         async headDashboardGetInvoices() {
-            axios.get("/accountant/headDashboardGetInvoices").then((response) => {
-                // this.classOptions = response.data.data;
-                // this.showLoader = false;
-                this.chartData = [
-                    ["Language", "INVOICES"],
-                    ["procurement", response.data.data.procurementCount],
-                    [
-                        "Accountant School",
-                        response.data.data.accountantSchoolCount,
-                    ],
-                    [
-                        "Accountant Financial",
-                        response.data.data.accountantFinancialCount,
-                    ],
-                ];
-                // console.log(response.data.data);
-                // console.log(this.chartData);
-            });
+            axios
+                .get("/accountant/headDashboardGetInvoices")
+                .then((response) => {
+                    // this.classOptions = response.data.data;
+                    // this.showLoader = false;
+                    this.chartData = [
+                        ["Language", "INVOICES"],
+                        ["procurement", response.data.data.procurementCount],
+                        [
+                            "Accountant School",
+                            response.data.data.accountantSchoolCount,
+                        ],
+                        [
+                            "Accountant Financial",
+                            response.data.data.accountantFinancialCount,
+                        ],
+                    ];
+                    // console.log(response.data.data);
+                    // console.log(this.chartData);
+                });
         },
 
         async headDashboardGetUploads() {
-            axios.get("/accountant/headDashboardGetUploads").then((response) => {
-                this.totalUploads = response.data.data.totalUploads;
-                this.uploadTitles = response.data.data.uploadTitles;
-                // console.log(response.data.data)
-            });
+            axios
+                .get("/accountant/headDashboardGetUploads")
+                .then((response) => {
+                    this.totalUploads = response.data.data.totalUploads;
+                    this.uploadTitles = response.data.data.uploadTitles;
+                    // console.log(response.data.data)
+                });
         },
         // async headDashboardGetTools() {
         //     axios.get("/accountant/headDashboardGetTools").then((response) => {

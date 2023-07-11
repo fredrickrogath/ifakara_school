@@ -14,6 +14,7 @@ class InvoiceService
         $created = \App\Models\Invoice::create([
             'name' => $request->name,
             'price' => $request->price,
+            'total' => $request->total,
             'count' => $request->count,
             'school_id' => auth()->user()->school_id,
             'description' => $request->narration,
@@ -72,9 +73,9 @@ class InvoiceService
     }
 
     public function headDashboardGetInvoices(){
-        $procurement = \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('status', false)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
-        $accountantSchool = \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('status', true)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
-        $accountantFinancial = \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('status', true)->where('status_from_financial', true)->orderBy('created_at', 'desc')->get();
+        $procurement = \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('status_from_accountant', false)->where('status_from_financial_accountant', false)->orderBy('created_at', 'desc')->get();
+        $accountantSchool = \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('status_from_accountant', true)->where('status_from_financial_accountant', false)->orderBy('created_at', 'desc')->get();
+        $accountantFinancial = \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('status_from_accountant', true)->where('status_from_financial_accountant', true)->orderBy('created_at', 'desc')->get();
         return [
             'procurement' => $procurement,
             'procurementCount' => $procurement->count(),
@@ -135,6 +136,7 @@ class InvoiceService
         $invoice = \App\Models\Invoice::create([
             // 'invoice_no' => 0000,
             // 'seller_id' => 1,
+            'total' => $request->total,
             'school_id' => auth()->user()->school_id,
             'narration' => '...'
         ]);

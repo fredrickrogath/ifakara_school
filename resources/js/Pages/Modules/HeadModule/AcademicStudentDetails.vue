@@ -321,10 +321,10 @@
                                     ><i
                                         class="mdi mdi-check-circle font-18 align-middle me-2 pb-1"
                                     ></i
-                                    >Paid Students</a
+                                    >Student Payments</a
                                 >
 
-                                <a
+                                <!-- <a
                                     href="#"
                                     class="list-group-item border-0"
                                     @click="setTab('unpaid')"
@@ -337,7 +337,7 @@
                                         class="mdi mdi-radiobox-blank font-18 align-middle me-2 pb-1"
                                     ></i
                                     >Unpaid Students</a
-                                >
+                                > -->
                             </div>
 
                             <hr class="bg-gray-200 mx-2 mb-2 mt-2" />

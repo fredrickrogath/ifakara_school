@@ -30,7 +30,17 @@ class StudentService
     }
 
     public function getInvoices(){
-        return \App\Models\Student::orderBy('created_at', 'desc')->get();
+        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getStudentPayments(){
+        $currentYear = date('Y');
+        return \App\Models\Student::with(['entries'])->where('school_id', auth()->user()->school_id)->whereYear('created_at', $currentYear)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getSpecificStudent($request){
+        // $currentYear = date('Y');
+        return \App\Models\Student::with(['entries'])->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }
 
     // public function getInvoiceView($request){
@@ -38,15 +48,15 @@ class StudentService
     // }
 
     public function getStudentClasses(){
-        return \App\Models\ClassLevel::orderBy('created_at', 'desc')->get();
+        return \App\Models\ClassLevel::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getStudents(){
-        return \App\Models\Student::orderBy('first_name', 'asc')->get();
+        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('first_name', 'asc')->get();
     }
 
     public function getStudentsNew(){
-        return \App\Models\Student::orderBy('created_at', 'desc')->get();
+        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getStudent($request){
@@ -119,15 +129,12 @@ class StudentService
 
     public function headDashboardGetStudents(){
         $totalStudents = \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
-        $paidStudents = 1;
-        $unpaidStudents = 2;
+        $paidStudents = \App\Models\Student::with('entries')->where('school_id', auth()->user()->school_id)->get();
         return [
             'totalStudents' => $totalStudents->count(),
             'paidStudents' => $paidStudents,
-            'unpaidStudents' => $unpaidStudents,
         ];
     }
-    
     // public function getComments($request){
     //     return \App\Models\Comment::where('notification_id', $request->id)->orderBy('created_at', 'asc')->get();
     // }

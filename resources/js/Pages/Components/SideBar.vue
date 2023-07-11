@@ -207,7 +207,7 @@
                         </my-custom-link>
                     </li>
 
-                    <li>
+                    <!-- <li>
                         <my-custom-link
                             :href="route('head.about_school')"
                             :active="route().current('head.about_school')"
@@ -215,7 +215,7 @@
                             <v-icon size="22">mdi-school</v-icon>
                             <span> About School </span>
                         </my-custom-link>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -452,6 +452,16 @@
                     </li>
 
                     <li>
+                        <my-custom-link
+                            :href="route('accountant.payment_details')"
+                            :active="route().current('accountant.payment_details')"
+                        >
+                            <v-icon size="20">mdi-school</v-icon>
+                            <span> Student Payments </span>
+                        </my-custom-link>
+                    </li>
+
+                    <!-- <li>
                         <a href="#sidebarCrm" data-bs-toggle="collapse">
                             <v-icon size="20">mdi-school</v-icon>
                             <span> Student </span>
@@ -478,7 +488,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
 
                     <li>
                         <my-custom-link

@@ -4,36 +4,90 @@ namespace App\Services\AccountantServices\InvoiceServices;
 
 class ChatOfAccountService
 {
-    public function getSpecificLegerEntries(){
-        return \App\Models\ChartsOfAccount::where('account_type' ,'=', 'Income')->get();
+    public function getStudentPayments(){
+        $currentYear = date('Y');
+        return \App\Models\Student::with(['entries'])->where('school_id', auth()->user()->school_id)->whereYear('created_at', $currentYear)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getSpecificStudent($request){
+        // $currentYear = date('Y');
+        return \App\Models\Student::with(['entries'])->where('id', $request->id)->orderBy('created_at', 'desc')->first();
+    }
+
+    public function getStudentsNew(){
+        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getSpecificLegerEntries($request){
+        return \App\Models\ChartsOfAccount::where('school_id', auth()->user()->school_id)->where('account_type' , $request->type)->get();
     }
 
     public function getLegerEntries(){
-        return \App\Models\TuitionFee::with('chartOfAccount', 'user')->orderBy('created_at', 'desc')->get();
+        return \App\Models\Entry::with('chartOfAccount', 'user')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getChartOfAccounts(){
-        return \App\Models\ChartsOfAccount::orderBy('created_at', 'desc')->get();
+        return \App\Models\ChartsOfAccount::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
-    public function submitTuitionFee($request){
-        \App\Models\TuitionFee::create([
-            'charts_of_accounts_id' => 1,
-            'user_id' => 1,
-            'amount' => $request->amount,
-            'narration' => $request->narration,
+    public function entry($request){
+        if($request->isSchoolFee){
+            $entry = \App\Models\Entry::create([
+                'charts_of_accounts_id' => $request->charts_of_accounts_id,
+                'user_id' => auth()->user()->id,
+                'level_1' => $request->level_1,
+                'level_2' => $request->level_2,
+                'level_3' => $request->level_3,
+                'narration' => $request->narration,
+                'school_id' => auth()->user()->school_id,
+    
+            ]);
 
-        ]);
 
-        \App\Models\TuitionFee::create([
-            'charts_of_accounts_id' => 2,
-            'user_id' => 1,
-            'amount' => ($request->amount * 10) / 100,
-            'narration' => $request->narration,
+            \App\Models\EntryStudent::create([
+                'entry_id' => $entry->id,
+                'student_id' => $request->studentId,
+            ]);
 
-        ]);
+            return true;
+        }
 
-        return true;
+        else if(!$request->isSchoolFee){
+            \App\Models\Entry::create([
+                'charts_of_accounts_id' => $request->charts_of_accounts_id,
+                'user_id' => auth()->user()->id,
+                'level_1' => $request->level_1,
+                'level_2' => $request->level_2,
+                'level_3' => $request->level_3,
+                'narration' => $request->narration,
+                'school_id' => auth()->user()->school_id,
+    
+            ]);
+
+            return true;
+        }
+
+        // else if(!$request->isSchoolFee && $request->account_type != 'Income'){
+        //     \App\Models\Entry::create([
+        //         'charts_of_accounts_id' => $request->charts_of_accounts_id,
+        //         'user_id' => auth()->user()->id,
+        //         'student_id' => null,
+        //         'level_1' => $request->level_1,
+        //         'level_2' => $request->level_2,
+        //         'level_3' => $request->level_3,
+        //         'narration' => $request->narration,
+        //         'school_id' => auth()->user()->school_id,
+    
+        //     ]);
+        // }
+
+        // \App\Models\TuitionFee::create([
+        //     'charts_of_accounts_id' => 2,
+        //     'user_id' => 1,
+        //     'amount' => ($request->amount * 10) / 100,
+        //     'narration' => $request->narration,
+
+        // ]);
     }
 
     public function updateChartOfAccount($request){
@@ -52,6 +106,9 @@ class ChatOfAccountService
             'level1' => $request->level1,
             'level2' => $request->level2,
             'level3' => $request->level3,
+            'isSchoolFee' => $request->isSchoolFee,
+            'school_id' => auth()->user()->school_id,
+            'user_id' => auth()->user()->id,
             'name' => $request->name,
             'description' => $request->description ,
             'notes' => $request->notes,
@@ -61,12 +118,10 @@ class ChatOfAccountService
 
     public function headDashboardGetStudents(){
         $totalStudents = \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
-        $paidStudents = 1;
-        $unpaidStudents = 2;
+        $paidStudents = \App\Models\Student::with('entries')->where('school_id', auth()->user()->school_id)->get();
         return [
             'totalStudents' => $totalStudents->count(),
             'paidStudents' => $paidStudents,
-            'unpaidStudents' => $unpaidStudents,
         ];
     }
 }

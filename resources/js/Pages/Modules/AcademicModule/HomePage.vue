@@ -45,7 +45,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">12</span>
+                                        <span data-plugin="counterup">{{ paidStudents ? paidStudents : 0 }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Paid Fees
@@ -72,7 +72,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">87</span>
+                                        <span data-plugin="counterup"> {{ unpaidStudents ? unpaidStudents : 0 }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Unpaid Fees
@@ -122,7 +122,7 @@
 
         <!-- end row -->
 
-        <div class="d-flex pt-1">
+        <div class="d-flex pt-1 bg-white h-screen">
             <div class="mr-1">
                 <div class="card">
                     <div class="card-body">
@@ -169,6 +169,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="registeredStudents"
+                                            :head="head"
+                                            :content="content"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -177,6 +179,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="finances"
+                                            :head="head"
+                                            :content="content"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -218,13 +222,14 @@
                                             Departiment
                                         </th>
                                         <th class="border-top-0">Email</th>
+                                        <th class="border-top-0">Updated At</th>
                                         <!-- <th class="border-top-0">
                                             Registered On
                                         </th> -->
                                         <!-- <th class="border-top-0">Download</th> -->
                                     </tr>
                                 </thead>
-                                <tbody class="text-gray-600">
+                                <tbody class="text-gray-600 italic font-semibold">
                                     <tr
                                         v-for="(staff, index) in staffs"
                                         :key="staff.id"
@@ -236,7 +241,7 @@
                                                 :src="
                                                     'https://ui-avatars.com/api/?name=' +
                                                     formatName(staff.name) +
-                                                    '&color=F8FAFC&background=6b7280'
+                                                    '&color=525252&background=FFFFFF'
                                                 "
                                                 :alt="staff.name"
                                             />
@@ -257,11 +262,11 @@
                                         <td class="italic font-semibold">
                                             {{ staff.email }}
                                         </td>
-                                        <!-- <td>
+                                        <td>
                                             {{
-                                                formattedDate(staff.created_at)
+                                                formattedDate(staff.updated_at)
                                             }}
-                                        </td> -->
+                                        </td>
                                         <!-- <td class="text-center">
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
@@ -309,7 +314,7 @@ export default {
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                console.log(e);
+                // console.log(e);
             }
         );
     },
@@ -328,6 +333,12 @@ export default {
             finances: [],
             invoices: null,
             chartData: [],
+            headDonghurt: "3D New Tools vs Total Tools",
+            contentDonghurt:
+                "3D This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+            head: "Bar New Tools vs Total Tools",
+            content:
+                "Bar This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
         };
     },
     computed: {
@@ -366,14 +377,29 @@ export default {
 
         async headDashboardGetStudents() {
             axios.get("/academic/headDashboardGetStudents").then((response) => {
-                this.students = response.data.data.totalStudents;
-                // this.showLoader = false;
-                this.registeredStudents = [
-                    ["Language", "Students"],
-                    // ["Total Students", response.data.data.totalStudents],
-                    ["Paid Students", response.data.data.paidStudents],
-                    ["Unpaid Students", response.data.data.unpaidStudents],
-                ];
+                if (response.data.data != null) {
+                        this.students = response.data.data.totalStudents;
+                        // Filter the students with entries.length > 0
+                        const studentsWithEntries =
+                            response.data.data.paidStudents.filter(
+                                (student) => student.entries.length > 0
+                            );
+                        // Get the count of students with entries
+                        const count = studentsWithEntries.length;
+                        this.unpaidStudents = response.data.data.totalStudents - count
+                        this.paidStudents = count
+                        this.registeredStudents = [
+                            ["Language", "Students"],
+                            // ["Total Students", response.data.data.totalStudents],
+                            ["Paid Students", this.paidStudents],
+                            [
+                                "Unpaid Students",
+                                this.unpaidStudents,
+                            ],
+                        ];
+
+                        this.showLoader = false;
+                    }
 
                 // console.log(response.data.data);
             });

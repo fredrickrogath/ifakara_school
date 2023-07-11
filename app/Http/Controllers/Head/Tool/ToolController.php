@@ -39,6 +39,11 @@ class ToolController extends Controller
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $toolService->getTrashedTools()]);
     }
+
+    public function getSellersList(ToolService $toolService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $toolService->getSellersList()]);
+    }
     
     // public function updateTools(Request $request, ToolService $toolService){
     //     $this->authorize('authorizeProcurement', \App\Models\User::class);

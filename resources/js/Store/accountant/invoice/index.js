@@ -9,7 +9,11 @@ export default {
     state() {
         return {
             tabInvoice: 'entries',
+            chartOfAcountForm: '',
             invoiceGenerate: false,
+
+            paymentView: false,
+            paymentId: null,
 
             invoiceView: false,
             invoiceId: null,

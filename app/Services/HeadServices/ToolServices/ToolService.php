@@ -28,7 +28,10 @@ class ToolService
     public function get_tools(){
         return \App\Models\Tool::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
-
+    
+    public function getSellersList(){
+        return \App\Models\Seller::orderBy('created_at', 'desc')->get();
+    }
     public function headDashboardGetTools(){
         $totalTools = \App\Models\Tool::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
         $newTools = 1;

@@ -15,4 +15,13 @@ export default {
         state.invoiceView = !state.invoiceView;
         state.invoiceId = id;
     },
+
+    setChartOfAcountForm(state , tab){
+        state.chartOfAcountForm = tab;
+    },
+
+    setPaymentView(state , id){
+        state.paymentView = !state.paymentView;
+        state.paymentId = id;
+    },
 };

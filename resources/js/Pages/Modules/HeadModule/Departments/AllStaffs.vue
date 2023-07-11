@@ -78,6 +78,7 @@
                                     mdi-star
                                 </v-icon>
 
+<<<<<<< HEAD
                                 <span class="text-gray-600" v-else-if="header.value == 'id'">{{ item[header.value] }}</span>
 
                                 <span class="text-gray-600" v-else-if="header.value == 'created_at'">{{
@@ -92,6 +93,40 @@
                                     item[header.value] }}</span>
 
                                 <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'email'">
+=======
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'id'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'created_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'updated_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'name'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'email'"
+                                >
+>>>>>>> 2feb054ac674572e0c71bb353515c2ebf438fefb
                                     {{
                                         item[header.value]
                                     }}
@@ -218,8 +253,8 @@ export default {
         },
 
         formattedDate(date) {
-            return moment(date).format("MMMM Do YYYY");
-            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         // totalPrice(item) {

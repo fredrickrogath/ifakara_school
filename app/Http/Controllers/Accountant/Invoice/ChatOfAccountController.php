@@ -20,9 +20,9 @@ class ChatOfAccountController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function getSpecificLegerEntries(ChatOfAccountService $chatOfAccountService){
+    public function getSpecificLegerEntries(Request $request ,ChatOfAccountService $chatOfAccountService){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
-        return response()->json(['data' => $chatOfAccountService->getSpecificLegerEntries()]);
+        return response()->json(['data' => $chatOfAccountService->getSpecificLegerEntries($request)]);
     }
 
     public function getLegerEntries(ChatOfAccountService $chatOfAccountService){
@@ -35,10 +35,10 @@ class ChatOfAccountController extends Controller
         return response()->json(['data' => $studentService->searchStudent()]);
     }
 
-    public function submitTuitionFee(Request $request){
+    public function entry(Request $request, ChatOfAccountService $chatOfAccountService){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
-        return response()->json('success');
+        return response()->json(['data' => $chatOfAccountService->entry($request)]);
     }
 
     public function getChartOfAccounts(ChatOfAccountService $chatOfAccountService){
@@ -68,5 +68,20 @@ class ChatOfAccountController extends Controller
         $this->authorize('authorizeAccountant', \App\Models\User::class);
         // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $chatOfAccountService->headDashboardGetStudents()]);
+    }
+
+    public function getStudentPayments(ChatOfAccountService $studentService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getStudentPayments()]);
+    }
+
+    public function getStudentsNew(ChatOfAccountService $studentService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getStudentsNew()]);
+    }
+
+    public function getSpecificStudent(Request $request ,ChatOfAccountService $studentService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getSpecificStudent($request)]);
     }
 }

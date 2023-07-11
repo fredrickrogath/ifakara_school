@@ -187,7 +187,7 @@
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'tools'"
                                 >
                                     <div v-for="tool in item[header.value]">

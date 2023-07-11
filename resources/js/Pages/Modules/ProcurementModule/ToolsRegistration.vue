@@ -582,7 +582,7 @@ export default {
                     this.submitFormToMain();
                     this.amount = "";
                     this.narration = "";
-                    console.log(response.data);
+                    // console.log(response.data);
                 });
             // handle response here
         },
@@ -597,16 +597,16 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
 
         myChangeEvent(val) {
-            console.log(val);
+            // console.log(val);
         },
         mySelectEvent({ id, text }) {
-            console.log({ id, text });
+            // console.log({ id, text });
         },
     },
 };

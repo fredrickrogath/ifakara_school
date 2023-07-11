@@ -5,7 +5,7 @@
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="card h-screen">
-                    <div class="card-body pt-1">
+                    <div class="pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
                             <div class="mail-list">
@@ -133,7 +133,7 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-1 h-screen">
+                        <div class="inbox-rightbar pt-1 h-screen bg-white px-0">
 
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
@@ -321,10 +321,10 @@ export default {
         },
 
         myChangeEvent(val) {
-            console.log(val);
+            // console.log(val);
         },
         mySelectEvent({ id, text }) {
-            console.log({ id, text });
+            // console.log({ id, text });
         },
     },
 };

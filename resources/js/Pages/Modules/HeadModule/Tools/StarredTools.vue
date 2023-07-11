@@ -10,7 +10,7 @@
 
             <!-- Warning Alert Modal -->
             <div
-                id="warning-alert-modal"
+                id="warning-alert-modal-p1"
                 class="modal fade"
                 tabindex="-1"
                 role="dialog"
@@ -59,6 +59,9 @@
             <v-card-title class="px-0 pt-0">
                 Starred Tools
                 <v-spacer></v-spacer>
+
+                <snack-bar message="Task completed successfully"></snack-bar>
+
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -75,6 +78,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -91,7 +95,7 @@
                                         size="22"
                                         type="button"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#warning-alert-modal"
+                                        data-bs-target="#warning-alert-modal-p1"
                                         @click="
                                             setIdForAction(items[idx]['id'])
                                         "
@@ -120,7 +124,7 @@
                                 </div>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -128,7 +132,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -136,7 +140,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
                                     >{{
                                         item[header.value]
@@ -159,7 +163,7 @@
                                     large
                                 >
                                     <span
-                                        class="text-gray-600"
+                                        class="text-gray-600 italic font-semibold"
                                         :class="
                                             item[header.value] == null &&
                                             header.value !== 'action' // header.value == 'level1'
@@ -245,9 +249,12 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
+
 export default {
     components: {
         Spinner,
+        SnackBar,
     },
 
     props: {
@@ -271,7 +278,7 @@ export default {
     },
 
     mounted() {
-        this.showLoader = true;
+        this.showLoader = false;
         // this.getLegerEntries();
         this.getTools();
 
@@ -293,22 +300,22 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Code",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
+                // {
+                //     text: "Code",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 {
                     text: "Name",
                     value: "name",
                 },
                 { text: "Price", value: "price", align: "center" },
                 { text: "Count", value: "count" },
-                { text: "Date", value: "created_at" },
                 // { text: "Update", value: "updated_at" },
                 { text: "Starred", value: "starred" },
-                { text: "Action", value: "action" },
+                { text: "Date", value: "created_at" },
+                // { text: "Action", value: "action" },
 
                 // { text: "Iron (%)", value: "iron" },
             ],
@@ -353,7 +360,7 @@ export default {
 
         async updateTools(id, column, data) {
             axios
-                .post("/head/updateTools", {
+                .post("/procurement/updateTools", {
                     id: id,
                     data: data,
                     column: column,
@@ -362,9 +369,13 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
+        },
+
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
         },
 
         async starredTools(id,data ,column) {
@@ -375,10 +386,11 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -390,7 +402,7 @@ export default {
                 })
                 .then((response) => {
                     // this.students = response.data.data;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

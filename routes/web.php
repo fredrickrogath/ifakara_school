@@ -138,6 +138,7 @@ Route::middleware([
         Route::get('/getStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudents'])->name('getStudents');
         Route::post('/addStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');
+        Route::get('/getStudentPayments', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentPayments'])->name('getStudentPayments');
 
         Route::get('/getStudentsNew', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentsNew'])->name('getStudentsNew');
         Route::post('/getStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudent'])->name('getStudent');
@@ -170,6 +171,7 @@ Route::middleware([
         Route::get('/getStarredTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'getStarredTools'])->name('getStarredTools');
         Route::get('/getTrashedTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'getTrashedTools'])->name('getTrashedTools');
         Route::post('/starredTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'starredTools'])->name('starredTools');
+        Route::get('/getSellersList', [\App\Http\Controllers\Head\Tool\ToolController::class, 'getSellersList'])->name('getSellersList');
 
         /*
         |--------------------------------------------------------------------------
@@ -223,6 +225,7 @@ Route::middleware([
         Route::get('/getStudents', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudents'])->name('getStudents');
         Route::get('/getStudentsNew', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentsNew'])->name('getStudentsNew');
         Route::post('/getStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudent'])->name('getStudent');
+        Route::get('/getStudentPayments', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentPayments'])->name('getStudentPayments');
         Route::post('/editStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'editStudent'])->name('editStudent');
         Route::post('/permissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
         Route::post('/checkPermissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'checkPermissionToEditStudent'])->name('checkPermissionToEditStudent');
@@ -314,10 +317,11 @@ Route::middleware([
         */
 
         Route::get('/getLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getLegerEntries'])->name('getLegerEntries');
-        Route::get('/getSpecificLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSpecificLegerEntries'])->name('getSpecificLegerEntries');
+        Route::post('/getSpecificLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSpecificLegerEntries'])->name('getSpecificLegerEntries');
         Route::get('/searchStudent', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'searchStudent'])->name('searchStudent');
-        Route::post('/submitTuitionFee', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'submitTuitionFee'])->name('submitTuitionFee');
-
+        Route::post('/entry', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'entry'])->name('entry');
+        Route::post('/getSpecificStudent', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSpecificStudent'])->name('getSpecificStudent');
+        
         /*
         |--------------------------------------------------------------------------
         | CHART OF ACCOUNTS
@@ -329,6 +333,9 @@ Route::middleware([
         Route::post('/updateChartOfAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'updateChartOfAccount'])->name('updateChartOfAccount');
         Route::post('/deleteChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'deleteChartOfAccounts'])->name('deleteChartOfAccounts');
         Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+
+        Route::get('/getStudentsNew', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getStudentsNew'])->name('getStudentsNew');
+        Route::get('/getStudentPayments', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getStudentPayments'])->name('getStudentPayments');
         /*
         |--------------------------------------------------------------------------
         | UPLOADS

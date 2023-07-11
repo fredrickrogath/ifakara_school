@@ -12,7 +12,7 @@
                     <button
                         type="submit"
                         class="btn btn-success text-white btn-sm waves-effect waves-light"
-                        v-if="!this.invoice.status"
+                        v-if="!this.invoice.status_from_accountant"
                     >
                         Submit to head office
                     </button>
@@ -30,8 +30,6 @@
 
         <div class="col-12">
             <div class="">
-                <snackbar message="Task completed successfully"></snackbar>
-
                 <div class="">
                     <div class="row">
                         <div class="col-md-6">
@@ -74,40 +72,57 @@
                                 </span>
                             </div>
                         </div>
-                        <!-- end col -->
+
                         <div class="col-md-4 offset-md-2">
-                            <div class="mt-3 float-en d-flex flex-col">
+                            <div class="mt-0 float-end d-flex flex-col">
                                 <span>
                                     <strong> Invoice id : </strong
                                     ><span>{{ getInvoiceId }}</span>
                                 </span>
                                 <span>
-                                    <strong>Invoice Date : </strong>
+                                    <strong>Invoice Date:</strong>
                                     <span class="float-end">
                                         &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <!-- {{ currentDate | formatDate }} -->
                                         {{
                                             formattedDate(
                                                 this.invoice.created_at
                                             )
-                                        }}</span
-                                    >
+                                        }}
+                                    </span>
                                 </span>
+
                                 <span>
                                     <strong>Invoice Status : </strong>
-                                    <span class="float-end">
-                                        <span
-                                            v-if="
-                                                !this.invoice
-                                                    .status_from_financial
-                                            "
-                                            class="badge bg-danger"
-                                            >Unpaid</span
-                                        >
 
-                                        <span v-else class="badge bg-success"
-                                            >Paid</span
-                                        >
-                                    </span>
+                                    <span
+                                        v-if="
+                                            !this.invoice.status_from_accountant
+                                        "
+                                        class="badge bg-danger"
+                                        >Unforwarded</span
+                                    >
+
+                                    <div v-else class="badge bg-success">
+                                        Forwarded
+                                    </div>
+                                </span>
+
+                                <span>
+                                    <strong>Invoice Status : </strong>
+
+                                    <span
+                                        v-if="
+                                            !this.invoice
+                                                .status_from_financial_accountant
+                                        "
+                                        class="badge bg-danger"
+                                        >Unpaid</span
+                                    >
+
+                                    <div v-else class="badge bg-success">
+                                        Paid
+                                    </div>
                                 </span>
                             </div>
                         </div>
@@ -337,14 +352,15 @@ export default {
                     "/accountant/acceptInvoice",
                     {
                         id: this.invoice.id,
-                        status: this.invoice.status,
+                        status_from_accountant:
+                            this.invoice.status_from_accountant,
                         // invoice: this.objectData,
                     }
                 )
                 .then((response) => {
                     this.showLoader = false;
                     // Clear objectData
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                     // console.log(this.objectData);
                 });
         },
@@ -355,9 +371,9 @@ export default {
             if (newVal !== null) {
                 this.getInvoiceView();
             }
-            console.log(
-                `The message has changed from "${oldVal}" to "${newVal}"`
-            );
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
         },
     },
 

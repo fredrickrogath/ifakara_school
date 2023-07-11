@@ -56,6 +56,7 @@
                             <div class="text-end">
                                 <button
                                     type="submit"
+                                    data-bs-dismiss="modal"
                                     class="btn btn-success waves-effect waves-light"
                                 >
                                     Save
@@ -179,7 +180,7 @@ export default {
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                console.log(e);
+                // console.log(e);
             }
         );
     },

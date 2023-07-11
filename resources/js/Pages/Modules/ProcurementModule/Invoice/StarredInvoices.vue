@@ -398,7 +398,7 @@ export default {
             axios.get("/procurement/getStarredInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data)
+                // console.log(response.data.data)
             });
         },
 

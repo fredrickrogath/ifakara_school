@@ -33,6 +33,23 @@ class Student extends Model
     public function notification(){
         return $this->hasOne('App\Models\Notification','object_id','id');
     }
+
+    public function entries()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Entry',
+            'App\Models\EntryStudent',
+            'student_id',
+            'id',
+            'id',
+            'entry_id'
+        )->with('chartOfAccount');
+    }
+
+    // public function chartOfAccounts()
+    // {
+    //     return $this->belongsToMany('App\Models\ChartsOfAccount', 'entry_students', 'student_id', 'charts_of_accounts_id');
+    // }
     
     // public function user()
     // {

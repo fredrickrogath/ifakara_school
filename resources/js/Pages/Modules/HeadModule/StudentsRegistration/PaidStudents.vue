@@ -1,5 +1,782 @@
 <template>
-    <div>
-        paid
+    <!-- <v-col>
+        <v-row> -->
+    <div class="">
+        <!-- Right Sidebar -->
+        <div class="col-12 card p-0 m-0 pt-2">
+            <div class="h-screen bg-white" v-show="getPaymentView">
+                <payment-view></payment-view>
+            </div>
+            <div class="h-screen bg-white" v-show="!getPaymentView">
+                <spinner v-if="showLoader"></spinner>
+
+                <!-- <v-col v-else sm="12" md="12"> -->
+                <!-- <v-card flat :dark="isDark"> -->
+                <!-- <v-card elevation="0" data-app> -->
+
+                <v-card-title class="px-0 pt-0 mr-2">
+                    <div class="pl-2 pt-1">Payments</div>
+                    <v-spacer></v-spacer>
+
+                    <snack-bar
+                        class="absolute right-0 top-14"
+                        message="Task completed successfully"
+                    ></snack-bar>
+
+                    <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Search"
+                        single-line
+                        hide-details
+                    ></v-text-field>
+                </v-card-title>
+                <!-- {{ $page.props.posts }} -->
+
+                <v-data-table
+                    :headers="headers"
+                    :items="students"
+                    item-key="name"
+                    :search="search"
+                    class="elevation-1"
+                    :items-per-page="20"
+                >
+                    <template v-slot:body="{ items, headers }">
+                        <tbody>
+                            <tr v-for="(item, idx, k) in items" :key="idx">
+                                <td v-for="(header, key) in headers" :key="key">
+                                    <!-- <v-icon
+                                v-if="header.value == 'delete'"
+                                size="22"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#warning-alert-modal"
+                                @click="setIdForAction(items[idx]['id'])"
+                            >
+                                mdi-delete
+                            </v-icon>
+
+                            <v-icon
+                                v-if="header.value == 'view'"
+                                size="22"
+                                @click="setInvoiceView(items[idx]['id'])"
+                            >
+                                mdi-eye
+                            </v-icon>
+
+                            <v-icon
+                                v-if="header.value == 'edit'"
+                                size="22"
+                                @click="setEditStudent(items[idx]['id'])"
+                            >
+                                mdi-pen
+                            </v-icon> -->
+
+                                    <!-- <v-icon
+                                        v-if="header.value == 'starred'"
+                                        size="22"
+                                        :class="
+                                            item[header.value]
+                                                ? 'text-warning'
+                                                : ''
+                                        "
+                                        @click="
+                                            starredInvoice(
+                                                items[idx]['id'],
+                                                item[header.value],
+                                                header.value
+                                            )
+                                        "
+                                    >
+                                        mdi-star
+                                    </v-icon> -->
+
+                                    <v-icon
+                                    v-if="header.value == 'view'"
+                                    size="22"
+                                    @click=" studentDetails(items[idx]['id'])"
+                                >
+                                    mdi-eye
+                                </v-icon>
+
+                                    <!-- <span
+                                class="text-gray-600"
+                                v-else-if="header.value == 'id'"
+                                >{{ item[header.value] }}</span
+                            > -->
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.value == 'created_at'"
+                                        >{{
+                                            formattedDate(item[header.value])
+                                        }}</span
+                                    >
+
+                                    <span
+                                        class="text-gray-600"
+                                        v-else-if="header.value == 'updated_at'"
+                                        >{{
+                                            formattedDate(item[header.value])
+                                        }}</span
+                                    >
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.value == 'first_name'"
+                                        >{{ item[header.value] }}</span
+                                    >
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="
+                                            header.value == 'middle_name'
+                                        "
+                                    >
+                                        {{ item[header.value] }}
+                                    </span>
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.value == 'last_name'"
+                                    >
+                                        {{ item[header.value] }}
+                                    </span>
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.text === 'Level 1'"
+                                    >
+                                        <template
+                                            v-if="
+                                                item[header.value] &&
+                                                item[header.value].length > 0
+                                            "
+                                        >
+                                            <div class="d-flex flex-col">
+                                                <span>
+                                                    EXPECTED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-yellow-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ][0]
+                                                                    .chart_of_account
+                                                                    .level1
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    TOTAL PAYMENTS
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ].reduce(
+                                                                    (
+                                                                        total,
+                                                                        entry
+                                                                    ) =>
+                                                                        total +
+                                                                        entry.level_1,
+                                                                    0
+                                                                )
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    REMAINED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-red-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ][0]
+                                                                    .chart_of_account
+                                                                    .level1 -
+                                                                    item[
+                                                                        header
+                                                                            .value
+                                                                    ].reduce(
+                                                                        (
+                                                                            total,
+                                                                            entry
+                                                                        ) =>
+                                                                            total +
+                                                                            entry.level_1,
+                                                                        0
+                                                                    )
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                            </div>
+                                        </template>
+                                        <template v-else>
+                                            <!-- {{ formattedPrice(0) }} -->
+                                            <div class="d-flex flex-col">
+                                                <span>
+                                                    EXPECTED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-yellow-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    TOTAL PAYMENTS
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    REMAINED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-red-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                            </div>
+                                        </template>
+                                    </span>
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.text === 'Level 2'"
+                                    >
+                                        <template
+                                            v-if="
+                                                item[header.value] &&
+                                                item[header.value].length > 0
+                                            "
+                                        >
+                                            <div class="d-flex flex-col">
+                                                <span>
+                                                    EXPECTED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-yellow-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ][0]
+                                                                    .chart_of_account
+                                                                    .level2
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    TOTAL PAYMENTS
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ].reduce(
+                                                                    (
+                                                                        total,
+                                                                        entry
+                                                                    ) =>
+                                                                        total +
+                                                                        entry.level_2,
+                                                                    0
+                                                                )
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    REMAINED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-red-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ][0]
+                                                                    .chart_of_account
+                                                                    .level2 -
+                                                                    item[
+                                                                        header
+                                                                            .value
+                                                                    ].reduce(
+                                                                        (
+                                                                            total,
+                                                                            entry
+                                                                        ) =>
+                                                                            total +
+                                                                            entry.level_2,
+                                                                        0
+                                                                    )
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                            </div>
+                                        </template>
+                                        <template v-else>
+                                            <!-- {{ formattedPrice(0) }} -->
+                                            <div class="d-flex flex-col">
+                                                <span>
+                                                    EXPECTED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-yellow-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    TOTAL PAYMENTS
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    REMAINED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-red-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                            </div>
+                                        </template>
+                                    </span>
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.text === 'Level 3'"
+                                    >
+                                        <template
+                                            v-if="
+                                                item[header.value] &&
+                                                item[header.value].length > 0
+                                            "
+                                        >
+                                            <div class="d-flex flex-col">
+                                                <span>
+                                                    EXPECTED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-yellow-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ][0]
+                                                                    .chart_of_account
+                                                                    .level3
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    TOTAL PAYMENTS
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ].reduce(
+                                                                    (
+                                                                        total,
+                                                                        entry
+                                                                    ) =>
+                                                                        total +
+                                                                        entry.level_3,
+                                                                    0
+                                                                )
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    REMAINED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-red-500"
+                                                        >{{
+                                                            formattedPrice(
+                                                                item[
+                                                                    header.value
+                                                                ][0]
+                                                                    .chart_of_account
+                                                                    .level3 -
+                                                                    item[
+                                                                        header
+                                                                            .value
+                                                                    ].reduce(
+                                                                        (
+                                                                            total,
+                                                                            entry
+                                                                        ) =>
+                                                                            total +
+                                                                            entry.level_3,
+                                                                        0
+                                                                    )
+                                                            )
+                                                        }}</span
+                                                    >
+                                                </span>
+                                            </div>
+                                        </template>
+                                        <template v-else>
+                                            <!-- {{ formattedPrice(0) }} -->
+                                            <div class="d-flex flex-col">
+                                                <span>
+                                                    EXPECTED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-yellow-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    TOTAL PAYMENTS
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-green-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                                <span>
+                                                    REMAINED
+                                                    <v-icon
+                                                        size="20"
+                                                        class="mb-1 px-1"
+                                                        >mdi-hand-pointing-right</v-icon
+                                                    >
+                                                    <span
+                                                        class="text-red-500"
+                                                        >{{
+                                                            formattedPrice(0)
+                                                        }}</span
+                                                    >
+                                                </span>
+                                            </div>
+                                        </template>
+                                    </span>
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="
+                                            header.text === 'Last Pay On'
+                                        "
+                                    >
+                                        {{
+                                            item[header.value] &&
+                                            item[header.value].level_3 !== null
+                                                ? formattedDate(
+                                                      item[header.value]
+                                                          .updated_at
+                                                  )
+                                                : 0
+                                        }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </template>
+                </v-data-table>
+                <!-- </v-col> -->
+            </div>
+        </div>
     </div>
+    <!-- </v-row>
+    </v-col> -->
 </template>
+
+<script>
+import moment from "moment";
+import Spinner from "../../../Components/SpinnerLoader.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
+import PaymentView from "../PaymentDetails/PaymentView.vue";
+export default {
+    components: {
+        Spinner,
+        SnackBar,
+        PaymentView,
+    },
+
+    props: {
+        // postsData: {
+        // type: Number,
+        // default: [],
+        // default(rawProps) {
+        //     return { message: "hello" };
+        // },
+        // DATA TYPES
+        // String
+        // Number
+        // Boolean
+        // Array
+        // Object
+        // Date
+        // Function
+        // Symbol
+        // disabled: [Boolean, Number]
+        // },
+    },
+
+    mounted() {
+        this.showLoader = true;
+        this.getStudents();
+
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         console.log('abc');
+        //         // this.getTools();
+        //     }
+        // );
+
+        // Receiving broadicasting
+        // window.Echo.channel("StudentTriggered").listen(
+        //     ".Api\\Secretary\\StudentEvent",
+        //     (e) => {
+        //         console.log('abc');
+        //         this.getStudents();
+        //     }
+        // );
+
+        // window.Echo.channel("student-event." + this.$page.props.user.school_id).listen(
+        //     "Academic\\StudentEvent",
+        //     (e) => {
+        //         this.getStudents();
+        //     }
+        // );
+
+        // Receiving broadicasting
+        //  window.Echo.channel("student-trigger-from-financial-secretary").listen(
+        //     "ApiSecretaryStudentEvent",
+        //     (e) => {
+        //         console.log('student-trigger-from-financial-secretary');
+        //         // this.getTools();
+        //     }
+        // );
+
+        window.Echo.channel("EventTriggered").listen(
+            "NewPostPublished",
+            (e) => {
+                // console.log(e);
+            }
+        );
+    },
+
+    data() {
+        return {
+            contentFullWidthWhenSideBarHides: 10,
+            storagePath: window.location.origin + "/storage/systemFiles/",
+
+            showLoader: true,
+            search: "",
+            headers: [
+                {
+                    text: "First Name",
+                    align: "start",
+                    sortable: false,
+                    value: "first_name",
+                },
+                {
+                    text: "Middle Name",
+                    value: "middle_name",
+                },
+                {
+                    text: "Last Name",
+                    value: "last_name",
+                },
+                {
+                    text: "Level 1",
+                    value: "entries",
+                },
+
+                {
+                    text: "Level 2",
+                    value: "entries",
+                },
+
+                {
+                    text: "Level 3",
+                    value: "entries",
+                },
+                { text: "Last Pay On", value: "entries" },
+                { text: "Details", value: "view" },
+                // { text: "Parent", value: "parent" },
+                // { text: "Contact", value: "parent_contact" },
+                // { text: "Edit", value: "edit" },
+            ],
+            students: [],
+
+            idForAction: null,
+        };
+    },
+
+    computed: {
+        contentFullWidthWhenSideBarHidesComputed() {
+            return this.contentFullWidthWhenSideBarHides;
+        },
+
+        // getStudentId() {
+        //     this.$store.dispatch("AcademicStudentModule/setStudentId", id);
+        //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
+        // },
+
+        getPaymentView() {
+            return this.$store.getters["AccountantInvoiceModule/getPaymentView"];
+        },
+    },
+
+    methods: {
+        async setIdForAction(id) {
+            this.idForAction = id;
+        },
+
+        formattedPrice(amount) {
+            return amount.toLocaleString("sw-TZ", {
+                style: "currency",
+                currency: "Tsh",
+            });
+        },
+
+        formattedDate(date) {
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        },
+
+        // setEditStudent(id) {
+        //     this.$store.dispatch("AcademicStudentModule/setStudentId", id);
+        //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
+        // },
+
+        studentDetails(id) {
+            this.setInvoiceView(id);
+        },
+
+        setInvoiceView(id) {
+            this.$store.dispatch("AccountantInvoiceModule/setPaymentView", id);
+        },
+
+        getStudents() {
+            axios.get("/head/getStudentPayments").then((response) => {
+                this.students = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data);
+            });
+        },
+
+        save(id, column, data) {
+             this.updateTools(id, data, column);
+            // console.log(id + " , " +data);
+        },
+        cancel() {},
+        open() {},
+        close() {},
+    },
+};
+</script>
