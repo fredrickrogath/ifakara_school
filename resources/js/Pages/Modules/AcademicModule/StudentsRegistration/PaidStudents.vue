@@ -14,7 +14,7 @@
                 <!-- <v-card flat :dark="isDark"> -->
                 <!-- <v-card elevation="0" data-app> -->
 
-                <v-card-title class="px-0 pt-0">
+                <v-card-title class="px-0 pt-0 mr-2">
                     <div class="pl-2 pt-1">Payments</div>
                     <v-spacer></v-spacer>
 
