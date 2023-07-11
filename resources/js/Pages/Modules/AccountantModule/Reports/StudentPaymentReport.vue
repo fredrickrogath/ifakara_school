@@ -760,7 +760,8 @@ export default {
                             }
 
                             return "No Payment";
-                        } if (
+                        }
+                        if (
                             Array.isArray(student[column.value]) &&
                             column.text === "Level 2"
                         ) {
@@ -795,7 +796,8 @@ export default {
                             }
 
                             return "No Payment";
-                        }if (
+                        }
+                        if (
                             Array.isArray(student[column.value]) &&
                             column.text === "Level 3"
                         ) {

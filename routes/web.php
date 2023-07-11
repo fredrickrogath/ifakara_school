@@ -223,6 +223,7 @@ Route::middleware([
         Route::get('/getStudents', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudents'])->name('getStudents');
         Route::get('/getStudentsNew', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentsNew'])->name('getStudentsNew');
         Route::post('/getStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudent'])->name('getStudent');
+        Route::get('/getStudentPayments', [\App\Http\Controllers\Academic\Student\StudentController::class, 'getStudentPayments'])->name('getStudentPayments');
         Route::post('/editStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'editStudent'])->name('editStudent');
         Route::post('/permissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'permissionToEditStudent'])->name('permissionToEditStudent');
         Route::post('/checkPermissionToEditStudent', [\App\Http\Controllers\Academic\Student\StudentController::class, 'checkPermissionToEditStudent'])->name('checkPermissionToEditStudent');

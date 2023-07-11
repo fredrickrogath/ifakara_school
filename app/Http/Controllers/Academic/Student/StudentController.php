@@ -59,6 +59,16 @@ class StudentController extends Controller
         return response()->json(['data' => $studentService->getStudent($request)]);
     }
 
+    public function getStudentPayments(StudentService $studentService){
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getStudentPayments()]);
+    }
+
+    public function getSpecificStudent(Request $request ,StudentService $studentService){
+        $this->authorize('authorizeAcademic', \App\Models\User::class); 
+        return response()->json(['data' => $studentService->getSpecificStudent($request)]);
+    }
+
     public function editStudent(Request $request, StudentService $studentService){
         $this->authorize('authorizeAcademic', \App\Models\User::class); 
         event(new \App\Events\Academic\StudentEvent(auth()->user()->school_id));

@@ -505,8 +505,10 @@ export default {
                     id: this.getPaymentId,
                 })
                 .then((response) => {
-                    this.student = response.data.data;
-                    this.showLoader = false;
+                    if(response.data.data != null){
+                        this.student = response.data.data;
+                        this.showLoader = false;
+                    }
                     // console.log(response.data.data);
                 });
         },

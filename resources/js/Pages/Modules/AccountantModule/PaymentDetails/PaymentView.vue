@@ -1,6 +1,6 @@
 <template>
     <div>
-        <spinner v-if="showLoader"></spinner>
+        <!-- <spinner v-if="showLoader"></spinner> -->
 
         <div class="h-screen bg-white" style="overflow-y: auto">
             <div class="d-flex justify-content-between bg-warning">
@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import moment from "moment";
-import Spinner from "../../../Components/SpinnerLoader.vue";
-import SnackBar from "../../../Components/SnackBar.vue";
+// import moment from "moment";
+// import Spinner from "../../../Components/SpinnerLoader.vue";
+// import SnackBar from "../../../Components/SnackBar.vue";
 import Payment from "../../../Components/Payment/Payment.vue";
 export default {
     components: {
-        Spinner,
-        SnackBar,
+        // Spinner,
+        // SnackBar,
         Payment,
     },
 
@@ -50,7 +50,7 @@ export default {
 
     mounted() {
         this.showLoader = true;
-        this.getStudents();
+        // this.getStudents();
 
         // window.Echo.channel("EventTriggered").listen(
         //     "NewPostPublished",
@@ -85,12 +85,12 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
-            (e) => {
-                // console.log(e);
-            }
-        );
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         // console.log(e);
+        //     }
+        // );
     },
 
     data() {
@@ -99,7 +99,7 @@ export default {
             storagePath: window.location.origin + "/storage/systemFiles/",
 
             showLoader: true,
-            search: "",
+            // search: "",
             // headers: [
             //     {
             //         text: "First Name",
@@ -135,9 +135,9 @@ export default {
             //     // { text: "Contact", value: "parent_contact" },
             //     // { text: "Edit", value: "edit" },
             // ],
-            students: [],
+            // students: [],
 
-            idForAction: null,
+            // idForAction: null,
         };
     },
 
@@ -163,17 +163,17 @@ export default {
         //     this.idForAction = id;
         // },
 
-        formattedPrice(amount) {
-            return amount.toLocaleString("sw-TZ", {
-                style: "currency",
-                currency: "Tsh",
-            });
-        },
+        // formattedPrice(amount) {
+        //     return amount.toLocaleString("sw-TZ", {
+        //         style: "currency",
+        //         currency: "Tsh",
+        //     });
+        // },
 
-        formattedDate(date) {
-            // return moment(date).format("MMMM Do YYYY");
-            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-        },
+        // formattedDate(date) {
+        //     // return moment(date).format("MMMM Do YYYY");
+        //     return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        // },
 
         // setEditStudent(id) {
         //     this.$store.dispatch("AcademicStudentModule/setStudentId", id);
@@ -188,13 +188,13 @@ export default {
             this.$store.dispatch("AccountantInvoiceModule/setPaymentView", null);
         },
 
-        getStudents() {
-            axios.get("/accountant/getStudentPayments").then((response) => {
-                this.students = response.data.data;
-                this.showLoader = false;
-                // console.log(response.data.data);
-            });
-        },
+        // getStudents() {
+        //     axios.get("/accountant/getStudentPayments").then((response) => {
+        //         this.students = response.data.data;
+        //         this.showLoader = false;
+        //         // console.log(response.data.data);
+        //     });
+        // },
 
         // save(id, column, data) {
         //      this.updateTools(id, data, column);

@@ -319,10 +319,10 @@
                                     ><i
                                         class="mdi mdi-check-circle font-18 align-middle me-2 pb-1"
                                     ></i
-                                    >Paid Students</a
+                                    >Student Payments</a
                                 >
 
-                                <a
+                                <!-- <a
                                     href="#"
                                     class="list-group-item border-0"
                                     @click="setTab('unpaid')"
@@ -335,7 +335,7 @@
                                         class="mdi mdi-radiobox-blank font-18 align-middle me-2 pb-1"
                                     ></i
                                     >Unpaid Students</a
-                                >
+                                > -->
                             </div>
 
                             <hr class="bg-gray-200 mx-2 mb-2 mt-2" />
@@ -387,7 +387,7 @@
                                         <all-students v-show="getCurrentTab == 'all'"></all-students>
                                         <new-students v-show="getCurrentTab == 'new'"></new-students>
                                         <paid-students v-show="getCurrentTab == 'paid'"></paid-students>
-                                        <unpaid-students v-show="getCurrentTab == 'unpaid'"></unpaid-students>
+                                        <!-- <unpaid-students v-show="getCurrentTab == 'unpaid'"></unpaid-students> -->
                                     </div>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"
@@ -427,7 +427,7 @@ import JetApplicationMark from "@/Jetstream/ApplicationMark";
 import AllStudents from "./StudentsRegistration/AllStudents.vue";
 import NewStudents from "./StudentsRegistration/NewStudents.vue";
 import PaidStudents from "./StudentsRegistration/PaidStudents.vue";
-import UnpaidStudents from "./StudentsRegistration/UnpaidStudents.vue";
+// import UnpaidStudents from "./StudentsRegistration/UnpaidStudents.vue";
 import ViewStudent from "./StudentsRegistration/ViewStudent.vue";
 import AddStudent from "./StudentsRegistration/AddStudent.vue";
 import EditStudent from "./StudentsRegistration/EditStudent.vue";
@@ -444,7 +444,7 @@ export default {
         AllStudents,
         NewStudents,
         PaidStudents,
-        UnpaidStudents,
+        // UnpaidStudents,
         ViewStudent,
         AddStudent,
         EditStudent,

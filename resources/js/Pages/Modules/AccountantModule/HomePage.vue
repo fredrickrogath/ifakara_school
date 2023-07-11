@@ -45,7 +45,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">12</span>
+                                        <span data-plugin="counterup">{{ paidStudents ? paidStudents : 0}}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Paid Fees
@@ -72,7 +72,7 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">87</span>
+                                        <span data-plugin="counterup">{{ unpaidStudents ? unpaidStudents : 0 }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Unpaid Fees
@@ -99,12 +99,18 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"
-                                            > {{ totalUploads ? totalUploads : 0 }} </span
-                                        >
+                                        <span data-plugin="counterup">
+                                            {{
+                                                totalUploads ? totalUploads : 0
+                                            }}
+                                        </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{ uploadTitles ? uploadTitles : 'Please wait' }}
+                                        {{
+                                            uploadTitles
+                                                ? uploadTitles
+                                                : "Please wait"
+                                        }}
                                     </p>
                                 </div>
                             </div>
@@ -418,7 +424,6 @@
             <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
-
                         <h4 class="header-title">Invoices Status</h4>
 
                         <div class="">
@@ -434,7 +439,6 @@
                 <!-- end card -->
             </div>
         </div>
-
     </div>
 </template>
 
@@ -471,7 +475,7 @@ export default {
             unpaidStudents: null,
             registeredStudents: [],
             totalUploads: null,
-            uploadTitles: '',
+            uploadTitles: "",
             staffs: null,
             tools: [],
             finances: [],
@@ -508,48 +512,69 @@ export default {
             ];
         },
 
-        async headDashboardGetStudents() {console.log('hello')
-            axios.get("/accountant/headDashboardGetStudents").then((response) => {
-                this.students = response.data.data.totalStudents;
-                // this.showLoader = false;
-                this.registeredStudents = [
-                    ["Language", "Students"],
-                    // ["Total Students", response.data.data.totalStudents],
-                    ["Paid Students", response.data.data.paidStudents],
-                    ["Unpaid Students", response.data.data.unpaidStudents],
-                ];
+        async headDashboardGetStudents() {
+            axios
+                .get("/accountant/headDashboardGetStudents")
+                .then((response) => {
+                    if (response.data.data != null) {
+                        this.students = response.data.data.totalStudents;
+                        // Filter the students with entries.length > 0
+                        const studentsWithEntries =
+                            response.data.data.paidStudents.filter(
+                                (student) => student.entries.length > 0
+                            );
+                        // Get the count of students with entries
+                        const count = studentsWithEntries.length;
+                        this.unpaidStudents = response.data.data.totalStudents - count
+                        this.paidStudents = count
+                        this.registeredStudents = [
+                            ["Language", "Students"],
+                            // ["Total Students", response.data.data.totalStudents],
+                            ["Paid Students", this.paidStudents],
+                            [
+                                "Unpaid Students",
+                                this.unpaidStudents,
+                            ],
+                        ];
 
-                // console.log(response.data.data);
-            });
+                        this.showLoader = false;
+                    }
+
+                    // console.log(response.data.data);
+                });
         },
 
         async headDashboardGetInvoices() {
-            axios.get("/accountant/headDashboardGetInvoices").then((response) => {
-                // this.classOptions = response.data.data;
-                // this.showLoader = false;
-                this.chartData = [
-                    ["Language", "INVOICES"],
-                    ["procurement", response.data.data.procurementCount],
-                    [
-                        "Accountant School",
-                        response.data.data.accountantSchoolCount,
-                    ],
-                    [
-                        "Accountant Financial",
-                        response.data.data.accountantFinancialCount,
-                    ],
-                ];
-                // console.log(response.data.data);
-                // console.log(this.chartData);
-            });
+            axios
+                .get("/accountant/headDashboardGetInvoices")
+                .then((response) => {
+                    // this.classOptions = response.data.data;
+                    // this.showLoader = false;
+                    this.chartData = [
+                        ["Language", "INVOICES"],
+                        ["procurement", response.data.data.procurementCount],
+                        [
+                            "Accountant School",
+                            response.data.data.accountantSchoolCount,
+                        ],
+                        [
+                            "Accountant Financial",
+                            response.data.data.accountantFinancialCount,
+                        ],
+                    ];
+                    // console.log(response.data.data);
+                    // console.log(this.chartData);
+                });
         },
 
         async headDashboardGetUploads() {
-            axios.get("/accountant/headDashboardGetUploads").then((response) => {
-                this.totalUploads = response.data.data.totalUploads;
-                this.uploadTitles = response.data.data.uploadTitles;
-                // console.log(response.data.data)
-            });
+            axios
+                .get("/accountant/headDashboardGetUploads")
+                .then((response) => {
+                    this.totalUploads = response.data.data.totalUploads;
+                    this.uploadTitles = response.data.data.uploadTitles;
+                    // console.log(response.data.data)
+                });
         },
         // async headDashboardGetTools() {
         //     axios.get("/accountant/headDashboardGetTools").then((response) => {

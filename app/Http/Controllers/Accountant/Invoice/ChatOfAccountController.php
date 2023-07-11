@@ -81,7 +81,7 @@ class ChatOfAccountController extends Controller
     }
 
     public function getSpecificStudent(Request $request ,ChatOfAccountService $studentService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $studentService->getSpecificStudent($request)]);
     }
 }
