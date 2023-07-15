@@ -1,20 +1,21 @@
 <template>
-    <div class="pt-10">
-        <div class="d-flex justify-content-between">
+    <div class="pt-2 h-screen bg-white" style="overflow-y: auto">
+        <spinner v-if="showsubmitButton"></spinner>
+        <div v-else class="d-flex justify-content-between">
             <a @click="setInvoiceView()" class="btn text-lg-700">
                 <strong class="text-danger" style="font-size: large"
                     ><i class="fe-arrow-left"></i>
                 </strong>
             </a>
-
+             
             <form @submit.prevent="acceptInvoice">
-                <div class="d-flex justify-content-between my-1 mt-2">
+                <div class="d-flex justify-content-between my-1 mt-2 mr-2">
                     <button
                         type="submit"
                         class="btn btn-success text-white btn-sm waves-effect waves-light"
-                        v-if="!this.invoice.status"
+                        v-if="this.invoice.status_from_accountant && !this.invoice.status_from_head"
                     >
-                        Submit to financial
+                        Submit to financial accountant
                     </button>
 
                     <button
@@ -22,58 +23,115 @@
                         class="btn btn-danger text-white btn-sm waves-effect waves-light"
                         v-else
                     >
-                        Unsubmit to financial
+                        Unsubmit to financial accountant
                     </button>
                 </div>
             </form>
         </div>
 
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+            <div class="">
+                <div class="">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mt-3">
-                                <p>
+                            <div class="mt-0">
+                                <!-- <p>
                                     <b>Hello, {{ seller }}</b>
                                 </p>
-                                <small>Procumerement</small>
+                                <small>Procumerement</small> -->
+
+                                <span
+                                    v-for="(seller, index) in invoice.sellers"
+                                    :key="seller.id"
+                                    class="d-block"
+                                >
+                                    <div class="">
+                                        <v-menu transition="fab-transition">
+                                            <template
+                                                v-slot:activator="{ on, attrs }"
+                                            >
+                                                <strong
+                                                    >Supplier {{ index + 1 }} :
+                                                </strong>
+                                                <span
+                                                    class="seller-name uppercase"
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                    @click="
+                                                        getSellerProfile(seller)
+                                                    "
+                                                >
+                                                    {{ seller.name }}
+                                                </span>
+                                            </template>
+
+                                            <seller-profile
+                                                :seller="sellerInfo"
+                                            ></seller-profile>
+                                        </v-menu>
+                                    </div>
+                                </span>
                             </div>
                         </div>
-                        <!-- end col -->
+
                         <div class="col-md-4 offset-md-2">
-                            <div class="mt-3 float-end">
-                                <p>
+                            <div class="mt-0 float-end d-flex flex-col">
+                                <span>
                                     <strong> Invoice id : </strong
                                     ><span>{{ getInvoiceId }}</span>
-                                </p>
-                                <p>
-                                    <strong>Invoice Date : </strong>
+                                </span>
+                                <span>
+                                    <strong>Invoice Date:</strong>
                                     <span class="float-end">
-                                        &nbsp;&nbsp;&nbsp;&nbsp; {{ formattedDate(this.invoice.created_at) }}</span
-                                    >
-                                </p>
-                                <p>
-                                    <strong>Invoice Status : </strong>
-                                    <span class="float-end"
-                                        >
-                                        <span v-if="!this.invoice.status_from_financial" class="badge bg-danger"
-                                            >Unpaid</span
-                                        >
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <!-- {{ currentDate | formatDate }} -->
+                                        {{
+                                            formattedDate(
+                                                this.invoice.created_at
+                                            )
+                                        }}
+                                    </span>
+                                </span>
 
-                                        <span v-else class="badge bg-success"
-                                            >Paid</span
-                                        >
-                                        </span
+                                <span>
+                                    <strong>Invoice Status : </strong>
+
+                                    <span
+                                        v-if="
+                                            !this.invoice.status_from_accountant
+                                        "
+                                        class="badge bg-danger"
+                                        >Unforwarded</span
                                     >
-                                </p>
+
+                                    <div v-else class="badge bg-success">
+                                        Forwarded
+                                    </div>
+                                </span>
+
+                                <span>
+                                    <strong>Invoice Status : </strong>
+
+                                    <span
+                                        v-if="
+                                            !this.invoice
+                                                .status_from_financial_accountant
+                                        "
+                                        class="badge bg-danger"
+                                        >Unpaid</span
+                                    >
+
+                                    <div v-else class="badge bg-success">
+                                        Paid
+                                    </div>
+                                </span>
                             </div>
                         </div>
                         <!-- end col -->
                     </div>
                     <!-- end row -->
 
-                    <div class="row mt-3">
+                    <div class="row mt-0">
                         <div class="col-sm-6">
                             <h6>Invoice Address</h6>
                             <address>
@@ -91,10 +149,10 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table mt-4 table-centered">
+                                <table class="table mt-0 table-centered">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <!-- <th>#</th> -->
                                             <th>Tool&Item</th>
                                             <th style="width: 10%">Quantity</th>
                                             <th style="width: 10%">Amount</th>
@@ -112,7 +170,7 @@
                                             :key="data.id"
                                         >
                                             <template v-if="formattedData">
-                                                <td>1</td>
+                                                <!-- <td>1</td> -->
                                                 <td>
                                                     <b>{{ data.tool.name }}</b>
                                                     <br />
@@ -147,7 +205,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="clearfix pt-5">
-                                <h4 class="text-primary">
+                                <h4 class="">
                                     Total Amount of the Tools & Items
                                 </h4>
                             </div>
@@ -170,34 +228,19 @@
                                         }}</span
                                     >
                                 </p>
-                                <h3>
+                                <h4 lass="float-end">
                                     {{
                                         formattedPrice(
                                             total - total * (18 / 100)
                                         )
                                     }}
-                                </h3>
+                                </h4>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <!-- end col -->
                     </div>
                     <!-- end row -->
-
-                    <div class="mt-4 mb-1">
-                        <div class="text-end d-print-none">
-                            <a
-                                href="javascript:window.print()"
-                                class="btn btn-primary waves-effect waves-light"
-                                ><i class="mdi mdi-printer me-1"></i> Print</a
-                            >
-                            <a
-                                href="#"
-                                class="btn btn-info waves-effect waves-light"
-                                >Submit</a
-                            >
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- end card -->
@@ -208,7 +251,14 @@
 
 <script>
 import moment from "moment";
+import SellerProfile from "../../.././Components/SellerProfile.vue";
+import Spinner from "../../.././Components/SpinnerLoader.vue";
+
 export default {
+    components: {
+        SellerProfile,
+        Spinner,
+    },
     mounted() {
         this.showLoader = true;
 
@@ -224,8 +274,9 @@ export default {
 
     data() {
         return {
-            showLoader: false,
+            showsubmitButton: true,
             objectData: [],
+            sellerInfo: [],
             seller: "",
             supplier: [],
             invoice: [],
@@ -261,11 +312,8 @@ export default {
             this.objectData.splice(0, this.objectData.length);
         },
 
-        async sellerName(invoice) {
-            if (typeof invoice !== "undefined" && invoice !== null) {
-                this.seller = invoice.seller.name;
-                // this.supplier = invoice.seller;
-            }
+        getSellerProfile(seller) {
+            this.sellerInfo = seller;
         },
 
         async getInvoiceView() {
@@ -274,10 +322,9 @@ export default {
                     id: this.getInvoiceId,
                 })
                 .then((response) => {
-                    this.showLoader = false;
+                    this.showsubmitButton = false;
                     this.totalPrice(response.data.data);
                     this.invoice = response.data.data;
-                    this.sellerName(this.invoice);
                 });
         },
 
@@ -297,7 +344,7 @@ export default {
                     "/head/acceptInvoice",
                     {
                         id: this.invoice.id,
-                        status: this.invoice.status,
+                        status: this.invoice.status_from_head,
                         // invoice: this.objectData,
                     }
                 )
@@ -315,9 +362,9 @@ export default {
             if (newVal !== null) {
                 this.getInvoiceView();
             }
-            console.log(
-                `The message has changed from "${oldVal}" to "${newVal}"`
-            );
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
         },
     },
 

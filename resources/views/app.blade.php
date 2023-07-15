@@ -92,7 +92,7 @@
     </style>
 </head>
 
-<body class="font-sans antialiased loading">
+<body class="font-sans antialiased loading font-sans">
     @inertia
 
     {{-- <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script> --}}

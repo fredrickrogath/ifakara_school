@@ -23,5 +23,9 @@ export default {
 
     setPaymentView(context, id){
         context.commit("setPaymentView", id);
+    },
+
+    setInvoice(context){
+        context.commit("setInvoice");
     }
 };

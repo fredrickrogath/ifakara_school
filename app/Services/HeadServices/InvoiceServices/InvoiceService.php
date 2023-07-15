@@ -56,7 +56,7 @@ class InvoiceService
 
     public function acceptInvoice($request){
         return \App\Models\Invoice::find($request->id)->update([
-            'status_from_accountant' => !$request->status,
+            'status_from_head' => !$request->status,
         ]);
     }
 

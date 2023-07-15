@@ -32,6 +32,29 @@ class InvoiceService
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }
 
+    public function createInvoice($request){
+
+            $items = $request->items;
+            $invoice = \App\Models\AccountantInvoice::create([
+                'total' => $request->total,
+                'school_id' => auth()->user()->school_id,
+            ]);
+
+
+foreach ($items as $item) {
+    \App\Models\AccountantInvoiceItem::create([
+        'name' => $item['name'],
+        'accountant_invoice_id' => $invoice->id,
+        'school_id' => auth()->user()->school_id,
+        'description' => $item['description'],
+        'price' => $item['price'],
+    ]);
+}
+
+    return true;
+
+    }
+    
     public function acceptedInvoice(){
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status_from_accountant', true)->orderBy('created_at', 'desc')->get();
     }

@@ -1,19 +1,18 @@
 <template>
     <div data-app>
-
         <!-- End of Right modal content -->
 
         <div class="row">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="h-screen bg-white">
+                <div class="h-screen card bg-white">
                     <div class="pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar bg-white">
                             <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
                                     type="button"
-                                    class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle"
+                                    class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle font-semibold"
                                     data-bs-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false"
@@ -22,17 +21,14 @@
                                 </button>
 
                                 <div class="dropdown-menu">
-                                    <a
-                                        class="dropdown-item"
-                                        href="#"
-                                    >
+                                    <a class="dropdown-item" href="#">
                                         <v-icon size="18" class="me-1"
                                             >mdi-cart</v-icon
                                         >
                                         Sales</a
                                     >
                                     <a
-                                        class="dropdown-item"
+                                        class="dropdown-item font-semibold"
                                         href="#"
                                         @click="
                                             getSpecificLegerEntries('Income');
@@ -47,12 +43,12 @@
                                     >
 
                                     <a
-                                        class="dropdown-item"
+                                        class="dropdown-item font-semibold"
                                         href="#"
                                         @click="
                                             getSpecificLegerEntries('Expense');
                                             setLegerEntry(
-                                                'Expense Entry Selected',
+                                                'Expense Entry Selected'
                                             );
                                         "
                                         ><v-icon size="16" class="me-1"
@@ -62,7 +58,7 @@
                                     >
 
                                     <a
-                                        class="dropdown-item"
+                                        class="dropdown-item font-semibold"
                                         href="#"
                                         @click="
                                             (dialog = true),
@@ -80,7 +76,7 @@
                             <div class="btn-group d-block mb-0 mx-2">
                                 <button
                                     type="button"
-                                    class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle"
+                                    class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle font-semibold"
                                     data-bs-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false"
@@ -88,11 +84,11 @@
                                     {{ setLegerEntryListener }}
                                 </button>
 
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu font-semibold">
                                     <a
                                         v-for="item in legerEntriesListener"
                                         :key="item.id"
-                                        class="dropdown-item"
+                                        class="dropdown-item font-semibold"
                                         href="#"
                                         @click="setChartOfAcountForm(item)"
                                         ><i class="mdi mdi-cart me-1"></i>
@@ -100,7 +96,7 @@
                                     >
                                     <a
                                         v-if="legerEntriesListener == null"
-                                        class="dropdown-item"
+                                        class="dropdown-item font-semibold"
                                         href="#"
                                     >
                                         Please Select Entry</a
@@ -119,6 +115,19 @@
                                         Loans</a
                                     > -->
                                 </div>
+                                <button
+                                    type="button"
+                                    class="bg-gray-200 py-1 mt-2 w-100 waves-effect waves-light dropdown-toggle font-semibold"
+                                    @click="setInvoice"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    {{
+                                        getInvoice
+                                            ? "Invoice Cancel"
+                                            : "Add Invoice"
+                                    }}
+                                </button>
                             </div>
 
                             <hr class="bg-gray-100 mb-1" />
@@ -131,7 +140,7 @@
                                 <a
                                     @click="setTab('entries')"
                                     href="#"
-                                    class="list-group-item border-0 mt-1"
+                                    class="list-group-item border-0 mt-1 font-semibold"
                                     :class="[
                                         getCurrentTab == 'entries'
                                             ? 'text-warning'
@@ -154,7 +163,7 @@
                                 <a
                                     @click="setTab('home')"
                                     href="#"
-                                    class="list-group-item border-0 mt-1"
+                                    class="list-group-item border-0 mt-1 font-semibold"
                                     :class="[
                                         getCurrentTab == 'home'
                                             ? 'text-warning'
@@ -168,7 +177,7 @@
                                 <a
                                     @click="setTab('accepted')"
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 font-semibold"
                                     :class="[
                                         getCurrentTab == 'accepted'
                                             ? 'text-warning'
@@ -182,7 +191,7 @@
                                 <a
                                     @click="setTab('rejected')"
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 font-semibold"
                                     :class="[
                                         getCurrentTab == 'rejected'
                                             ? 'text-warning'
@@ -196,7 +205,7 @@
                                 <a
                                     @click="setTab('starred')"
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 font-semibold"
                                     :class="[
                                         getCurrentTab == 'starred'
                                             ? 'text-warning'
@@ -210,7 +219,7 @@
                                 <a
                                     @click="setTab('deleted')"
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 font-semibold"
                                     :class="[
                                         getCurrentTab == 'deleted'
                                             ? 'text-warning'
@@ -223,7 +232,7 @@
                                 >
                             </div>
 
-                            <div class="mt-2 ml-3">
+                            <!-- <div class="mt-2 ml-3">
                                 <h5>
                                     <span
                                         class="badge rounded-pill p-1 px-2 badge-soft-secondary"
@@ -244,7 +253,7 @@
                                 <p class="text-muted font-12 mb-0">
                                     7 (25%) of 35 incomplete tasks
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- End Left sidebar -->
 
@@ -260,32 +269,36 @@
                                     <entries
                                         v-show="
                                             getCurrentTab == 'entries' &&
-                                            getChartOfAcountForm == ''
+                                            getChartOfAcountForm == '' && !getInvoice
                                         "
                                     ></entries>
 
                                     <school-fee
                                         v-show="
                                             getCurrentTab == 'entries' &&
-                                            getChartOfAcountForm !== ''
+                                            getChartOfAcountForm !== '' && !getInvoice
                                         "
                                     ></school-fee>
 
+                                    <invoice-create
+                                        v-show="getInvoice"
+                                    ></invoice-create>
+
                                     <div></div>
                                     <requisitions
-                                        v-show="getCurrentTab == 'home'"
+                                        v-show="getCurrentTab == 'home' && !getInvoice"
                                     ></requisitions>
                                     <accepted-requisitions
-                                        v-show="getCurrentTab == 'accepted'"
+                                        v-show="getCurrentTab == 'accepted' && !getInvoice"
                                     ></accepted-requisitions>
                                     <deleted-requisitions
-                                        v-show="getCurrentTab == 'deleted'"
+                                        v-show="getCurrentTab == 'deleted' && !getInvoice"
                                     ></deleted-requisitions>
                                     <starred-requisitions
-                                        v-show="getCurrentTab == 'starred'"
+                                        v-show="getCurrentTab == 'starred' && !getInvoice"
                                     ></starred-requisitions>
                                     <rejected-requisitions
-                                        v-show="getCurrentTab == 'rejected'"
+                                        v-show="getCurrentTab == 'rejected' && !getInvoice"
                                     ></rejected-requisitions>
                                 </div>
                                 <!-- </transition> -->
@@ -313,6 +326,7 @@ import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
 import SchoolFee from "./Invoices/Forms/SchoolFee.vue";
+import InvoiceCreate from "./Invoices/InvoiceCreate.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -326,6 +340,7 @@ export default {
         StarredRequisitions,
         RejectedRequisitions,
         ViewInvoice,
+        InvoiceCreate,
 
         Entries,
 
@@ -377,6 +392,10 @@ export default {
             ];
         },
 
+        getInvoice() {
+            return this.$store.getters["AccountantInvoiceModule/getInvoice"];
+        },
+
         legerEntriesListener() {
             return this.legerEntries !== null ? this.legerEntries.data : null;
         },
@@ -395,6 +414,10 @@ export default {
         //Add methods...
         setTab(tab) {
             this.$store.dispatch("AccountantInvoiceModule/setTab", tab);
+        },
+
+        setInvoice() {
+            this.$store.dispatch("AccountantInvoiceModule/setInvoice");
         },
 
         setChartOfAcountForm(tab) {

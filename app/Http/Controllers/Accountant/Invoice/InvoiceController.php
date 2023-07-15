@@ -29,6 +29,11 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoiceView($request)]);
     }
 
+    public function createInvoice(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->createInvoice($request)]);
+    }
+    
     public function acceptInvoice(Request $request, InvoiceService $invoiceService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
         event(new \App\Events\NewPostPublished('created'));

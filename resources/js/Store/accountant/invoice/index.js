@@ -18,6 +18,8 @@ export default {
             invoiceView: false,
             invoiceId: null,
 
+            setInvoice: false,
+
             // SNACKBAR
             snackBarState: false,
             snackBarMessage: 'Successfully submited',

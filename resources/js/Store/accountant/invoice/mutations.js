@@ -24,4 +24,8 @@ export default {
         state.paymentView = !state.paymentView;
         state.paymentId = id;
     },
+
+    setInvoice(state){
+        state.setInvoice = !state.setInvoice;
+    },
 };

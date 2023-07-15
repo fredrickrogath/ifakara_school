@@ -34,6 +34,10 @@ export default {
     getPaymentId(state){
         return state.paymentId;
     },
+
+    getInvoice(state){
+        return state.setInvoice;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state
