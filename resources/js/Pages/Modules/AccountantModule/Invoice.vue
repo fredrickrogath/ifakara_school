@@ -157,6 +157,29 @@
 
                             <div class="mail-list">
                                 <span class="text-center pl-3 mx-auto"
+                                    >From Invoice Creation</span
+                                >
+
+                                <a
+                                    @click="setTab('invoices')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1 font-semibold"
+                                    :class="[
+                                        getCurrentTab == 'invoices'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >All Invoices
+                                </a>
+                            </div>
+
+                            <hr class="bg-gray-100 mb-1 mt-0" />
+
+                            <div class="mail-list">
+                                <span class="text-center pl-3 mx-auto"
                                     >From Procurement</span
                                 >
 
@@ -285,6 +308,7 @@
                                     ></invoice-create>
 
                                     <div></div>
+                                    <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
                                     <requisitions
                                         v-show="getCurrentTab == 'home' && !getInvoice"
                                     ></requisitions>
@@ -327,6 +351,8 @@ import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
 import SchoolFee from "./Invoices/Forms/SchoolFee.vue";
 import InvoiceCreate from "./Invoices/InvoiceCreate.vue";
+import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
+import InvoiceCreationView from "./Invoices/InvoiceCreation/InvoiceCreationView.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -341,6 +367,8 @@ export default {
         RejectedRequisitions,
         ViewInvoice,
         InvoiceCreate,
+        InvoiceCreation,
+        InvoiceCreationView,
 
         Entries,
 

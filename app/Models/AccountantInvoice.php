@@ -21,4 +21,9 @@ class AccountantInvoice extends Model
         'status_from_financial_secretary',
         'status_from_financial_internalAuditor',
     ];
+
+    public function invoiceItems()
+    {
+        return $this->hasMany('App\Models\AccountantInvoiceItem','accountant_invoice_id','id');
+    }
 }

@@ -28,6 +28,10 @@ class InvoiceService
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
     }
 
+    public function getInvoicesCreation(){
+        return \App\Models\AccountantInvoice::with('invoiceItems')->orderBy('created_at', 'desc')->get();
+    }
+    
     public function getInvoiceView($request){
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }
