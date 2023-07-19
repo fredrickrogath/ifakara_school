@@ -50,7 +50,7 @@ class ToolService
     }
 
     public function get_tools(){
-        return \App\Models\Tool::where('broken', false)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Tool::where('broken', false)->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getToolsForInternalAuditor($request){
@@ -58,19 +58,19 @@ class ToolService
     }
 
     public function getSellersList(){
-        return \App\Models\Seller::orderBy('created_at', 'desc')->get();
+        return \App\Models\Seller::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
     
     public function getBrokenTools(){
-        return \App\Models\Tool::where('broken', true)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Tool::where('broken', true)->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
     
     public function getStarredTools(){
-        return \App\Models\Tool::where('starred', true)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Tool::where('starred', true)->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public  function getTrashedTools(){
-        return \App\Models\Tool::onlyTrashed()->orderBy('created_at', 'desc')->get();
+        return \App\Models\Tool::onlyTrashed()->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
     
     public function updateTools($request){
@@ -127,7 +127,7 @@ class ToolService
     }
 
     public function headDashboardGetTools(){
-        $totalTools = \App\Models\Tool::orderBy('created_at', 'desc')->get();
+        $totalTools = \App\Models\Tool::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
         $newTools = 1;
         $brokenTools = 0;
         return [
@@ -140,7 +140,7 @@ class ToolService
     }
 
     public function getToolDashboardData(){
-        $totalTools = \App\Models\Tool::orderBy('created_at', 'desc')->get();
+        $totalTools = \App\Models\Tool::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
         $newTools = 1;
         $brokenTools = 0;
         

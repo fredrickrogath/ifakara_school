@@ -99,7 +99,7 @@ class InvoiceService
 
 
     public function getSpecificLegerEntries(){
-        return \App\Models\ChartsOfAccount::where('account_type' ,'=', 'Income')->get();
+        return \App\Models\ChartsOfAccount::where('school_id', auth()->user()->school_id)->where('account_type' ,'=', 'Income')->get();
     }
 
     public function getLegerEntries(){

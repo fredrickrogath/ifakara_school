@@ -361,7 +361,7 @@ export default {
             axios.get("/accountant/getInvoicesCreation").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data)
+                // console.log(response.data.data)
             });
         },
 

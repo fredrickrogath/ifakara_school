@@ -34,6 +34,7 @@ class UploadService
 
     public function getUploads(){
         return \App\Models\Upload::with('user')
+        ->where('school_id', auth()->user()->school_id)
         ->join('users', 'users.id', '=', 'uploads.user_id')
         ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
         ->where('users.role', 6)
@@ -44,6 +45,7 @@ class UploadService
 
     public function getNewUploads(){
         return \App\Models\Upload::with('user')
+        ->where('school_id', auth()->user()->school_id)
         ->join('users', 'users.id', '=', 'uploads.user_id')
         ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
         ->where('users.role', 6)
@@ -58,6 +60,7 @@ class UploadService
 
     public function getTrashedUploads(){
         return \App\Models\Upload::with('user')
+        ->where('school_id', auth()->user()->school_id)
         ->onlyTrashed()
         ->join('users', 'users.id', '=', 'uploads.user_id')
         ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
@@ -76,7 +79,7 @@ class UploadService
     }
 
     public function headDashboardGetUploads(){
-        $totalUploads = \App\Models\Upload::where('user_id', auth()->user()->id)->get();
+        $totalUploads = \App\Models\Upload::where('school_id', auth()->user()->school_id)->get();
 
         return [
             'totalUploads' => $totalUploads->count(),
