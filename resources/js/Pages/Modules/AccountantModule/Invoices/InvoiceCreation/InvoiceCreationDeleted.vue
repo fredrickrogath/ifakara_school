@@ -10,7 +10,7 @@
 
             <!-- Warning Alert Modal -->
             <div
-                id="warning-alert-modal2"
+                id="warning-alert-modal"
                 class="modal fade"
                 tabindex="-1"
                 role="dialog"
@@ -27,14 +27,15 @@
                                     Are you sure you want to delete this data ?
                                 </h4>
                                 <p class="mt-3">
-                                    This operation can not be reversed.
+                                    Do not worry, deleting this can be restored
+                                    in your trash within 30 days.
                                 </p>
                                 <div class="flex justify-around">
                                     <button
                                         type="button"
                                         class="btn btn-sm btn-warning my-1 text-white"
                                         data-bs-dismiss="modal"
-                                        @click="permanentDeleteInvoice()"
+                                        @click="deleteInvoice()"
                                     >
                                         Continue
                                     </button>
@@ -60,7 +61,7 @@
                 <v-spacer></v-spacer>
 
                 <snackbar message="Task completed successfully"></snackbar>
-
+                
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -83,19 +84,19 @@
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-                                <v-icon
+                                <!-- <v-icon
                                     v-if="header.value == 'delete'"
                                     size="22"
                                     type="button"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal2"
+                                    data-bs-target="#warning-alert-modal"
                                     @click="setIdForAction(items[idx]['id'])"
                                 >
                                     mdi-delete
-                                </v-icon>
+                                </v-icon> -->
 
                                 <v-icon
-                                        v-if="header.value == 'starred'"
+                                        v-if="header.value == 'delete'"
                                         size="22"
                                         :class="
                                             item[header.value]
@@ -113,10 +114,35 @@
                                         mdi-restore
                                     </v-icon>
 
+                                <v-icon
+                                    v-if="header.value == 'view'"
+                                    size="22"
+                                    @click=" setInvoiceView(items[idx]['id'])"
+                                >
+                                    mdi-eye
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'starred'"
+                                    size="22"
+                                    :class="
+                                        item[header.value] ? 'text-warning' : ''
+                                    "
+                                    @click="
+                                        starredInvoice(
+                                            items[idx]['id'],
+                                            item[header.value],
+                                            header.value
+                                        )
+                                    "
+                                >
+                                    mdi-star
+                                </v-icon>
+
                                 <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'id'"
-                                    >{{ item[header.value] }}</span
+                                    class="text-green-500 italic font-semibold"
+                                    v-else-if="header.value == 'total'"
+                                    >{{ formattedPrice(item[header.value]) }}</span
                                 >
 
                                 <span
@@ -127,7 +153,7 @@
                                     }}</span
                                 >
 
-                                <span
+                                <!-- <span
                                     class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
@@ -137,8 +163,9 @@
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value === 'sellers'"
-                                >
+                                    v-else-if="header.value == 'sellers'"
+                                    >
+                                    
                                     <span
                                         v-for="seller in item[header.value]"
                                         :key="seller.id"
@@ -166,93 +193,60 @@
                                             </v-menu>
                                         </div>
                                     </span>
-                                </span>
+                                    
+                                    </span
+                                > -->
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'tools'"
+                                    v-else-if="header.value == 'invoice_items'"
                                 >
-                                    <div v-for="tool in item[header.value]">
+                                    <div v-for="item in item[header.value]">
                                         <span>
-                                            {{ tool.name }}
+                                            Name {{ item.name }}
                                         </span>
-                                        <!-- <span class="mx-1">
-                                            {{ formattedPrice(tool.price) }}
-                                        </span> -->
 
-                                        <!-- <span class="px-1"> * </span> -->
+                                        <v-icon
+                                                    size="20"
+                                                    class="mb-1 px-1"
+                                                    >mdi-hand-pointing-right</v-icon
+                                                >
 
-                                        <!-- <span>
-                                            {{ tool.count }}
-                                        </span> -->
+                                        <span>
+                                           Price <span class="text-green-500">{{ formattedPrice(item.price) }}</span>
+                                        </span>
 
-                                        <!-- <span class="px-1"> = </span> -->
+                                        <v-icon
+                                                    size="20"
+                                                    class="mb-1 px-1"
+                                                    >mdi-hand-pointing-right</v-icon
+                                                >
 
-                                        <!-- <span>
-                                            {{
-                                                formattedPrice(
-                                                    tool.price * tool.count
-                                                )
-                                            }}
-                                        </span> -->
-                                        
-                                        <!-- <span class="px-1 font-bold"> {{ tool.id == item[header.value].length? ' . ': ' , ' }} </span> -->
+                                        <span>
+                                           Description {{ item.description }}
+                                        </span>
                                     </div>
                                 </span>
 
                                 <!-- <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'tool_sum'"
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'invoice_items'"
                                 >
-                                    {{
-                                        formattedPrice(
-                                            totalPrice(item.invoice_tool)
-                                        )
-                                    }}
+                                    <div v-for="item in item[header.value]">
+                                        <span>
+                                            {{ item.name }}
+                                        </span>
+                                    </div>
                                 </span> -->
 
-                                <!-- <v-edit-dialog
-                                    v-else
-                                    :return-value.sync="item[header.value]"
-                                    @save="
-                                        save(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                    @cancel="cancel"
-                                    @open="open"
-                                    @close="close"
-                                    large
+                                <!-- <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'tool_sum'"
                                 >
-                                    <span
-                                        class="text-gray-600"
-                                        :class="
-                                            item[header.value] == null &&
-                                            header.value !== 'action' // header.value == 'level1'
-                                                ? 'bg-gray-100 italic rounded px-1'
-                                                : ''
-                                        "
-                                        >{{
-                                            item[header.value] !== null
-                                                ? header.value == "price"
-                                                    ? formattedPrice(
-                                                          item[header.value]
-                                                      )
-                                                    : item[header.value]
-                                                : "Empty"
-                                        }}</span
-                                    >
-
-                                    <template v-slot:input>
-                                        <v-text-field
-                                            v-model="item[header.value]"
-                                            label="Edit"
-                                            single-line
-                                        ></v-text-field>
-                                    </template>
-                                </v-edit-dialog> -->
+                                    {{ 
+                                        formattedPrice(totalPrice(item.invoice_tool))
+                                    }}
+                                </span> -->
                             </td>
                         </tr>
                     </tbody>
@@ -266,10 +260,9 @@
 
 <script>
 import moment from "moment";
-import Spinner from "../../.././Components/SpinnerLoader.vue";
-import Snackbar from "../../.././Components/Snackbar.vue";
-import SellerProfile from "../../../Components/SellerProfile.vue";
-
+import Spinner from "../../../../Components/SpinnerLoader.vue";
+import Snackbar from "../../../../Components/Snackbar";
+import SellerProfile from "../../../../Components/SellerProfile.vue";
 export default {
     components: {
         Spinner,
@@ -299,14 +292,14 @@ export default {
 
     mounted() {
         this.showLoader = true;
-        this.getTrashedInvoices();
+        this.getInvoices();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
                 // console.log('abc');
-                this.getTrashedInvoices();
+                this.getInvoices();
             }
         );
     },
@@ -326,21 +319,21 @@ export default {
                 //     value: "id",
                 // },
                 {
-                    text: "Seller",
-                    value: "sellers",
+                    text: "Total",
+                    value: "total",
                 },
                 {
-                    text: "Tools",
-                    value: "tools",
+                    text: "Items",
+                    value: "invoice_items",
                 },
                 // {
                 //     text: "Total",
                 //     value: "tool_sum",
                 // },
+                // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
-                // { text: "View", value: "view" },
-                { text: "Restore", value: "starred" },
-                { text: "Delete", value: "delete" },
+                { text: "Action", value: "delete" },
+                // { text: "Created At", value: "created_at" },
             ],
             invoices: [],
 
@@ -379,12 +372,12 @@ export default {
             }, 0);
         },
 
-        setSnackBarState() {
-            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        getSellerProfile(seller) {
+            this.sellerInfo = seller
         },
 
-        getTrashedInvoices() {
-            axios.get("/procurement/getTrashedInvoices").then((response) => {
+        getInvoices() {
+            axios.get("/accountant/getTrashedCreateInvoice").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
@@ -393,13 +386,12 @@ export default {
 
         async restoreInvoice(id,data ,column) {
             axios
-                .post("/procurement/restoreInvoice", {
+                .post("/accountant/restoreCreateInvoice", {
                     id: id,
                     data: data,
                     column: column,
                 })
                 .then((response) => {
-                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
@@ -408,63 +400,52 @@ export default {
             // handle response here
         },
 
-        async updateTools(id, column, data) {
-            axios
-                .post("/procurement/updateTools", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async updateTools(id, column, data) {
+        //     axios
+        //         .post("/accountant/updateTools", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
         async deleteInvoice() {
             axios
-                .post("/procurement/deleteInvoice", {
+                .post("/accountant/deleteCreateInvoice", {
                     id: this.idForAction,
                 })
                 .then((response) => {
-                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // console.log(response.data.data);
                 });
             // handle response here
         },
 
-        async permanentDeleteInvoice() {
-            axios
-                .post("/procurement/permanentDeleteInvoice", {
-                    id: this.idForAction,
-                })
-                .then((response) => {
-                    this.setSnackBarState();
-                    // this.students = response.data.data;
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async starredInvoice(id,data ,column) {
+        //     axios
+        //         .post("/accountant/starredInvoice", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async starredInvoice(id,data ,column) {
-            axios
-                .post("/procurement/starredInvoice", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    this.setSnackBarState();
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
+        setInvoiceView(id) {
+            this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
         },
 
         save(id, column, data) {

@@ -347,7 +347,7 @@ export default {
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
                 { text: "Restore", value: "starred" },
-                { text: "Delete", value: "delete" },
+                // { text: "Delete", value: "delete" },
             ],
             invoices: [],
 

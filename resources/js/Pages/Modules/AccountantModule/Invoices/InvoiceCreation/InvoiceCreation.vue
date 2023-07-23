@@ -121,7 +121,7 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-green-500 italic font-semibold"
                                     v-else-if="header.value == 'total'"
                                     >{{ formattedPrice(item[header.value]) }}</span
                                 >
@@ -194,7 +194,7 @@
                                                 >
 
                                         <span>
-                                           Price {{ formattedPrice(item.price) }}
+                                           Price <span class="text-green-500">{{ formattedPrice(item.price) }}</span>
                                         </span>
 
                                         <v-icon
@@ -313,7 +313,7 @@ export default {
                 // },
                 // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
-                // { text: "View", value: "view" },
+                { text: "Action", value: "delete" },
                 // { text: "Created At", value: "created_at" },
             ],
             invoices: [],
@@ -381,17 +381,17 @@ export default {
         //     // handle response here
         // },
 
-        // async deleteInvoice() {
-        //     axios
-        //         .post("/accountant/deleteInvoice", {
-        //             id: this.idForAction,
-        //         })
-        //         .then((response) => {
-        //             // this.students = response.data.data;
-        //             // console.log(response.data.data);
-        //         });
-        //     // handle response here
-        // },
+        async deleteInvoice() {
+            axios
+                .post("/accountant/deleteCreateInvoice", {
+                    id: this.idForAction,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
 
         // async starredInvoice(id,data ,column) {
         //     axios

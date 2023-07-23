@@ -360,6 +360,9 @@ Route::middleware([
         Route::get('/getInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoices'])->name('getInvoices');
         Route::get('/getInvoicesCreation', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoicesCreation'])->name('getInvoicesCreation');
         Route::post('/createInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'createInvoice'])->name('createInvoice');
+        Route::post('/deleteCreateInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'deleteCreateInvoice'])->name('deleteCreateInvoice');
+        Route::get('/getTrashedCreateInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getTrashedCreateInvoice'])->name('getTrashedCreateInvoice');
+        Route::post('/restoreCreateInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'restoreCreateInvoice'])->name('restoreCreateInvoice');
         Route::post('/getInvoiceView', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoiceView'])->name('getInvoiceView');
         Route::get('/getStarredInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getStarredInvoices'])->name('getStarredInvoices');
         Route::get('/getTrashedInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');

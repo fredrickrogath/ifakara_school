@@ -301,10 +301,10 @@ export default {
                     text: "Total",
                     value: "tool_sum",
                 },
-                { text: "Starred", value: "starred" },
+                // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
-                { text: "Delete", value: "delete" },
+                // { text: "Delete", value: "delete" },
             ],
             invoices: [],
 

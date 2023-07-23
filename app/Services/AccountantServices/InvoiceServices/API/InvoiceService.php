@@ -24,29 +24,45 @@ class InvoiceService
     //     return false;
     // }
 
-    public function getInvoices(){
-        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
-    }
+    // public function getInvoices(){
+    //     return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
+    // }
 
     public function getInvoiceView($request){
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }
 
-    public function acceptedInvoice(){
-        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status_from_financial', true)->orderBy('created_at', 'desc')->get();
+    public function getInvoicesCreation($request){
+        return \App\Models\AccountantInvoice::with('invoiceItems')->where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
     }
 
-    public function rejectedInvoice(){
-        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
+    public function deleteCreateInvoice($request){
+        return \App\Models\AccountantInvoice::findoRFail($request->id)->delete();
     }
 
-    public function getTrashedInvoices(){
-        return \App\Models\Invoice::onlyTrashed()->with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
+    public function getTrashedCreateInvoice($request){
+        return \App\Models\AccountantInvoice::onlyTrashed()->with('invoiceItems')->where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function restoreCreateInvoice($request){
+        return \App\Models\AccountantInvoice::onlyTrashed()->findoRFail($request->id)->restore();
+    }
+    
+    public function acceptedInvoice($request){
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', $request->school_id)->where('status_from_financial_accountant', true)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function rejectedInvoice($request){
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', $request->school_id)->where('status_from_financial_accountant', false)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getTrashedInvoices($request){
+        return \App\Models\Invoice::onlyTrashed()->with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function acceptInvoice($request){
         return \App\Models\Invoice::find($request->id)->update([
-            'status_from_financial' => !$request->status_from_financial,
+            'status_from_financial_accountant' => !$request->status_from_financial_accountant,
         ]);
     }
 
@@ -70,8 +86,8 @@ class InvoiceService
     //     return \App\Models\Invoice::onlyTrashed()->with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
     // }
 
-    public function getStarredInvoices(){
-        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('starred', true)->where('status', true)->orderBy('created_at', 'desc')->get();
+    public function getStarredInvoices($request){
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', $request->school_id)->where('starred', true)->where('status_from_accountant', true)->orderBy('created_at', 'desc')->get();
     }
 
     // public function restoreInvoice($request){

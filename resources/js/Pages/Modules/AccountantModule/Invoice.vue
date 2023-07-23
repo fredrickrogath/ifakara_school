@@ -160,7 +160,8 @@
                                     >From Invoice Creation</span
                                 >
 
-                                <a
+                                <div class="d-flex">
+                                    <a
                                     @click="setTab('invoices')"
                                     href="#"
                                     class="list-group-item border-0 mt-1 font-semibold"
@@ -172,8 +173,24 @@
                                     ><i
                                         class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
                                     ></i
-                                    >All Invoices
+                                    >Invoices
                                 </a>
+
+                                <a
+                                    @click="setTab('invoicesDeleted')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1 font-semibold"
+                                    :class="[
+                                        getCurrentTab == 'invoicesDeleted'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Deleted
+                                </a>
+                                </div>
                             </div>
 
                             <hr class="bg-gray-100 mb-1 mt-0" />
@@ -309,6 +326,7 @@
 
                                     <div></div>
                                     <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
+                                    <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
                                     <requisitions
                                         v-show="getCurrentTab == 'home' && !getInvoice"
                                     ></requisitions>
@@ -353,10 +371,11 @@ import SchoolFee from "./Invoices/Forms/SchoolFee.vue";
 import InvoiceCreate from "./Invoices/InvoiceCreate.vue";
 import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
 import InvoiceCreationView from "./Invoices/InvoiceCreation/InvoiceCreationView.vue";
+import InvoiceCreationDeleted from "./Invoices/InvoiceCreation/InvoiceCreationDeleted.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
-import Select2 from "v-select2-component";
+// import Select2 from "v-select2-component";
 
 export default {
     components: {
@@ -369,10 +388,11 @@ export default {
         InvoiceCreate,
         InvoiceCreation,
         InvoiceCreationView,
+        InvoiceCreationDeleted,
 
         Entries,
 
-        Select2,
+        // Select2,
 
         SchoolFee,
     },
