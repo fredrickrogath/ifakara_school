@@ -90,6 +90,10 @@ class InvoiceService
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', $request->school_id)->where('starred', true)->where('status_from_accountant', true)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getLegerEntries($request){
+        return \App\Models\Entry::with('chartOfAccount', 'user')->where('school_id',  $request->school_id)->orderBy('created_at', 'desc')->get();
+    }
+
     // public function restoreInvoice($request){
     //     return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->restore();
     // }

@@ -21,7 +21,7 @@ class InvoiceController extends Controller
     
     public function deleteCreateInvoice(Request $request, InvoiceService $invoiceService){
         // $this->authorize('authorizeAccountant', \App\Models\User::class);
-        event(new \App\Events\NewPostPublished('created'));
+        // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->deleteCreateInvoice($request)]);
     }
 
@@ -32,7 +32,7 @@ class InvoiceController extends Controller
 
     public function restoreCreateInvoice(Request $request, InvoiceService $invoiceService){
         // $this->authorize('authorizeAccountant', \App\Models\User::class);
-        event(new \App\Events\NewPostPublished('created'));
+        // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->restoreCreateInvoice($request)]);
     }
 
@@ -75,25 +75,31 @@ class InvoiceController extends Controller
 
     public function deleteInvoice(Request $request, InvoiceService $invoiceService){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
-        event(new \App\Events\NewPostPublished('created'));
+        // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->deleteInvoice($request)]);
     }
 
     public function restoreInvoice(Request $request, InvoiceService $invoiceService){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
-        event(new \App\Events\NewPostPublished('created'));
+        // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->restoreInvoice($request)]);
     }
 
     public function permanentDeleteInvoice(Request $request, InvoiceService $invoiceService){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
-        event(new \App\Events\NewPostPublished('created'));
+        // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->permanentDeleteInvoice($request)]);
     }
     
     public function starredInvoice(Request $request, InvoiceService $invoiceService){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
-        event(new \App\Events\NewPostPublished('created'));
+        // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->starredInvoice($request)]);
+    }
+
+    public function getLegerEntries(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->getLegerEntries($request)]);
     }
 }

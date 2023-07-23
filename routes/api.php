@@ -38,6 +38,7 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
     // Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
     
     // Route::get('/getInvoices', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoices'])->name('getInvoices');
+    Route::post('/getLegerEntries', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getLegerEntries'])->name('getLegerEntries');
         Route::post('/getInvoiceView', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoiceView'])->name('getInvoiceView');
         Route::post('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
         Route::post('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
