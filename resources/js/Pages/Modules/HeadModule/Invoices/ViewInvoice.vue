@@ -7,13 +7,16 @@
                     ><i class="fe-arrow-left"></i>
                 </strong>
             </a>
-             
+
             <form @submit.prevent="acceptInvoice">
                 <div class="d-flex justify-content-between my-1 mt-2 mr-2">
                     <button
                         type="submit"
                         class="btn btn-success text-white btn-sm waves-effect waves-light"
-                        v-if="this.invoice.status_from_accountant && !this.invoice.status_from_head"
+                        v-if="
+                            this.invoice.status_from_accountant &&
+                            !this.invoice.status_from_head
+                        "
                     >
                         Submit to financial accountant
                     </button>
@@ -287,10 +290,7 @@ export default {
     },
     methods: {
         setInvoiceView() {
-            this.$store.dispatch(
-                "HeadInvoiceModule/setInvoiceView",
-                null
-            );
+            this.$store.dispatch("HeadInvoiceModule/setInvoiceView", null);
         },
 
         formattedDate(date) {
@@ -322,9 +322,11 @@ export default {
                     id: this.getInvoiceId,
                 })
                 .then((response) => {
-                    this.showsubmitButton = false;
-                    this.totalPrice(response.data.data);
-                    this.invoice = response.data.data;
+                    if (response.data.data != null) {
+                        this.showsubmitButton = false;
+                        this.totalPrice(response.data.data);
+                        this.invoice = response.data.data;
+                    }
                 });
         },
 
@@ -370,8 +372,7 @@ export default {
 
     computed: {
         getInvoiceId() {
-            this.id =
-                this.$store.getters["HeadInvoiceModule/getInvoiceId"];
+            this.id = this.$store.getters["HeadInvoiceModule/getInvoiceId"];
             return this.$store.getters["HeadInvoiceModule/getInvoiceId"];
         },
 

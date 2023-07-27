@@ -1,6 +1,5 @@
 <template>
     <div data-app>
-
         <div class="row">
             <!-- Right Sidebar -->
             <div class="col-12">
@@ -27,6 +26,46 @@
                                     ></i
                                     >All Entries
                                 </a>
+                            </div>
+
+                            <hr class="bg-gray-100 mb-1 mt-0" />
+
+                            <div class="mail-list">
+                                <span class="text-center pl-3 mx-auto"
+                                    >From Invoice Creation</span
+                                >
+
+                                <div class="d-flex">
+                                    <a
+                                        @click="setTab('invoices')"
+                                        href="#"
+                                        class="list-group-item border-0 mt-1 font-semibold"
+                                        :class="[
+                                            getCurrentTab == 'invoices'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                        ></i
+                                        >Invoices
+                                    </a>
+
+                                    <a
+                                        @click="setTab('invoicesDeleted')"
+                                        href="#"
+                                        class="list-group-item border-0 mt-1 font-semibold"
+                                        :class="[
+                                            getCurrentTab == 'invoicesDeleted'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                        ></i
+                                        >Deleted
+                                    </a>
+                                </div>
                             </div>
 
                             <hr class="bg-gray-100 mb-1 mt-0" />
@@ -134,7 +173,6 @@
                         <!-- End Left sidebar -->
 
                         <div class="inbox-rightbar pt-1 h-screen bg-white px-0">
-
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
@@ -144,23 +182,33 @@
 
                                 <div v-show="!getInvoiceView">
                                     <entries
-                                    v-show="getCurrentTab == 'entries'"
-                                ></entries>
-                                <requisitions
-                                    v-show="getCurrentTab == 'home'"
-                                ></requisitions>
-                                <accepted-requisitions
-                                    v-show="getCurrentTab == 'accepted'"
-                                ></accepted-requisitions>
-                                <deleted-requisitions
-                                    v-show="getCurrentTab == 'deleted'"
-                                ></deleted-requisitions>
-                                <starred-requisitions
-                                    v-show="getCurrentTab == 'starred'"
-                                ></starred-requisitions>
-                                <rejected-requisitions
-                                    v-show="getCurrentTab == 'rejected'"
-                                ></rejected-requisitions>
+                                        v-show="getCurrentTab == 'entries'"
+                                    ></entries>
+
+                                    <invoice-creation
+                                        v-show="getCurrentTab == 'invoices'"
+                                    ></invoice-creation>
+                                    <invoice-creation-deleted
+                                        v-show="
+                                            getCurrentTab == 'invoicesDeleted'
+                                        "
+                                    ></invoice-creation-deleted>
+
+                                    <requisitions
+                                        v-show="getCurrentTab == 'home'"
+                                    ></requisitions>
+                                    <accepted-requisitions
+                                        v-show="getCurrentTab == 'accepted'"
+                                    ></accepted-requisitions>
+                                    <deleted-requisitions
+                                        v-show="getCurrentTab == 'deleted'"
+                                    ></deleted-requisitions>
+                                    <starred-requisitions
+                                        v-show="getCurrentTab == 'starred'"
+                                    ></starred-requisitions>
+                                    <rejected-requisitions
+                                        v-show="getCurrentTab == 'rejected'"
+                                    ></rejected-requisitions>
                                 </div>
                                 <!-- </transition> -->
                             </div>
@@ -186,6 +234,8 @@ import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
+import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
+import InvoiceCreationDeleted from "./Invoices/InvoiceCreation/InvoiceCreationDeleted.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -199,6 +249,8 @@ export default {
         StarredRequisitions,
         RejectedRequisitions,
         ViewInvoice,
+        InvoiceCreation,
+        InvoiceCreationDeleted,
 
         Entries,
 
@@ -266,12 +318,10 @@ export default {
 
         getSpecificLegerEntries() {
             // console.log("Loading next page");
-            axios
-                .get("/head/getSpecificLegerEntries")
-                .then((response) => {
-                    this.legerEntries = response.data;
-                    // console.log(response.data)
-                });
+            axios.get("/head/getSpecificLegerEntries").then((response) => {
+                this.legerEntries = response.data;
+                // console.log(response.data)
+            });
         },
 
         setLegerEntry(entry) {

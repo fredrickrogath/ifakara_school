@@ -28,6 +28,10 @@ class InvoiceService
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getInvoicesCreation(){
+        return \App\Models\AccountantInvoice::with('invoiceItems')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+    }
+
     public function headDashboardGetInvoices(){
         $procurement = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('status_from_accountant', false)->where('status_from_financial_accountant', false)->orderBy('created_at', 'desc')->get();
         $accountantSchool = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('status_from_accountant', true)->where('status_from_financial_accountant', false)->orderBy('created_at', 'desc')->get();
@@ -80,6 +84,10 @@ class InvoiceService
         return \App\Models\Invoice::onlyTrashed()->with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getTrashedCreateInvoice(){
+        return \App\Models\AccountantInvoice::onlyTrashed()->with('invoiceItems')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+    }
+
     public function getStarredInvoices(){
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->where('starred', true)->orderBy('created_at', 'desc')->get();
     }
@@ -88,13 +96,20 @@ class InvoiceService
         return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->restore();
     }
 
+    public function restoreCreateInvoice($request){
+        return \App\Models\AccountantInvoice::onlyTrashed()->findoRFail($request->id)->restore();
+    }
+
     public function permanentDeleteInvoice($request){
         return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->forceDelete();
     }
 
 
-
-
+    public function verifyInvoiceCreation($request){
+        return \App\Models\AccountantInvoice::find($request->id)->update([
+            'status_from_head' => !$request->status_from_head
+        ]);
+    }
 
 
 

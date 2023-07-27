@@ -116,18 +116,23 @@ Route::middleware([
         */
 
         Route::get('/getInvoices', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'getInvoices'])->name('getInvoices');
+        Route::get('/getInvoicesCreation', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'getInvoicesCreation'])->name('getInvoicesCreation');
         Route::post('/getInvoiceView', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'getInvoiceView'])->name('getInvoiceView');
         Route::get('/getStarredInvoices', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'getStarredInvoices'])->name('getStarredInvoices');
         Route::get('/getTrashedInvoices', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');
+        Route::get('/getTrashedCreateInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'getTrashedCreateInvoice'])->name('getTrashedCreateInvoice');
         Route::post('/permanentDeleteInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'permanentDeleteInvoice'])->name('permanentDeleteInvoice');
         Route::post('/restoreInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'restoreInvoice'])->name('restoreInvoice');
         Route::post('/deleteInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
+        Route::post('/deleteCreateInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'deleteCreateInvoice'])->name('deleteCreateInvoice');
         Route::post('/starredInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'starredInvoice'])->name('starredInvoice');
         Route::get('/acceptedInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
         Route::post('/acceptInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'acceptInvoice'])->name('acceptInvoice');
         Route::get('/rejectedInvoice', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
         Route::get('/getLegerEntries', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'getLegerEntries'])->name('getLegerEntries');
         Route::get('/getSpecificLegerEntries', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'getSpecificLegerEntries'])->name('getSpecificLegerEntries');
+
+        Route::post('/verifyInvoiceCreation', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'verifyInvoiceCreation'])->name('verifyInvoiceCreation');
 
         /*
         |--------------------------------------------------------------------------

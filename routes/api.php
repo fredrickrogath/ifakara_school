@@ -43,6 +43,7 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
         Route::post('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
         Route::post('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
         Route::post('/getInvoicesCreation', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoicesCreation'])->name('getInvoicesCreation');
+        Route::post('/verifyInvoiceCreation', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'verifyInvoiceCreation'])->name('verifyInvoiceCreation');
         Route::post('/getTrashedCreateInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getTrashedCreateInvoice'])->name('getTrashedCreateInvoice');
         Route::post('/getStarredInvoices', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getStarredInvoices'])->name('getStarredInvoices');
         Route::post('/getTrashedInvoices', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');

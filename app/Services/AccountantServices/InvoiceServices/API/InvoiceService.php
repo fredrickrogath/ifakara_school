@@ -66,6 +66,12 @@ class InvoiceService
         ]);
     }
 
+    public function verifyInvoiceCreation($request){
+        return \App\Models\AccountantInvoice::find($request->id)->update([
+            'status_from_financial_accountant' => !$request->status_from_financial_accountant
+        ]);
+    }
+
     public function deleteInvoice($request){
         return \App\Models\Invoice::findoRFail($request->id)->delete();
     }

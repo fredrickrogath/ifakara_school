@@ -102,4 +102,10 @@ class InvoiceController extends Controller
         // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->getLegerEntries($request)]);
     }
+
+    public function verifyInvoiceCreation(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->verifyInvoiceCreation($request)]);
+    }
 }

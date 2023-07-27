@@ -85,6 +85,18 @@
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
                                 <v-icon
+                                    v-if="header.value == 'head'"
+                                    size="22"
+                                >
+                                    {{ items[idx]['status_from_head'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+                                <v-icon
+                                    v-if="header.value == 'finance'"
+                                    size="22"
+                                >
+                                    {{ items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+                                <v-icon
                                     v-if="header.value == 'delete'"
                                     size="22"
                                     type="button"
@@ -313,6 +325,8 @@ export default {
                 // },
                 // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
+                { text: "Head", value: "head" },
+                { text: "Finance", value: "finance" },
                 { text: "Action", value: "delete" },
                 // { text: "Created At", value: "created_at" },
             ],
@@ -343,8 +357,8 @@ export default {
         },
 
         formattedDate(date) {
-            // return moment(date).format("MMMM Do YYYY");
-            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            return moment(date).format("MMMM Do YYYY");
+            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         totalPrice(item) {

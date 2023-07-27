@@ -19,6 +19,11 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoices()]);
     }
 
+    public function getInvoicesCreation(InvoiceService $invoiceService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getInvoicesCreation()]);
+    }
+
     public function headDashboardGetInvoices(InvoiceService $invoiceService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->headDashboardGetInvoices()]);
@@ -50,9 +55,26 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getTrashedInvoices()]);
     }
 
+    public function getTrashedCreateInvoice(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getTrashedCreateInvoice($request)]);
+    }
+
+    public function deleteCreateInvoice(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeHead', \App\Models\User::class);
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->deleteCreateInvoice($request)]);
+    }
+
     public function getStarredInvoices(InvoiceService $invoiceService){
         $this->authorize('authorizeHead', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getStarredInvoices()]);
+    }
+
+    public function verifyInvoiceCreation(Request $request, InvoiceService $invoiceService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->verifyInvoiceCreation($request)]);
     }
     
     // public function updateInvoice(Request $request, InvoiceService $invoiceService){
