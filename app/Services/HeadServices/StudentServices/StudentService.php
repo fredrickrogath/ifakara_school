@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Services\HeadServices\StudentServices;
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentService
 {
@@ -29,6 +31,45 @@ class StudentService
         return false;
     }
 
+    public function processExcelFile($request){
+
+        $file = $request->file('file');
+
+         // Import Excel data using ProductImport class
+         try {
+            Excel::import(new ProductImport, $file);
+            
+            return response()->json(['message' => 'Data imported successfully.'], 200);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            
+            // Handle validation failures (if any)
+            // You can access the validation errors using $failures variable
+            
+            return response()->json(['message' => 'Data import failed.'], 400);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while importing data.'], 500);
+        }
+
+        // return $request->hasFile('file');
+        // $created = \App\Models\Student::create([
+        //     'class_level_id' => $request->classLevel,
+        //     'first_name' => $request->firstName,
+        //     'middle_name' => $request->middleName,
+        //     'last_name' => $request->lastName,
+        //     'gender' => $request->gender,
+        //     'from' => $request->location,
+        //     'parent' => $request->parent,
+        //     'parent_contact' => $request->contact,
+        //     'school_id' => auth()->user()->school_id,
+        // ]);
+
+        // if($created){
+        //     return true;
+        // }
+        // return false;
+    }
+    
     public function getInvoices(){
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }

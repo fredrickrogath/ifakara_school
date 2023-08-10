@@ -45,51 +45,7 @@
                         <tbody>
                             <tr v-for="(item, idx, k) in items" :key="idx">
                                 <td v-for="(header, key) in headers" :key="key">
-                                    <!-- <v-icon
-                                v-if="header.value == 'delete'"
-                                size="22"
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#warning-alert-modal"
-                                @click="setIdForAction(items[idx]['id'])"
-                            >
-                                mdi-delete
-                            </v-icon>
-
-                            <v-icon
-                                v-if="header.value == 'view'"
-                                size="22"
-                                @click="setInvoiceView(items[idx]['id'])"
-                            >
-                                mdi-eye
-                            </v-icon>
-
-                            <v-icon
-                                v-if="header.value == 'edit'"
-                                size="22"
-                                @click="setEditStudent(items[idx]['id'])"
-                            >
-                                mdi-pen
-                            </v-icon> -->
-
-                                    <!-- <v-icon
-                                        v-if="header.value == 'starred'"
-                                        size="22"
-                                        :class="
-                                            item[header.value]
-                                                ? 'text-warning'
-                                                : ''
-                                        "
-                                        @click="
-                                            starredInvoice(
-                                                items[idx]['id'],
-                                                item[header.value],
-                                                header.value
-                                            )
-                                        "
-                                    >
-                                        mdi-star
-                                    </v-icon> -->
+                   
 
                                     <v-icon
                                     v-if="header.value == 'view'"
@@ -98,12 +54,6 @@
                                 >
                                     mdi-eye
                                 </v-icon>
-
-                                    <!-- <span
-                                class="text-gray-600"
-                                v-else-if="header.value == 'id'"
-                                >{{ item[header.value] }}</span
-                            > -->
 
                                     <span
                                         class="text-gray-600 italic font-semibold"

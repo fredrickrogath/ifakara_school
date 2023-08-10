@@ -140,6 +140,7 @@ Route::middleware([
         |--------------------------------------------------------------------------
         */
 
+        Route::post('/processExcelFile', [\App\Http\Controllers\Head\Student\StudentController::class, 'processExcelFile'])->name('processExcelFile');
         Route::get('/getStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudents'])->name('getStudents');
         Route::post('/addStudent', [\App\Http\Controllers\Head\Student\StudentController::class, 'addStudent'])->name('addStudent');
         Route::get('/getStudentClasses', [\App\Http\Controllers\Head\Student\StudentController::class, 'getStudentClasses'])->name('getStudentClasses');

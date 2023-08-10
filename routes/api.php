@@ -18,6 +18,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/studentsCount', function() {
+    return \App\Models\Student::get()->count();
+})->name('studentsCount');
+
+Route::get('/studentsCount', function() {
+    return \App\Models\Student::get()->count();
+})->name('studentsCount');
+
 
 Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
     // Route::post('/shareInvoiceWithFinancial', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'invoiceFromSchool'])->name('invoiceFromSchool');
@@ -37,7 +45,7 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
     // Route::get('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
     // Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
     
-    // Route::get('/getInvoices', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoices'])->name('getInvoices');
+    Route::post('/getInvoices', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoices'])->name('getInvoices');
     Route::post('/getLegerEntries', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getLegerEntries'])->name('getLegerEntries');
         Route::post('/getInvoiceView', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoiceView'])->name('getInvoiceView');
         Route::post('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
@@ -54,6 +62,9 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
         Route::post('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
         Route::post('/acceptInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptInvoice'])->name('acceptInvoice');
         Route::post('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
+        
+        Route::post('/getStudentPayments', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getStudentPayments'])->name('getStudentPayments');
+        Route::post('/getSpecificStudent', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getSpecificStudent'])->name('getSpecificStudent');
 });
 
 /*

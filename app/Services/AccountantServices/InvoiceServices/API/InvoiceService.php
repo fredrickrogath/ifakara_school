@@ -28,6 +28,16 @@ class InvoiceService
     //     return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
     // }
 
+    public function getStudentPayments($request){
+        $currentYear = date('Y');
+        return \App\Models\Student::with(['entries'])->where('school_id', $request->school_id)->whereYear('created_at', $currentYear)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getSpecificStudent($request){
+        // $currentYear = date('Y');
+        return \App\Models\Student::with(['entries'])->where('id', $request->id)->orderBy('created_at', 'desc')->first();
+    }
+
     public function getInvoiceView($request){
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }

@@ -108,4 +108,15 @@ class InvoiceController extends Controller
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->verifyInvoiceCreation($request)]);
     }
+
+    public function getStudentPayments(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        // event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->getStudentPayments($request)]);
+    }
+
+    public function getSpecificStudent(Request $request ,InvoiceService $invoiceService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getSpecificStudent($request)]);
+    }
 }

@@ -9,20 +9,39 @@
                 <div class="col-12">
                     <div class="mt-2 h-screen">
                         <div class="">
-
                             <div>
-                                <div class="col-md-6">
+                                <form
+                                    @submit.prevent="processExcelFile"
+                                    class="flex justify-between"
+                                >
+                                    <template>
+                                        <v-file-input
+                                            :rules="rules"
+                                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                            placeholder="Choose an Excel file"
+                                            prepend-icon="mdi-file-excel "
+                                            label="Excel File"
+                                            show-size
+                                            counter
+                                            class="mt-0 pt-0 mr-12"
+                                            @change="onFileChange"
+                                        ></v-file-input>
+                                    </template>
+
+                                    <div class="shrink">
+                                        <div class="col-md-6">
                                             <div
                                                 class="button-list mb-1 mb-sm-0"
                                             >
-                                                <button v-if="!showLoader"
+                                                <button
+                                                    v-if="!showLoader"
                                                     class="btn btn-sm btn-primary text-white"
                                                     type="submit"
                                                 >
                                                     Submit
                                                 </button>
                                                 <button
-                                                v-else
+                                                    v-else
                                                     class="btn btn-sm btn-primary"
                                                     type="button"
                                                     disabled
@@ -36,6 +55,8 @@
                                                 </button>
                                             </div>
                                         </div>
+                                    </div>
+                                </form>
                             </div>
                             <form @submit.prevent="addStudent">
                                 <div class="row">
@@ -175,14 +196,15 @@
                                             <div
                                                 class="button-list mb-1 mb-sm-0"
                                             >
-                                                <button v-if="!showLoader"
+                                                <button
+                                                    v-if="!showLoader"
                                                     class="btn btn-sm btn-primary text-white"
                                                     type="submit"
                                                 >
                                                     Submit
                                                 </button>
                                                 <button
-                                                v-else
+                                                    v-else
                                                     class="btn btn-sm btn-primary"
                                                     type="button"
                                                     disabled
@@ -311,6 +333,19 @@ export default {
             parent: "",
             contact: "",
 
+            rules: [
+                (value) => {
+                    return (
+                        !value ||
+                        !value.length ||
+                        value[0].size < 20000000 ||
+                        "Avatar size should be less than 20 MB!"
+                    );
+                },
+            ],
+
+            myFile: null,
+
             // totalPrice: 0,
         };
     },
@@ -332,69 +367,16 @@ export default {
             this.totalPrice = 0;
         },
 
-        // async setIdForAction(id) {
-        //     this.idForAction = id;
-        // },
-
-        // formattedPrice(amount) {
-        //     return amount.toLocaleString("sw-TZ", {
-        //         style: "currency",
-        //         currency: "Tsh",
-        //     });
-        // },
-
-        // formattedDate(date) {
-        //     // return moment(date).format("MMMM Do YYYY");
-        //     return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-        // },
-
-        // mySelectEvent(e, action) {
-        //     if (action == "tool") {
-        //         this.id = e.id;
-        //         this.name = e.text;
-        //         this.price = e.price;
-        //         this.toolIsSet = true;
-        //     } else if (action == "count") {
-        //         this.countIsSet = true;
-        //     } else if (action == "supplier") {
-        //         this.supplier = e.text;
-        //         this.supplierId = e.id;
-        //         this.supplierIsSet = true;
-        //     }
-
-        //     if (this.toolIsSet && this.countIsSet) {
-        //         this.buildInvoiceTools();
-        //     }
-        // },
-
-        // myChangeEvent(e) {
-        //     console.log(e);
-        // },
-
-        // async buildInvoiceTools() {
-        //     this.totalPrice = this.totalPrice + this.price * this.count;
-
-        //     const newTool = {
-        //         id: this.id,
-        //         name: this.name,
-        //         price: this.price * this.count,
-        //         count: this.count,
-        //     };
-
-        //     this.tools.push(newTool);
-
-        //     this.toolIsSet = false;
-        //     this.countIsSet = false;
-
-        //     this.tool = "";
-        //     this.count = "";
-        // },
         setAddStudent() {
             this.$store.dispatch("HeadStudentModule/setAddStudent");
         },
 
         setSnackBarState() {
             this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
+        async onFileChange(file) {
+            this.myFile = file;
         },
 
         async addStudent() {
@@ -425,7 +407,7 @@ export default {
                     this.parent = "";
                     this.contact = "";
 
-                    this.setSnackBarState()
+                    this.setSnackBarState();
                 });
         },
 
@@ -444,17 +426,13 @@ export default {
         //     });
         // },
 
-        // async updateTools(id, column, data) {
-        //     axios
-        //         .post("/procurement/updateTools", {
-        //             id: id,
-        //             data: data,
-        //             column: column,
-        //         })
-        //         .then((response) => {
-        //             // console.log(response.data.data);
-        //         });
-        // },
+        async processExcelFile() {
+            let formData = new FormData();
+            formData.append("file", this.myFile);
+            axios.post("/head/processExcelFile", formData).then((response) => {
+                console.log(response.data.data);
+            });
+        },
 
         // async starredTools(id, data, column) {
         //     axios

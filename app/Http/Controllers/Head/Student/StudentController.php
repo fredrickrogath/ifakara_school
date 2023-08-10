@@ -20,6 +20,12 @@ class StudentController extends Controller
         return response()->json(['data' => $studentService->addStudent($request)]);
     }
 
+    public function processExcelFile(Request $request, StudentService $studentService){
+        $this->authorize('authorizeHead', \App\Models\User::class); 
+        event(new \App\Events\Academic\StudentEvent(auth()->user()->school_id));
+        return response()->json(['data' => $studentService->processExcelFile($request)]);
+    }
+
     // public function getInvoiceView(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
     //     return response()->json(['data' => $invoiceService->getInvoiceView($request)]);
