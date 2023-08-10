@@ -426,6 +426,8 @@ export default {
                 return "Accountant";
             } else if (role == 6) {
                 return "Procurement";
+            }else if (role == 8){
+                return 'Other Offices'
             }
         },
 
