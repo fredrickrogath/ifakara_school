@@ -22,9 +22,13 @@ Route::get('/studentsCount', function() {
     return \App\Models\Student::get()->count();
 })->name('studentsCount');
 
-Route::get('/studentsCount', function() {
-    return \App\Models\Student::get()->count();
-})->name('studentsCount');
+Route::get('/paidStudents', function() {
+    return \App\Models\Student::has('entries')->with('entries')->get()->count();
+})->name('paidStudents');
+
+Route::get('/fullPaidStudents', function() {
+    return \App\Models\Student::has('entries')->with('entries')->get();
+})->name('fullPaidStudents');
 
 
 Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
