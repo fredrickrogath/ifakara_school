@@ -286,6 +286,9 @@ export default {
             else if (role == 6){
                 return 'Procurement Office'
             }
+            else if (role == 8){
+                return 'Other Offices'
+            }
         },
 
         getStaffs() {
