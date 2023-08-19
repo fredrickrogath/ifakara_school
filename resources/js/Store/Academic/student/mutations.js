@@ -39,5 +39,9 @@ export default {
     setSnackBarState(state){
         state.snackBarState = !state.snackBarState;
     },
+
+    setActiveClass(state, activeClass){
+        state.activeClass = activeClass;
+    },
     
 };

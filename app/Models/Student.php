@@ -34,6 +34,10 @@ class Student extends Model
         return $this->hasOne('App\Models\Notification','object_id','id');
     }
 
+    public function classType(){
+        return $this->belongsTo('App\Models\ClassLevel','class_level_id','id');
+    }
+
     public function entries()
     {
         return $this->hasManyThrough(

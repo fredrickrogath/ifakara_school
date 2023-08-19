@@ -14,6 +14,7 @@ export default {
             commentView: false,
             notificationId: null,
             chatId: null,
+            activeClass: 'ALL',
 
             // invoiceView: false,
             studentId: null,

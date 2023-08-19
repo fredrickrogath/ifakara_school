@@ -52,7 +52,7 @@ class StudentService
     }
 
     public function getStudents(){
-        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('first_name', 'asc')->get();
+        return \App\Models\Student::with('classType')->where('school_id', auth()->user()->school_id)->orderBy('first_name', 'asc')->get();
     }
 
     public function getStudentsNew(){

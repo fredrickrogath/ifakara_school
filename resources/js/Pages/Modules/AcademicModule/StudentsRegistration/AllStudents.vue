@@ -57,13 +57,14 @@
             <!-- /.modal -->
 
             <v-card-title class="pt-0 px-0">
-                <div class="pl-2 pt-1">
-                    Students
-                </div>
+                <div class="pl-2 pt-1">Students</div>
                 <v-spacer></v-spacer>
-                
-                <snack-bar class="absolute right-0 top-14" message="Task completed successfully"></snack-bar>
-                
+
+                <snack-bar
+                    class="absolute right-0 top-14"
+                    message="Task completed successfully"
+                ></snack-bar>
+
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -73,10 +74,30 @@
                 ></v-text-field>
             </v-card-title>
             <!-- {{ $page.props.posts }} -->
+            <div class="d-flex justify-content-end">
+                <span
+                        class="cursor-pointer underline uppercase ml-3"
+                        :class="getActiveClass == 'ALL' ? 'text-warning' : ''"
+                        @click="setActiveClass('ALL')"
+                        >ALL</span
+                    >
+                <div
+                    v-for="classs in classes"
+                    :key="classs.id"
+                    class="d-flex"
+                >
+                    <span
+                        class="cursor-pointer underline uppercase ml-3"
+                        :class="getActiveClass == classs.class_level ? 'text-warning' : ''"
+                        @click="setActiveClass(classs.class_level)"
+                        >{{ classs.class_level }}</span
+                    >
+                </div>
+            </div>
 
             <v-data-table
                 :headers="headers"
-                :items="students"
+                :items="filteredStudents"
                 item-key="name"
                 :search="search"
                 class="elevation-1"
@@ -152,6 +173,14 @@
                                     }}</span
                                 >
 
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'class_type'"
+                                    >{{
+                                        item[header.value].class_level
+                                    }}</span
+                                >
+                                
                                 <span
                                     class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'first_name'"
@@ -243,6 +272,7 @@ export default {
     mounted() {
         this.showLoader = true;
         this.getStudents();
+        this.getStudentClasses();
 
         // window.Echo.channel("EventTriggered").listen(
         //     "NewPostPublished",
@@ -261,14 +291,14 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("student-event." + this.$page.props.user.school_id).listen(
-            "Academic\\StudentEvent",
-            (e) => {
-                this.getStudents();
-            }
-        );
+        window.Echo.channel(
+            "student-event." + this.$page.props.user.school_id
+        ).listen("Academic\\StudentEvent", (e) => {
+            this.getStudents();
+            this.getStudentClasses();
+        });
 
-         // Receiving broadicasting
+        // Receiving broadicasting
         //  window.Echo.channel("student-trigger-from-financial-secretary").listen(
         //     "ApiSecretaryStudentEvent",
         //     (e) => {
@@ -301,6 +331,10 @@ export default {
                     value: "last_name",
                 },
                 {
+                    text: "Class",
+                    value: "class_type",
+                },
+                {
                     text: "Gender",
                     value: "gender",
                 },
@@ -310,6 +344,10 @@ export default {
                 { text: "Edit", value: "edit" },
             ],
             students: [],
+
+            classes: [],
+
+            classType: 'ALL',
 
             idForAction: null,
         };
@@ -325,9 +363,18 @@ export default {
         //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
         // },
 
-        // getStudentId() {
-        //     return this.$store.getters["AcademicStudentModule/getStudentId"];
-        // },
+        getActiveClass() {
+            this.classType = this.$store.getters["AcademicStudentModule/getActiveClass"];
+            return this.$store.getters["AcademicStudentModule/getActiveClass"];
+        },
+
+        filteredStudents() {
+        if (this.classType === 'ALL') {
+            return this.students; // Display all rows
+        } else {
+            return this.students.filter(item => item.class_type.class_level === this.classType);
+        }
+    },
     },
 
     methods: {
@@ -352,6 +399,14 @@ export default {
             this.$store.dispatch("AcademicStudentModule/setEditStudent");
         },
 
+        setActiveClass(setActiveClass) {
+            this.classType = setActiveClass;
+            this.$store.dispatch(
+                "AcademicStudentModule/setActiveClass",
+                setActiveClass
+            );
+        },
+
         // totalPrice(item) {
         //     return item.reduce((total, item) => {
         //         return total + item.tool.price * item.count;
@@ -362,7 +417,15 @@ export default {
             axios.get("/academic/getStudents").then((response) => {
                 this.students = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                // console.log(response.data.data[0].class_type.class_level)
+            });
+        },
+
+        getStudentClasses() {
+            axios.get("/academic/getStudentClasses").then((response) => {
+                this.classes = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data);
             });
         },
 

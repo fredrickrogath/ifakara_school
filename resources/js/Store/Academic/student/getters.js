@@ -42,6 +42,10 @@ export default {
     getSnackBarState(state){
         return state.snackBarState;
     },
+
+    getActiveClass(state){
+        return state.activeClass;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

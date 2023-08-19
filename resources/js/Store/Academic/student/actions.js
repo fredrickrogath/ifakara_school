@@ -39,7 +39,9 @@ export default {
 
     setSnackBarState(context){
         context.commit("setSnackBarState");
-    }
+    },
 
-    
+    setActiveClass(context, activeClass){
+        context.commit("setActiveClass", activeClass);
+    }
 };

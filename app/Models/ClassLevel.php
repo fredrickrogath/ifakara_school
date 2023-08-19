@@ -13,4 +13,9 @@ class ClassLevel extends Model
         'class_level',
         'school_id',
     ];
+
+    public function students() {
+        return $this->hasOne(\App\Models\Student::class, 'class_level_id', 'id');
+    }
+    
 }
