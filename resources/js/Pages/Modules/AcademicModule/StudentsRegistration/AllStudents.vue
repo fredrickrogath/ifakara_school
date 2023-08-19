@@ -174,7 +174,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'class_type'"
                                     >{{
                                         item[header.value].class_level
