@@ -74,24 +74,39 @@
                 ></v-text-field>
             </v-card-title>
             <!-- {{ $page.props.posts }} -->
-            <div class="d-flex justify-content-end">
-                <span
+            <div class="d-flex justify-content-between">
+                <div class="ml-3">
+                    <span class="text-xl font-semibold">
+                        {{ filteredStudentCount }}
+                    </span>
+                    <span>
+                        {{ getActiveClass }}
+                    </span>
+                    <span>STUDENTS</span>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <span
                         class="cursor-pointer underline uppercase ml-3"
                         :class="getActiveClass == 'ALL' ? 'text-warning' : ''"
                         @click="setActiveClass('ALL')"
                         >ALL</span
                     >
-                <div
-                    v-for="classs in classes"
-                    :key="classs.id"
-                    class="d-flex"
-                >
-                    <span
-                        class="cursor-pointer underline uppercase ml-3"
-                        :class="getActiveClass == classs.class_level ? 'text-warning' : ''"
-                        @click="setActiveClass(classs.class_level)"
-                        >{{ classs.class_level }}</span
+                    <div
+                        v-for="classs in classes"
+                        :key="classs.id"
+                        class="d-flex"
                     >
+                        <span
+                            class="cursor-pointer underline uppercase ml-3"
+                            :class="
+                                getActiveClass == classs.class_level
+                                    ? 'text-warning'
+                                    : ''
+                            "
+                            @click="setActiveClass(classs.class_level)"
+                            >{{ classs.class_level }}</span
+                        >
+                    </div>
                 </div>
             </div>
 
@@ -176,11 +191,9 @@
                                 <span
                                     class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'class_type'"
-                                    >{{
-                                        item[header.value].class_level
-                                    }}</span
+                                    >{{ item[header.value].class_level }}</span
                                 >
-                                
+
                                 <span
                                     class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'first_name'"
@@ -347,7 +360,7 @@ export default {
 
             classes: [],
 
-            classType: 'ALL',
+            classType: "ALL",
 
             idForAction: null,
         };
@@ -364,17 +377,24 @@ export default {
         // },
 
         getActiveClass() {
-            this.classType = this.$store.getters["AcademicStudentModule/getActiveClass"];
+            this.classType =
+                this.$store.getters["AcademicStudentModule/getActiveClass"];
             return this.$store.getters["AcademicStudentModule/getActiveClass"];
         },
 
         filteredStudents() {
-        if (this.classType === 'ALL') {
-            return this.students; // Display all rows
-        } else {
-            return this.students.filter(item => item.class_type.class_level === this.classType);
-        }
-    },
+            if (this.classType === "ALL") {
+                return this.students; // Display all rows
+            } else {
+                return this.students.filter(
+                    (item) => item.class_type.class_level === this.classType
+                );
+            }
+        },
+
+        filteredStudentCount() {
+            return this.filteredStudents.length;
+        },
     },
 
     methods: {
