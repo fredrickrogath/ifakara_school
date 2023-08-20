@@ -34,11 +34,11 @@ class UploadService
 
     public function getUploads(){
         return \App\Models\Upload::with('user')
-        ->where('school_id', auth()->user()->school_id)
         ->join('users', 'users.id', '=', 'uploads.user_id')
         ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
+        ->where('users.school_id', auth()->user()->school_id)
         ->where('users.role', 5)
-        ->where('uploads.user_id', Auth::user()->id)
+        // ->where('uploads.user_id', Auth::user()->id)
         ->orderBy('title', 'asc')
         ->get();
     }
@@ -48,8 +48,9 @@ class UploadService
         ->where('school_id', auth()->user()->school_id)
         ->join('users', 'users.id', '=', 'uploads.user_id')
         ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
+        ->where('users.school_id', auth()->user()->school_id)
         ->where('users.role', 5)
-        ->where('uploads.user_id', Auth::user()->id)
+        // ->where('uploads.user_id', Auth::user()->id)
         ->orderBy('created_at', 'desc')
         ->get();
     }
@@ -60,12 +61,12 @@ class UploadService
 
     public function getTrashedUploads(){
         return \App\Models\Upload::with('user')
-        ->where('school_id', auth()->user()->school_id)
         ->onlyTrashed()
         ->join('users', 'users.id', '=', 'uploads.user_id')
         ->select('uploads.id as id', 'uploads.title', 'uploads.description', 'uploads.path', 'uploads.created_at',)
+        ->where('users.school_id', auth()->user()->school_id)
         ->where('users.role', 5)
-        ->where('uploads.user_id', Auth::user()->id)
+        // ->where('uploads.user_id', Auth::user()->id)
         ->orderBy('created_at', 'desc')
         ->get();
     }
