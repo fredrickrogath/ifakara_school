@@ -3,7 +3,7 @@
         <v-row> -->
     <div class="">
         <!-- Right Sidebar -->
-        <div class="col-12 card p-0 m-0 pt-2">
+        <div class="col-12 p-0 m-0 pt-2">
             <div class="h-screen bg-white" v-show="getPaymentView">
                 <payment-view></payment-view>
             </div>
@@ -33,9 +33,60 @@
                 </v-card-title>
                 <!-- {{ $page.props.posts }} -->
 
+                <hr class="bg-gray-200 mb-2 mt-0" />
+
+                <div class="d-flex justify-content-between">
+                    <div class="ml-3">
+                        <span class="text-xl font-semibold">
+                            {{ filteredStudentCount }}
+                        </span>
+                        <span>
+                            {{ payType }}
+                        </span>
+                        <span>STUDENTS</span>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <span
+                            class="cursor-pointer underline uppercase ml-3"
+                            :class="
+                                getActivePayment == 'ALL' ? 'text-warning' : ''
+                            "
+                            @click="setActivePayment('ALL')"
+                            >ALL</span
+                        >
+                        <div class="d-flex">
+                            <span
+                                class="cursor-pointer underline uppercase ml-3"
+                                :class="
+                                    getActivePayment == 'PAID'
+                                        ? 'text-warning'
+                                        : ''
+                                "
+                                @click="setActivePayment('PAID')"
+                            >
+                                paid
+                            </span>
+
+                            <span
+                                class="cursor-pointer underline uppercase ml-3 mr-2"
+                                :class="
+                                    getActivePayment == 'UNPAID'
+                                        ? 'text-warning'
+                                        : ''
+                                "
+                                @click="setActivePayment('UNPAID')"
+                            >
+                                unpaid
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="bg-gray-200 mb-2 mt-1" />
+
                 <v-data-table
                     :headers="headers"
-                    :items="students"
+                    :items="filteredStudents"
                     item-key="name"
                     :search="search"
                     class="elevation-1"
@@ -45,65 +96,16 @@
                         <tbody>
                             <tr v-for="(item, idx, k) in items" :key="idx">
                                 <td v-for="(header, key) in headers" :key="key">
-                                    <!-- <v-icon
-                                v-if="header.value == 'delete'"
-                                size="22"
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#warning-alert-modal"
-                                @click="setIdForAction(items[idx]['id'])"
-                            >
-                                mdi-delete
-                            </v-icon>
-
-                            <v-icon
-                                v-if="header.value == 'view'"
-                                size="22"
-                                @click="setInvoiceView(items[idx]['id'])"
-                            >
-                                mdi-eye
-                            </v-icon>
-
-                            <v-icon
-                                v-if="header.value == 'edit'"
-                                size="22"
-                                @click="setEditStudent(items[idx]['id'])"
-                            >
-                                mdi-pen
-                            </v-icon> -->
-
-                                    <!-- <v-icon
-                                        v-if="header.value == 'starred'"
+                
+                                    <v-icon
+                                        v-if="header.value == 'view'"
                                         size="22"
-                                        :class="
-                                            item[header.value]
-                                                ? 'text-warning'
-                                                : ''
-                                        "
                                         @click="
-                                            starredInvoice(
-                                                items[idx]['id'],
-                                                item[header.value],
-                                                header.value
-                                            )
+                                            studentDetails(items[idx]['id'])
                                         "
                                     >
-                                        mdi-star
-                                    </v-icon> -->
-
-                                    <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    @click=" studentDetails(items[idx]['id'])"
-                                >
-                                    mdi-eye
-                                </v-icon>
-
-                                    <!-- <span
-                                class="text-gray-600"
-                                v-else-if="header.value == 'id'"
-                                >{{ item[header.value] }}</span
-                            > -->
+                                        mdi-eye
+                                    </v-icon>
 
                                     <span
                                         class="text-gray-600 italic font-semibold"
@@ -184,18 +186,11 @@
                                                     <span
                                                         class="text-green-500"
                                                         >{{
-                                                            formattedPrice(
+                                                            calculateTotal(
                                                                 item[
                                                                     header.value
-                                                                ].reduce(
-                                                                    (
-                                                                        total,
-                                                                        entry
-                                                                    ) =>
-                                                                        total +
-                                                                        entry.level_1,
-                                                                    0
-                                                                )
+                                                                ],
+                                                                "level_1"
                                                             )
                                                         }}</span
                                                     >
@@ -207,30 +202,21 @@
                                                         class="mb-1 px-1"
                                                         >mdi-hand-pointing-right</v-icon
                                                     >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
-                                                            formattedPrice(
+                                                    <span class="text-red-500">
+                                                        {{
+                                                            calculateRemained(
                                                                 item[
                                                                     header.value
                                                                 ][0]
                                                                     .chart_of_account
-                                                                    .level1 -
-                                                                    item[
-                                                                        header
-                                                                            .value
-                                                                    ].reduce(
-                                                                        (
-                                                                            total,
-                                                                            entry
-                                                                        ) =>
-                                                                            total +
-                                                                            entry.level_1,
-                                                                        0
-                                                                    )
+                                                                    .level1,
+                                                                item[
+                                                                    header.value
+                                                                ],
+                                                                "level_1"
                                                             )
-                                                        }}</span
-                                                    >
+                                                        }}
+                                                    </span>
                                                 </span>
                                             </div>
                                         </template>
@@ -324,18 +310,11 @@
                                                     <span
                                                         class="text-green-500"
                                                         >{{
-                                                            formattedPrice(
+                                                            calculateTotal(
                                                                 item[
                                                                     header.value
-                                                                ].reduce(
-                                                                    (
-                                                                        total,
-                                                                        entry
-                                                                    ) =>
-                                                                        total +
-                                                                        entry.level_2,
-                                                                    0
-                                                                )
+                                                                ],
+                                                                "level_2"
                                                             )
                                                         }}</span
                                                     >
@@ -347,30 +326,21 @@
                                                         class="mb-1 px-1"
                                                         >mdi-hand-pointing-right</v-icon
                                                     >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
-                                                            formattedPrice(
+                                                    <span class="text-red-500">
+                                                        {{
+                                                            calculateRemained(
                                                                 item[
                                                                     header.value
                                                                 ][0]
                                                                     .chart_of_account
-                                                                    .level2 -
-                                                                    item[
-                                                                        header
-                                                                            .value
-                                                                    ].reduce(
-                                                                        (
-                                                                            total,
-                                                                            entry
-                                                                        ) =>
-                                                                            total +
-                                                                            entry.level_2,
-                                                                        0
-                                                                    )
+                                                                    .level2,
+                                                                item[
+                                                                    header.value
+                                                                ],
+                                                                "level_2"
                                                             )
-                                                        }}</span
-                                                    >
+                                                        }}
+                                                    </span>
                                                 </span>
                                             </div>
                                         </template>
@@ -464,18 +434,11 @@
                                                     <span
                                                         class="text-green-500"
                                                         >{{
-                                                            formattedPrice(
+                                                            calculateTotal(
                                                                 item[
                                                                     header.value
-                                                                ].reduce(
-                                                                    (
-                                                                        total,
-                                                                        entry
-                                                                    ) =>
-                                                                        total +
-                                                                        entry.level_3,
-                                                                    0
-                                                                )
+                                                                ],
+                                                                "level_3"
                                                             )
                                                         }}</span
                                                     >
@@ -487,30 +450,21 @@
                                                         class="mb-1 px-1"
                                                         >mdi-hand-pointing-right</v-icon
                                                     >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
-                                                            formattedPrice(
+                                                    <span class="text-red-500">
+                                                        {{
+                                                            calculateRemained(
                                                                 item[
                                                                     header.value
                                                                 ][0]
                                                                     .chart_of_account
-                                                                    .level3 -
-                                                                    item[
-                                                                        header
-                                                                            .value
-                                                                    ].reduce(
-                                                                        (
-                                                                            total,
-                                                                            entry
-                                                                        ) =>
-                                                                            total +
-                                                                            entry.level_3,
-                                                                        0
-                                                                    )
+                                                                    .level3,
+                                                                item[
+                                                                    header.value
+                                                                ],
+                                                                "level_3"
                                                             )
-                                                        }}</span
-                                                    >
+                                                        }}
+                                                    </span>
                                                 </span>
                                             </div>
                                         </template>
@@ -713,6 +667,8 @@ export default {
             ],
             students: [],
 
+            payType: "ALL",
+
             idForAction: null,
         };
     },
@@ -727,8 +683,36 @@ export default {
         //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
         // },
 
+        getActivePayment() {
+            this.payType =
+                this.$store.getters["AcademicStudentModule/getActivePayment"];
+            return this.$store.getters[
+                "AcademicStudentModule/getActivePayment"
+            ];
+        },
+
+        filteredStudents() {
+            if (this.payType === "ALL") {
+                return this.students; // Display all rows
+            } else if (this.payType === "PAID") {
+                // Show only students who have paid (entries.length > 0)
+                return this.students.filter((student) => student.entries.length > 0);
+            } else if (this.payType === "UNPAID") {
+                // Show only students who have not paid (entries.length == 0)
+                return this.students.filter(
+                    (student) => student.entries.length === 0
+                );
+            }
+        },
+
+        filteredStudentCount() {
+            return this.filteredStudents.length;
+        },
+
         getPaymentView() {
-            return this.$store.getters["AccountantInvoiceModule/getPaymentView"];
+            return this.$store.getters[
+                "AccountantInvoiceModule/getPaymentView"
+            ];
         },
     },
 
@@ -749,11 +733,6 @@ export default {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
-        // setEditStudent(id) {
-        //     this.$store.dispatch("AcademicStudentModule/setStudentId", id);
-        //     this.$store.dispatch("AcademicStudentModule/setEditStudent");
-        // },
-
         studentDetails(id) {
             this.setInvoiceView(id);
         },
@@ -762,16 +741,66 @@ export default {
             this.$store.dispatch("AccountantInvoiceModule/setPaymentView", id);
         },
 
+        setActivePayment(payType) {
+            this.payType = payType;
+            this.$store.dispatch(
+                "AcademicStudentModule/setActivePayment",
+                payType
+            );
+        },
+
+        calculateRemained(level, entries, levelPropertyName) {
+            // Check if levelPropertyName exists in the first entry
+            if (
+                entries.length > 0 &&
+                entries[0].hasOwnProperty(levelPropertyName)
+            ) {
+                const totalLevel = entries.reduce(
+                    (acc, entry) => acc + entry[levelPropertyName],
+                    0
+                );
+                return this.formattedPrice(level - totalLevel);
+            } else {
+                return "Invalid level property name";
+            }
+        },
+
+        calculateTotal(entries, level) {
+            const total = entries.reduce((acc, entry) => acc + entry[level], 0);
+            return this.formattedPrice(total);
+        },
+
         getStudents() {
             axios.get("/academic/getStudentPayments").then((response) => {
                 this.students = response.data.data;
+                // console.log(this.students)
                 this.showLoader = false;
-                // console.log(response.data.data);
+                // console.log(
+                //     response.data.data[2].entries.chart_of_account.level1 -
+                //         response.data.data[2].entries.reduce(
+                //             (total, entry) => total + entry.level_1,
+                //             0
+                //         )
+                // );
+
+                // console.log(
+                //     response.data.data[2].entries.reduce(
+                //         (total, entry) => total + entry.level_2,
+                //         0
+                //     )
+                // );
+
+                // console.log(
+                //     response.data.data[2].entries.reduce(
+                //         (total, entry) => total + entry.level_3,
+                //         0
+                //     )
+                // );
             });
         },
 
         save(id, column, data) {
-             this.updateTools(id, data, column);
+            this.updateTools(id, data, column);
             // console.log(id + " , " +data);
         },
         cancel() {},

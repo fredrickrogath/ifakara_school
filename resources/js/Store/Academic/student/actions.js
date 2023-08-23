@@ -43,5 +43,9 @@ export default {
 
     setActiveClass(context, activeClass){
         context.commit("setActiveClass", activeClass);
+    },
+
+    setActivePayment(context, activePayment){
+        context.commit("setActivePayment", activePayment);
     }
 };

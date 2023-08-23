@@ -74,6 +74,9 @@
                 ></v-text-field>
             </v-card-title>
             <!-- {{ $page.props.posts }} -->
+
+            <hr class="bg-gray-200 mb-2 mt-0" />
+
             <div class="d-flex justify-content-between">
                 <div class="ml-3">
                     <span class="text-xl font-semibold">
@@ -109,6 +112,8 @@
                     </div>
                 </div>
             </div>
+
+            <hr class="bg-gray-200 mb-2 mt-1" />
 
             <v-data-table
                 :headers="headers"

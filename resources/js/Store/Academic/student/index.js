@@ -15,6 +15,7 @@ export default {
             notificationId: null,
             chatId: null,
             activeClass: 'ALL',
+            activePayment: 'ALL',
 
             // invoiceView: false,
             studentId: null,

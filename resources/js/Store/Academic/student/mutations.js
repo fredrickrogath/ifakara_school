@@ -43,5 +43,9 @@ export default {
     setActiveClass(state, activeClass){
         state.activeClass = activeClass;
     },
+
+    setActivePayment(state, activePayment){
+        state.activePayment = activePayment;
+    },
     
 };

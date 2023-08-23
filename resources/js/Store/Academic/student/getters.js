@@ -46,6 +46,10 @@ export default {
     getActiveClass(state){
         return state.activeClass;
     },
+
+    getActivePayment(state){
+        return state.activePayment;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state
