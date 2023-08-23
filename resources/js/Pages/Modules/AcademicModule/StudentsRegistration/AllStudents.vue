@@ -89,8 +89,8 @@
                 </div>
                 <div class="d-flex justify-content-end">
                     <span
-                        class="cursor-pointer underline uppercase ml-3"
-                        :class="getActiveClass == 'ALL' ? 'text-warning' : ''"
+                        class="cursor-pointer uppercase ml-3"
+                        :class="getActiveClass == 'ALL' ? 'text-warning' : 'underline'"
                         @click="setActiveClass('ALL')"
                         >ALL</span
                     >
@@ -100,11 +100,11 @@
                         class="d-flex"
                     >
                         <span
-                            class="cursor-pointer underline uppercase ml-3"
+                            class="cursor-pointer uppercase ml-3"
                             :class="
                                 getActiveClass == classs.class_level
                                     ? 'text-warning'
-                                    : ''
+                                    : 'underline'
                             "
                             @click="setActiveClass(classs.class_level)"
                             >{{ classs.class_level }}</span

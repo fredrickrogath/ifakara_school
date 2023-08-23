@@ -47,20 +47,20 @@
                     </div>
                     <div class="d-flex justify-content-end">
                         <span
-                            class="cursor-pointer underline uppercase ml-3"
+                            class="cursor-pointer uppercase ml-3"
                             :class="
-                                getActivePayment == 'ALL' ? 'text-warning' : ''
+                                getActivePayment == 'ALL' ? 'text-warning' : 'underline'
                             "
                             @click="setActivePayment('ALL')"
                             >ALL</span
                         >
                         <div class="d-flex">
                             <span
-                                class="cursor-pointer underline uppercase ml-3"
+                                class="cursor-pointer uppercase ml-3"
                                 :class="
                                     getActivePayment == 'PAID'
                                         ? 'text-warning'
-                                        : ''
+                                        : 'underline'
                                 "
                                 @click="setActivePayment('PAID')"
                             >
@@ -68,11 +68,11 @@
                             </span>
 
                             <span
-                                class="cursor-pointer underline uppercase ml-3 mr-2"
+                                class="cursor-pointer uppercase ml-3 mr-2"
                                 :class="
                                     getActivePayment == 'UNPAID'
                                         ? 'text-warning'
-                                        : ''
+                                        : 'underline'
                                 "
                                 @click="setActivePayment('UNPAID')"
                             >
