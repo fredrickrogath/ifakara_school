@@ -45,11 +45,43 @@
                         </span>
                         <span>STUDENTS</span>
                     </div>
+
                     <div class="d-flex justify-content-end">
                         <span
                             class="cursor-pointer uppercase ml-3"
                             :class="
-                                getActivePayment == 'ALL' ? 'text-warning' : 'underline'
+                                getActivePayment == 'ALL'
+                                    ? 'text-warning'
+                                    : 'underline'
+                            "
+                            @click="setActivePayment('ALL')"
+                            >ALL</span
+                        >
+                        <div
+                            v-for="classs in classes"
+                            :key="classs.id"
+                            class="d-flex"
+                        >
+                            <span
+                                class="cursor-pointer uppercase ml-3"
+                                :class="
+                                    getActivePayment == classs.class_level
+                                        ? 'text-warning'
+                                        : 'underline'
+                                "
+                                @click="setActivePayment(classs.class_level)"
+                                >{{ classs.class_level }}</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <span
+                            class="cursor-pointer uppercase ml-3"
+                            :class="
+                                getActivePayment == 'ALL'
+                                    ? 'text-warning'
+                                    : 'underline'
                             "
                             @click="setActivePayment('ALL')"
                             >ALL</span
@@ -78,6 +110,30 @@
                             >
                                 unpaid
                             </span>
+
+                            <span
+                                class="cursor-pointer uppercase ml-3 mr-2"
+                                :class="
+                                    getActivePayment == 'PARTIALPAID'
+                                        ? 'text-warning'
+                                        : 'underline'
+                                "
+                                @click="setActivePayment('PARTIALPAID')"
+                            >
+                                partial paid
+                            </span>
+
+                            <span
+                                class="cursor-pointer uppercase ml-3 mr-2"
+                                :class="
+                                    getActivePayment == 'FULLPAID'
+                                        ? 'text-warning'
+                                        : 'underline'
+                                "
+                                @click="setActivePayment('FULLPAID')"
+                            >
+                                full paid
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -96,7 +152,6 @@
                         <tbody>
                             <tr v-for="(item, idx, k) in items" :key="idx">
                                 <td v-for="(header, key) in headers" :key="key">
-                
                                     <v-icon
                                         v-if="header.value == 'view'"
                                         size="22"
@@ -144,6 +199,14 @@
                                     >
                                         {{ item[header.value] }}
                                     </span>
+
+                                    <span
+                                        class="text-gray-600 italic font-semibold"
+                                        v-else-if="header.value == 'class_type'"
+                                        >{{
+                                            item[header.value].class_level
+                                        }}</span
+                                    >
 
                                     <span
                                         class="text-gray-600 italic font-semibold"
@@ -581,6 +644,7 @@ export default {
     mounted() {
         this.showLoader = true;
         this.getStudents();
+        this.getStudentClasses();
 
         // window.Echo.channel("EventTriggered").listen(
         //     "NewPostPublished",
@@ -646,6 +710,10 @@ export default {
                     value: "last_name",
                 },
                 {
+                    text: "Class",
+                    value: "class_type",
+                },
+                {
                     text: "Level 1",
                     value: "entries",
                 },
@@ -669,6 +737,10 @@ export default {
 
             payType: "ALL",
 
+            classes: [],
+
+            classType: "ALL",
+
             idForAction: null,
         };
     },
@@ -684,6 +756,8 @@ export default {
         // },
 
         getActivePayment() {
+            this.classType =
+                this.$store.getters["AcademicStudentModule/getActivePayment"];
             this.payType =
                 this.$store.getters["AcademicStudentModule/getActivePayment"];
             return this.$store.getters[
@@ -696,11 +770,71 @@ export default {
                 return this.students; // Display all rows
             } else if (this.payType === "PAID") {
                 // Show only students who have paid (entries.length > 0)
-                return this.students.filter((student) => student.entries.length > 0);
+                return this.students.filter(
+                    (student) => student.entries.length > 0
+                );
             } else if (this.payType === "UNPAID") {
                 // Show only students who have not paid (entries.length == 0)
                 return this.students.filter(
                     (student) => student.entries.length === 0
+                );
+            } else if (this.payType === "PARTIALPAID") {
+                const filteredStudents = this.students.filter(
+                    (student) => student.entries.length > 0
+                );
+
+                const studentsWithTrueComparison = filteredStudents.filter(
+                    (student) => {
+                        const total = student.entries.reduce((acc, entry) => {
+                            return (
+                                acc +
+                                entry.level_1 +
+                                entry.level_2 +
+                                entry.level_3
+                            );
+                        }, 0);
+
+                        const chartOfAccountTotal = student.entries[0]
+                            ? student.entries[0].chart_of_account.level1 +
+                              student.entries[0].chart_of_account.level2 +
+                              student.entries[0].chart_of_account.level3
+                            : 0;
+
+                        return total !== chartOfAccountTotal;
+                    }
+                );
+
+                return studentsWithTrueComparison;
+            } else if (this.payType === "FULLPAID") {
+                const filteredStudents = this.students.filter(
+                    (student) => student.entries.length > 0
+                );
+
+                const studentsWithTrueComparison = filteredStudents.filter(
+                    (student) => {
+                        const total = student.entries.reduce((acc, entry) => {
+                            return (
+                                acc +
+                                entry.level_1 +
+                                entry.level_2 +
+                                entry.level_3
+                            );
+                        }, 0);
+
+                        const chartOfAccountTotal = student.entries[0]
+                            ? student.entries[0].chart_of_account.level1 +
+                              student.entries[0].chart_of_account.level2 +
+                              student.entries[0].chart_of_account.level3
+                            : 0;
+
+                        return total === chartOfAccountTotal;
+                    }
+                );
+
+                return studentsWithTrueComparison;
+            } else {
+                return this.students.filter(
+                    (item) => item.class_type.class_level === this.classType
                 );
             }
         },
@@ -796,6 +930,14 @@ export default {
                 //         0
                 //     )
                 // );
+            });
+        },
+
+        getStudentClasses() {
+            axios.get("/academic/getStudentClasses").then((response) => {
+                this.classes = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data);
             });
         },
 
