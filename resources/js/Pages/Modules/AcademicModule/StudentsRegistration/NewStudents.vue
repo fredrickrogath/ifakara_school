@@ -1,8 +1,7 @@
 <template>
-    <div>
-        new
-    </div>
-</template><template>
+    <div>new</div>
+</template>
+<template>
     <!-- <v-col>
         <v-row> -->
     <div>
@@ -61,26 +60,71 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                <div class="pl-2 pt-1">
-                    Students
-                </div>
+                <div class="pl-2 pt-1">Students</div>
                 <v-spacer></v-spacer>
 
-                <snack-bar class="absolute right-0 top-14" message="Task completed successfully"></snack-bar>
-                
+                <snack-bar
+                    class="absolute right-0 top-14"
+                    message="Task completed successfully"
+                ></snack-bar>
+
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
                     label="Search"
-                    single-line
+                     single-line
                     hide-details
                 ></v-text-field>
             </v-card-title>
             <!-- {{ $page.props.posts }} -->
 
+            <hr class="bg-gray-200 mb-2 mt-0" />
+
+            <div class="d-flex justify-content-between">
+                <div class="ml-3">
+                    <span class="text-xl font-semibold">
+                        {{ filteredStudentCount }}
+                    </span>
+                    <span>
+                        {{ getActiveClass }}
+                    </span>
+                    <span>STUDENTS</span>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <span
+                        class="cursor-pointer uppercase ml-3"
+                        :class="
+                            getActiveClass == 'ALL'
+                                ? 'text-warning'
+                                : 'underline'
+                        "
+                        @click="setActiveClass('ALL')"
+                        >ALL</span
+                    >
+                    <div
+                        v-for="classs in classes"
+                        :key="classs.id"
+                        class="d-flex"
+                    >
+                        <span
+                            class="cursor-pointer uppercase ml-3"
+                            :class="
+                                getActiveClass == classs.class_level
+                                    ? 'text-warning'
+                                    : 'underline'
+                            "
+                            @click="setActiveClass(classs.class_level)"
+                            >{{ classs.class_level }}</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <hr class="bg-gray-200 mb-2 mt-1" />
+
             <v-data-table
                 :headers="headers"
-                :items="students"
+                :items="filteredStudents"
                 item-key="name"
                 :search="search"
                 class="elevation-1"
@@ -141,7 +185,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -154,6 +198,12 @@
                                     >{{
                                         formattedDate(item[header.value])
                                     }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'class_type'"
+                                    >{{ item[header.value].class_level }}</span
                                 >
 
                                 <span
@@ -177,7 +227,7 @@
                                 </span>
 
                                 <span
-                                    class="text -gray-600 italic font-semibold"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'gender'"
                                 >
                                     {{ item[header.value] }}
@@ -247,6 +297,7 @@ export default {
     mounted() {
         this.showLoader = true;
         this.getStudents();
+        this.getStudentClasses();
 
         // window.Echo.channel("EventTriggered").listen(
         //     "NewPostPublished",
@@ -265,14 +316,13 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("student-event." + this.$page.props.user.school_id).listen(
-            "Academic\\StudentEvent",
-            (e) => {
-                this.getStudents();
-            }
-        );
+        window.Echo.channel(
+            "student-event." + this.$page.props.user.school_id
+        ).listen("Academic\\StudentEvent", (e) => {
+            this.getStudents();
+        });
 
-         // Receiving broadicasting
+        // Receiving broadicasting
         //  window.Echo.channel("student-trigger-from-financial-secretary").listen(
         //     "ApiSecretaryStudentEvent",
         //     (e) => {
@@ -305,6 +355,10 @@ export default {
                     value: "last_name",
                 },
                 {
+                    text: "Class",
+                    value: "class_type",
+                },
+                {
                     text: "Gender",
                     value: "gender",
                 },
@@ -314,6 +368,10 @@ export default {
                 { text: "Edit", value: "edit" },
             ],
             students: [],
+
+            classes: [],
+
+            classType: "ALL",
 
             idForAction: null,
         };
@@ -332,6 +390,26 @@ export default {
         // getStudentId() {
         //     return this.$store.getters["AcademicStudentModule/getStudentId"];
         // },
+
+        getActiveClass() {
+            this.classType =
+                this.$store.getters["AcademicStudentModule/getActiveClass"];
+            return this.$store.getters["AcademicStudentModule/getActiveClass"];
+        },
+
+        filteredStudents() {
+            if (this.classType === "ALL") {
+                return this.students; // Display all rows
+            } else {
+                return this.students.filter(
+                    (item) => item.class_type.class_level === this.classType
+                );
+            }
+        },
+
+        filteredStudentCount() {
+            return this.filteredStudents.length;
+        },
     },
 
     methods: {
@@ -362,11 +440,27 @@ export default {
         //     }, 0);
         // },
 
+        setActiveClass(setActiveClass) {
+            this.classType = setActiveClass;
+            this.$store.dispatch(
+                "AcademicStudentModule/setActiveClass",
+                setActiveClass
+            );
+        },
+
         getStudents() {
             axios.get("/academic/getStudentsNew").then((response) => {
                 this.students = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
+            });
+        },
+
+        getStudentClasses() {
+            axios.get("/academic/getStudentClasses").then((response) => {
+                this.classes = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data);
             });
         },
 

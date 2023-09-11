@@ -30,6 +30,11 @@ class ChatOfAccountController extends Controller
         return response()->json(['data' => $chatOfAccountService->getLegerEntries()]);
     }
 
+    public function getStudentClasses(ChatOfAccountService $chatOfAccountService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        return response()->json(['data' => $chatOfAccountService->getStudentClasses()]);
+    }
+    
     public function searchStudent(StudentService $studentService){
         $this->authorize('authorizeAccountant', \App\Models\User::class);
         return response()->json(['data' => $studentService->searchStudent()]);

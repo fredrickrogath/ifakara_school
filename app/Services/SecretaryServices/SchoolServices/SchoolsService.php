@@ -85,7 +85,7 @@ class SchoolsService
     }
 
     public function getSchoolStudents($request){
-        return \App\Models\Student::where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Student::with('classType')->where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     // public function getInvoiceView($request){

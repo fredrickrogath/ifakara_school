@@ -56,7 +56,7 @@ class StudentService
     }
 
     public function getStudentsNew(){
-        return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Student::with('classType')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getStudent($request){

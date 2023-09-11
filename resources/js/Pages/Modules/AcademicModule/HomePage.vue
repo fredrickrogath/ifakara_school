@@ -45,7 +45,9 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">{{ paidStudents ? paidStudents : 0 }}</span>
+                                        <span data-plugin="counterup">{{
+                                            paidStudents ? paidStudents : 0
+                                        }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Paid Fees
@@ -72,7 +74,13 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"> {{ unpaidStudents ? unpaidStudents : 0 }}</span>
+                                        <span data-plugin="counterup">
+                                            {{
+                                                unpaidStudents
+                                                    ? unpaidStudents
+                                                    : 0
+                                            }}</span
+                                        >
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Unpaid Fees
@@ -118,7 +126,6 @@
             </div>
             <!-- end col -->
         </div>
-
 
         <!-- end row -->
 
@@ -211,73 +218,114 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0 text-gray-900"
+                            <v-data-table
+                                :headers="headers"
+                                :items="staffs"
+                                item-key="name"
+                                class="elevation-1"
+                                :items-per-page="7"
                             >
-                                <thead>
-                                    <tr>
-                                        <th class="border-top-0">Identity</th>
-                                        <th class="border-top-0">Name</th>
-                                        <th class="border-top-0">
-                                            Departiment
-                                        </th>
-                                        <th class="border-top-0">Email</th>
-                                        <th class="border-top-0">Updated At</th>
-                                        <!-- <th class="border-top-0">
-                                            Registered On
-                                        </th> -->
-                                        <!-- <th class="border-top-0">Download</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-600 italic font-semibold">
-                                    <tr
-                                        v-for="(staff, index) in staffs"
-                                        :key="staff.id"
-                                        v-if="index < 8"
-                                    >
-                                        <td class="py-1">
-                                            <img
-                                                class="h-8 w-8 rounded-full object-cover"
-                                                :src="
-                                                    'https://ui-avatars.com/api/?name=' +
-                                                    formatName(staff.name) +
-                                                    '&color=525252&background=FFFFFF'
-                                                "
-                                                :alt="staff.name"
-                                            />
-                                            <!-- <img
-                                                src="assets/images/users/user-2.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            /> -->
-                                        </td>
-                                        <td class="italic font-semibold">
-                                            <span class="text-center">
-                                                {{ staff.name }}
-                                            </span>
-                                        </td>
-                                        <td class="italic font-semibold">
-                                            {{ department(staff.role) }}
-                                        </td>
-                                        <td class="italic font-semibold">
-                                            {{ staff.email }}
-                                        </td>
-                                        <td>
-                                            {{
-                                                formattedDate(staff.updated_at)
-                                            }}
-                                        </td>
-                                        <!-- <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
+                                <template v-slot:body="{ items, headers }">
+                                    <tbody>
+                                        <tr
+                                            v-for="(item, idx, k) in items"
+                                            :key="idx"
+                                        >
+                                            <td
+                                                v-for="(header, key) in headers"
+                                                :key="key"
                                             >
-                                        </td> -->
-                                    </tr>
-                                </tbody>
-                            </table>
+                                                <v-icon
+                                                    v-if="
+                                                        header.value == 'delete'
+                                                    "
+                                                    size="22"
+                                                    type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#warning-alert-modal"
+                                                    @click="
+                                                        setIdForAction(
+                                                            items[idx]['id']
+                                                        )
+                                                    "
+                                                >
+                                                    mdi-delete
+                                                </v-icon>
+
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value == 'id'
+                                                    "
+                                                    >{{
+                                                        item[header.value]
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value ==
+                                                        'created_at'
+                                                    "
+                                                    >{{
+                                                        formattedDate(
+                                                            item[header.value]
+                                                        )
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value ==
+                                                        'updated_at'
+                                                    "
+                                                    >{{
+                                                        formattedDate(
+                                                            item[header.value]
+                                                        )
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600 italic font-semibold"
+                                                    v-else-if="
+                                                        header.value == 'name'
+                                                    "
+                                                    >{{
+                                                        item[header.value]
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600 italic font-semibold"
+                                                    v-else-if="
+                                                        header.value == 'email'
+                                                    "
+                                                >
+                                                    {{ item[header.value] }}
+                                                </span>
+
+                                                <span
+                                                    class="text-gray-600 italic font-semibold"
+                                                    v-else-if="
+                                                        header.value == 'role'
+                                                    "
+                                                >
+                                                    {{
+                                                        department(
+                                                            item[header.value]
+                                                        )
+                                                    }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </template>
+                            </v-data-table>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -321,6 +369,23 @@ export default {
 
     data() {
         return {
+            headers: [
+                {
+                    text: "Name",
+                    align: "start",
+                    sortable: false,
+                    value: "name",
+                },
+                {
+                    text: "Email",
+                    value: "email",
+                },
+                {
+                    text: "Department",
+                    value: "role",
+                },
+                { text: "Date", value: "created_at" },
+            ],
             echo: null,
             students: null,
             paidStudents: null,
@@ -365,6 +430,20 @@ export default {
             ];
         },
 
+        department(role) {
+            if (role == 1) {
+                return "Head Office";
+            } else if (role == 3) {
+                return "Academic Office";
+            } else if (role == 5) {
+                return "Accountant Office";
+            } else if (role == 6) {
+                return "Procurement Office";
+            } else if (role == 8) {
+                return "Other Offices";
+            }
+        },
+
         formatName(name) {
             const nameArr = name.split(" ");
             const formattedNameArr = nameArr.map((name) => {
@@ -378,28 +457,26 @@ export default {
         async headDashboardGetStudents() {
             axios.get("/academic/headDashboardGetStudents").then((response) => {
                 if (response.data.data != null) {
-                        this.students = response.data.data.totalStudents;
-                        // Filter the students with entries.length > 0
-                        const studentsWithEntries =
-                            response.data.data.paidStudents.filter(
-                                (student) => student.entries.length > 0
-                            );
-                        // Get the count of students with entries
-                        const count = studentsWithEntries.length;
-                        this.unpaidStudents = response.data.data.totalStudents - count
-                        this.paidStudents = count
-                        this.registeredStudents = [
-                            ["Language", "Students"],
-                            // ["Total Students", response.data.data.totalStudents],
-                            ["Paid Students", this.paidStudents],
-                            [
-                                "Unpaid Students",
-                                this.unpaidStudents,
-                            ],
-                        ];
+                    this.students = response.data.data.totalStudents;
+                    // Filter the students with entries.length > 0
+                    const studentsWithEntries =
+                        response.data.data.paidStudents.filter(
+                            (student) => student.entries.length > 0
+                        );
+                    // Get the count of students with entries
+                    const count = studentsWithEntries.length;
+                    this.unpaidStudents =
+                        response.data.data.totalStudents - count;
+                    this.paidStudents = count;
+                    this.registeredStudents = [
+                        ["Language", "Students"],
+                        // ["Total Students", response.data.data.totalStudents],
+                        ["Paid Students", this.paidStudents],
+                        ["Unpaid Students", this.unpaidStudents],
+                    ];
 
-                        this.showLoader = false;
-                    }
+                    this.showLoader = false;
+                }
 
                 // console.log(response.data.data);
             });
@@ -462,7 +539,7 @@ export default {
                 return "Accountant Office";
             } else if (role == 6) {
                 return "Procurement Office";
-            }else if (role == 8) {
+            } else if (role == 8) {
                 return "Other Offices";
             }
         },

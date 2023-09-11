@@ -6,7 +6,7 @@ class ChatOfAccountService
 {
     public function getStudentPayments(){
         $currentYear = date('Y');
-        return \App\Models\Student::with(['entries'])->where('school_id', auth()->user()->school_id)->whereYear('created_at', $currentYear)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Student::with(['entries', 'classType'])->where('school_id', auth()->user()->school_id)->whereYear('created_at', $currentYear)->orderBy('created_at', 'desc')->get();
     }
 
     public function getSpecificStudent($request){
@@ -16,6 +16,10 @@ class ChatOfAccountService
 
     public function getStudentsNew(){
         return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getStudentClasses(){
+        return \App\Models\ClassLevel::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getSpecificLegerEntries($request){

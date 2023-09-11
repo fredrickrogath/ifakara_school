@@ -68,6 +68,7 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
         Route::post('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
         
         Route::post('/getStudentPayments', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getStudentPayments'])->name('getStudentPayments');
+        Route::post('/getStudentClasses', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getStudentClasses'])->name('getStudentClasses');
         Route::post('/getSpecificStudent', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getSpecificStudent'])->name('getSpecificStudent');
 });
 

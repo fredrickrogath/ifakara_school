@@ -426,65 +426,112 @@
                         <h4 class="header-title my-1 px-1">School Staffs</h4>
 
                         <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0"
+                            <v-data-table
+                                :headers="headers"
+                                :items="staffs"
+                                item-key="name"
+                                class="elevation-1"
+                                :items-per-page="7"
                             >
-                                <thead>
-                                    <tr>
-                                        <th class="border-top-0">Identity</th>
-                                        <th class="border-top-0">Name</th>
-                                        <th class="border-top-0">
-                                            Departiment
-                                        </th>
-                                        <th class="border-top-0">Email</th>
-                                        <th class="border-top-0">
-                                            Registered On
-                                        </th>
-                                        <!-- <th class="border-top-0">Download</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody
-                                    class="italic font-semibold text-gray-900"
-                                >
-                                    <tr v-for="staff in staffs" :key="staff.id">
-                                        <td>
-                                            <img
-                                                class="h-8 w-8 rounded-full object-cover"
-                                                :src="
-                                                    $page.props.user
-                                                        .profile_photo_url
-                                                "
-                                                :alt="$page.props.user.name"
-                                            />
-                                            <!-- <img
-                                                src="assets/images/users/user-2.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            /> -->
-                                        </td>
-                                        <td>
-                                            <span class="text-center">
-                                                {{ staff.name }}
-                                            </span>
-                                        </td>
-                                        <td>{{ department(staff.role) }}</td>
-                                        <td>{{ staff.email }}</td>
-                                        <td>
-                                            {{
-                                                formattedDate(staff.created_at)
-                                            }}
-                                        </td>
-                                        <!-- <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
+                                <template v-slot:body="{ items, headers }">
+                                    <tbody>
+                                        <tr
+                                            v-for="(item, idx, k) in items"
+                                            :key="idx"
+                                        >
+                                            <td
+                                                v-for="(header, key) in headers"
+                                                :key="key"
                                             >
-                                        </td> -->
-                                    </tr>
-                                </tbody>
-                            </table>
+                                                <v-icon
+                                                    v-if="
+                                                        header.value == 'delete'
+                                                    "
+                                                    size="22"
+                                                    type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#warning-alert-modal"
+                                                    @click="
+                                                        setIdForAction(
+                                                            items[idx]['id']
+                                                        )
+                                                    "
+                                                >
+                                                    mdi-delete
+                                                </v-icon>
+
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value == 'id'
+                                                    "
+                                                    >{{
+                                                        item[header.value]
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value ==
+                                                        'created_at'
+                                                    "
+                                                    >{{
+                                                        formattedDate(
+                                                            item[header.value]
+                                                        )
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value ==
+                                                        'updated_at'
+                                                    "
+                                                    >{{
+                                                        formattedDate(
+                                                            item[header.value]
+                                                        )
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600 italic font-semibold"
+                                                    v-else-if="
+                                                        header.value == 'name'
+                                                    "
+                                                    >{{
+                                                        item[header.value]
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600 italic font-semibold"
+                                                    v-else-if="
+                                                        header.value == 'email'
+                                                    "
+                                                >
+                                                    {{ item[header.value] }}
+                                                </span>
+
+                                                <span
+                                                    class="text-gray-600 italic font-semibold"
+                                                    v-else-if="
+                                                        header.value == 'role'
+                                                    "
+                                                >
+                                                    {{
+                                                        department(
+                                                            item[header.value]
+                                                        )
+                                                    }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </template>
+                            </v-data-table>
                         </div>
                     </div>
                 </div>
@@ -521,12 +568,29 @@ export default {
 
     data() {
         return {
+            headers: [
+                {
+                    text: "Name",
+                    align: "start",
+                    sortable: false,
+                    value: "name",
+                },
+                {
+                    text: "Email",
+                    value: "email",
+                },
+                {
+                    text: "Department",
+                    value: "role",
+                },
+                { text: "Date", value: "created_at" },
+            ],
             echo: null,
             students: null,
             paidStudents: null,
             unpaidStudents: null,
             registeredStudents: [],
-            staffs: null,
+            staffs: [],
             totalTool: null,
             tools: [],
             finances: [],
@@ -561,6 +625,20 @@ export default {
                 ["Liabilities", 6700000],
                 ["Assets", 700000],
             ];
+        },
+
+        department(role) {
+            if (role == 3) {
+                return "Academic Office";
+            } else if (role == 1) {
+                return "Head Office";
+            } else if (role == 5) {
+                return "Accountant Office";
+            } else if (role == 6) {
+                return "Procurement Office";
+            } else if (role == 8) {
+                return "Other Offices";
+            }
         },
 
         async headDashboardGetStudents() {
@@ -643,6 +721,8 @@ export default {
                 return "Accountant";
             } else if (role == 6) {
                 return "Procurement";
+            }else if (role == 8) {
+                return "Other Offices";
             }
         },
 

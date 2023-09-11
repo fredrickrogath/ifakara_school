@@ -72,9 +72,53 @@
             </v-card-title>
             <!-- {{ $page.props.posts }} -->
 
+            <hr class="bg-gray-200 mb-2 mt-0" />
+
+            <div class="d-flex justify-content-between">
+                <div class="ml-3">
+                    <span class="text-xl font-semibold">
+                        {{ filteredStudentCount }}
+                    </span>
+                    <span>
+                        {{ getActiveClass }}
+                    </span>
+                    <span>STUDENTS</span>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <span
+                        class="cursor-pointer uppercase ml-3"
+                        :class="
+                            getActiveClass == 'ALL'
+                                ? 'text-warning'
+                                : 'underline'
+                        "
+                        @click="setActiveClass('ALL')"
+                        >ALL</span
+                    >
+                    <div
+                        v-for="classs in classes"
+                        :key="classs.id"
+                        class="d-flex"
+                    >
+                        <span
+                            class="cursor-pointer uppercase ml-3"
+                            :class="
+                                getActiveClass == classs.class_level
+                                    ? 'text-warning'
+                                    : 'underline'
+                            "
+                            @click="setActiveClass(classs.class_level)"
+                            >{{ classs.class_level }}</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <hr class="bg-gray-200 mb-2 mt-1" />
+
             <v-data-table
                 :headers="headers"
-                :items="students"
+                :items="filteredStudents"
                 item-key="name"
                 :search="search"
                 class="elevation-1"
@@ -171,6 +215,12 @@
                                 </span>
 
                                 <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'class_type'"
+                                    >{{ item[header.value].class_level }}</span
+                                >
+
+                                <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'gender'"
                                 >
@@ -241,6 +291,7 @@ export default {
     mounted() {
         this.showLoader = true;
         this.getStudents();
+        this.getStudentClasses();
 
         // Receiving broadicasting
         window.Echo.channel("student-event." + this.$page.props.user.school_id).listen(
@@ -274,6 +325,10 @@ export default {
                     value: "last_name",
                 },
                 {
+                    text: "Class",
+                    value: "class_type",
+                },
+                {
                     text: "Gender",
                     value: "gender",
                 },
@@ -283,6 +338,10 @@ export default {
                 { text: "Edit", value: "edit" },
             ],
             students: [],
+
+            classes: [],
+
+            classType: "ALL",
 
             idForAction: null,
         };
@@ -299,6 +358,26 @@ export default {
 
         getEditStudent() {
             return this.$store.getters["HeadStudentModule/getEditStudent"];
+        },
+
+        getActiveClass() {
+            this.classType =
+                this.$store.getters["AcademicStudentModule/getActiveClass"];
+            return this.$store.getters["AcademicStudentModule/getActiveClass"];
+        },
+
+        filteredStudents() {
+            if (this.classType === "ALL") {
+                return this.students; // Display all rows
+            } else {
+                return this.students.filter(
+                    (item) => item.class_type.class_level === this.classType
+                );
+            }
+        },
+
+        filteredStudentCount() {
+            return this.filteredStudents.length;
         },
     },
 
@@ -324,11 +403,27 @@ export default {
             this.$store.dispatch("HeadStudentModule/setEditStudent");
         },
 
+        setActiveClass(setActiveClass) {
+            this.classType = setActiveClass;
+            this.$store.dispatch(
+                "AcademicStudentModule/setActiveClass",
+                setActiveClass
+            );
+        },
+
         getStudents() {
             axios.get("/head/getStudentsNew").then((response) => {
                 this.students = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
+            });
+        },
+
+        getStudentClasses() {
+            axios.get("/head/getStudentClasses").then((response) => {
+                this.classes = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data);
             });
         },
 
