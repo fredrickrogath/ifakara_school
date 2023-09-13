@@ -11,9 +11,14 @@ class ChatOfAccountService
 
     public function getSpecificStudent($request){
         // $currentYear = date('Y');
-        return \App\Models\Student::with(['entries'])->where('id', $request->id)->orderBy('created_at', 'desc')->first();
+        return \App\Models\Student::with(['entries', 'classLevel'])->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }
 
+    public function changeClassLevel($request){
+        // $currentYear = date('Y');
+        return \App\Models\Student::where('id', $request->studentId)->update(['class_level_id' => $request->classId]);
+    }
+    
     public function getStudentsNew(){
         return \App\Models\Student::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
     }

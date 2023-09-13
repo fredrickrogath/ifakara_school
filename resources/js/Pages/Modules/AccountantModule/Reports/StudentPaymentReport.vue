@@ -2,11 +2,11 @@
     <div>
         <spinner v-if="showLoader"></spinner>
 
-        <v-card-title class="px-1 py-0 my-0">
+        <v-card-title class="px-1 py-0 my-0 font-15">
             STUDENT PAYMENTS REPORT {{ formattedDateRange }}
             <v-spacer></v-spacer>
 
-            <v-row class="px-2 pt-1">
+            <v-row class="px-2 pt-1 font-14">
                 <v-menu
                     ref="datePickerMenu"
                     :close-on-content-click="false"
@@ -62,12 +62,111 @@
         </v-card-title>
         <!-- {{ $page.props.posts }} -->
 
+        <hr class="bg-gray-200 mb-2 mt-0" />
+
+        <div class="d-flex justify-content-between">
+            <div class="ml-3">
+                <span class="text-xl font-semibold">
+                    {{ filteredStudentCount }}
+                </span>
+                <span>
+                    {{ payType }}
+                </span>
+                <span>STUDENTS</span>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <span
+                    class="cursor-pointer uppercase ml-3"
+                    :class="
+                        getActivePayment == 'ALL' ? 'text-warning' : 'underline'
+                    "
+                    @click="setActivePayment('ALL')"
+                    >ALL</span
+                >
+                <div v-for="classs in classes" :key="classs.id" class="d-flex">
+                    <span
+                        class="cursor-pointer uppercase ml-3"
+                        :class="
+                            getActivePayment == classs.class_level
+                                ? 'text-warning'
+                                : 'underline'
+                        "
+                        @click="setActivePayment(classs.class_level)"
+                        >{{ classs.class_level }}</span
+                    >
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <span
+                    class="cursor-pointer uppercase ml-3"
+                    :class="
+                        getActivePayment == 'ALL' ? 'text-warning' : 'underline'
+                    "
+                    @click="setActivePayment('ALL')"
+                    >ALL</span
+                >
+                <div class="d-flex">
+                    <span
+                        class="cursor-pointer uppercase ml-3"
+                        :class="
+                            getActivePayment == 'PAID'
+                                ? 'text-warning'
+                                : 'underline'
+                        "
+                        @click="setActivePayment('PAID')"
+                    >
+                        paid
+                    </span>
+
+                    <span
+                        class="cursor-pointer uppercase ml-3 mr-2"
+                        :class="
+                            getActivePayment == 'UNPAID'
+                                ? 'text-warning'
+                                : 'underline'
+                        "
+                        @click="setActivePayment('UNPAID')"
+                    >
+                        unpaid
+                    </span>
+
+                    <span
+                        class="cursor-pointer uppercase ml-3 mr-2"
+                        :class="
+                            getActivePayment == 'PARTIALPAID'
+                                ? 'text-warning'
+                                : 'underline'
+                        "
+                        @click="setActivePayment('PARTIALPAID')"
+                    >
+                        partial paid
+                    </span>
+
+                    <span
+                        class="cursor-pointer uppercase ml-3 mr-2"
+                        :class="
+                            getActivePayment == 'FULLPAID'
+                                ? 'text-warning'
+                                : 'underline'
+                        "
+                        @click="setActivePayment('FULLPAID')"
+                    >
+                        full paid
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <hr class="bg-gray-200 mb-2 mt-1" />
+
         <v-data-table
             :headers="headers"
             :items="students"
             item-key="name"
             :search="search"
-            class="elevation-1"
+            class="elevation-1 font-14"
             :items-per-page="20"
         >
             <template v-slot:body="{ items, headers }">
@@ -147,27 +246,33 @@
                             > -->
 
                             <span
-                                class="text-gray-600 italic font-semibold"
+                                class="text-gray-600 italic font-semibold text-xs"
                                 v-else-if="header.value == 'first_name'"
                                 >{{ item[header.value] }}</span
                             >
 
                             <span
-                                class="text-gray-600 italic font-semibold"
+                                class="text-gray-600 italic font-semibold text-xs"
                                 v-else-if="header.value == 'middle_name'"
                             >
                                 {{ item[header.value] }}
                             </span>
 
                             <span
-                                class="text-gray-600 italic font-semibold"
+                                class="text-gray-600 italic font-semibold text-xs"
                                 v-else-if="header.value == 'last_name'"
                             >
                                 {{ item[header.value] }}
                             </span>
 
                             <span
-                                class="text-gray-600 italic font-semibold"
+                                class="text-gray-600 italic font-semibold text-xs"
+                                v-else-if="header.value == 'class_type'"
+                                >{{ item[header.value].class_level }}</span
+                            >
+
+                            <span
+                                class="text-gray-600 italic font-semibold text-xs"
                                 v-else-if="header.text === 'Level 1'"
                             >
                                 <template
@@ -263,7 +368,7 @@
                             </span>
 
                             <span
-                                class="text-gray-600 italic font-semibold"
+                                class="text-gray-600 italic font-semibold text-xs"
                                 v-else-if="header.text === 'Level 2'"
                             >
                                 <template
@@ -359,7 +464,7 @@
                             </span>
 
                             <span
-                                class="text-gray-600 italic font-semibold"
+                                class="text-gray-600 italic font-semibold text-xs"
                                 v-else-if="header.text === 'Level 3'"
                             >
                                 <template
@@ -455,7 +560,7 @@
                             </span>
 
                             <span
-                                class="text-gray-600 italic font-semibold"
+                                class="text-gray-600 italic font-semibold text-xs"
                                 v-else-if="header.text === 'Last Pay On'"
                             >
                                 {{
@@ -496,6 +601,7 @@ export default {
     mounted() {
         this.showLoader = true;
         this.getStudents();
+        this.getStudentClasses();
         // this.getTools();
 
         // window.Echo.channel(
@@ -529,6 +635,10 @@ export default {
                     value: "last_name",
                 },
                 {
+                    text: "Class",
+                    value: "class_type",
+                },
+                {
                     text: "Level 1",
                     value: "entries",
                 },
@@ -551,6 +661,11 @@ export default {
 
             showLoader: true,
             students: [],
+            payType: "ALL",
+
+            classes: [],
+
+            classType: "ALL",
             storeStudents: [],
 
             idForAction: null,
@@ -593,6 +708,115 @@ export default {
             // return "No Date Selected";
         },
 
+        // filteredStudents() {
+        //     return this.students.filter((student) => {
+        //         const matchesSearch = this.headers.some((header) => {
+        //             const value = student[header.value];
+        //             return (
+        //                 value &&
+        //                 value
+        //                     .toString()
+        //                     .toLowerCase()
+        //                     .includes(this.search.toLowerCase())
+        //             );
+        //         });
+
+        //         if (!matchesSearch) return false;
+
+        //         if (!this.selectedDate) return true;
+
+        //         const startDate = moment(this.selectedDate.start);
+        //         const endDate = moment(this.selectedDate.end);
+        //         const studentDate = moment(student.created_at);
+
+        //         return studentDate.isBetween(startDate, endDate, "day", "[]");
+        //     });
+        // },
+
+        getActivePayment() {
+            this.classType =
+                this.$store.getters["AcademicStudentModule/getActivePayment"];
+            this.payType =
+                this.$store.getters["AcademicStudentModule/getActivePayment"];
+            return this.$store.getters[
+                "AcademicStudentModule/getActivePayment"
+            ];
+        },
+
+        // filteredStudents() {
+        //     if (this.payType === "ALL") {
+        //         return this.students; // Display all rows
+        //     } else if (this.payType === "PAID") {
+        //         // Show only students who have paid (entries.length > 0)
+        //         return this.students.filter(
+        //             (student) => student.entries.length > 0
+        //         );
+        //     } else if (this.payType === "UNPAID") {
+        //         // Show only students who have not paid (entries.length == 0)
+        //         return this.students.filter(
+        //             (student) => student.entries.length === 0
+        //         );
+        //     } else if (this.payType === "PARTIALPAID") {
+        //         const filteredStudents = this.students.filter(
+        //             (student) => student.entries.length > 0
+        //         );
+
+        //         const studentsWithTrueComparison = filteredStudents.filter(
+        //             (student) => {
+        //                 const total = student.entries.reduce((acc, entry) => {
+        //                     return (
+        //                         acc +
+        //                         entry.level_1 +
+        //                         entry.level_2 +
+        //                         entry.level_3
+        //                     );
+        //                 }, 0);
+
+        //                 const chartOfAccountTotal = student.entries[0]
+        //                     ? student.entries[0].chart_of_account.level1 +
+        //                       student.entries[0].chart_of_account.level2 +
+        //                       student.entries[0].chart_of_account.level3
+        //                     : 0;
+
+        //                 return total !== chartOfAccountTotal;
+        //             }
+        //         );
+
+        //         return studentsWithTrueComparison;
+        //     } else if (this.payType === "FULLPAID") {
+        //         const filteredStudents = this.students.filter(
+        //             (student) => student.entries.length > 0
+        //         );
+
+        //         const studentsWithTrueComparison = filteredStudents.filter(
+        //             (student) => {
+        //                 const total = student.entries.reduce((acc, entry) => {
+        //                     return (
+        //                         acc +
+        //                         entry.level_1 +
+        //                         entry.level_2 +
+        //                         entry.level_3
+        //                     );
+        //                 }, 0);
+
+        //                 const chartOfAccountTotal = student.entries[0]
+        //                     ? student.entries[0].chart_of_account.level1 +
+        //                       student.entries[0].chart_of_account.level2 +
+        //                       student.entries[0].chart_of_account.level3
+        //                     : 0;
+
+        //                 return total === chartOfAccountTotal;
+        //             }
+        //         );
+
+        //         return studentsWithTrueComparison;
+        //     } else {
+        //         return this.students.filter(
+        //             (item) => item.class_type.class_level === this.classType
+        //         );
+        //     }
+        // },
+
         filteredStudents() {
             return this.students.filter((student) => {
                 const matchesSearch = this.headers.some((header) => {
@@ -614,8 +838,57 @@ export default {
                 const endDate = moment(this.selectedDate.end);
                 const studentDate = moment(student.created_at);
 
-                return studentDate.isBetween(startDate, endDate, "day", "[]");
+                if (!studentDate.isBetween(startDate, endDate, "day", "[]"))
+                    return false;
+
+                if (this.payType === "ALL") {
+                    return true;
+                } else if (
+                    this.payType === "PAID" &&
+                    student.entries.length > 0
+                ) {
+                    return true;
+                } else if (
+                    this.payType === "UNPAID" &&
+                    student.entries.length === 0
+                ) {
+                    return true;
+                } else if (this.payType === "PARTIALPAID") {
+                    const total = student.entries.reduce((acc, entry) => {
+                        return (
+                            acc + entry.level_1 + entry.level_2 + entry.level_3
+                        );
+                    }, 0);
+
+                    const chartOfAccountTotal = student.entries[0]
+                        ? student.entries[0].chart_of_account.level1 +
+                          student.entries[0].chart_of_account.level2 +
+                          student.entries[0].chart_of_account.level3
+                        : 0;
+
+                    return total !== chartOfAccountTotal;
+                } else if (this.payType === "FULLPAID") {
+                    const total = student.entries.reduce((acc, entry) => {
+                        return (
+                            acc + entry.level_1 + entry.level_2 + entry.level_3
+                        );
+                    }, 0);
+
+                    const chartOfAccountTotal = student.entries[0]
+                        ? student.entries[0].chart_of_account.level1 +
+                          student.entries[0].chart_of_account.level2 +
+                          student.entries[0].chart_of_account.level3
+                        : 0;
+
+                    return total === chartOfAccountTotal;
+                } else {
+                    return student.class_type.class_level === this.classType;
+                }
             });
+        },
+        
+        filteredStudentCount() {
+            return this.filteredStudents.length;
         },
     },
 
@@ -689,12 +962,28 @@ export default {
             this.sellerInfo = seller;
         },
 
+        setActivePayment(payType) {
+            this.payType = payType;
+            this.$store.dispatch(
+                "AcademicStudentModule/setActivePayment",
+                payType
+            );
+        },
+
         getStudents() {
             axios.get("/accountant/getStudentPayments").then((response) => {
                 this.students = response.data.data;
                 this.storeStudents = response.data.data;
                 this.showLoader = false;
                 // console.log(this.students)
+            });
+        },
+
+        getStudentClasses() {
+            axios.get("/accountant/getStudentClasses").then((response) => {
+                this.classes = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data);
             });
         },
 

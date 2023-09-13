@@ -40,7 +40,7 @@ class StudentService
 
     public function getSpecificStudent($request){
         // $currentYear = date('Y');
-        return \App\Models\Student::with(['entries'])->where('id', $request->id)->orderBy('created_at', 'desc')->first();
+        return \App\Models\Student::with(['entries','classLevel'])->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }
 
     // public function getInvoiceView($request){

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-card-title class="px-1 py-0 my-0">
+        <v-card-title class="px-1 py-0 my-0 font-15">
             INVOICE REPORT {{ formattedDateRange }}
             <v-spacer></v-spacer>
 

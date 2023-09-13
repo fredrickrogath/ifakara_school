@@ -328,6 +328,7 @@ Route::middleware([
         Route::get('/getStudentClasses', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getStudentClasses'])->name('getStudentClasses');
         Route::post('/entry', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'entry'])->name('entry');
         Route::post('/getSpecificStudent', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSpecificStudent'])->name('getSpecificStudent');
+        Route::post('/changeClassLevel', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'changeClassLevel'])->name('changeClassLevel');
         
         /*
         |--------------------------------------------------------------------------

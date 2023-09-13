@@ -34,6 +34,10 @@ class Student extends Model
         return $this->hasOne('App\Models\Notification','object_id','id');
     }
 
+    public function classLevel(){
+        return $this->hasOne('App\Models\ClassLevel', 'id', 'class_level_id');
+    }
+
     public function classType(){
         return $this->belongsTo('App\Models\ClassLevel','class_level_id','id');
     }
@@ -49,15 +53,4 @@ class Student extends Model
             'entry_id'
         )->with('chartOfAccount');
     }
-
-    // public function chartOfAccounts()
-    // {
-    //     return $this->belongsToMany('App\Models\ChartsOfAccount', 'entry_students', 'student_id', 'charts_of_accounts_id');
-    // }
-    
-    // public function user()
-    // {
-    //     // return $this->belongsTo('Model', 'foreign_key', 'owner_key'); 
-    //     return $this->belongsTo('App\Models\User','user_id','id');
-    // }
 }

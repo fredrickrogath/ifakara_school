@@ -15,14 +15,24 @@
                         >
                         <!-- <img class="mx-auto h-52 w-52 rounded-lg border p-2 md:mt-0" src="https://i.imgur.com/FQS7fFC.png" alt="step" /> -->
                         <div>
+
+                            <h6 v-if="student.entries &&
+                                    student.entries.length > 0" class="mt-2"> {{ student.class_level.class_level }} STUDENT </h6>
                             <h1
-                                class="font-laonoto mt-4 text-center text-xl font-bold"
+                                class="font-laonoto mt-2 text-center text-xl font-bold"
                             >
                                 <span v-show="false">{{ getPaymentId }}</span>
                                 {{ student.first_name }}
                                 {{ student.middle_name }}
                                 {{ student.last_name }}
                             </h1>
+
+                            <select v-if="student.entries &&
+                                    student.entries.length > 0 && calculateFormattedFeeTotal() <= calculateFormattedTotal()"                                    class="form-select form-select-sm mx-auto" aria-label="Default select example" style="width:auto;">
+                                    <option value="3" selected> {{ student.class_level.class_level }} STUDENT </option>
+                                <option @click="changeClass(student.id ,classs.id)" value="2"
+                                    v-for="classs in classes" :key="classs.id"> {{ classs.class_level }} LEVEL </option>
+                            </select>
 
                             <p
                             v-if="
@@ -369,6 +379,7 @@ export default {
     mounted() {
         this.showLoader = true;
         this.getStudents();
+        this.getStudentClasses();
 
         // window.Echo.channel("EventTriggered").listen(
         //     "NewPostPublished",
@@ -415,6 +426,7 @@ export default {
         return {
             id: null,
             student: [],
+            classes: [],
         };
     },
 
@@ -499,6 +511,35 @@ export default {
     return parseFloat(total);
   },
 
+  changeClass(studentId, classId){
+    if(this.$page.props.role == 'academic'){
+        // axios.post("/accountant/changeClassLevel", {
+        //             id: this.getPaymentId,
+        //         })
+        //         .then((response) => {
+        //             if(response.data.data != null){
+        //                 this.student = response.data.data;
+        //                 this.showLoader = false;
+        //             }
+        //             // console.log(response.data.data);
+        //         });
+            }
+            if(this.$page.props.role == 'accountant'){
+                axios.post("/accountant/changeClassLevel", {
+                    studentId: studentId,
+                    classId: classId,
+                })
+                .then((response) => {
+                    if(response.data.data != null){
+                        this.getStudents()
+                        // this.student = response.data.data;
+                        this.showLoader = false;
+                    }
+                    // console.log(response.data.data);
+                });
+            }
+            
+  },
         getStudents() {
             axios
                 .post("/accountant/getSpecificStudent", {
@@ -511,6 +552,23 @@ export default {
                     }
                     // console.log(response.data.data);
                 });
+        },
+
+        getStudentClasses() {
+            if(this.$page.props.role == 'academic'){
+                axios.get("/academic/getStudentClasses").then((response) => {
+                this.classes = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data);
+            });
+            }
+            if(this.$page.props.role == 'accountant'){
+                axios.get("/accountant/getStudentClasses").then((response) => {
+                this.classes = response.data.data;
+                this.showLoader = false;
+                // console.log(response.data.data);
+            });
+            }
         },
 
         // save(id, column, data) {
