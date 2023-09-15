@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Services\HeadServices\StudentServices;
-use App\Imports\ProductImport;
+use App\Imports\StudentImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 
 class StudentService
 {
@@ -31,44 +33,172 @@ class StudentService
         return false;
     }
 
-    public function processExcelFile($request){
+    
+public function processExcelFile($request)
+{
+    $file = $request->file('file');
+    
+    // Import Excel data using StudentImport class
+    $data = Excel::toArray(new StudentImport, $file);
 
-        $file = $request->file('file');
+    // Assuming the data you want is in the first sheet (index 0)
+    $dataArray = collect($data[0])->filter(function($row) {
+        // Filter out rows with all null or empty values
+        return !empty(array_filter($row));
+    })->values()->toArray();
 
-         // Import Excel data using ProductImport class
-         try {
-            Excel::import(new ProductImport, $file);
-            
-            return response()->json(['message' => 'Data imported successfully.'], 200);
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            $failures = $e->failures();
-            
-            // Handle validation failures (if any)
-            // You can access the validation errors using $failures variable
-            
-            return response()->json(['message' => 'Data import failed.'], 400);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'An error occurred while importing data.'], 500);
+    // Start a database transaction
+    DB::beginTransaction();
+    return response()->json($dataArray);
+    foreach ($dataArray as $dataRow) {
+        // Retrieve the 'class_level_id' for each row's 'class' value
+        $classLevel = \App\Models\ClassLevel::where('class_level', $dataRow['class'])->first();
+
+        if ($classLevel) {
+            // Create a new Student model instance and fill it with data
+            $student = \App\Models\Student::create([
+                'class_level_id' => $classLevel->id, // Use the 'id' from ClassLevel model
+                'first_name' => $dataRow['first_name'],
+                'middle_name' => $dataRow['middle_name'],
+                'last_name' => $row['last_name'],
+                'gender' => $row['gender'],
+                'from' => $row['from'],
+                'parent' => $row['parent_name'],
+                'parent_contact' => $row['phone_number'],
+                'school_id' => auth()->user()->school_id,
+            ]);
+            return response()->json('dataRow');
+            // Save the model to the database
+            // $student->save();
+        } else {
+            // Handle the case where 'class' value doesn't match any 'class_level'
+            // You can log an error or take appropriate action here
         }
-
-        // return $request->hasFile('file');
-        // $created = \App\Models\Student::create([
-        //     'class_level_id' => $request->classLevel,
-        //     'first_name' => $request->firstName,
-        //     'middle_name' => $request->middleName,
-        //     'last_name' => $request->lastName,
-        //     'gender' => $request->gender,
-        //     'from' => $request->location,
-        //     'parent' => $request->parent,
-        //     'parent_contact' => $request->contact,
-        //     'school_id' => auth()->user()->school_id,
-        // ]);
-
-        // if($created){
-        //     return true;
-        // }
-        // return false;
     }
+
+    try {
+        // foreach ($dataArray as $dataRow) {
+        //     // Retrieve the 'class_level_id' for each row's 'class' value
+        //     $classLevel = \App\Models\ClassLevel::where('class_level', $dataRow['class'])->first();
+
+        //     if ($classLevel) {
+        //         // Create a new Student model instance and fill it with data
+        //         $student = \App\Models\Student::create([
+        //             'class_level_id' => $classLevel->id, // Use the 'id' from ClassLevel model
+        //             'first_name' => $dataRow['first_name'],
+        //             'middle_name' => $dataRow['middle_name'],
+        //             'last_name' => $row['last_name'],
+        //             'gender' => $row['gender'],
+        //             'from' => $row['from'],
+        //             'parent' => $row['parent_name'],
+        //             'parent_contact' => $row['phone_number'],
+        //             'school_id' => auth()->user()->school_id,
+        //         ]);
+
+        //         // Save the model to the database
+        //         // $student->save();
+        //     } else {
+        //         // Handle the case where 'class' value doesn't match any 'class_level'
+        //         // You can log an error or take appropriate action here
+        //     }
+        // }
+
+        // // Commit the transaction
+        // DB::commit();
+
+        // return response()->json(['message' => 'Data inserted successfully']);
+    } catch (\Exception $e) {
+        // Rollback the transaction in case of an error
+        DB::rollback();
+
+        return response()->json(['message' => 'Data insertion failed. Error: ' . $e->getMessage()], 500);
+    }
+}
+//     public function processExcelFile($request)
+// {
+//     $file = $request->file('file');
+    
+//     // Import Excel data using StudentImport class
+//     $data = Excel::toArray(new StudentImport, $file);
+
+//     // Assuming the data you want is in the first sheet (index 0)
+//     $dataArray = collect($data[0])->filter(function($row) {
+//         // Filter out rows with all null or empty values
+//         return !empty(array_filter($row));
+//     })->values()->toArray();
+
+//     // Chunk the data into smaller arrays of 100 rows each (adjust the size as needed)
+//     $chunks = array_chunk($dataArray, 100);
+
+//     // Start a database transaction
+//     DB::beginTransaction();
+
+//     try {
+//         foreach ($chunks as $chunk) {
+//             // Insert each chunk into the database using batch insertion
+//             Student::insert($chunk);
+//         }
+
+//         // Commit the transaction
+//         DB::commit();
+
+//         return response()->json(['message' => 'Data inserted successfully']);
+//     } catch (\Exception $e) {
+//         // Rollback the transaction in case of an error
+//         DB::rollback();
+
+//         return response()->json(['message' => 'Data insertion failed. Error: ' . $e->getMessage()], 500);
+//     }
+// }
+
+    // public function processExcelFile($request){
+
+    //     $file = $request->file('file');
+
+    //     $data = Excel::toArray(new StudentImport, $file);
+
+    // // Assuming the data you want is in the first sheet (index 0)
+    // $dataArray = collect($data[0])->filter(function($row) {
+    //     // Filter out rows with all null or empty values
+    //     return !empty(array_filter($row));
+    // })->values()->toArray();
+
+    // return response()->json($dataArray);
+    
+    //      // Import Excel data using ProductImport class
+    //     //  Excel::toCollection(new StudentImport, $file);
+    //      return response()->json(Excel::toArray(new StudentImport, $file));
+    //      return response()->json(['message' => 'Data imported successfully.'], 200);
+    //      try {
+    //     } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+    //         $failures = $e->failures();
+            
+    //         // Handle validation failures (if any)
+    //         // You can access the validation errors using $failures variable
+            
+    //         return response()->json(['message' => 'Data import failed.'], 400);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['message' => 'An error occurred while importing data.'], 500);
+    //     }
+
+    //     // return $request->hasFile('file');
+    //     // $created = \App\Models\Student::create([
+    //     //     'class_level_id' => $request->classLevel,
+    //     //     'first_name' => $request->firstName,
+    //     //     'middle_name' => $request->middleName,
+    //     //     'last_name' => $request->lastName,
+    //     //     'gender' => $request->gender,
+    //     //     'from' => $request->location,
+    //     //     'parent' => $request->parent,
+    //     //     'parent_contact' => $request->contact,
+    //     //     'school_id' => auth()->user()->school_id,
+    //     // ]);
+
+    //     // if($created){
+    //     //     return true;
+    //     // }
+    //     // return false;
+    // }
     
     public function getInvoices(){
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', auth()->user()->school_id)->orderBy('created_at', 'desc')->get();
