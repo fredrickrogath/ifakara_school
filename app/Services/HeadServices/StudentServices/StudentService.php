@@ -39,62 +39,36 @@ public function processExcelFile($request)
     $file = $request->file('file');
     
     // Import Excel data using StudentImport class
-    $data = Excel::toArray(new StudentImport, $file);
+    $data = Excel::import(new StudentImport, $file);
 
     // Assuming the data you want is in the first sheet (index 0)
-    $dataArray = collect($data[0])->filter(function($row) {
-        // Filter out rows with all null or empty values
-        return !empty(array_filter($row));
-    })->values()->toArray();
+    // $dataArray = collect($data[0])->filter(function($row) {
+    //     // Filter out rows with all null or empty values
+    //     return !empty(array_filter($row));
+    // })->values()->toArray();
 
     // Start a database transaction
-    DB::beginTransaction();
-    return response()->json($dataArray);
-    foreach ($dataArray as $dataRow) {
-        // Retrieve the 'class_level_id' for each row's 'class' value
-        $classLevel = \App\Models\ClassLevel::where('class_level', $dataRow['class'])->first();
-
-        if ($classLevel) {
-            // Create a new Student model instance and fill it with data
-            $student = \App\Models\Student::create([
-                'class_level_id' => $classLevel->id, // Use the 'id' from ClassLevel model
-                'first_name' => $dataRow['first_name'],
-                'middle_name' => $dataRow['middle_name'],
-                'last_name' => $row['last_name'],
-                'gender' => $row['gender'],
-                'from' => $row['from'],
-                'parent' => $row['parent_name'],
-                'parent_contact' => $row['phone_number'],
-                'school_id' => auth()->user()->school_id,
-            ]);
-            return response()->json('dataRow');
-            // Save the model to the database
-            // $student->save();
-        } else {
-            // Handle the case where 'class' value doesn't match any 'class_level'
-            // You can log an error or take appropriate action here
-        }
-    }
+    // DB::beginTransaction();
 
     try {
         // foreach ($dataArray as $dataRow) {
         //     // Retrieve the 'class_level_id' for each row's 'class' value
         //     $classLevel = \App\Models\ClassLevel::where('class_level', $dataRow['class'])->first();
-
+    
         //     if ($classLevel) {
         //         // Create a new Student model instance and fill it with data
         //         $student = \App\Models\Student::create([
-        //             'class_level_id' => $classLevel->id, // Use the 'id' from ClassLevel model
+        //             'class_level_id' => $classLevel->id,
         //             'first_name' => $dataRow['first_name'],
         //             'middle_name' => $dataRow['middle_name'],
-        //             'last_name' => $row['last_name'],
-        //             'gender' => $row['gender'],
-        //             'from' => $row['from'],
-        //             'parent' => $row['parent_name'],
-        //             'parent_contact' => $row['phone_number'],
+        //             'last_name' => $dataRow['last_name'],
+        //             'gender' => $dataRow['gender'],
+        //             'from' => $dataRow['from'],
+        //             'parent' => $dataRow['parent_name'],
+        //             'parent_contact' => $dataRow['phone_number'],
         //             'school_id' => auth()->user()->school_id,
         //         ]);
-
+        //         return json_encode($student->id);
         //         // Save the model to the database
         //         // $student->save();
         //     } else {
@@ -104,12 +78,12 @@ public function processExcelFile($request)
         // }
 
         // // Commit the transaction
-        // DB::commit();
+        // // DB::commit();
 
         // return response()->json(['message' => 'Data inserted successfully']);
     } catch (\Exception $e) {
         // Rollback the transaction in case of an error
-        DB::rollback();
+        // DB::rollback();
 
         return response()->json(['message' => 'Data insertion failed. Error: ' . $e->getMessage()], 500);
     }
