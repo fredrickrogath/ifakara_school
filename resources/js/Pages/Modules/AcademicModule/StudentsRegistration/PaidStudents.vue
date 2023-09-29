@@ -14,23 +14,24 @@
                 <!-- <v-card flat :dark="isDark"> -->
                 <!-- <v-card elevation="0" data-app> -->
 
-                <v-card-title class="px-0 pt-0 mr-2">
-                    <div class="pl-2 pt-1 font-15 uppercase ">Payments</div>
-                    <v-spacer></v-spacer>
-
-                    <snack-bar
-                        class="absolute right-0 top-14"
-                        message="Task completed successfully"
+                    <v-card-title class="px-0 pt-0 pb-1">
+                <div class="pl-2 pt-1 text-sm uppercase">Payments</div>
+                <v-spacer></v-spacer>
+                
+                <snack-bar
+                    class="absolute right-0 top-14"
+                    message="Task completed successfully"
                     ></snack-bar>
+                    
+                    <v-spacer></v-spacer>
+                
 
-                    <v-text-field
-                        v-model="search"
-                        append-icon="mdi-magnify"
-                        label="Search"
-                        single-line
-                        hide-details
-                    ></v-text-field>
-                </v-card-title>
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                    <input v-model="search" type="text" class="form-control form-control-sm" />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
+            </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
                 <!-- {{ $page.props.posts }} -->
 
                 <hr class="bg-gray-200 mb-2 mt-0" />
