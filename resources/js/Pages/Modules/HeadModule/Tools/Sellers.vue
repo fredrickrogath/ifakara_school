@@ -156,20 +156,17 @@
                 <!-- /.modal-dialog -->
             </div>
 
-            <v-card-title class="px-0 pt-0">
-                Sellers
+            <v-card-title class="px-0 pt-0 pb-1">
+                <div class="pl-2 pt-1 text-sm uppercase">Sellers</div>
+ 
                 <v-spacer></v-spacer>
 
                 <snackbar message="Task completed successfully"></snackbar>
                 
-                <v-text-field
-
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                    <input v-model="search" type="text" class="form-control form-control-sm" />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
 
                 <v-icon
                     type="button"
@@ -180,6 +177,8 @@
                     mdi-pen-plus
                 </v-icon>
             </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
+
             <!-- {{ $page.props.posts }} -->
 
             <v-data-table

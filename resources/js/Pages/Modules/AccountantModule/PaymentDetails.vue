@@ -14,221 +14,135 @@
                 <!-- <v-card flat :dark="isDark"> -->
                 <!-- <v-card elevation="0" data-app> -->
 
-                <v-card-title class="px-0 pt-0">
-                    <div class="pl-2 pt-1 font-15 uppercase">Payments</div>
-                    <v-spacer></v-spacer>
 
-                    <snack-bar
-                        class="absolute right-0 top-14"
-                        message="Task completed successfully"
-                    ></snack-bar>
+      
+                    <v-card-title class="px-0 pt-0 pb-1">
+                        <div class="pl-2 pt-1 text-sm uppercase">Payments</div>
+                        <v-spacer></v-spacer>
+                        <snackbar class="absolute right-0 top-14" message="Task completed successfully"></snackbar>
 
-                    <v-text-field
-                        v-model="search"
-                        append-icon="mdi-magnify"
-                        label="Search"
-                        single-line
-                        hide-details
-                    ></v-text-field>
-                </v-card-title>
-                <!-- {{ $page.props.posts }} -->
+                        <div class="flex col-3 p-0 pt-1 mr-2">
+                            <input v-model="search" type="text" class="form-control form-control-sm" />
+                            <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                        </div>
+                    </v-card-title>
+                    <hr class="bg-gray-200 mb-1 mt-0" />
+                    <!-- {{ $page.props.posts }} -->
 
-                <hr class="bg-gray-200 mb-2 mt-0" />
+    
+                    <div class="d-flex justify-content-between">
+                        <div class="ml-3">
+                            <span class="text-xl font-semibold">
+                                {{ filteredStudentCount }}
+                            </span>
+                            <span>
+                                {{ payType }}
+                            </span>
+                            <span>STUDENTS</span>
+                        </div>
 
-                <div class="d-flex justify-content-between">
-                    <div class="ml-3">
-                        <span class="text-xl font-semibold">
-                            {{ filteredStudentCount }}
-                        </span>
-                        <span>
-                            {{ payType }}
-                        </span>
-                        <span>STUDENTS</span>
-                    </div>
-
-                    <div class="d-flex justify-content-end">
-                        <span
-                            class="cursor-pointer uppercase ml-3"
-                            :class="
-                                getActivePayment == 'ALL'
+                        <div class="d-flex justify-content-end">
+                            <span class="cursor-pointer uppercase ml-3" :class="getActivePayment == 'ALL'
                                     ? 'text-warning'
                                     : 'underline'
-                            "
-                            @click="setActivePayment('ALL')"
-                            >ALL</span
-                        >
-                        <div
-                            v-for="classs in classes"
-                            :key="classs.id"
-                            class="d-flex"
-                        >
-                            <span
-                                class="cursor-pointer uppercase ml-3"
-                                :class="
-                                    getActivePayment == classs.class_level
+                                " @click="setActivePayment('ALL')">ALL</span>
+                            <div v-for="classs in classes" :key="classs.id" class="d-flex">
+                                <span class="cursor-pointer uppercase ml-3" :class="getActivePayment == classs.class_level
                                         ? 'text-warning'
                                         : 'underline'
-                                "
-                                @click="setActivePayment(classs.class_level)"
-                                >{{ classs.class_level }}</span
-                            >
+                                    " @click="setActivePayment(classs.class_level)">{{ classs.class_level }}</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <span class="cursor-pointer uppercase ml-3" :class="getActivePayment == 'ALL'
+                                    ? 'text-warning'
+                                    : 'underline'
+                                " @click="setActivePayment('ALL')">ALL</span>
+                            <div class="d-flex">
+                                <span class="cursor-pointer uppercase ml-3" :class="getActivePayment == 'PAID'
+                                        ? 'text-warning'
+                                        : 'underline'
+                                    " @click="setActivePayment('PAID')">
+                                    paid
+                                </span>
+
+                                <span class="cursor-pointer uppercase ml-3 mr-2" :class="getActivePayment == 'UNPAID'
+                                        ? 'text-warning'
+                                        : 'underline'
+                                    " @click="setActivePayment('UNPAID')">
+                                    unpaid
+                                </span>
+
+                                <span class="cursor-pointer uppercase ml-3 mr-2" :class="getActivePayment == 'PARTIALPAID'
+                                        ? 'text-warning'
+                                        : 'underline'
+                                    " @click="setActivePayment('PARTIALPAID')">
+                                    partial paid
+                                </span>
+
+                                <span class="cursor-pointer uppercase ml-3 mr-2" :class="getActivePayment == 'FULLPAID'
+                                        ? 'text-warning'
+                                        : 'underline'
+                                    " @click="setActivePayment('FULLPAID')">
+                                    full paid
+                                </span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-end">
-                        <span
-                            class="cursor-pointer uppercase ml-3"
-                            :class="
-                                getActivePayment == 'ALL'
-                                    ? 'text-warning'
-                                    : 'underline'
-                            "
-                            @click="setActivePayment('ALL')"
-                            >ALL</span
-                        >
-                        <div class="d-flex">
-                            <span
-                                class="cursor-pointer uppercase ml-3"
-                                :class="
-                                    getActivePayment == 'PAID'
-                                        ? 'text-warning'
-                                        : 'underline'
-                                "
-                                @click="setActivePayment('PAID')"
-                            >
-                                paid
-                            </span>
+                    <hr class="bg-gray-200 mb-2 mt-1" />
 
-                            <span
-                                class="cursor-pointer uppercase ml-3 mr-2"
-                                :class="
-                                    getActivePayment == 'UNPAID'
-                                        ? 'text-warning'
-                                        : 'underline'
-                                "
-                                @click="setActivePayment('UNPAID')"
-                            >
-                                unpaid
-                            </span>
+                    <v-data-table :headers="headers" :items="filteredStudents" item-key="name" :search="search"
+                        class="elevation-1" :items-per-page="20">
+                        <template v-slot:body="{ items, headers }">
+                            <tbody>
+                                <tr v-for="(item, idx, k) in items" :key="idx">
+                                    <td v-for="(header, key) in headers" :key="key">
 
-                            <span
-                                class="cursor-pointer uppercase ml-3 mr-2"
-                                :class="
-                                    getActivePayment == 'PARTIALPAID'
-                                        ? 'text-warning'
-                                        : 'underline'
-                                "
-                                @click="setActivePayment('PARTIALPAID')"
-                            >
-                                partial paid
-                            </span>
 
-                            <span
-                                class="cursor-pointer uppercase ml-3 mr-2"
-                                :class="
-                                    getActivePayment == 'FULLPAID'
-                                        ? 'text-warning'
-                                        : 'underline'
-                                "
-                                @click="setActivePayment('FULLPAID')"
-                            >
-                                full paid
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                                        <v-icon v-if="header.value == 'view'" size="22"
+                                            @click=" studentDetails(items[idx]['id'])">
+                                            mdi-eye
+                                        </v-icon>
 
-                <hr class="bg-gray-200 mb-2 mt-1" />
+                                        <span class="text-gray-600 italic font-semibold text-xs"
+                                            v-else-if="header.value == 'created_at'">{{
+                                                formattedDate(item[header.value])
+                                            }}</span>
 
-                <v-data-table
-                    :headers="headers"
-                    :items="filteredStudents"
-                    item-key="name"
-                    :search="search"
-                    class="elevation-1"
-                    :items-per-page="20"
-                >
-                    <template v-slot:body="{ items, headers }">
-                        <tbody>
-                            <tr v-for="(item, idx, k) in items" :key="idx">
-                                <td v-for="(header, key) in headers" :key="key">
-                   
-
-                                    <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    @click=" studentDetails(items[idx]['id'])"
-                                >
-                                    mdi-eye
-                                </v-icon>
-
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="header.value == 'created_at'"
-                                        >{{
+                                        <span class="text-gray-600" v-else-if="header.value == 'updated_at'">{{
                                             formattedDate(item[header.value])
-                                        }}</span
-                                    >
+                                        }}</span>
 
-                                    <span
-                                        class="text-gray-600"
-                                        v-else-if="header.value == 'updated_at'"
-                                        >{{
-                                            formattedDate(item[header.value])
-                                        }}</span
-                                    >
+                                        <span class="text-gray-600 italic font-semibold text-xs"
+                                            v-else-if="header.value == 'first_name'">{{ item[header.value] }}</span>
 
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="header.value == 'first_name'"
-                                        >{{ item[header.value] }}</span
-                                    >
+                                        <span class="text-gray-600 italic font-semibold text-xs" v-else-if="header.value == 'middle_name'
+                                            ">
+                                            {{ item[header.value] }}
+                                        </span>
 
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="
-                                            header.value == 'middle_name'
-                                        "
-                                    >
-                                        {{ item[header.value] }}
-                                    </span>
+                                        <span class="text-gray-600 italic font-semibold text-xs"
+                                            v-else-if="header.value == 'last_name'">
+                                            {{ item[header.value] }}
+                                        </span>
 
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="header.value == 'last_name'"
-                                    >
-                                        {{ item[header.value] }}
-                                    </span>
+                                        <span class="text-gray-600 italic font-semibold text-xs"
+                                            v-else-if="header.value == 'class_type'">{{
+                                                item[header.value].class_level
+                                            }}</span>
 
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="header.value == 'class_type'"
-                                        >{{
-                                            item[header.value].class_level
-                                        }}</span
-                                    >
-
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="header.text === 'Level 1'"
-                                    >
-                                        <template
-                                            v-if="
-                                                item[header.value] &&
+                                        <span class="text-gray-600 italic font-semibold text-xs"
+                                            v-else-if="header.text === 'Level 1'">
+                                            <template v-if="item[header.value] &&
                                                 item[header.value].length > 0
-                                            "
-                                        >
-                                            <div class="d-flex flex-col">
-                                                <span>
-                                                    EXPECTED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-yellow-500"
-                                                        >{{
+                                                ">
+                                                <div class="d-flex flex-col">
+                                                    <span>
+                                                        EXPECTED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-yellow-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
@@ -236,19 +150,12 @@
                                                                     .chart_of_account
                                                                     .level1
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    TOTAL PAYMENTS
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        TOTAL PAYMENTS
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-green-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
@@ -262,113 +169,73 @@
                                                                     0
                                                                 )
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    REMAINED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        REMAINED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-red-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
                                                                 ][0]
                                                                     .chart_of_account
                                                                     .level1 -
-                                                                    item[
-                                                                        header
-                                                                            .value
-                                                                    ].reduce(
-                                                                        (
-                                                                            total,
-                                                                            entry
-                                                                        ) =>
-                                                                            total +
-                                                                            entry.level_1,
-                                                                        0
-                                                                    )
+                                                                item[
+                                                                    header
+                                                                        .value
+                                                                ].reduce(
+                                                                    (
+                                                                        total,
+                                                                        entry
+                                                                    ) =>
+                                                                        total +
+                                                                        entry.level_1,
+                                                                    0
+                                                                )
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                            </div>
-                                        </template>
-                                        <template v-else>
-                                            <!-- {{ formattedPrice(0) }} -->
-                                            <div class="d-flex flex-col">
-                                                <span>
-                                                    EXPECTED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-yellow-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                            <template v-else>
+                                                <!-- {{ formattedPrice(0) }} -->
+                                                <div class="d-flex flex-col">
+                                                    <span>
+                                                        EXPECTED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-yellow-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    TOTAL PAYMENTS
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        TOTAL PAYMENTS
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-green-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    REMAINED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        REMAINED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-red-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                            </div>
-                                        </template>
-                                    </span>
+                                                        }}</span>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                        </span>
 
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="header.text === 'Level 2'"
-                                    >
-                                        <template
-                                            v-if="
-                                                item[header.value] &&
+                                        <span class="text-gray-600 italic font-semibold text-xs"
+                                            v-else-if="header.text === 'Level 2'">
+                                            <template v-if="item[header.value] &&
                                                 item[header.value].length > 0
-                                            "
-                                        >
-                                            <div class="d-flex flex-col">
-                                                <span>
-                                                    EXPECTED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-yellow-500"
-                                                        >{{
+                                                ">
+                                                <div class="d-flex flex-col">
+                                                    <span>
+                                                        EXPECTED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-yellow-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
@@ -376,19 +243,12 @@
                                                                     .chart_of_account
                                                                     .level2
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    TOTAL PAYMENTS
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        TOTAL PAYMENTS
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-green-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
@@ -402,113 +262,73 @@
                                                                     0
                                                                 )
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    REMAINED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        REMAINED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-red-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
                                                                 ][0]
                                                                     .chart_of_account
                                                                     .level2 -
-                                                                    item[
-                                                                        header
-                                                                            .value
-                                                                    ].reduce(
-                                                                        (
-                                                                            total,
-                                                                            entry
-                                                                        ) =>
-                                                                            total +
-                                                                            entry.level_2,
-                                                                        0
-                                                                    )
+                                                                item[
+                                                                    header
+                                                                        .value
+                                                                ].reduce(
+                                                                    (
+                                                                        total,
+                                                                        entry
+                                                                    ) =>
+                                                                        total +
+                                                                        entry.level_2,
+                                                                    0
+                                                                )
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                            </div>
-                                        </template>
-                                        <template v-else>
-                                            <!-- {{ formattedPrice(0) }} -->
-                                            <div class="d-flex flex-col">
-                                                <span>
-                                                    EXPECTED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-yellow-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                            <template v-else>
+                                                <!-- {{ formattedPrice(0) }} -->
+                                                <div class="d-flex flex-col">
+                                                    <span>
+                                                        EXPECTED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-yellow-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    TOTAL PAYMENTS
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        TOTAL PAYMENTS
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-green-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    REMAINED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        REMAINED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-red-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                            </div>
-                                        </template>
-                                    </span>
+                                                        }}</span>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                        </span>
 
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="header.text === 'Level 3'"
-                                    >
-                                        <template
-                                            v-if="
-                                                item[header.value] &&
+                                        <span class="text-gray-600 italic font-semibold text-xs"
+                                            v-else-if="header.text === 'Level 3'">
+                                            <template v-if="item[header.value] &&
                                                 item[header.value].length > 0
-                                            "
-                                        >
-                                            <div class="d-flex flex-col">
-                                                <span>
-                                                    EXPECTED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-yellow-500"
-                                                        >{{
+                                                ">
+                                                <div class="d-flex flex-col">
+                                                    <span>
+                                                        EXPECTED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-yellow-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
@@ -516,19 +336,12 @@
                                                                     .chart_of_account
                                                                     .level3
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    TOTAL PAYMENTS
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        TOTAL PAYMENTS
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-green-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
@@ -542,114 +355,81 @@
                                                                     0
                                                                 )
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    REMAINED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        REMAINED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-red-500">{{
                                                             formattedPrice(
                                                                 item[
                                                                     header.value
                                                                 ][0]
                                                                     .chart_of_account
                                                                     .level3 -
-                                                                    item[
-                                                                        header
-                                                                            .value
-                                                                    ].reduce(
-                                                                        (
-                                                                            total,
-                                                                            entry
-                                                                        ) =>
-                                                                            total +
-                                                                            entry.level_3,
-                                                                        0
-                                                                    )
+                                                                item[
+                                                                    header
+                                                                        .value
+                                                                ].reduce(
+                                                                    (
+                                                                        total,
+                                                                        entry
+                                                                    ) =>
+                                                                        total +
+                                                                        entry.level_3,
+                                                                    0
+                                                                )
                                                             )
-                                                        }}</span
-                                                    >
-                                                </span>
-                                            </div>
-                                        </template>
-                                        <template v-else>
-                                            <!-- {{ formattedPrice(0) }} -->
-                                            <div class="d-flex flex-col">
-                                                <span>
-                                                    EXPECTED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-yellow-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                            <template v-else>
+                                                <!-- {{ formattedPrice(0) }} -->
+                                                <div class="d-flex flex-col">
+                                                    <span>
+                                                        EXPECTED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-yellow-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    TOTAL PAYMENTS
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-green-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        TOTAL PAYMENTS
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-green-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                                <span>
-                                                    REMAINED
-                                                    <v-icon
-                                                        size="20"
-                                                        class="mb-1 px-1"
-                                                        >mdi-hand-pointing-right</v-icon
-                                                    >
-                                                    <span
-                                                        class="text-red-500"
-                                                        >{{
+                                                        }}</span>
+                                                    </span>
+                                                    <span>
+                                                        REMAINED
+                                                        <v-icon size="20" class="mb-1 px-1">mdi-hand-pointing-right</v-icon>
+                                                        <span class="text-red-500">{{
                                                             formattedPrice(0)
-                                                        }}</span
-                                                    >
-                                                </span>
-                                            </div>
-                                        </template>
-                                    </span>
+                                                        }}</span>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                        </span>
 
-                                    <span
-                                        class="text-gray-600 italic font-semibold text-xs"
-                                        v-else-if="
-                                            header.text === 'Last Pay On'
-                                        "
-                                    >
-                                        {{
-                                            item[header.value] &&
-                                            item[header.value].level_3 !== null
+                                        <span class="text-gray-600 italic font-semibold text-xs" v-else-if="header.text === 'Last Pay On'
+                                                ">
+                                            {{
+                                                item[header.value] &&
+                                                item[header.value].level_3 !== null
                                                 ? formattedDate(
-                                                      item[header.value]
-                                                          .updated_at
-                                                  )
+                                                    item[header.value]
+                                                        .updated_at
+                                                )
                                                 : 0
-                                        }}
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </template>
-                </v-data-table>
-                <!-- </v-col> -->
+                                            }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </template>
+                    </v-data-table>
+                    <!-- </v-col> -->
             </div>
         </div>
     </div>
@@ -848,8 +628,8 @@ export default {
 
                         const chartOfAccountTotal = student.entries[0]
                             ? student.entries[0].chart_of_account.level1 +
-                              student.entries[0].chart_of_account.level2 +
-                              student.entries[0].chart_of_account.level3
+                            student.entries[0].chart_of_account.level2 +
+                            student.entries[0].chart_of_account.level3
                             : 0;
 
                         return total !== chartOfAccountTotal;
@@ -875,8 +655,8 @@ export default {
 
                         const chartOfAccountTotal = student.entries[0]
                             ? student.entries[0].chart_of_account.level1 +
-                              student.entries[0].chart_of_account.level2 +
-                              student.entries[0].chart_of_account.level3
+                            student.entries[0].chart_of_account.level2 +
+                            student.entries[0].chart_of_account.level3
                             : 0;
 
                         return total === chartOfAccountTotal;
@@ -952,12 +732,12 @@ export default {
         },
 
         save(id, column, data) {
-             this.updateTools(id, data, column);
+            this.updateTools(id, data, column);
             // console.log(id + " , " +data);
         },
-        cancel() {},
-        open() {},
-        close() {},
+        cancel() { },
+        open() { },
+        close() { },
     },
 };
 </script>

@@ -7,17 +7,17 @@
         <v-col v-else sm="12" md="12">
             <!-- <v-card flat :dark="isDark"> -->
             <!-- <v-card elevation="0" data-app> -->
-            <v-card-title class="px-1 pt-0">
-                Transaction Entries
+                <v-card-title class="px-0 pt-0 pb-1">
+                <div class="pl-2 pt-1 text-sm uppercase">Transaction Entries</div>
                 <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
+            <snackbar message="Task completed successfully"></snackbar>
+
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                    <input v-model="search" type="text" class="form-control form-control-sm" />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
             </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
             <!-- {{ $page.props.posts }} -->
             <v-data-table
                 mobile-breakpoint="0"
