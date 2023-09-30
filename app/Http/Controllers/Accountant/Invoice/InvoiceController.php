@@ -141,6 +141,11 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoicesFinancial($request)]);
     }
 
+    public function getInvoicesFinancialAll(Request $request ,InvoiceService $invoiceService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getInvoicesFinancialAll($request)]);
+    }
+    
     // public function getInvoiceView(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
     //     return response()->json(['data' => $invoiceService->getInvoiceView($request)]);

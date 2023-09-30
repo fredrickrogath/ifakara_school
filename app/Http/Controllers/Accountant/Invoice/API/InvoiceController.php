@@ -18,6 +18,16 @@ class InvoiceController extends Controller
         // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getInvoicesCreation($request)]);
     }
+
+    public function getInvoiceCreation(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getInvoiceCreation($request)]);
+    }
+    
+    public function getInvoicesCreationAll(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getInvoicesCreationAll($request)]);
+    }
     
     public function deleteCreateInvoice(Request $request, InvoiceService $invoiceService){
         // $this->authorize('authorizeAccountant', \App\Models\User::class);
@@ -109,6 +119,18 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->verifyInvoiceCreation($request)]);
     }
 
+    public function verifyInvoiceCreationBishop(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->verifyInvoiceCreationBishop($request)]);
+    }
+
+    public function verifyInvoiceBishop(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->verifyInvoiceBishop($request)]);
+    }
+    
     public function getStudentPayments(Request $request, InvoiceService $invoiceService){
         // $this->authorize('authorizeHead', \App\Models\User::class); 
         // event(new \App\Events\NewPostPublished('created'));

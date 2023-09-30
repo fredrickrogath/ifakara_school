@@ -38,7 +38,7 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
 
     Route::post('/getInvoicesFinancial', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoicesFinancial'])->name('getInvoicesFinancial');
     // Route::post('/getInvoiceView', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoiceView'])->name('getInvoiceView');
-    // Route::get('/getStarredInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getStarredInvoices'])->name('getStarredInvoices');
+    Route::post('/getInvoicesFinancialAll', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoicesFinancialAll'])->name('getInvoicesFinancialAll');
     // Route::get('/getTrashedInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');
     // Route::post('/permanentDeleteInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'permanentDeleteInvoice'])->name('permanentDeleteInvoice');
     // Route::post('/restoreInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'restoreInvoice'])->name('restoreInvoice');
@@ -55,7 +55,10 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
         Route::post('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
         Route::post('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
         Route::post('/getInvoicesCreation', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoicesCreation'])->name('getInvoicesCreation');
+        Route::post('/getInvoiceCreation', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoiceCreation'])->name('getInvoiceCreation');
+        Route::post('/getInvoicesCreationAll', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getInvoicesCreationAll'])->name('getInvoicesCreationAll');
         Route::post('/verifyInvoiceCreation', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'verifyInvoiceCreation'])->name('verifyInvoiceCreation');
+        Route::post('/verifyInvoiceCreationBishop', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'verifyInvoiceCreationBishop'])->name('verifyInvoiceCreationBishop');
         Route::post('/getTrashedCreateInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getTrashedCreateInvoice'])->name('getTrashedCreateInvoice');
         Route::post('/getStarredInvoices', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getStarredInvoices'])->name('getStarredInvoices');
         Route::post('/getTrashedInvoices', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');
@@ -65,6 +68,7 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
         Route::post('/starredInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'starredInvoice'])->name('starredInvoice');
         Route::post('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
         Route::post('/acceptInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'acceptInvoice'])->name('acceptInvoice');
+        Route::post('/verifyInvoiceBishop', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'verifyInvoiceBishop'])->name('verifyInvoiceBishop');
         Route::post('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
         
         Route::post('/getStudentPayments', [\App\Http\Controllers\Accountant\Invoice\API\InvoiceController::class, 'getStudentPayments'])->name('getStudentPayments');

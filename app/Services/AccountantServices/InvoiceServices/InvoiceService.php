@@ -138,6 +138,10 @@ foreach ($items as $item) {
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getInvoicesFinancialAll($request){
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
+    }
+
     // public function getInvoiceView($request){
     //     return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     // }

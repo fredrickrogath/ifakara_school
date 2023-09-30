@@ -50,6 +50,14 @@ class InvoiceService
         return \App\Models\AccountantInvoice::with('invoiceItems')->where('school_id', $request->school_id)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getInvoiceCreation($request){
+        return \App\Models\AccountantInvoice::with('invoiceItems')->findOrFail($request->id);
+    }
+    
+    public function getInvoicesCreationAll($request){
+        return \App\Models\AccountantInvoice::with('invoiceItems')->orderBy('created_at', 'desc')->get();
+    }
+    
     public function deleteCreateInvoice($request){
         return \App\Models\AccountantInvoice::findoRFail($request->id)->delete();
     }
@@ -86,6 +94,18 @@ class InvoiceService
         ]);
     }
 
+    public function verifyInvoiceCreationBishop($request){
+        return \App\Models\AccountantInvoice::find($request->id)->update([
+            'status_from_financial_bishop' => !$request->status_from_financial_bishop
+        ]);
+    }
+
+    public function verifyInvoiceBishop($request){
+        return \App\Models\Invoice::find($request->id)->update([
+            'status_from_financial_bishop' => !$request->status_from_financial_bishop
+        ]);
+    }
+    
     public function deleteInvoice($request){
         return \App\Models\Invoice::findoRFail($request->id)->delete();
     }
